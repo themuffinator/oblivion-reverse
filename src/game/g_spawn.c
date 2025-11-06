@@ -123,6 +123,10 @@ void SP_monster_infantry (edict_t *self);
 void SP_monster_soldier_light (edict_t *self);
 void SP_monster_soldier (edict_t *self);
 void SP_monster_soldier_ss (edict_t *self);
+void SP_monster_soldier_deatom (edict_t *self);
+void SP_monster_cyborg (edict_t *self);
+void SP_monster_kigrax (edict_t *self);
+void SP_monster_spider (edict_t *self);
 void SP_monster_tank (edict_t *self);
 void SP_monster_medic (edict_t *self);
 void SP_monster_flipper (edict_t *self);
@@ -240,9 +244,13 @@ spawn_t	spawns[] = {
 	{"monster_gladiator", SP_monster_gladiator},
 	{"monster_gunner", SP_monster_gunner},
 	{"monster_infantry", SP_monster_infantry},
-	{"monster_soldier_light", SP_monster_soldier_light},
-	{"monster_soldier", SP_monster_soldier},
-	{"monster_soldier_ss", SP_monster_soldier_ss},
+        {"monster_soldier_light", SP_monster_soldier_light},
+        {"monster_soldier", SP_monster_soldier},
+        {"monster_soldier_ss", SP_monster_soldier_ss},
+        {"monster_soldier_deatom", SP_monster_soldier_deatom},
+        {"monster_cyborg", SP_monster_cyborg},
+        {"monster_kigrax", SP_monster_kigrax},
+        {"monster_spider", SP_monster_spider},
 	{"monster_tank", SP_monster_tank},
 	{"monster_tank_commander", SP_monster_tank},
 	{"monster_medic", SP_monster_medic},
