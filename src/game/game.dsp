@@ -1363,6 +1363,33 @@ DEP_CPP_M_SOL=\
 # End Source File
 # Begin Source File
 
+SOURCE=.\m_sentinel.c
+
+!IF  "$(CFG)" == "game - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "game - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "game - Win32 Debug Alpha"
+
+DEP_CPP_M_SEN=\
+        ".\g_local.h"\
+        ".\game.h"\
+        ".\q_shared.h"\
+
+
+!ELSEIF  "$(CFG)" == "game - Win32 Release Alpha"
+
+DEP_CPP_M_SEN=\
+        ".\g_local.h"\
+        ".\game.h"\
+        ".\q_shared.h"\
+
+
+!ENDIF
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\m_supertank.c
 
 !IF  "$(CFG)" == "game - Win32 Release"
