@@ -2,6 +2,10 @@
 
 This document summarizes the initial reconnaissance performed on the Oblivion Quake II mod. It consolidates the Binary Ninja HLIL observations, Quake II source review, and the generated diff between the Oblivion and stock Quake II game DLLs.
 
+## Repository layout
+
+The checked-in source tree now retains only the game DLL under `src/game/`. Engine-specific clients, renderers, and platform layers have been removed from this repository and should be consulted in the vanilla Quake II drop preserved at `references/source-code/Quake-2-master/` when engine behaviour needs to be cross-referenced.
+
 ## Binary metadata comparison
 
 ### Shared characteristics
