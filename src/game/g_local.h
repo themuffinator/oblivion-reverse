@@ -296,6 +296,38 @@ typedef struct gitem_s
 
 
 
+typedef enum
+{
+        MISSION_OBJECTIVE_INACTIVE = 0,
+        MISSION_OBJECTIVE_ACTIVE,
+        MISSION_OBJECTIVE_COMPLETED,
+        MISSION_OBJECTIVE_FAILED
+} mission_objective_state_t;
+
+typedef struct
+{
+        char                    id[32];
+        char                    title[64];
+        char                    text[256];
+        mission_objective_state_t       state;
+        int                             timer_limit;
+        int                             timer_remaining;
+        qboolean                primary;
+        qboolean                persistent;
+        vec3_t                  origin;
+        vec3_t                  angles;
+        float                   radius;
+} mission_objective_save_t;
+
+#define MAX_MISSION_OBJECTIVES 8
+
+typedef struct mission_state_s
+{
+        mission_objective_save_t        objectives[MAX_MISSION_OBJECTIVES];
+        int                             objective_count;
+        int                             unread_events;
+} mission_state_t;
+
 //
 // this structure is left intact through an entire game
 // it should be initialized at dll load time, and read/written to
@@ -401,39 +433,6 @@ typedef struct
 	float		minpitch;
 	float		maxpitch;
 } spawn_temp_t;
-
-typedef enum
-{
-        MISSION_OBJECTIVE_INACTIVE = 0,
-        MISSION_OBJECTIVE_ACTIVE,
-        MISSION_OBJECTIVE_COMPLETED,
-        MISSION_OBJECTIVE_FAILED
-} mission_objective_state_t;
-
-typedef struct
-{
-        char                    id[32];
-        char                    title[64];
-        char                    text[256];
-        mission_objective_state_t       state;
-        int                     timer_limit;
-        int                     timer_remaining;
-        qboolean                primary;
-        qboolean                persistent;
-        vec3_t                  origin;
-        vec3_t                  angles;
-        float                   radius;
-} mission_objective_save_t;
-
-#define MAX_MISSION_OBJECTIVES 8
-
-typedef struct
-{
-        mission_objective_save_t        objectives[MAX_MISSION_OBJECTIVES];
-        int                             objective_count;
-        int                             unread_events;
-} mission_state_t;
-
 
 typedef struct camera_state_s camera_state_t;
 typedef struct rotate_train_state_s rotate_train_state_t;
