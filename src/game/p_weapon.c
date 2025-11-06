@@ -233,6 +233,42 @@ NoAmmoWeaponChange
 */
 void NoAmmoWeaponChange (edict_t *ent)
 {
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("Rifle Plasma"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("Plasma Rifle"))] )
+	{
+		ent->client->newweapon = FindItem ("Plasma Rifle");
+		return;
+	}
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("Cells"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("Obliterator"))] )
+	{
+		ent->client->newweapon = FindItem ("Obliterator");
+		return;
+	}
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("Cells"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("Deatomizer"))] )
+	{
+		ent->client->newweapon = FindItem ("Deatomizer");
+		return;
+	}
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("Rockets"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("HellFury"))] )
+	{
+		ent->client->newweapon = FindItem ("HellFury");
+		return;
+	}
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("Detonation Pack"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("Remote Detonator"))] )
+	{
+		ent->client->newweapon = FindItem ("Remote Detonator");
+		return;
+	}
+	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("PistolPlasma"))]
+		&& ent->client->pers.inventory[ITEM_INDEX(FindItem("Plasma Pistol"))] )
+	{
+		ent->client->newweapon = FindItem ("Plasma Pistol");
+		return;
+	}
 	if ( ent->client->pers.inventory[ITEM_INDEX(FindItem("slugs"))]
 		&&  ent->client->pers.inventory[ITEM_INDEX(FindItem("railgun"))] )
 	{
@@ -272,6 +308,83 @@ void NoAmmoWeaponChange (edict_t *ent)
 	ent->client->newweapon = FindItem ("blaster");
 }
 
+static void Oblivion_UpdateWeaponRegen (edict_t *ent)
+{
+        gclient_t       *cl;
+        static qboolean regen_indexes_cached = false;
+        static int      plasma_pistol_index;
+        static int      plasma_rifle_index;
+        static int      pistol_plasma_ammo_index;
+        static int      rifle_plasma_ammo_index;
+
+        cl = ent->client;
+        if (!cl)
+                return;
+
+        if (!regen_indexes_cached)
+        {
+                gitem_t *lookup;
+
+                lookup = FindItem("Plasma Pistol");
+                if (lookup)
+                        plasma_pistol_index = ITEM_INDEX(lookup);
+
+                lookup = FindItem("Plasma Rifle");
+                if (lookup)
+                        plasma_rifle_index = ITEM_INDEX(lookup);
+
+                lookup = FindItem("PistolPlasma");
+                if (lookup)
+                        pistol_plasma_ammo_index = ITEM_INDEX(lookup);
+
+                lookup = FindItem("Rifle Plasma");
+                if (lookup)
+                        rifle_plasma_ammo_index = ITEM_INDEX(lookup);
+
+                regen_indexes_cached = true;
+        }
+
+        if (plasma_pistol_index && cl->plasma_pistol_next_regen <= level.time)
+        {
+                if (cl->pers.inventory[plasma_pistol_index] && pistol_plasma_ammo_index)
+                {
+                        if (cl->pers.inventory[pistol_plasma_ammo_index] < cl->pers.max_pistolplasma)
+                        {
+                                cl->pers.inventory[pistol_plasma_ammo_index]++;
+                                cl->plasma_pistol_next_regen = level.time + 1.5f;
+                        }
+                        else
+                        {
+                                cl->plasma_pistol_next_regen = level.time + 0.5f;
+                        }
+                }
+                else
+                {
+                        cl->plasma_pistol_next_regen = level.time + 0.5f;
+                }
+        }
+
+        if (plasma_rifle_index && cl->plasma_rifle_next_regen <= level.time)
+        {
+                if (cl->pers.inventory[plasma_rifle_index] && rifle_plasma_ammo_index)
+                {
+                        if (cl->pers.inventory[rifle_plasma_ammo_index] < cl->pers.max_rifleplasma)
+                        {
+                                cl->pers.inventory[rifle_plasma_ammo_index]++;
+                                cl->plasma_rifle_next_regen = level.time + 2.0f;
+                        }
+                        else
+                        {
+                                cl->plasma_rifle_next_regen = level.time + 0.5f;
+                        }
+                }
+                else
+                {
+                        cl->plasma_rifle_next_regen = level.time + 0.5f;
+                }
+        }
+}
+
 /*
 =================
 Think_Weapon
@@ -286,18 +399,20 @@ void Think_Weapon (edict_t *ent)
 	{
 		ent->client->newweapon = NULL;
 		ChangeWeapon (ent);
-	}
+        }
 
-	// call active weapon think routine
-	if (ent->client->pers.weapon && ent->client->pers.weapon->weaponthink)
-	{
-		is_quad = (ent->client->quad_framenum > level.framenum);
-		if (ent->client->silencer_shots)
-			is_silenced = MZ_SILENCED;
-		else
-			is_silenced = 0;
-		ent->client->pers.weapon->weaponthink (ent);
-	}
+        // call active weapon think routine
+        if (ent->client->pers.weapon && ent->client->pers.weapon->weaponthink)
+        {
+                is_quad = (ent->client->quad_framenum > level.framenum);
+                if (ent->client->silencer_shots)
+                        is_silenced = MZ_SILENCED;
+                else
+                        is_silenced = 0;
+                ent->client->pers.weapon->weaponthink (ent);
+        }
+
+        Oblivion_UpdateWeaponRegen(ent);
 }
 
 
@@ -1432,3 +1547,349 @@ void Weapon_BFG (edict_t *ent)
 
 
 //======================================================================
+
+
+/*
+======================================================================
+
+PLASMA PISTOL
+
+======================================================================
+*/
+
+static void PlasmaPistol_Fire (edict_t *ent)
+{
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+	int		damage;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 20 : 15;
+	if (is_quad)
+		damage *= 4;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 24, 8, ent->viewheight-8);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	VectorScale (forward, -2, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -1;
+
+	fire_plasma_bolt (ent, start, forward, damage, 900, EF_PLASMA, MOD_PLASMA_PISTOL);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_BLASTER | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+
+	ent->client->plasma_pistol_next_regen = level.time + 1.5f;
+}
+
+void Weapon_PlasmaPistol (edict_t *ent)
+{
+	static int	pause_frames[]	= {19, 32, 0};
+	static int	fire_frames[]	= {5, 0};
+
+	Weapon_Generic (ent, 4, 8, 52, 55, pause_frames, fire_frames, PlasmaPistol_Fire);
+}
+
+
+/*
+======================================================================
+
+PLASMA RIFLE
+
+======================================================================
+*/
+
+static void PlasmaRifle_Fire (edict_t *ent)
+{
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+	int		damage;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 28 : 22;
+	if (is_quad)
+		damage *= 4;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 24, 6, ent->viewheight-10);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	VectorScale (forward, -1.5f, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -1.5f;
+
+	fire_plasma_bolt (ent, start, forward, damage, 1100, EF_PLASMA | EF_HYPERBLASTER, MOD_PLASMA_RIFLE);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_HYPERBLASTER | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+
+	ent->client->plasma_rifle_next_regen = level.time + 2.0f;
+}
+
+void Weapon_PlasmaRifle (edict_t *ent)
+{
+	static int	pause_frames[]	= {19, 32, 0};
+	static int	fire_frames[]	= {5, 0};
+
+	Weapon_Generic (ent, 5, 20, 49, 53, pause_frames, fire_frames, PlasmaRifle_Fire);
+}
+
+
+/*
+======================================================================
+
+LASER CANNON
+
+======================================================================
+*/
+
+static void LaserCannon_Fire (edict_t *ent)
+{
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+	int		damage;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 45 : 35;
+	if (is_quad)
+		damage *= 4;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 18, 6, ent->viewheight-6);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	VectorScale (forward, -2.5f, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -3;
+
+	fire_plasma_bolt (ent, start, forward, damage, 1400, EF_PLASMA | EF_HYPERBLASTER, MOD_LASERCANNON);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_BFG | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	gi.sound(ent, CHAN_WEAPON, gi.soundindex("weapons/hyprbu1a.wav"), 1, ATTN_NORM, 0);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+
+void Weapon_LaserCannon (edict_t *ent)
+{
+	static int	pause_frames[]	= {28, 42, 0};
+	static int	fire_frames[]	= {10, 0};
+
+	Weapon_Generic (ent, 8, 32, 55, 58, pause_frames, fire_frames, LaserCannon_Fire);
+}
+
+
+/*
+======================================================================
+
+DEATOMIZER
+
+======================================================================
+*/
+
+static void Deatomizer_Fire (edict_t *ent)
+{
+	vec3_t	forward, right;
+	vec3_t	start;
+	vec3_t	offset;
+	int		damage;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 55 : 45;
+	if (is_quad)
+		damage *= 4;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 16, 6, ent->viewheight-6);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	VectorScale (forward, -3.0f, ent->client->kick_origin);
+	ent->client->kick_angles[0] = -4;
+
+	fire_plasma_bolt (ent, start, forward, damage, 900, EF_PLASMA | EF_BLASTER, MOD_DEATOMIZER);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_BFG | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	gi.sound(ent, CHAN_WEAPON, gi.soundindex("deatom/dfire.wav"), 1, ATTN_NORM, 0);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+
+void Weapon_Deatomizer (edict_t *ent)
+{
+	static int	pause_frames[]	= {23, 35, 0};
+	static int	fire_frames[]	= {7, 0};
+
+	Weapon_Generic (ent, 5, 16, 49, 53, pause_frames, fire_frames, Deatomizer_Fire);
+}
+
+
+/*
+======================================================================
+
+HELLFURY
+
+======================================================================
+*/
+
+static void Hellfury_Fire (edict_t *ent)
+{
+	vec3_t	offset;
+	vec3_t	forward, right;
+	vec3_t	start;
+	int		damage;
+	float	damage_radius;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 140 : 120;
+	if (is_quad)
+		damage *= 4;
+
+	damage_radius = damage + 80;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 8, 8, ent->viewheight-8);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	fire_oblivion_rocket (ent, start, forward, damage, 650, damage_radius, damage, MOD_HELLFURY, MOD_HELLFURY);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_ROCKET | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+
+void Weapon_HellFury (edict_t *ent)
+{
+	static int	pause_frames[]	= {25, 33, 42, 50, 0};
+	static int	fire_frames[]	= {5, 0};
+
+	Weapon_Generic (ent, 4, 12, 50, 54, pause_frames, fire_frames, Hellfury_Fire);
+}
+
+
+/*
+======================================================================
+
+REMOTE DETONATOR
+
+======================================================================
+*/
+
+static void RemoteDetonator_Fire (edict_t *ent)
+{
+	vec3_t	offset;
+	vec3_t	forward, right;
+	vec3_t	start;
+	int		damage;
+	float	damage_radius;
+
+	if (!ent->client->pers.inventory[ent->client->ammo_index])
+	{
+		ent->client->ps.gunframe++;
+		return;
+	}
+
+	damage = deathmatch->value ? 180 : 150;
+	if (is_quad)
+		damage *= 4;
+
+	damage_radius = damage + 120;
+
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet(offset, 12, 6, ent->viewheight-6);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+
+	fire_oblivion_rocket (ent, start, forward, damage, 500, damage_radius, damage, MOD_REMOTE_DETONATOR, MOD_DETPACK);
+
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_ROCKET | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+	gi.sound(ent, CHAN_WEAPON, gi.soundindex("weapons/hgrent1a.wav"), 1, ATTN_NORM, 0);
+
+	ent->client->ps.gunframe++;
+
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+
+void Weapon_RemoteDetonator (edict_t *ent)
+{
+	static int	pause_frames[]	= {19, 32, 0};
+	static int	fire_frames[]	= {5, 0};
+
+	Weapon_Generic (ent, 4, 12, 45, 48, pause_frames, fire_frames, RemoteDetonator_Fire);
+}

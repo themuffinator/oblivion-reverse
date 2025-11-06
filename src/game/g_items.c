@@ -39,6 +39,12 @@ void Weapon_Grenade (edict_t *ent);
 void Weapon_GrenadeLauncher (edict_t *ent);
 void Weapon_Railgun (edict_t *ent);
 void Weapon_BFG (edict_t *ent);
+void Weapon_PlasmaPistol (edict_t *ent);
+void Weapon_PlasmaRifle (edict_t *ent);
+void Weapon_HellFury (edict_t *ent);
+void Weapon_LaserCannon (edict_t *ent);
+void Weapon_Deatomizer (edict_t *ent);
+void Weapon_RemoteDetonator (edict_t *ent);
 
 gitem_armor_t jacketarmor_info	= { 25,  50, .30, .00, ARMOR_JACKET};
 gitem_armor_t combatarmor_info	= { 50, 100, .60, .30, ARMOR_COMBAT};
@@ -468,6 +474,16 @@ qboolean Add_Ammo (edict_t *ent, gitem_t *item, int count)
 		max = ent->client->pers.max_cells;
 	else if (item->tag == AMMO_SLUGS)
 		max = ent->client->pers.max_slugs;
+	else if (item->tag == AMMO_PISTOLPLASMA)
+		max = ent->client->pers.max_pistolplasma;
+	else if (item->tag == AMMO_RIFLEPLASMA)
+		max = ent->client->pers.max_rifleplasma;
+	else if (item->tag == AMMO_MINES)
+		max = ent->client->pers.max_mines;
+	else if (item->tag == AMMO_DETPACK)
+		max = ent->client->pers.max_detpack;
+	else if (item->tag == AMMO_DOD)
+		max = ent->client->pers.max_dod;
 	else
 		return false;
 
@@ -1296,7 +1312,7 @@ gitem_t	itemlist[] =
 		Pickup_Weapon,
 		Use_Weapon,
 		Drop_Weapon,
-		NULL,
+		Weapon_PlasmaPistol,
 		"misc/w_pkup.wav",
 		NULL, 0,
 		"models/weapons/v_pistol/tris.md2",
@@ -1834,7 +1850,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                NULL,
+                Weapon_LaserCannon,
                 "misc/w_pkup.wav",
                 "models/weapons/g_laser/tris.md2", EF_ROTATE,
                 "models/weapons/v_laser/tris.md2",
@@ -1856,7 +1872,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                NULL,
+                Weapon_Deatomizer,
                 "misc/w_pkup.wav",
                 "models/weapons/g_deatom/tris.md2", EF_ROTATE,
                 "models/weapons/v_deatom/tris.md2",
@@ -1879,7 +1895,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                NULL,
+                Weapon_PlasmaRifle,
                 "misc/w_pkup.wav",
                 "models/weapons/g_plasma/tris.md2", EF_ROTATE,
                 "models/weapons/v_plasma/tris.md2",
@@ -1902,7 +1918,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                NULL,
+                Weapon_RemoteDetonator,
                 "misc/w_pkup.wav",
                 NULL, 0,
                 "models/weapons/v_detonator/tris.md2",
@@ -1926,7 +1942,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                NULL,
+                Weapon_HellFury,
                 "misc/w_pkup.wav",
                 "models/weapons/g_hellfury/tris.md2", EF_ROTATE,
                 "models/weapons/v_hellfury/tris.md2",

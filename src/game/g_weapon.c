@@ -321,7 +321,9 @@ void blaster_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *
 
 	if (other->takedamage)
 	{
-		if (self->spawnflags & 1)
+		if (self->count)
+			mod = self->count;
+		else if (self->spawnflags & 1)
 			mod = MOD_HYPERBLASTER;
 		else
 			mod = MOD_BLASTER;
@@ -450,6 +452,47 @@ static void Grenade_Explode (edict_t *ent)
 	gi.multicast (ent->s.origin, MULTICAST_PHS);
 
 	G_FreeEdict (ent);
+void fire_plasma_bolt (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int effect, int mod)
+{
+	edict_t *bolt;
+	trace_t tr;
+
+	VectorNormalize (dir);
+
+	bolt = G_Spawn();
+	bolt->svflags = SVF_DEADMONSTER;
+	VectorCopy (start, bolt->s.origin);
+	VectorCopy (start, bolt->s.old_origin);
+	vectoangles (dir, bolt->s.angles);
+	VectorScale (dir, speed, bolt->velocity);
+	bolt->movetype = MOVETYPE_FLYMISSILE;
+	bolt->clipmask = MASK_SHOT;
+	bolt->solid = SOLID_BBOX;
+	bolt->s.effects |= effect;
+	VectorClear (bolt->mins);
+	VectorClear (bolt->maxs);
+	bolt->s.modelindex = gi.modelindex ("models/objects/laser/tris.md2");
+	bolt->s.sound = gi.soundindex ("misc/lasfly.wav");
+	bolt->owner = self;
+	bolt->touch = blaster_touch;
+	bolt->nextthink = level.time + 2;
+	bolt->think = G_FreeEdict;
+	bolt->dmg = damage;
+	bolt->classname = "bolt";
+	bolt->count = mod;
+	gi.linkentity (bolt);
+
+	if (self->client)
+		check_dodge (self, bolt->s.origin, dir, speed);
+
+	tr = gi.trace (self->s.origin, NULL, NULL, bolt->s.origin, bolt, MASK_SHOT);
+	if (tr.fraction < 1.0)
+	{
+		VectorMA (bolt->s.origin, -10, dir, bolt->s.origin);
+		bolt->touch (bolt, tr.ent, NULL, NULL);
+	}
+}
+
 }
 
 static void Grenade_Touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf)
@@ -588,7 +631,8 @@ void rocket_touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *su
 
 	if (other->takedamage)
 	{
-		T_Damage (other, ent, ent->owner, ent->velocity, ent->s.origin, plane->normal, ent->dmg, 0, 0, MOD_ROCKET);
+		int mod = ent->count ? ent->count : MOD_ROCKET;
+		T_Damage (other, ent, ent->owner, ent->velocity, ent->s.origin, plane->normal, ent->dmg, 0, 0, mod);
 	}
 	else
 	{
@@ -604,7 +648,10 @@ void rocket_touch (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *su
 		}
 	}
 
-	T_RadiusDamage(ent, ent->owner, ent->radius_dmg, other, ent->dmg_radius, MOD_R_SPLASH);
+	{
+		int splash_mod = ent->mass ? ent->mass : MOD_R_SPLASH;
+		T_RadiusDamage(ent, ent->owner, ent->radius_dmg, other, ent->dmg_radius, splash_mod);
+	}
 
 	gi.WriteByte (svc_temp_entity);
 	if (ent->waterlevel)
@@ -647,6 +694,39 @@ void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed
 		check_dodge (self, rocket->s.origin, dir, speed);
 
 	gi.linkentity (rocket);
+void fire_oblivion_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage, int direct_mod, int splash_mod)
+{
+	edict_t *rocket;
+
+	rocket = G_Spawn();
+	VectorCopy (start, rocket->s.origin);
+	VectorCopy (dir, rocket->movedir);
+	vectoangles (dir, rocket->s.angles);
+	VectorScale (dir, speed, rocket->velocity);
+	rocket->movetype = MOVETYPE_FLYMISSILE;
+	rocket->clipmask = MASK_SHOT;
+	rocket->solid = SOLID_BBOX;
+	rocket->s.effects |= EF_ROCKET;
+	VectorClear (rocket->mins);
+	VectorClear (rocket->maxs);
+	rocket->s.modelindex = gi.modelindex ("models/objects/rocket/tris.md2");
+	rocket->owner = self;
+	rocket->touch = rocket_touch;
+	rocket->nextthink = level.time + 8000/speed;
+	rocket->think = G_FreeEdict;
+	rocket->dmg = damage;
+	rocket->radius_dmg = radius_damage;
+	rocket->dmg_radius = damage_radius;
+	rocket->classname = "rocket";
+	rocket->count = direct_mod;
+	rocket->mass = splash_mod;
+
+	if (self->client)
+		check_dodge (self, rocket->s.origin, dir, speed);
+
+	gi.linkentity (rocket);
+}
+
 }
 
 

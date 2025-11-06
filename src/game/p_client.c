@@ -383,6 +383,43 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message = "tried to invade";
 				message2 = "'s personal space";
 				break;
+
+			case MOD_PLASMA_PISTOL:
+				message = "was seared by";
+				message2 = "'s plasma pistol";
+				break;
+			case MOD_PLASMA_RIFLE:
+				message = "was vaporized by";
+				message2 = "'s plasma rifle";
+				break;
+			case MOD_LASERCANNON:
+				message = "was obliterated by";
+				message2 = "'s obliterator";
+				break;
+			case MOD_DEATOMIZER:
+				message = "was reduced to atoms by";
+				message2 = "'s deatomizer";
+				break;
+			case MOD_HELLFURY:
+				message = "was incinerated by";
+				message2 = "'s hellfury";
+				break;
+			case MOD_REMOTE_DETONATOR:
+				message = "was detonated by";
+				message2 = "'s remote charge";
+				break;
+			case MOD_LASERMINE:
+				message = "was sliced apart by";
+				message2 = "'s laser mine";
+				break;
+			case MOD_DETPACK:
+				message = "was shredded by";
+				message2 = "'s detpack";
+				break;
+			case MOD_DOD:
+				message = "was annihilated by";
+				message2 = "'s DOD";
+				break;
 			}
 			if (message)
 			{
@@ -626,6 +663,11 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_grenades	= 50;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 50;
+	client->pers.max_pistolplasma	= 100;
+	client->pers.max_rifleplasma	= 80;
+	client->pers.max_mines		= 10;
+	client->pers.max_detpack	= 5;
+	client->pers.max_dod		= 3;
 
 	client->pers.connected = true;
 }
@@ -1105,6 +1147,8 @@ void PutClientInServer (edict_t *ent)
 	int		i;
 	client_persistant_t	saved;
 	client_respawn_t	resp;
+	float		plasma_pistol_regen_at;
+	float		plasma_rifle_regen_at;
 
 	// find a spawn point
 	// do it before setting health back up, so farthest
@@ -1113,6 +1157,10 @@ void PutClientInServer (edict_t *ent)
 
 	index = ent-g_edicts-1;
 	client = ent->client;
+
+	// remember regeneration timers so they persist across respawn resets
+	plasma_pistol_regen_at = client->plasma_pistol_next_regen;
+	plasma_rifle_regen_at = client->plasma_rifle_next_regen;
 
 	// deathmatch wipes most client data every spawn
 	if (deathmatch->value)
@@ -1156,6 +1204,9 @@ void PutClientInServer (edict_t *ent)
 	if (client->pers.health <= 0)
 		InitClientPersistant(client);
 	client->resp = resp;
+
+	client->plasma_pistol_next_regen = plasma_pistol_regen_at;
+	client->plasma_rifle_next_regen = plasma_rifle_regen_at;
 
 	// copy some data from the client to the entity
 	FetchClientEntData (ent);

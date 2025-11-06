@@ -529,7 +529,16 @@ extern	int	body_armor_index;
 #define MOD_TARGET_LASER	30
 #define MOD_TRIGGER_HURT	31
 #define MOD_HIT				32
-#define MOD_TARGET_BLASTER	33
+#define MOD_TARGET_BLASTER      33
+#define MOD_PLASMA_PISTOL       34
+#define MOD_PLASMA_RIFLE        35
+#define MOD_LASERCANNON         36
+#define MOD_DEATOMIZER          37
+#define MOD_HELLFURY            38
+#define MOD_REMOTE_DETONATOR    39
+#define MOD_LASERMINE           40
+#define MOD_DETPACK             41
+#define MOD_DOD                 42
 #define MOD_FRIENDLY_FIRE	0x8000000
 
 extern	int	meansOfDeath;
@@ -767,9 +776,11 @@ qboolean fire_hit (edict_t *self, vec3_t aim, int damage, int kick);
 void fire_bullet (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int mod);
 void fire_shotgun (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick, int hspread, int vspread, int count, int mod);
 void fire_blaster (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, int effect, qboolean hyper);
+void fire_plasma_bolt (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, int effect, int mod);
 void fire_grenade (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius);
 void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float timer, float damage_radius, qboolean held);
 void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage);
+void fire_oblivion_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage, int direct_mod, int splash_mod);
 void fire_rail (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick);
 void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius);
 
@@ -892,6 +903,11 @@ typedef struct
 	int			max_grenades;
 	int			max_cells;
 	int			max_slugs;
+	int			max_pistolplasma;
+	int			max_rifleplasma;
+	int			max_mines;
+	int			max_detpack;
+	int			max_dod;
 
 	gitem_t		*weapon;
 	gitem_t		*lastweapon;
@@ -943,6 +959,9 @@ struct gclient_s
 	qboolean	weapon_thunk;
 
 	gitem_t		*newweapon;
+
+	float		plasma_pistol_next_regen;
+	float		plasma_rifle_next_regen;
 
 	// sum up damage over an entire frame, so
 	// shotgun blasts give a single big kick

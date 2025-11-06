@@ -472,6 +472,84 @@ void G_SetStats (edict_t *ent)
 		ent->client->ps.stats[STAT_TIMER] = 0;
 	}
 
+	if (!ent->client->ps.stats[STAT_TIMER_ICON])
+	{
+		gitem_t *weapon = ent->client->pers.weapon;
+
+		if (weapon)
+		{
+			static gitem_t *plasma_pistol_weapon = NULL;
+			static gitem_t *plasma_rifle_weapon = NULL;
+			static gitem_t *pistol_plasma_ammo = NULL;
+			static gitem_t *rifle_plasma_ammo = NULL;
+			static int	pistol_plasma_ammo_index = 0;
+			static int	rifle_plasma_ammo_index = 0;
+
+			if (!plasma_pistol_weapon)
+				plasma_pistol_weapon = FindItem("Plasma Pistol");
+			if (!plasma_rifle_weapon)
+				plasma_rifle_weapon = FindItem("Plasma Rifle");
+			if (!pistol_plasma_ammo)
+			{
+				pistol_plasma_ammo = FindItem("PistolPlasma");
+				if (pistol_plasma_ammo)
+					pistol_plasma_ammo_index = ITEM_INDEX(pistol_plasma_ammo);
+			}
+			if (!rifle_plasma_ammo)
+			{
+				rifle_plasma_ammo = FindItem("Rifle Plasma");
+				if (rifle_plasma_ammo)
+					rifle_plasma_ammo_index = ITEM_INDEX(rifle_plasma_ammo);
+			}
+
+			if (weapon == plasma_pistol_weapon && pistol_plasma_ammo_index)
+			{
+				int ammo = ent->client->pers.inventory[pistol_plasma_ammo_index];
+
+				if (ammo < ent->client->pers.max_pistolplasma)
+				{
+					float remaining = ent->client->plasma_pistol_next_regen - level.time;
+
+					if (remaining > 0.0f)
+					{
+						int seconds = (int)remaining;
+
+						if ((float)seconds < remaining)
+							seconds++;
+						if (seconds < 1)
+							seconds = 1;
+
+						ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex(pistol_plasma_ammo->icon);
+						ent->client->ps.stats[STAT_TIMER] = seconds;
+					}
+				}
+			}
+			else if (weapon == plasma_rifle_weapon && rifle_plasma_ammo_index)
+			{
+				int ammo = ent->client->pers.inventory[rifle_plasma_ammo_index];
+
+				if (ammo < ent->client->pers.max_rifleplasma)
+				{
+					float remaining = ent->client->plasma_rifle_next_regen - level.time;
+
+					if (remaining > 0.0f)
+					{
+						int seconds = (int)remaining;
+
+						if ((float)seconds < remaining)
+							seconds++;
+						if (seconds < 1)
+							seconds = 1;
+
+						ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex(rifle_plasma_ammo->icon);
+						ent->client->ps.stats[STAT_TIMER] = seconds;
+					}
+				}
+			}
+		}
+	}
+
+
 	//
 	// selected item
 	//
