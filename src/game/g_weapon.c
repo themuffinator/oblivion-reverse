@@ -694,6 +694,8 @@ void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed
 		check_dodge (self, rocket->s.origin, dir, speed);
 
 	gi.linkentity (rocket);
+}
+
 void fire_oblivion_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage, int direct_mod, int splash_mod)
 {
 	edict_t *rocket;
@@ -717,6 +719,7 @@ void fire_oblivion_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, 
 	rocket->dmg = damage;
 	rocket->radius_dmg = radius_damage;
 	rocket->dmg_radius = damage_radius;
+	rocket->s.sound = gi.soundindex ("weapons/rockfly.wav");
 	rocket->classname = "rocket";
 	rocket->count = direct_mod;
 	rocket->mass = splash_mod;
@@ -725,8 +728,6 @@ void fire_oblivion_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, 
 		check_dodge (self, rocket->s.origin, dir, speed);
 
 	gi.linkentity (rocket);
-}
-
 }
 
 
