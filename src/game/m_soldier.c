@@ -511,7 +511,17 @@ void soldier_fire (edict_t *self, int flash_number)
         }
         else if (self->count)
         {
-                monster_fire_blaster (self, start, aim, 18, 900, flash_index, EF_TRACKER);
+                const int damage = 50;
+                const int speed = 600;
+                const float damage_radius = 480.0f;
+                const int splash_damage = damage;
+
+                fire_deatomizer (self, start, aim, damage, speed, damage_radius, splash_damage);
+
+                gi.WriteByte (svc_muzzleflash2);
+                gi.WriteShort (self - g_edicts);
+                gi.WriteByte (flash_index);
+                gi.multicast (start, MULTICAST_PVS);
         }
         else
         {
