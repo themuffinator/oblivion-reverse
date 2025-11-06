@@ -383,7 +383,42 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message = "tried to invade";
 				message2 = "'s personal space";
 				break;
-			}
+			case MOD_MINE:
+				message = "found that mine";
+				message2 = " had misplaced";
+				break;
+			case MOD_DEATOMIZER:
+				if (IsNeutral(self))
+				        message = "had its electrons unbound by";
+				else if (IsFemale(self))
+				        message = "had her electrons unbound by";
+				else
+				        message = "had his electrons unbound by";
+				break;
+			case MOD_PLASMA_PISTOL:
+				message = "was pistol-whipped by";
+				break;
+			case MOD_PLASMA_RIFLE:
+				message = "was smeared by";
+				message2 = "'s hot sticky plasma";
+				break;
+			case MOD_DETPACK:
+				message = "stepped on";
+				message2 = "'s dog sh... er.. detonation pack";
+				break;
+			case MOD_LASERCANNON:
+				message = "was sliced and diced by";
+				message2 = "'s obliterator";
+				break;
+			case MOD_DONUT:
+				message = "took a bite of";
+				message2 = "'s donut";
+				break;
+			case MOD_REMOTE_CANNON:
+				message = "caught some of";
+				message2 = "'s remote cannon lovin'";
+				break;
+                }
 			if (message)
 			{
 				gi.bprintf (PRINT_MEDIUM,"%s %s %s%s\n", self->client->pers.netname, message, attacker->client->pers.netname, message2);
@@ -626,6 +661,11 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_grenades	= 50;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 50;
+        client->pers.max_mines         = 10;
+        client->pers.max_detpacks      = 10;
+        client->pers.max_dods          = 5;
+        client->pers.max_pistolplasma  = 100;
+        client->pers.max_rifleplasma   = 50;
 
 	client->pers.connected = true;
 }

@@ -260,6 +260,8 @@ typedef struct
 #define WEAP_LASERCANNON	15
 #define WEAP_DEATOMIZER		16
 #define WEAP_REMOTE_DETONATOR	17
+#define WEAP_DONUT			18
+#define WEAP_REMOTE_CANNON	19
 typedef struct gitem_s
 {
 	char		*classname;	// spawning name
@@ -911,6 +913,11 @@ typedef struct
 	int			max_grenades;
 	int			max_cells;
 	int			max_slugs;
+        int                     max_mines;
+        int                     max_detpacks;
+        int                     max_dods;
+        int                     max_pistolplasma;
+        int                     max_rifleplasma;
 
 	gitem_t		*weapon;
 	gitem_t		*lastweapon;
