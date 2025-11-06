@@ -70,7 +70,24 @@ static void cyborg_fire_deatom (edict_t *self)
     VectorNormalize (dir);
 
     gi.sound (self, CHAN_WEAPON, sound_attack, 1, ATTN_NORM, 0);
-    monster_fire_blaster (self, start, dir, 12, 1000, MZ2_TANK_BLASTER_1, EF_BLASTER);
+
+    // The original DLL rolled cyborg deatom damage from a narrow band per shot
+    // before spawning a high-speed tracking projectile.  Match that behaviour
+    // here so kill feeds attribute the hits to the proper deatomizer mods.
+    {
+        int     damage;
+        int     splash;
+        const int       speed = 1000;
+        const float     damage_radius = 480.0f;
+
+        damage = 90 + (int) (random () * 30.0f);
+        if (damage > 119)
+            damage = 119;
+
+        splash = damage / 2;
+
+        fire_deatomizer (self, start, dir, damage, speed, damage_radius, splash);
+    }
 }
 
 static void cyborg_attack_think (edict_t *self)
