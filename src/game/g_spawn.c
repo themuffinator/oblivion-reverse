@@ -553,13 +553,15 @@ void SpawnEntities (char *mapname, char *entities, char *spawnpoint)
 
 	SaveClientData ();
 
-	gi.FreeTags (TAG_LEVEL);
+        gi.FreeTags (TAG_LEVEL);
 
-	memset (&level, 0, sizeof(level));
-	memset (g_edicts, 0, game.maxentities * sizeof (g_edicts[0]));
+        memset (&level, 0, sizeof(level));
+        memset (g_edicts, 0, game.maxentities * sizeof (g_edicts[0]));
 
-	strncpy (level.mapname, mapname, sizeof(level.mapname)-1);
-	strncpy (game.spawnpoint, spawnpoint, sizeof(game.spawnpoint)-1);
+        Mission_BeginLevel (mapname);
+
+        strncpy (level.mapname, mapname, sizeof(level.mapname)-1);
+        strncpy (game.spawnpoint, spawnpoint, sizeof(game.spawnpoint)-1);
 
 	// set client fields on player ents
 	for (i=0 ; i<game.maxclients ; i++)

@@ -48,10 +48,22 @@ field_t fields[] = {
 	{"rotate", FOFS(rotate), F_VECTOR},
 	{"rotate_vec", FOFS(rotate), F_VECTOR},
 	{"speeds", FOFS(rotate_speed), F_VECTOR},
-	{"move_origin", FOFS(move_origin), F_VECTOR},
-	{"move_angles", FOFS(move_angles), F_VECTOR},
-	{"style", FOFS(style), F_INT},
-	{"count", FOFS(count), F_INT},
+        {"move_origin", FOFS(move_origin), F_VECTOR},
+        {"move_angles", FOFS(move_angles), F_VECTOR},
+        {"mission_id", FOFS(oblivion.mission_id), F_LSTRING},
+        {"mission_title", FOFS(oblivion.mission_title), F_LSTRING},
+        {"mission_text", FOFS(oblivion.mission_text), F_LSTRING},
+        {"mission_event", FOFS(oblivion.mission_state), F_INT},
+        {"mission_timer_limit", FOFS(oblivion.mission_timer_limit), F_INT},
+        {"mission_timer_start", FOFS(oblivion.mission_timer_remaining), F_INT},
+        {"mission_flags", FOFS(oblivion.mission_timer_cooldown), F_INT},
+        {"mission_origin", FOFS(oblivion.mission_origin), F_VECTOR},
+        {"mission_angles", FOFS(oblivion.mission_angles), F_VECTOR},
+        {"mission_velocity", FOFS(oblivion.mission_velocity), F_VECTOR},
+        {"mission_blend", FOFS(oblivion.mission_blend), F_FLOAT},
+        {"mission_radius", FOFS(oblivion.mission_radius), F_FLOAT},
+        {"style", FOFS(style), F_INT},
+        {"count", FOFS(count), F_INT},
 	{"health", FOFS(health), F_INT},
 	{"sounds", FOFS(sounds), F_INT},
 	{"light", 0, F_IGNORE},
@@ -208,14 +220,16 @@ void InitGame (void)
 	// dm map list
 	sv_maplist = gi.cvar ("sv_maplist", "", 0);
 
-	// items
-	InitItems ();
+        // items
+        InitItems ();
 
-	Com_sprintf (game.helpmessage1, sizeof(game.helpmessage1), "");
+        Com_sprintf (game.helpmessage1, sizeof(game.helpmessage1), "");
 
-	Com_sprintf (game.helpmessage2, sizeof(game.helpmessage2), "");
+        Com_sprintf (game.helpmessage2, sizeof(game.helpmessage2), "");
 
-	// initialize all entities for this game
+        Mission_InitGame ();
+
+        // initialize all entities for this game
 	game.maxentities = maxentities->value;
 	g_edicts =  gi.TagMalloc (game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
 	globals.edicts = g_edicts;
@@ -512,12 +526,14 @@ void ReadGame (char *filename)
 	g_edicts =  gi.TagMalloc (game.maxentities * sizeof(g_edicts[0]), TAG_GAME);
 	globals.edicts = g_edicts;
 
-	fread (&game, sizeof(game), 1, f);
-	game.clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
-	for (i=0 ; i<game.maxclients ; i++)
-		ReadClient (f, &game.clients[i]);
+        fread (&game, sizeof(game), 1, f);
+        game.clients = gi.TagMalloc (game.maxclients * sizeof(game.clients[0]), TAG_GAME);
+        for (i=0 ; i<game.maxclients ; i++)
+                ReadClient (f, &game.clients[i]);
 
-	fclose (f);
+        Mission_OnGameLoaded ();
+
+        fclose (f);
 }
 
 //==========================================================

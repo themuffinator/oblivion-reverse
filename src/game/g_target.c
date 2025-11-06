@@ -117,10 +117,17 @@ void SP_target_speaker (edict_t *ent)
 
 void Use_Target_Help (edict_t *ent, edict_t *other, edict_t *activator)
 {
-	if (ent->spawnflags & 1)
-		strncpy (game.helpmessage1, ent->message, sizeof(game.helpmessage2)-1);
-	else
-		strncpy (game.helpmessage2, ent->message, sizeof(game.helpmessage1)-1);
+	qboolean handled = Mission_TargetHelpFired (ent, activator);
+
+	if (!handled)
+	{
+		const char *message = ent->message ? ent->message : "";
+
+		if (ent->spawnflags & 1)
+			strncpy (game.helpmessage1, message, sizeof(game.helpmessage1)-1);
+		else
+			strncpy (game.helpmessage2, message, sizeof(game.helpmessage2)-1);
+	}
 
 	game.helpchanged++;
 }
@@ -136,12 +143,15 @@ void SP_target_help(edict_t *ent)
 		return;
 	}
 
-	if (!ent->message)
+	if (!ent->message && (!ent->oblivion.mission_text || !ent->oblivion.mission_text[0]))
 	{
 		gi.dprintf ("%s with no message at %s\n", ent->classname, vtos(ent->s.origin));
 		G_FreeEdict (ent);
 		return;
 	}
+
+	Mission_RegisterHelpTarget (ent);
+
 	ent->use = Use_Target_Help;
 }
 

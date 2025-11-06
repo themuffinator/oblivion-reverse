@@ -370,6 +370,7 @@ static void G_RunFrame_Internal (void)
 	AI_SetSightClient ();
 
 	RTDU_RunFrame ();
+	Mission_FrameUpdate ();
 
 	// exit intermissions
 
