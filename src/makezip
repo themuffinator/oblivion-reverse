@@ -1,2 +1,3 @@
-zip -9 -r code . 
+zip -9 -r code .
+zip -9 -j code ../LICENSE
 

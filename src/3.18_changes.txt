@@ -1,5 +1,8 @@
 3.18 Changes
 
+- Added a top-level LICENSE file with the complete GNU GPL v2 text and ensured
+  release packaging scripts include it so redistributors receive the full
+  license alongside the source.
 - "Water surfing" that was present in 3.17 has been fixed (holding jump while
   on the surface of water let you swim at full speed).
 - Environment maps (env) are now autodownloaded (if allow_download_maps is set).
