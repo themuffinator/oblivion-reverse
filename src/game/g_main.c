@@ -86,6 +86,14 @@ void ReadLevel (char *filename);
 void InitGame (void);
 void G_RunFrame (void);
 
+static void Oblivion_WriteGame (char *filename, qboolean autosave);
+static void Oblivion_ReadGame (char *filename);
+static void Oblivion_WriteLevel (char *filename);
+static void Oblivion_ReadLevel (char *filename);
+static void Oblivion_RunFrame (void);
+
+void Oblivion_ServerCommand (void);
+
 
 //===================================================================
 
@@ -116,10 +124,10 @@ game_export_t *GetGameAPI (game_import_t *import)
 	globals.Shutdown = ShutdownGame;
 	globals.SpawnEntities = SpawnEntities;
 
-	globals.WriteGame = WriteGame;
-	globals.ReadGame = ReadGame;
-	globals.WriteLevel = WriteLevel;
-	globals.ReadLevel = ReadLevel;
+        globals.WriteGame = Oblivion_WriteGame;
+        globals.ReadGame = Oblivion_ReadGame;
+        globals.WriteLevel = Oblivion_WriteLevel;
+        globals.ReadLevel = Oblivion_ReadLevel;
 
 	globals.ClientThink = ClientThink;
 	globals.ClientConnect = ClientConnect;
@@ -128,9 +136,9 @@ game_export_t *GetGameAPI (game_import_t *import)
 	globals.ClientBegin = ClientBegin;
 	globals.ClientCommand = ClientCommand;
 
-	globals.RunFrame = G_RunFrame;
+        globals.RunFrame = Oblivion_RunFrame;
 
-	globals.ServerCommand = ServerCommand;
+        globals.ServerCommand = Oblivion_ServerCommand;
 
 	globals.edict_size = sizeof(edict_t);
 
@@ -350,7 +358,7 @@ G_RunFrame
 Advances the world by 0.1 seconds
 ================
 */
-void G_RunFrame (void)
+static void G_RunFrame_Internal (void)
 {
 	int		i;
 	edict_t	*ent;
@@ -406,6 +414,36 @@ void G_RunFrame (void)
 	CheckDMRules ();
 
 	// build the playerstate_t structures for all players
-	ClientEndServerFrames ();
+        ClientEndServerFrames ();
+}
+
+static void Oblivion_RunFrame (void)
+{
+        G_RunFrame_Internal ();
+}
+
+void G_RunFrame (void)
+{
+        G_RunFrame_Internal ();
+}
+
+static void Oblivion_WriteGame (char *filename, qboolean autosave)
+{
+        WriteGame (filename, autosave);
+}
+
+static void Oblivion_ReadGame (char *filename)
+{
+        ReadGame (filename);
+}
+
+static void Oblivion_WriteLevel (char *filename)
+{
+        WriteLevel (filename);
+}
+
+static void Oblivion_ReadLevel (char *filename)
+{
+        ReadLevel (filename);
 }
 
