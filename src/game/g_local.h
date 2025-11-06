@@ -532,14 +532,16 @@ extern	int	body_armor_index;
 #define MOD_TRIGGER_HURT	31
 #define MOD_HIT				32
 #define MOD_TARGET_BLASTER	33
-#define MOD_MINE                        34
-#define MOD_DEATOMIZER          35
-#define MOD_PLASMA_PISTOL       36
-#define MOD_PLASMA_RIFLE        37
-#define MOD_DETPACK                     38
-#define MOD_LASERCANNON         39
-#define MOD_DONUT                      40
-#define MOD_REMOTE_CANNON       41
+#define MOD_DEATOMIZER		34
+#define MOD_DEATOMIZER_SPLASH	35
+#define MOD_PLASMA_PISTOL	36
+#define MOD_PLASMA_RIFLE	37
+#define MOD_HELLFURY		38
+#define MOD_DONUT			39
+#define MOD_LASER_CANNON	40
+#define MOD_DETPACK		41
+#define MOD_MINE			42
+#define MOD_MINE_SPLASH	43
 #define MOD_FRIENDLY_FIRE	0x8000000
 
 extern	int	meansOfDeath;
@@ -782,6 +784,15 @@ void fire_grenade2 (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int 
 void fire_rocket (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int radius_damage);
 void fire_rail (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int kick);
 void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius);
+void fire_deatomizer (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage);
+void fire_plasma_pistol (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed);
+void fire_plasma_rifle (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed);
+void fire_hellfury (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage);
+void fire_donut (edict_t *self, vec3_t origin, float damage_radius, int splash_damage, edict_t *ignore);
+void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick);
+edict_t *fire_detpack (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius);
+void remote_detonator_trigger (edict_t *owner);
+edict_t *fire_proximity_mine (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius, int splash_damage);
 
 //
 // g_ptrail.c

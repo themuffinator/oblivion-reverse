@@ -914,3 +914,496 @@ void fire_bfg (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, f
 
 	gi.linkentity (bfg);
 }
+
+
+/*
+=================
+Oblivion projectile helpers
+=================
+*/
+
+static void deatomizer_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    vec3_t  dir;
+
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (other->takedamage)
+    {
+        if (!VectorCompare (self->velocity, vec3_origin))
+            VectorNormalize2 (self->velocity, dir);
+        else
+            VectorClear (dir);
+        T_Damage (other, self, self->owner, dir, self->s.origin,
+                plane ? plane->normal : vec3_origin, self->dmg, 0, DAMAGE_ENERGY, MOD_DEATOMIZER);
+    }
+    else
+    {
+        gi.WriteByte (svc_temp_entity);
+        gi.WriteByte (TE_PLASMA_EXPLOSION);
+        gi.WritePosition (self->s.origin);
+        gi.multicast (self->s.origin, MULTICAST_PVS);
+    }
+
+    if (self->dmg_radius > 0)
+        T_RadiusDamage (self, self->owner, self->radius_dmg, other, self->dmg_radius, MOD_DEATOMIZER_SPLASH);
+
+    G_FreeEdict (self);
+}
+
+void fire_deatomizer (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage)
+{
+    edict_t *bolt;
+
+    bolt = G_Spawn ();
+    VectorCopy (start, bolt->s.origin);
+    VectorCopy (start, bolt->s.old_origin);
+    vectoangles (dir, bolt->s.angles);
+    VectorScale (dir, speed, bolt->velocity);
+    bolt->movetype = MOVETYPE_FLYMISSILE;
+    bolt->clipmask = MASK_SHOT;
+    bolt->solid = SOLID_BBOX;
+    VectorClear (bolt->mins);
+    VectorClear (bolt->maxs);
+    bolt->s.effects = EF_BLASTER | EF_HYPERBLASTER;
+    bolt->s.sound = gi.soundindex ("misc/lasfly.wav");
+    bolt->s.modelindex = gi.modelindex ("models/objects/laser/tris.md2");
+    bolt->owner = self;
+    bolt->touch = deatomizer_touch;
+    bolt->nextthink = level.time + 8000 / speed;
+    bolt->think = G_FreeEdict;
+    bolt->dmg = damage;
+    bolt->radius_dmg = splash_damage;
+    bolt->dmg_radius = damage_radius;
+    bolt->classname = "deatomizer bolt";
+
+    if (self->client)
+        check_dodge (self, bolt->s.origin, dir, speed);
+
+    gi.linkentity (bolt);
+}
+
+static void plasma_pistol_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    vec3_t dir;
+
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (other->takedamage)
+    {
+        if (!VectorCompare (self->velocity, vec3_origin))
+            VectorNormalize2 (self->velocity, dir);
+        else
+            VectorClear (dir);
+        T_Damage (other, self, self->owner, dir, self->s.origin,
+                plane ? plane->normal : vec3_origin, self->dmg, 0, DAMAGE_ENERGY, MOD_PLASMA_PISTOL);
+    }
+    else
+    {
+        gi.WriteByte (svc_temp_entity);
+        gi.WriteByte (TE_PLASMA_EXPLOSION);
+        gi.WritePosition (self->s.origin);
+        gi.multicast (self->s.origin, MULTICAST_PVS);
+    }
+
+    G_FreeEdict (self);
+}
+
+void fire_plasma_pistol (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed)
+{
+    edict_t *bolt;
+
+    bolt = G_Spawn ();
+    VectorCopy (start, bolt->s.origin);
+    VectorCopy (start, bolt->s.old_origin);
+    vectoangles (dir, bolt->s.angles);
+    VectorScale (dir, speed, bolt->velocity);
+    bolt->movetype = MOVETYPE_FLYMISSILE;
+    bolt->clipmask = MASK_SHOT;
+    bolt->solid = SOLID_BBOX;
+    VectorClear (bolt->mins);
+    VectorClear (bolt->maxs);
+    bolt->s.effects = EF_PLASMA;
+    bolt->s.sound = gi.soundindex ("misc/lasfly.wav");
+    bolt->s.modelindex = gi.modelindex ("models/objects/laser/tris.md2");
+    bolt->owner = self;
+    bolt->touch = plasma_pistol_touch;
+    bolt->nextthink = level.time + 8000 / speed;
+    bolt->think = G_FreeEdict;
+    bolt->dmg = damage;
+    bolt->classname = "plasma pistol";
+
+    if (self->client)
+        check_dodge (self, bolt->s.origin, dir, speed);
+
+    gi.linkentity (bolt);
+}
+
+static void plasma_rifle_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    vec3_t dir;
+
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (other->takedamage)
+    {
+        if (!VectorCompare (self->velocity, vec3_origin))
+            VectorNormalize2 (self->velocity, dir);
+        else
+            VectorClear (dir);
+        T_Damage (other, self, self->owner, dir, self->s.origin,
+                plane ? plane->normal : vec3_origin, self->dmg, 0, DAMAGE_ENERGY, MOD_PLASMA_RIFLE);
+    }
+    else
+    {
+        gi.WriteByte (svc_temp_entity);
+        gi.WriteByte (TE_PLASMA_EXPLOSION);
+        gi.WritePosition (self->s.origin);
+        gi.multicast (self->s.origin, MULTICAST_PVS);
+    }
+
+    G_FreeEdict (self);
+}
+
+void fire_plasma_rifle (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed)
+{
+    edict_t *bolt;
+
+    bolt = G_Spawn ();
+    VectorCopy (start, bolt->s.origin);
+    VectorCopy (start, bolt->s.old_origin);
+    vectoangles (dir, bolt->s.angles);
+    VectorScale (dir, speed, bolt->velocity);
+    bolt->movetype = MOVETYPE_FLYMISSILE;
+    bolt->clipmask = MASK_SHOT;
+    bolt->solid = SOLID_BBOX;
+    VectorClear (bolt->mins);
+    VectorClear (bolt->maxs);
+    bolt->s.effects = EF_PLASMA | EF_ANIM_ALLFAST;
+    bolt->s.sound = gi.soundindex ("misc/lasfly.wav");
+    bolt->s.modelindex = gi.modelindex ("models/objects/laser/tris.md2");
+    bolt->owner = self;
+    bolt->touch = plasma_rifle_touch;
+    bolt->nextthink = level.time + 8000 / speed;
+    bolt->think = G_FreeEdict;
+    bolt->dmg = damage;
+    bolt->classname = "plasma rifle";
+
+    if (self->client)
+        check_dodge (self, bolt->s.origin, dir, speed);
+
+    gi.linkentity (bolt);
+}
+
+void fire_donut (edict_t *self, vec3_t origin, float damage_radius, int splash_damage, edict_t *ignore)
+{
+    edict_t *attacker;
+
+    attacker = self->owner ? self->owner : self;
+    T_RadiusDamage (self, attacker, splash_damage, ignore, damage_radius, MOD_DONUT);
+}
+
+static void hellfury_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    vec3_t dir;
+
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (other->takedamage)
+    {
+        VectorNormalize2 (self->velocity, dir);
+        T_Damage (other, self, self->owner, dir, self->s.origin,
+                plane ? plane->normal : vec3_origin, self->dmg, 0, DAMAGE_ENERGY | DAMAGE_RADIUS, MOD_HELLFURY);
+    }
+
+    fire_donut (self, self->s.origin, self->dmg_radius, self->radius_dmg, other);
+
+    gi.WriteByte (svc_temp_entity);
+    gi.WriteByte (TE_EXPLOSION1);
+    gi.WritePosition (self->s.origin);
+    gi.multicast (self->s.origin, MULTICAST_PVS);
+
+    G_FreeEdict (self);
+}
+
+void fire_hellfury (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage)
+{
+    edict_t *bolt;
+
+    bolt = G_Spawn ();
+    VectorCopy (start, bolt->s.origin);
+    VectorCopy (start, bolt->s.old_origin);
+    vectoangles (dir, bolt->s.angles);
+    VectorScale (dir, speed, bolt->velocity);
+    bolt->movetype = MOVETYPE_FLYMISSILE;
+    bolt->clipmask = MASK_SHOT;
+    bolt->solid = SOLID_BBOX;
+    VectorClear (bolt->mins);
+    VectorClear (bolt->maxs);
+    bolt->s.effects = EF_ROCKET;
+    bolt->s.modelindex = gi.modelindex ("models/objects/rocket/tris.md2");
+    bolt->owner = self;
+    bolt->touch = hellfury_touch;
+    bolt->nextthink = level.time + 8000 / speed;
+    bolt->think = G_FreeEdict;
+    bolt->dmg = damage;
+    bolt->radius_dmg = splash_damage;
+    bolt->dmg_radius = damage_radius;
+    bolt->classname = "hellfury";
+
+    if (self->client)
+        check_dodge (self, bolt->s.origin, dir, speed);
+
+    gi.linkentity (bolt);
+}
+
+void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick)
+{
+    vec3_t  end;
+    trace_t tr;
+
+    VectorMA (start, 8192, dir, end);
+    tr = gi.trace (start, NULL, NULL, end, self, MASK_SHOT);
+
+    if (tr.ent && tr.ent->takedamage)
+    {
+        T_Damage (tr.ent, self, self, dir, tr.endpos, tr.plane.normal, damage, kick, DAMAGE_ENERGY, MOD_LASER_CANNON);
+    }
+
+    gi.WriteByte (svc_temp_entity);
+    gi.WriteByte (TE_BFG_LASER);
+    gi.WritePosition (start);
+    gi.WritePosition (tr.endpos);
+    gi.multicast (start, MULTICAST_PVS);
+}
+
+static void detpack_detonate (edict_t *self);
+
+static void detpack_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
+{
+    detpack_detonate (self);
+}
+
+static void detpack_arm (edict_t *self)
+{
+    self->think = NULL;
+    self->nextthink = 0;
+    self->touch = NULL;
+}
+
+static void detpack_detonate (edict_t *self)
+{
+    gi.WriteByte (svc_temp_entity);
+    gi.WriteByte (TE_EXPLOSION2);
+    gi.WritePosition (self->s.origin);
+    gi.multicast (self->s.origin, MULTICAST_PHS);
+
+    T_RadiusDamage (self, self->owner ? self->owner : self, self->radius_dmg, NULL, self->dmg_radius, MOD_DETPACK);
+
+    G_FreeEdict (self);
+}
+
+static void detpack_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (!self->groundentity)
+    {
+        VectorClear (self->velocity);
+        VectorClear (self->avelocity);
+        self->movetype = MOVETYPE_NONE;
+        self->touch = NULL;
+        self->think = detpack_arm;
+        self->nextthink = level.time + 0.2f;
+        self->groundentity = other;
+    }
+}
+
+edict_t *fire_detpack (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius)
+{
+    edict_t *charge;
+
+    charge = G_Spawn ();
+    VectorCopy (start, charge->s.origin);
+    VectorCopy (start, charge->s.old_origin);
+    vectoangles (aimdir, charge->s.angles);
+    VectorScale (aimdir, speed, charge->velocity);
+    charge->movetype = MOVETYPE_BOUNCE;
+    charge->clipmask = MASK_SHOT;
+    charge->solid = SOLID_BBOX;
+    VectorSet (charge->mins, -8, -8, 0);
+    VectorSet (charge->maxs, 8, 8, 16);
+    charge->s.modelindex = gi.modelindex ("models/objects/detpack/tris.md2");
+    charge->s.effects = EF_GRENADE;
+    charge->owner = self;
+    charge->touch = detpack_touch;
+    charge->think = detpack_arm;
+    charge->nextthink = level.time + 0.2f;
+    charge->dmg = damage;
+    charge->radius_dmg = damage;
+    charge->dmg_radius = damage_radius;
+    charge->classname = "detpack";
+    charge->takedamage = DAMAGE_YES;
+    charge->die = detpack_die;
+
+    gi.linkentity (charge);
+
+    return charge;
+}
+
+void remote_detonator_trigger (edict_t *owner)
+{
+    int             i;
+    edict_t *ent;
+
+    for (i = 1; i < globals.num_edicts; i++)
+    {
+        ent = &g_edicts[i];
+        if (!ent->inuse)
+            continue;
+        if (!ent->classname)
+            continue;
+        if (strcmp (ent->classname, "detpack"))
+            continue;
+        if (ent->owner != owner)
+            continue;
+
+        detpack_detonate (ent);
+    }
+}
+
+static void proximity_mine_explode (edict_t *self, edict_t *target)
+{
+    if (target && target->takedamage)
+    {
+        vec3_t dir;
+        VectorSubtract (target->s.origin, self->s.origin, dir);
+        VectorNormalize (dir);
+        T_Damage (target, self, self->owner ? self->owner : self, dir, self->s.origin, vec3_origin, self->dmg, 0, DAMAGE_ENERGY, MOD_MINE);
+    }
+
+    gi.WriteByte (svc_temp_entity);
+    gi.WriteByte (TE_PLASMA_EXPLOSION);
+    gi.WritePosition (self->s.origin);
+    gi.multicast (self->s.origin, MULTICAST_PVS);
+
+    if (self->dmg_radius > 0)
+        T_RadiusDamage (self, self->owner ? self->owner : self, self->radius_dmg, target, self->dmg_radius, MOD_MINE_SPLASH);
+
+    G_FreeEdict (self);
+}
+
+static void proximity_mine_think (edict_t *self)
+{
+    edict_t *ent;
+
+    ent = NULL;
+    while ((ent = findradius (ent, self->s.origin, self->dmg_radius)) != NULL)
+    {
+        if (ent == self->owner)
+            continue;
+        if (!ent->takedamage)
+            continue;
+        if (!(ent->svflags & SVF_MONSTER) && !ent->client)
+            continue;
+
+        proximity_mine_explode (self, ent);
+        return;
+    }
+
+    self->nextthink = level.time + 0.1f;
+}
+
+static void proximity_mine_arm (edict_t *self)
+{
+    self->think = proximity_mine_think;
+    self->nextthink = level.time + 0.1f;
+}
+
+static void proximity_mine_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    if (!self->groundentity)
+    {
+        VectorClear (self->velocity);
+        VectorClear (self->avelocity);
+        self->movetype = MOVETYPE_NONE;
+        self->touch = NULL;
+        self->think = proximity_mine_arm;
+        self->nextthink = level.time + 0.2f;
+        self->groundentity = other;
+    }
+}
+
+edict_t *fire_proximity_mine (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius, int splash_damage)
+{
+    edict_t *mine;
+
+    mine = G_Spawn ();
+    VectorCopy (start, mine->s.origin);
+    VectorCopy (start, mine->s.old_origin);
+    vectoangles (aimdir, mine->s.angles);
+    VectorScale (aimdir, speed, mine->velocity);
+    mine->movetype = MOVETYPE_BOUNCE;
+    mine->clipmask = MASK_SHOT;
+    mine->solid = SOLID_BBOX;
+    VectorSet (mine->mins, -8, -8, 0);
+    VectorSet (mine->maxs, 8, 8, 16);
+    mine->s.effects = EF_GRENADE;
+    mine->s.modelindex = gi.modelindex ("models/objects/laser/tris.md2");
+    mine->owner = self;
+    mine->touch = proximity_mine_touch;
+    mine->think = proximity_mine_arm;
+    mine->nextthink = level.time + 0.2f;
+    mine->dmg = damage;
+    mine->radius_dmg = splash_damage;
+    mine->dmg_radius = damage_radius;
+    mine->classname = "prox_mine";
+
+    gi.linkentity (mine);
+
+    return mine;
+}
