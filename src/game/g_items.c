@@ -237,10 +237,20 @@ qboolean Pickup_Bandolier (edict_t *ent, edict_t *other)
 		other->client->pers.max_bullets = 250;
 	if (other->client->pers.max_shells < 150)
 		other->client->pers.max_shells = 150;
-	if (other->client->pers.max_cells < 250)
-		other->client->pers.max_cells = 250;
-	if (other->client->pers.max_slugs < 75)
-		other->client->pers.max_slugs = 75;
+        if (other->client->pers.max_cells < 250)
+                other->client->pers.max_cells = 250;
+        if (other->client->pers.max_slugs < 75)
+                other->client->pers.max_slugs = 75;
+        if (other->client->pers.max_mines < 15)
+                other->client->pers.max_mines = 15;
+        if (other->client->pers.max_detpacks < 15)
+                other->client->pers.max_detpacks = 15;
+        if (other->client->pers.max_dods < 6)
+                other->client->pers.max_dods = 6;
+        if (other->client->pers.max_pistolplasma < 150)
+                other->client->pers.max_pistolplasma = 150;
+        if (other->client->pers.max_rifleplasma < 75)
+                other->client->pers.max_rifleplasma = 75;
 
 	item = FindItem("Bullets");
 	if (item)
@@ -251,14 +261,59 @@ qboolean Pickup_Bandolier (edict_t *ent, edict_t *other)
 			other->client->pers.inventory[index] = other->client->pers.max_bullets;
 	}
 
-	item = FindItem("Shells");
-	if (item)
-	{
-		index = ITEM_INDEX(item);
-		other->client->pers.inventory[index] += item->quantity;
-		if (other->client->pers.inventory[index] > other->client->pers.max_shells)
-			other->client->pers.inventory[index] = other->client->pers.max_shells;
-	}
+        item = FindItem("Shells");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_shells)
+                        other->client->pers.inventory[index] = other->client->pers.max_shells;
+        }
+
+        item = FindItem("PistolPlasma");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_pistolplasma)
+                        other->client->pers.inventory[index] = other->client->pers.max_pistolplasma;
+        }
+
+        item = FindItem("Rifle Plasma");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_rifleplasma)
+                        other->client->pers.inventory[index] = other->client->pers.max_rifleplasma;
+        }
+
+        item = FindItem("Mines");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_mines)
+                        other->client->pers.inventory[index] = other->client->pers.max_mines;
+        }
+
+        item = FindItem("Detonation Pack");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_detpacks)
+                        other->client->pers.inventory[index] = other->client->pers.max_detpacks;
+        }
+
+        item = FindItem("DOD");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_dods)
+                        other->client->pers.inventory[index] = other->client->pers.max_dods;
+        }
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn (ent, ent->item->quantity);
@@ -277,12 +332,22 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 		other->client->pers.max_shells = 200;
 	if (other->client->pers.max_rockets < 100)
 		other->client->pers.max_rockets = 100;
-	if (other->client->pers.max_grenades < 100)
-		other->client->pers.max_grenades = 100;
-	if (other->client->pers.max_cells < 300)
-		other->client->pers.max_cells = 300;
-	if (other->client->pers.max_slugs < 100)
-		other->client->pers.max_slugs = 100;
+        if (other->client->pers.max_grenades < 100)
+                other->client->pers.max_grenades = 100;
+        if (other->client->pers.max_cells < 300)
+                other->client->pers.max_cells = 300;
+        if (other->client->pers.max_slugs < 100)
+                other->client->pers.max_slugs = 100;
+        if (other->client->pers.max_mines < 20)
+                other->client->pers.max_mines = 20;
+        if (other->client->pers.max_detpacks < 20)
+                other->client->pers.max_detpacks = 20;
+        if (other->client->pers.max_dods < 10)
+                other->client->pers.max_dods = 10;
+        if (other->client->pers.max_pistolplasma < 200)
+                other->client->pers.max_pistolplasma = 200;
+        if (other->client->pers.max_rifleplasma < 100)
+                other->client->pers.max_rifleplasma = 100;
 
 	item = FindItem("Bullets");
 	if (item)
@@ -329,14 +394,59 @@ qboolean Pickup_Pack (edict_t *ent, edict_t *other)
 			other->client->pers.inventory[index] = other->client->pers.max_rockets;
 	}
 
-	item = FindItem("Slugs");
-	if (item)
-	{
-		index = ITEM_INDEX(item);
-		other->client->pers.inventory[index] += item->quantity;
-		if (other->client->pers.inventory[index] > other->client->pers.max_slugs)
-			other->client->pers.inventory[index] = other->client->pers.max_slugs;
-	}
+        item = FindItem("Slugs");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_slugs)
+                        other->client->pers.inventory[index] = other->client->pers.max_slugs;
+        }
+
+        item = FindItem("PistolPlasma");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_pistolplasma)
+                        other->client->pers.inventory[index] = other->client->pers.max_pistolplasma;
+        }
+
+        item = FindItem("Rifle Plasma");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_rifleplasma)
+                        other->client->pers.inventory[index] = other->client->pers.max_rifleplasma;
+        }
+
+        item = FindItem("Mines");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_mines)
+                        other->client->pers.inventory[index] = other->client->pers.max_mines;
+        }
+
+        item = FindItem("Detonation Pack");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_detpacks)
+                        other->client->pers.inventory[index] = other->client->pers.max_detpacks;
+        }
+
+        item = FindItem("DOD");
+        if (item)
+        {
+                index = ITEM_INDEX(item);
+                other->client->pers.inventory[index] += item->quantity;
+                if (other->client->pers.inventory[index] > other->client->pers.max_dods)
+                        other->client->pers.inventory[index] = other->client->pers.max_dods;
+        }
 
 	if (!(ent->spawnflags & DROPPED_ITEM) && (deathmatch->value))
 		SetRespawn (ent, ent->item->quantity);
@@ -470,22 +580,22 @@ qboolean Add_Ammo (edict_t *ent, gitem_t *item, int count)
 		max = ent->client->pers.max_rockets;
 	else if (item->tag == AMMO_GRENADES)
 		max = ent->client->pers.max_grenades;
-	else if (item->tag == AMMO_CELLS)
-		max = ent->client->pers.max_cells;
-	else if (item->tag == AMMO_SLUGS)
-		max = ent->client->pers.max_slugs;
-	else if (item->tag == AMMO_PISTOLPLASMA)
-		max = ent->client->pers.max_pistolplasma;
-	else if (item->tag == AMMO_RIFLEPLASMA)
-		max = ent->client->pers.max_rifleplasma;
-	else if (item->tag == AMMO_MINES)
-		max = ent->client->pers.max_mines;
-	else if (item->tag == AMMO_DETPACK)
-		max = ent->client->pers.max_detpack;
-	else if (item->tag == AMMO_DOD)
-		max = ent->client->pers.max_dod;
-	else
-		return false;
+        else if (item->tag == AMMO_CELLS)
+                max = ent->client->pers.max_cells;
+        else if (item->tag == AMMO_SLUGS)
+                max = ent->client->pers.max_slugs;
+        else if (item->tag == AMMO_MINES)
+                max = ent->client->pers.max_mines;
+        else if (item->tag == AMMO_DETPACK)
+                max = ent->client->pers.max_detpacks;
+        else if (item->tag == AMMO_DOD)
+                max = ent->client->pers.max_dods;
+        else if (item->tag == AMMO_PISTOLPLASMA)
+                max = ent->client->pers.max_pistolplasma;
+        else if (item->tag == AMMO_RIFLEPLASMA)
+                max = ent->client->pers.max_rifleplasma;
+        else
+                return false;
 
 	index = ITEM_INDEX(item);
 
@@ -1311,8 +1421,8 @@ gitem_t	itemlist[] =
 		"weapon_plasma_pistol",
 		Pickup_Weapon,
 		Use_Weapon,
-		Drop_Weapon,
-		Weapon_PlasmaPistol,
+                Drop_Weapon,
+                Weapon_PlasmaPistol,
 		"misc/w_pkup.wav",
 		NULL, 0,
 		"models/weapons/v_pistol/tris.md2",
@@ -1942,7 +2052,7 @@ always owned, never in the world
                 Pickup_Weapon,
                 Use_Weapon,
                 Drop_Weapon,
-                Weapon_HellFury,
+                Weapon_Hellfury,
                 "misc/w_pkup.wav",
                 "models/weapons/g_hellfury/tris.md2", EF_ROTATE,
                 "models/weapons/v_hellfury/tris.md2",
@@ -1965,7 +2075,7 @@ always owned, never in the world
                 Pickup_Ammo,
                 Use_Weapon,
                 Drop_Ammo,
-                NULL,
+                Weapon_ProximityMines,
                 "misc/am_pkup.wav",
                 "models/items/ammo/mines/tris.md2", 0,
                 "models/weapons/v_mine/tris.md2",
@@ -1988,7 +2098,7 @@ always owned, never in the world
                 Pickup_Ammo,
                 Use_Weapon,
                 Drop_Ammo,
-                NULL,
+                Weapon_RemoteDetonator,
                 "misc/am_pkup.wav",
                 "models/items/ammo/detpack/tris.md2", 0,
                 "models/weapons/v_detpack/tris.md2",

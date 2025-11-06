@@ -383,44 +383,42 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message = "tried to invade";
 				message2 = "'s personal space";
 				break;
-
-			case MOD_PLASMA_PISTOL:
-				message = "was seared by";
-				message2 = "'s plasma pistol";
-				break;
-			case MOD_PLASMA_RIFLE:
-				message = "was vaporized by";
-				message2 = "'s plasma rifle";
-				break;
-			case MOD_LASERCANNON:
-				message = "was obliterated by";
-				message2 = "'s obliterator";
+			case MOD_MINE:
+				message = "found that mine";
+				message2 = " had misplaced";
 				break;
 			case MOD_DEATOMIZER:
-				message = "was reduced to atoms by";
-				message2 = "'s deatomizer";
+				if (IsNeutral(self))
+				        message = "had its electrons unbound by";
+				else if (IsFemale(self))
+				        message = "had her electrons unbound by";
+				else
+				        message = "had his electrons unbound by";
 				break;
-			case MOD_HELLFURY:
-				message = "was incinerated by";
-				message2 = "'s hellfury";
+			case MOD_PLASMA_PISTOL:
+				message = "was pistol-whipped by";
 				break;
-			case MOD_REMOTE_DETONATOR:
-				message = "was detonated by";
-				message2 = "'s remote charge";
-				break;
-			case MOD_LASERMINE:
-				message = "was sliced apart by";
-				message2 = "'s laser mine";
+			case MOD_PLASMA_RIFLE:
+				message = "was smeared by";
+				message2 = "'s hot sticky plasma";
 				break;
 			case MOD_DETPACK:
-				message = "was shredded by";
-				message2 = "'s detpack";
+				message = "stepped on";
+				message2 = "'s dog sh... er.. detonation pack";
 				break;
-			case MOD_DOD:
-				message = "was annihilated by";
-				message2 = "'s DOD";
+			case MOD_LASERCANNON:
+				message = "was sliced and diced by";
+				message2 = "'s obliterator";
 				break;
-			}
+			case MOD_DONUT:
+				message = "took a bite of";
+				message2 = "'s donut";
+				break;
+			case MOD_REMOTE_CANNON:
+				message = "caught some of";
+				message2 = "'s remote cannon lovin'";
+				break;
+                }
 			if (message)
 			{
 				gi.bprintf (PRINT_MEDIUM,"%s %s %s%s\n", self->client->pers.netname, message, attacker->client->pers.netname, message2);
@@ -663,11 +661,11 @@ void InitClientPersistant (gclient_t *client)
 	client->pers.max_grenades	= 50;
 	client->pers.max_cells		= 200;
 	client->pers.max_slugs		= 50;
-	client->pers.max_pistolplasma	= 100;
-	client->pers.max_rifleplasma	= 80;
-	client->pers.max_mines		= 10;
-	client->pers.max_detpack	= 5;
-	client->pers.max_dod		= 3;
+        client->pers.max_mines         = 10;
+        client->pers.max_detpacks      = 10;
+        client->pers.max_dods          = 5;
+        client->pers.max_pistolplasma  = 100;
+        client->pers.max_rifleplasma   = 50;
 
 	client->pers.connected = true;
 }
