@@ -1,8 +1,15 @@
 #include "g_local.h"
 
+#define STATE_TOP                       0
+#define STATE_BOTTOM            1
+#define STATE_UP                        2
+#define STATE_DOWN                      3
+
 #define RTRAIN_START_ON         1
 #define RTRAIN_TOGGLE           2
 #define RTRAIN_BLOCK_STOPS      4
+
+void Move_Calc (edict_t *ent, vec3_t dest, void(*func)(edict_t *));
 
 struct rotate_train_state_s {
         vec3_t  final_angles;

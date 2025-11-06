@@ -1,30 +1,8 @@
 #include "g_local.h"
 
-#define CAMERA_SPAWN_FREEZE     1
+void InitTrigger (edict_t *self);
 
-struct camera_state_s {
-        qboolean        active;
-        qboolean        freeze_players;
-        float           default_wait;
-        float           wait_override;
-        float           stop_time;      // 0 = indefinite
-        float           speed;
-        float           duration;
-        edict_t         *initial_corner;
-        edict_t         *current_corner;
-        edict_t         *target_corner;
-        edict_t         *focus;         // static look target
-        edict_t         *track;         // dynamic entity to look at
-        edict_t         *activator;
-        float           move_start_time;
-        float           move_duration;
-        vec3_t          move_start;
-        vec3_t          move_end;
-        vec3_t          start_angles;
-        vec3_t          end_angles;
-        qboolean        has_angle_goal;
-        int             sound_loop;
-};
+#define CAMERA_SPAWN_FREEZE     1
 
 static void Camera_AttachAll(edict_t *self);
 static void Camera_DetachAll(edict_t *self);
@@ -622,7 +600,7 @@ static void Camera_TargetUse(edict_t *self, edict_t *other, edict_t *activator)
         if (self->duration > 0)
                 cam->duration = self->duration;
         if (!VectorCompare(self->rotate, vec3_origin))
-                camera->rotate = self->rotate;
+                VectorCopy(self->rotate, camera->rotate);
         if (!VectorCompare(self->rotate_speed, vec3_origin))
-                camera->rotate_speed = self->rotate_speed;
+                VectorCopy(self->rotate_speed, camera->rotate_speed);
 }

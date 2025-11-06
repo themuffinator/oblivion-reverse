@@ -8,6 +8,8 @@
 
 #include "g_local.h"
 
+#define MODEL_SCALE         1.000000f
+
 #define SENTINEL_FRAME_STAND_START       0
 #define SENTINEL_FRAME_STAND_END         9
 #define SENTINEL_FRAME_RUN_START         10

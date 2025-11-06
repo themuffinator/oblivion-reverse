@@ -162,24 +162,29 @@ The monster is walking it's beat
 */
 void ai_walk (edict_t *self, float dist)
 {
-	M_MoveToGoal (self, dist);
+        M_MoveToGoal (self, dist);
 
-	// check for noticing a player
-	if (FindTarget (self))
-		return;
+        // check for noticing a player
+        if (FindTarget (self))
+                return;
 
-	if ((self->monsterinfo.search) && (level.time > self->monsterinfo.idle_time))
-	{
-		if (self->monsterinfo.idle_time)
-		{
-			self->monsterinfo.search (self);
-			self->monsterinfo.idle_time = level.time + 15 + random() * 15;
-		}
-		else
-		{
-			self->monsterinfo.idle_time = level.time + random() * 15;
-		}
-	}
+        if ((self->monsterinfo.search) && (level.time > self->monsterinfo.idle_time))
+        {
+                if (self->monsterinfo.idle_time)
+                {
+                        self->monsterinfo.search (self);
+                        self->monsterinfo.idle_time = level.time + 15 + random() * 15;
+                }
+                else
+                {
+                        self->monsterinfo.idle_time = level.time + random() * 15;
+                }
+        }
+}
+
+void ai_fly (edict_t *self, float dist)
+{
+        ai_walk (self, dist);
 }
 
 
