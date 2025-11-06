@@ -1275,7 +1275,7 @@ void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int
 
     if (tr.ent && tr.ent->takedamage)
     {
-        T_Damage (tr.ent, self, self, dir, tr.endpos, tr.plane.normal, damage, kick, DAMAGE_ENERGY, MOD_LASER_CANNON);
+        T_Damage (tr.ent, self, self, dir, tr.endpos, tr.plane.normal, damage, kick, DAMAGE_ENERGY, MOD_LASERCANNON);
     }
 
     gi.WriteByte (svc_temp_entity);

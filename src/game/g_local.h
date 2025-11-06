@@ -538,10 +538,13 @@ extern	int	body_armor_index;
 #define MOD_PLASMA_RIFLE	37
 #define MOD_HELLFURY		38
 #define MOD_DONUT			39
-#define MOD_LASER_CANNON	40
+#define MOD_LASERCANNON	40
 #define MOD_DETPACK		41
 #define MOD_MINE			42
 #define MOD_MINE_SPLASH	43
+#define MOD_REMOTE_DETONATOR	44
+#define MOD_REMOTE_CANNON		45
+#define MOD_LASER_CANNON	MOD_LASERCANNON
 #define MOD_FRIENDLY_FIRE	0x8000000
 
 extern	int	meansOfDeath;
