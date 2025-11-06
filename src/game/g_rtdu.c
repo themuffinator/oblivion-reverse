@@ -154,8 +154,8 @@ static void RTDU_TurretThink(edict_t *self)
                 {
                         int damage = 12;
 
-                        fire_blaster(self->owner ? self->owner : self,
-                                     start, forward, damage, 1000, EF_BLASTER, false);
+                        fire_blaster_with_mod(self->owner ? self->owner : self,
+                                     start, forward, damage, 1000, EF_BLASTER, false, MOD_REMOTE_CANNON);
                         if (!rtdu_fire_sound)
                                 rtdu_fire_sound = gi.soundindex("weapons/blastf1a.wav");
                         gi.sound(self, CHAN_WEAPON, rtdu_fire_sound, 1, ATTN_NORM, 0);

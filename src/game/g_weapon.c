@@ -344,10 +344,10 @@ void blaster_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *
 	G_FreeEdict (self);
 }
 
-void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int effect, qboolean hyper)
+void fire_blaster_with_mod (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int effect, qboolean hyper, int mod)
 {
-	edict_t	*bolt;
-	trace_t	tr;
+	edict_t *bolt;
+	trace_t tr;
 
 	VectorNormalize (dir);
 
@@ -378,6 +378,7 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 	bolt->classname = "bolt";
 	if (hyper)
 		bolt->spawnflags = 1;
+	bolt->count = mod;
 	gi.linkentity (bolt);
 
 	if (self->client)
@@ -389,7 +390,13 @@ void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int spee
 		VectorMA (bolt->s.origin, -10, dir, bolt->s.origin);
 		bolt->touch (bolt, tr.ent, NULL, NULL);
 	}
-}	
+}
+
+void fire_blaster (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, int effect, qboolean hyper)
+{
+	fire_blaster_with_mod (self, start, dir, damage, speed, effect, hyper, 0);
+}
+
 
 
 /*
