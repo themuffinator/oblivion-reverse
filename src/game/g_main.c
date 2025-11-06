@@ -369,6 +369,8 @@ static void G_RunFrame_Internal (void)
 	// choose a client for monsters to target this frame
 	AI_SetSightClient ();
 
+	RTDU_RunFrame ();
+
 	// exit intermissions
 
 	if (level.exitintermission)

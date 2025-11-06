@@ -381,6 +381,34 @@ DEP_CPP_G_MAI=\
 # End Source File
 # Begin Source File
 
+SOURCE=.\g_rtdu.c
+
+!IF  "$(CFG)" == "game - Win32 Release"
+
+!ELSEIF  "$(CFG)" == "game - Win32 Debug"
+
+!ELSEIF  "$(CFG)" == "game - Win32 Debug Alpha"
+
+DEP_CPP_G_RTD=\
+        ".\g_local.h"\
+        ".\game.h"\
+        ".\q_shared.h"\
+
+
+!ELSEIF  "$(CFG)" == "game - Win32 Release Alpha"
+
+DEP_CPP_G_RTD=\
+        ".\g_local.h"\
+        ".\game.h"\
+        ".\q_shared.h"\
+
+
+!ENDIF
+
+# End Source File
+
+# Begin Source File
+
 SOURCE=.\g_misc.c
 
 !IF  "$(CFG)" == "game - Win32 Release"

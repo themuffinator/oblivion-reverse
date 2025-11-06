@@ -502,6 +502,7 @@ void player_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damag
 {
 	int		n;
 
+	RTDU_PlayerDie (self);
 	VectorClear (self->avelocity);
 
 	self->takedamage = DAMAGE_YES;
@@ -1507,6 +1508,8 @@ void ClientDisconnect (edict_t *ent)
 
 	if (!ent->client)
 		return;
+
+	RTDU_PlayerDisconnect (ent);
 
 	gi.bprintf (PRINT_HIGH, "%s disconnected\n", ent->client->pers.netname);
 

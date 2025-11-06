@@ -54,3 +54,7 @@ A unified diff between the two HLIL dumps (generated with `git diff --no-index r
 - Structural changes implied by altered offsets and sizes in entity-handling code.
 
 Keep this document updated as deeper reverse-engineering yields more precise mappings or corrections.
+
+## Control mappings
+
+- The default key layout reserves the `r` key for RTDU deployment via the `use rtdu` command, matching the packaged configuration defaults.

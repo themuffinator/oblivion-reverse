@@ -24,6 +24,10 @@ qboolean	Pickup_Weapon (edict_t *ent, edict_t *other);
 void		Use_Weapon (edict_t *ent, gitem_t *inv);
 void		Drop_Weapon (edict_t *ent, gitem_t *inv);
 
+qboolean	Pickup_RTDU (edict_t *ent, edict_t *other);
+void		rtdu_use (edict_t *ent, gitem_t *item);
+void		Drop_RTDU (edict_t *ent, gitem_t *item);
+
 void Weapon_Blaster (edict_t *ent);
 void Weapon_Shotgun (edict_t *ent);
 void Weapon_SuperShotgun (edict_t *ent);
@@ -1777,6 +1781,29 @@ always owned, never in the world
 /* precache */ "items/airout.wav"
 	},
 
+
+/*QUAKED item_rtdu (.3 .3 1) (-16 -16 -16) (16 16 16)
+*/
+        {
+                "weapon_rtdu",
+                Pickup_RTDU,
+                rtdu_use,
+                Drop_RTDU,
+                NULL,
+                "misc/w_pkup.wav",
+                "models/objects/rtdu/rtdu.md2", 0,
+                NULL,
+/* icon */              "w_rtdu",
+/* pickup */    "RTDU",
+/* width */             1,
+                1,
+                NULL,
+                IT_STAY_COOP|IT_POWERUP,
+                0,
+                NULL,
+                0,
+/* precache */ "models/objects/rtdu/tripod.md2"
+        },
 /*QUAKED item_ancient_head (.3 .3 1) (-16 -16 -16) (16 16 16)
 Special item that gives +2 to maximum health
 */

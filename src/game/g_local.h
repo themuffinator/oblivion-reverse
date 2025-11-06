@@ -642,6 +642,13 @@ int PowerArmorType (edict_t *ent);
 gitem_t	*GetItemByIndex (int index);
 qboolean Add_Ammo (edict_t *ent, gitem_t *item, int count);
 void Touch_Item (edict_t *ent, edict_t *other, cplane_t *plane, csurface_t *surf);
+qboolean Pickup_RTDU (edict_t *ent, edict_t *other);
+void rtdu_use (edict_t *ent, gitem_t *item);
+void Drop_RTDU (edict_t *ent, gitem_t *item);
+void Drop_General (edict_t *ent, gitem_t *item);
+void RTDU_RunFrame (void);
+void RTDU_PlayerDisconnect (edict_t *ent);
+void RTDU_PlayerDie (edict_t *ent);
 
 //
 // g_utils.c
@@ -983,6 +990,12 @@ struct gclient_s
 	edict_t		*chase_target;		// player we are chasing
 	qboolean	update_chase;		// need to update chase info?
 
+	struct
+	{
+		edict_t *turret;		// active RTDU turret entity
+		float	next_use_time;		// debounce between deploy / recall
+	} rtdu;
+  
 	edict_t		*camera;		// active cutscene camera
 	qboolean	camera_freeze;		// freeze movement while camera active
 	float		camera_endtime;		// when camera should release view
