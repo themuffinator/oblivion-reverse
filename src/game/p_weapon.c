@@ -1765,6 +1765,62 @@ void Weapon_Hellfury (edict_t *ent)
         Weapon_Generic (ent, 4, 12, 50, 54, pause_frames, fire_frames, Weapon_Hellfury_Fire);
 }
 
+static void Weapon_DOD_Fire (edict_t *ent)
+{
+        vec3_t  offset, start;
+        vec3_t  forward, right;
+        int             damage = 120;
+        int             splash = 150;
+        float   radius = 180.0f;
+        int             speed = 700;
+
+        if (!((int)dmflags->value & DF_INFINITE_AMMO))
+        {
+                if (!ent->client->ammo_index || ent->client->pers.inventory[ent->client->ammo_index] < 1)
+                {
+                        ent->client->ps.gunframe++;
+                        if (level.time >= ent->pain_debounce_time)
+                        {
+                                gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
+                                ent->pain_debounce_time = level.time + 1;
+                        }
+                        return;
+                }
+        }
+
+        if (is_quad)
+        {
+                damage *= 4;
+                splash *= 4;
+        }
+
+        AngleVectors (ent->client->v_angle, forward, right, NULL);
+        VectorSet (offset, 8, 8, ent->viewheight-8);
+        P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+        fire_dod (ent, start, forward, damage, speed, radius, splash);
+
+        gi.WriteByte (svc_muzzleflash);
+        gi.WriteShort (ent-g_edicts);
+        gi.WriteByte (MZ_BFG | is_silenced);
+        gi.multicast (ent->s.origin, MULTICAST_PVS);
+
+        gi.sound (ent, CHAN_WEAPON, gi.soundindex("sound/dod/DoD.wav"), 1, ATTN_NORM, 0);
+
+        ent->client->ps.gunframe++;
+        PlayerNoise(ent, start, PNOISE_WEAPON);
+
+        if (!((int)dmflags->value & DF_INFINITE_AMMO))
+                ent->client->pers.inventory[ent->client->ammo_index]--;
+}
+
+void Weapon_DOD (edict_t *ent)
+{
+        static int      pause_frames[]  = {19, 32, 0};
+        static int      fire_frames[]   = {5, 0};
+
+        Weapon_Generic (ent, 4, 8, 52, 55, pause_frames, fire_frames, Weapon_DOD_Fire);
+}
+
 static void Weapon_LaserCannon_Fire (edict_t *ent)
 {
         vec3_t  offset, start;

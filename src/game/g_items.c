@@ -45,6 +45,7 @@ void Weapon_HellFury (edict_t *ent);
 void Weapon_LaserCannon (edict_t *ent);
 void Weapon_Deatomizer (edict_t *ent);
 void Weapon_RemoteDetonator (edict_t *ent);
+void Weapon_DOD (edict_t *ent);
 
 gitem_armor_t jacketarmor_info	= { 25,  50, .30, .00, ARMOR_JACKET};
 gitem_armor_t combatarmor_info	= { 50, 100, .60, .30, ARMOR_COMBAT};
@@ -2066,6 +2067,29 @@ always owned, never in the world
                 NULL,
                 0,
 /* precache */ "models/objects/rocket/tris.md2 weapons/rockfly.wav weapons/rocklf1a.wav weapons/rocklr1b.wav models/objects/debris2/tris.md2"
+        },
+
+/*QUAKED weapon_dod (.3 .3 1) (-16 -16 -16) (16 16 16)
+*/
+        {
+                "weapon_dod",
+                Pickup_Weapon,
+                Use_Weapon,
+                Drop_Weapon,
+                Weapon_DOD,
+                "misc/w_pkup.wav",
+                "models/weapons/g_dod/tris.md2", EF_ROTATE,
+                "models/weapons/v_DoD/tris.md2",
+/* icon */              "a_dod",
+/* pickup */    "DoD Launcher",
+                0,
+                1,
+                "DOD",
+                IT_WEAPON|IT_STAY_COOP,
+                WEAP_DONUT,
+                NULL,
+                0,
+/* precache */ "models/weapons/v_DoD/tris.md2 models/objects/dod/tris.md2 sound/dod/DoD_hum.wav sound/dod/DoD.wav"
         },
 
 /*QUAKED ammo_mines (.3 .3 1) (-16 -16 -16) (16 16 16)

@@ -1212,6 +1212,93 @@ void fire_donut (edict_t *self, vec3_t origin, float damage_radius, int splash_d
     T_RadiusDamage (self, attacker, splash_damage, ignore, damage_radius, MOD_DONUT);
 }
 
+static void dod_explode (edict_t *self)
+{
+    edict_t *ignore;
+
+    if (!self->inuse)
+        return;
+
+    ignore = self->enemy;
+
+    self->s.sound = 0;
+    gi.sound (self, CHAN_AUTO, gi.soundindex("sound/dod/DoD.wav"), 1, ATTN_NORM, 0);
+
+    gi.WriteByte (svc_temp_entity);
+    gi.WriteByte (TE_EXPLOSION2);
+    gi.WritePosition (self->s.origin);
+    gi.multicast (self->s.origin, MULTICAST_PHS);
+
+    fire_donut (self, self->s.origin, self->dmg_radius, self->radius_dmg, ignore);
+
+    G_FreeEdict (self);
+}
+
+static void dod_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+    vec3_t dir;
+
+    if (other == self->owner)
+        return;
+
+    if (surf && (surf->flags & SURF_SKY))
+    {
+        G_FreeEdict (self);
+        return;
+    }
+
+    self->enemy = NULL;
+
+    if (other->takedamage)
+    {
+        self->enemy = other;
+
+        if (!VectorCompare (self->velocity, vec3_origin))
+            VectorNormalize2 (self->velocity, dir);
+        else
+            VectorClear (dir);
+
+        T_Damage (other, self, self->owner, dir, self->s.origin,
+                plane ? plane->normal : vec3_origin, self->dmg, 0, DAMAGE_ENERGY, MOD_DONUT);
+    }
+
+    dod_explode (self);
+}
+
+void fire_dod (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage)
+{
+    edict_t *bolt;
+
+    bolt = G_Spawn ();
+    VectorCopy (start, bolt->s.origin);
+    VectorCopy (start, bolt->s.old_origin);
+    vectoangles (dir, bolt->s.angles);
+    VectorScale (dir, speed, bolt->velocity);
+    bolt->movetype = MOVETYPE_FLYMISSILE;
+    bolt->clipmask = MASK_SHOT;
+    bolt->solid = SOLID_BBOX;
+    VectorClear (bolt->mins);
+    VectorClear (bolt->maxs);
+    bolt->s.effects = EF_PLASMA | EF_ANIM_ALLFAST;
+    bolt->s.renderfx = RF_FULLBRIGHT;
+    bolt->s.modelindex = gi.modelindex ("models/objects/dod/tris.md2");
+    bolt->s.sound = gi.soundindex ("sound/dod/DoD_hum.wav");
+    bolt->owner = self;
+    bolt->enemy = NULL;
+    bolt->touch = dod_touch;
+    bolt->nextthink = level.time + 2.0f;
+    bolt->think = dod_explode;
+    bolt->dmg = damage;
+    bolt->radius_dmg = splash_damage;
+    bolt->dmg_radius = damage_radius;
+    bolt->classname = "dod";
+
+    if (self->client)
+        check_dodge (self, bolt->s.origin, dir, speed);
+
+    gi.linkentity (bolt);
+}
+
 static void hellfury_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
     vec3_t dir;

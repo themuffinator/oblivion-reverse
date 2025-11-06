@@ -1693,6 +1693,18 @@ SOURCE=.\q_shared.h
 # PROP Default_Filter "ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe"
 # Begin Source File
 
+SOURCE=..\..\pack\models\weapons\v_DoD\tris.md2
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\pack\sound\dod\DoD.wav
+# End Source File
+# Begin Source File
+
+SOURCE=..\..\pack\sound\dod\DoD_hum.wav
+# End Source File
+# Begin Source File
+
 SOURCE=.\game.def
 # End Source File
 # End Group

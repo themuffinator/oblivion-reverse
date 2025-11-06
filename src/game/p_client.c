@@ -410,10 +410,10 @@ void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 				message = "was sliced and diced by";
 				message2 = "'s obliterator";
 				break;
-			case MOD_DONUT:
-				message = "took a bite of";
-				message2 = "'s donut";
-				break;
+                        case MOD_DONUT:
+                                message = "was vaporized by";
+                                message2 = "'s DoD launcher";
+                                break;
 			case MOD_REMOTE_CANNON:
 				message = "caught some of";
 				message2 = "'s remote cannon lovin'";

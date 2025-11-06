@@ -482,8 +482,11 @@ void G_SetStats (edict_t *ent)
 			static gitem_t *plasma_rifle_weapon = NULL;
 			static gitem_t *pistol_plasma_ammo = NULL;
 			static gitem_t *rifle_plasma_ammo = NULL;
+			static gitem_t *dod_weapon = NULL;
+			static gitem_t *dod_ammo = NULL;
 			static int	pistol_plasma_ammo_index = 0;
 			static int	rifle_plasma_ammo_index = 0;
+			static int	dod_ammo_index = 0;
 
 			if (!plasma_pistol_weapon)
 				plasma_pistol_weapon = FindItem("Plasma Pistol");
@@ -500,6 +503,14 @@ void G_SetStats (edict_t *ent)
 				rifle_plasma_ammo = FindItem("Rifle Plasma");
 				if (rifle_plasma_ammo)
 					rifle_plasma_ammo_index = ITEM_INDEX(rifle_plasma_ammo);
+			}
+			if (!dod_weapon)
+				dod_weapon = FindItem("DoD Launcher");
+			if (!dod_ammo)
+			{
+				dod_ammo = FindItem("DOD");
+				if (dod_ammo)
+					dod_ammo_index = ITEM_INDEX(dod_ammo);
 			}
 
 			if (weapon == plasma_pistol_weapon && pistol_plasma_ammo_index)
@@ -545,6 +556,11 @@ void G_SetStats (edict_t *ent)
 						ent->client->ps.stats[STAT_TIMER] = seconds;
 					}
 				}
+			}
+			else if (weapon == dod_weapon && dod_ammo_index)
+			{
+				ent->client->ps.stats[STAT_TIMER_ICON] = gi.imageindex(dod_ammo->icon);
+				ent->client->ps.stats[STAT_TIMER] = ent->client->pers.max_dods;
 			}
 		}
 	}

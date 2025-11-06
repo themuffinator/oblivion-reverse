@@ -794,6 +794,7 @@ void fire_deatomizer (edict_t *self, vec3_t start, vec3_t dir, int damage, int s
 void fire_plasma_pistol (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed);
 void fire_plasma_rifle (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed);
 void fire_hellfury (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage);
+void fire_dod (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage);
 void fire_donut (edict_t *self, vec3_t origin, float damage_radius, int splash_damage, edict_t *ignore);
 void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick);
 edict_t *fire_detpack (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius);
