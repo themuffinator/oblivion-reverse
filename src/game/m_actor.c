@@ -23,6 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "m_actor.h"
 
 #define	MAX_ACTOR_NAMES		8
+
+/* misc_actor spawnflags */
+#define ACTOR_SPAWNFLAG_START_ON        32
+#define ACTOR_SPAWNFLAG_WIMPY           64
+
 char *actor_names[MAX_ACTOR_NAMES] =
 {
 	"Hellrot",
@@ -419,7 +424,9 @@ void actor_use (edict_t *self, edict_t *other, edict_t *activator)
 }
 
 
-/*QUAKED misc_actor (1 .5 0) (-16 -16 -24) (16 16 32)
+/*QUAKED misc_actor (1 .5 0) (-16 -16 -24) (16 16 32)  Ambush Trigger_Spawn Sight Corpse x START_ON WIMPY
+START_ON		actor immediately begins walking its path instead of waiting for a use event
+WIMPY		reduce the actor's health so it can be dispatched quickly
 */
 
 void SP_misc_actor (edict_t *self)
@@ -451,7 +458,13 @@ void SP_misc_actor (edict_t *self)
 	VectorSet (self->maxs, 16, 16, 32);
 
 	if (!self->health)
-		self->health = 100;
+	{
+		if (self->spawnflags & ACTOR_SPAWNFLAG_WIMPY)
+			self->health = 50;
+		else
+			self->health = 100;
+	}
+	self->max_health = self->health;
 	self->mass = 200;
 
 	self->pain = actor_pain;
@@ -475,6 +488,9 @@ void SP_misc_actor (edict_t *self)
 
 	// actors always start in a dormant state, they *must* be used to get going
 	self->use = actor_use;
+
+	if ((self->spawnflags & ACTOR_SPAWNFLAG_START_ON) && !(self->spawnflags & 2))
+		actor_use (self, self, self);
 }
 
 
