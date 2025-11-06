@@ -27,6 +27,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define	GAME_INCLUDE
 #include "game.h"
 
+struct edict_s;
+
+typedef struct edict_oblivion_ext_s
+{
+        struct edict_s *controller;
+        struct edict_s *last_controller;
+        struct edict_s *prev_path;
+        int                     mission_timer_remaining;
+        int                     mission_timer_limit;
+        int                     mission_timer_cooldown;
+        int                     mission_state;
+        vec3_t          mission_origin;
+        vec3_t          mission_angles;
+        vec3_t          mission_velocity;
+        float           mission_blend;
+        float           mission_radius;
+} edict_oblivion_ext_t;
+
 // the "gameversion" client command will print this plus compile date
 #define	GAMEVERSION	"baseq2"
 
@@ -1107,6 +1125,7 @@ struct edict_s
 	gitem_t		*item;			// for bonus items
 
 	// common data blocks
+	edict_oblivion_ext_t	oblivion;
 	moveinfo_t		moveinfo;
 	monsterinfo_t	monsterinfo;
 };

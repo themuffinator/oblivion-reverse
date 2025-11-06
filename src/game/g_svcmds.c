@@ -279,7 +279,7 @@ The game can issue gi.argc() / gi.argv() commands to get the rest
 of the parameters
 =================
 */
-void	ServerCommand (void)
+static void Legacy_ServerCommand (void)
 {
 	char	*cmd;
 
@@ -296,5 +296,15 @@ void	ServerCommand (void)
 		SVCmd_WriteIP_f ();
 	else
 		gi.cprintf (NULL, PRINT_HIGH, "Unknown server command \"%s\"\n", cmd);
+}
+
+void Oblivion_ServerCommand (void)
+{
+	Legacy_ServerCommand ();
+}
+
+void	ServerCommand (void)
+{
+	Legacy_ServerCommand ();
 }
 
