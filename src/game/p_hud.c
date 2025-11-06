@@ -303,6 +303,7 @@ void HelpComputer (edict_t *ent)
 {
 	char	string[1024];
 	char	*sk;
+	char	objectives[768];
 
 	if (skill->value == 0)
 		sk = "easy";
@@ -313,19 +314,19 @@ void HelpComputer (edict_t *ent)
 	else
 		sk = "hard+";
 
+	MissionMenu_BuildObjectiveLayout (objectives, sizeof(objectives));
+
 	// send the layout
 	Com_sprintf (string, sizeof(string),
 		"xv 32 yv 8 picn help "			// background
 		"xv 202 yv 12 string2 \"%s\" "		// skill
 		"xv 0 yv 24 cstring2 \"%s\" "		// level name
-		"xv 0 yv 54 cstring2 \"%s\" "		// help 1
-		"xv 0 yv 110 cstring2 \"%s\" "		// help 2
+		"%s"
 		"xv 50 yv 164 string2 \" kills     goals    secrets\" "
 		"xv 50 yv 172 string2 \"%3i/%3i     %i/%i       %i/%i\" ", 
 		sk,
 		level.level_name,
-		game.helpmessage1,
-		game.helpmessage2,
+		objectives,
 		level.killed_monsters, level.total_monsters, 
 		level.found_goals, level.total_goals,
 		level.found_secrets, level.total_secrets);
@@ -334,6 +335,7 @@ void HelpComputer (edict_t *ent)
 	gi.WriteString (string);
 	gi.unicast (ent, true);
 }
+
 
 
 /*
@@ -362,6 +364,7 @@ void Cmd_Help_f (edict_t *ent)
 	}
 
 	ent->client->showhelp = true;
+	Mission_ClearUnread (ent);
 	ent->client->pers.helpchanged = 0;
 	HelpComputer (ent);
 }
@@ -589,7 +592,7 @@ void G_SetStats (edict_t *ent)
 	//
 	// help icon / current weapon if not shown
 	//
-	if (ent->client->pers.helpchanged && (level.framenum&8) )
+	if ((ent->client->pers.helpchanged || Mission_HasUnread()) && (level.framenum&8) )
 		ent->client->ps.stats[STAT_HELPICON] = gi.imageindex ("i_help");
 	else if ( (ent->client->pers.hand == CENTER_HANDED || ent->client->ps.fov > 91)
 		&& ent->client->pers.weapon)

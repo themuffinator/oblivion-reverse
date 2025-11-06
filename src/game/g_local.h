@@ -43,6 +43,9 @@ typedef struct edict_oblivion_ext_s
         vec3_t          mission_velocity;
         float           mission_blend;
         float           mission_radius;
+        char            *mission_id;
+        char            *mission_title;
+        char            *mission_text;
 } edict_oblivion_ext_t;
 
 // the "gameversion" client command will print this plus compile date
@@ -321,6 +324,8 @@ typedef struct
 	// items
 	int			num_items;
 
+	mission_state_t mission;
+
 	qboolean	autosaved;
 } game_locals_t;
 
@@ -396,6 +401,38 @@ typedef struct
 	float		minpitch;
 	float		maxpitch;
 } spawn_temp_t;
+
+typedef enum
+{
+        MISSION_OBJECTIVE_INACTIVE = 0,
+        MISSION_OBJECTIVE_ACTIVE,
+        MISSION_OBJECTIVE_COMPLETED,
+        MISSION_OBJECTIVE_FAILED
+} mission_objective_state_t;
+
+typedef struct
+{
+        char                    id[32];
+        char                    title[64];
+        char                    text[256];
+        mission_objective_state_t       state;
+        int                     timer_limit;
+        int                     timer_remaining;
+        qboolean                primary;
+        qboolean                persistent;
+        vec3_t                  origin;
+        vec3_t                  angles;
+        float                   radius;
+} mission_objective_save_t;
+
+#define MAX_MISSION_OBJECTIVES 8
+
+typedef struct
+{
+        mission_objective_save_t        objectives[MAX_MISSION_OBJECTIVES];
+        int                             objective_count;
+        int                             unread_events;
+} mission_state_t;
 
 
 typedef struct camera_state_s camera_state_t;
@@ -698,6 +735,25 @@ char	*G_CopyString (char *in);
 
 float	*tv (float x, float y, float z);
 char	*vtos (vec3_t v);
+
+//
+// g_mission.c
+//
+void Mission_InitGame (void);
+void Mission_OnGameLoaded (void);
+void Mission_BeginLevel (const char *mapname);
+void Mission_FrameUpdate (void);
+void Mission_RegisterHelpTarget (edict_t *ent);
+qboolean Mission_TargetHelpFired (edict_t *ent, edict_t *activator);
+int Mission_GetObjectiveCount (void);
+const mission_objective_save_t *Mission_GetObjective (int index);
+void Mission_ClearUnread (edict_t *ent);
+qboolean Mission_HasUnread (void);
+
+//
+// p_menu.c
+//
+void MissionMenu_BuildObjectiveLayout (char *buffer, size_t buffer_size);
 
 float vectoyaw (vec3_t vec);
 void vectoangles (vec3_t vec, vec3_t angles);
