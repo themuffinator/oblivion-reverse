@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 // because we define the full size ones in this file
 #define	GAME_INCLUDE
 #include "game.h"
+#include "m_actor.h"
 
 struct edict_s;
 
@@ -66,6 +67,20 @@ typedef struct edict_oblivion_ext_s
         char            *mission_title;                  // mission log title override
         char            *mission_text;                   // mission log body text
 } edict_oblivion_ext_t;
+
+typedef enum mission_event_e
+{
+        MISSION_EVENT_UPDATE = 0,
+        MISSION_EVENT_START = 1,
+        MISSION_EVENT_COMPLETE = 2,
+        MISSION_EVENT_CLEAR = 3,
+        MISSION_EVENT_FAIL = 4
+} mission_event_t;
+
+#define MISSION_FLAG_PRIMARY     0x0001
+#define MISSION_FLAG_PERSISTENT  0x0002
+
+#define MISSION_TIMER_TICKS_PER_SECOND ((int)(1.0f / FRAMETIME))
 
 // the "gameversion" client command will print this plus compile date
 #define	GAMEVERSION	"oblivion"
