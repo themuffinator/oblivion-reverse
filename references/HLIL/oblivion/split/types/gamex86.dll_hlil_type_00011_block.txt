@@ -8,13 +8,13 @@
 1001617d  
 10016183  if (eax_3 != 0)
 10016186      sub_10039ca4(eax)
-10016190      data_1006c1dc("Savegame from an older version.\n")
+10016190      gi.error("Savegame from an older version.\n")
 10016190  
-100161b0  int32_t eax_5 = data_1006c244(data_1006ca4c * 0x3d0, 0x2fd)
+100161b0  int32_t eax_5 = gi.TagMalloc(data_1006ca4c * 0x3d0, 0x2fd)
 100161c3  data_1006c2c4 = eax_5
 100161c8  data_1006c160 = eax_5
 100161cd  sub_10039b8d(&data_1006c440, 0x61c, 1, eax)
-100161f2  data_1006c844 = data_1006c244(data_1006ca48 * 0xf34, 0x2fd)
+100161f2  data_1006c844 = gi.TagMalloc(data_1006ca48 * 0xf34, 0x2fd)
 100161ff  int32_t i = 0
 100161ff  
 10016203  if (data_1006ca48 s> 0)
@@ -128,7 +128,7 @@
 1001640d  int32_t* eax = sub_10039d52(esi, "wb")
 1001640d  
 10016419  if (eax == 0)
-10016421      data_1006c1dc("Couldn't open %s", esi)
+10016421      gi.error("Couldn't open %s", esi)
 10016421  
 10016434  arg_4 = 0x3d0
 1001643c  sub_10039a54(&arg_4, 4, 1, eax)
@@ -167,9 +167,9 @@
 100164f0  int32_t* eax = sub_10039d52(esi, "rb")
 100164f0  
 100164fc  if (eax == 0)
-10016504      data_1006c1dc("Couldn't open %s", esi)
+10016504      gi.error("Couldn't open %s", esi)
 10016504  
-10016512  data_1006c24c(0x2fe)
+10016512  gi.FreeTags(0x2fe)
 1001652e  int32_t ecx_3 = data_1006ca4c * 0x3d0
 1001653d  __builtin_memset(s: __builtin_memset(s: data_1006c2c4, c: 0, n: ecx_3 u>> 2 << 2), c: 0, 
 1001653d      n: ecx_3 & 3)
@@ -179,14 +179,14 @@
 10016561  
 10016572  if (arg1 != 0x3d0)
 10016575      sub_10039ca4(eax)
-1001657f      data_1006c1dc("ReadLevel: mismatched edict size")
+1001657f      gi.error("ReadLevel: mismatched edict size")
 1001657f  
 10016592  int32_t var_8
 10016592  sub_10039b8d(&var_8, 4, 1, eax)
 10016592  
 100165a3  if (var_8 != sub_100158d0)
 100165a6      sub_10039ca4(eax)
-100165b0      data_1006c1dc("ReadLevel: function pointers hav…")
+100165b0      gi.error("ReadLevel: function pointers hav…")
 100165b0  
 100165ba  sub_100163b0(eax)
 100165ba  
@@ -195,7 +195,7 @@
 100165d7      
 100165d7      if (sub_10039b8d(&var_4, 4, 1, eax) != 1)
 100165da          sub_10039ca4(eax)
-100165e4          data_1006c1dc("ReadLevel: failed to read entnum")
+100165e4          gi.error("ReadLevel: failed to read entnum")
 100165e4      
 100165ed      int32_t eax_7 = var_4
 100165ed      
@@ -209,7 +209,7 @@
 1001661d      sub_10016360(eax, esi_3)
 10016628      *(esi_3 + 0x60) = 0
 1001662a      *(esi_3 + 0x64) = 0
-1001662d      data_1006c208(esi_3)
+1001662d      gi.linkentity(esi_3)
 1001662d  
 10016639  sub_10039ca4(eax)
 1001663e  void* edx_2 = data_1006ca60
@@ -308,7 +308,7 @@
 10016761  char* var_4 = ebx
 10016761  
 10016765  if (ebx == 0)
-1001677a      return data_1006c1c4("ED_CallSpawn: NULL classname\n")
+1001677a      return gi.dprintf("ED_CallSpawn: NULL classname\n")
 1001677a  
 1001677b  int32_t edx = data_1006ca54
 10016781  int32_t ebp = 0
@@ -410,7 +410,7 @@
 10016826          if (eax_5 == 0)
 10016826              break
 10016826  
-1001683c  return data_1006c1c4("%s doesn't have a spawn function…", ebx)
+1001683c  return gi.dprintf("%s doesn't have a spawn function…", ebx)
 
 1001684e                                            90 90                                                                ..
 
@@ -427,7 +427,7 @@
 10016863      if (not(cond:0_1))
 10016863          break
 10016863  
-1001686c  char* result = data_1006c244(not.d(i), 0x2fe)
+1001686c  char* result = gi.TagMalloc(not.d(i), 0x2fe)
 10016875  char* i_1 = nullptr
 10016879  char* result_1 = result
 10016879  
@@ -514,7 +514,7 @@
 100168e0          esi = &esi[4]
 100168e5      while (i != 0)
 100168e5  
-100168ed  return data_1006c1c4("%s is not a field\n", arg1)
+100168ed  return gi.dprintf("%s is not a field\n", arg1)
 
 100169dc  uint32_t jump_table_100169dc[0x6] = 
 100169dc  {

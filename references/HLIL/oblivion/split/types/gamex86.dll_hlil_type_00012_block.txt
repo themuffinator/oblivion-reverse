@@ -31,7 +31,7 @@
 10016c33          if (esi_1 - 1 s>= edi)
 10016c33              break
 10016c33  
-10016c58  return data_1006c1c4("%i teams with %i entities\n", var_c, var_10)
+10016c58  return gi.dprintf("%i teams with %i entities\n", var_c, var_10)
 
 10016c59                                                                             90 90 90 90 90 90 90                           .......
 
@@ -61,12 +61,12 @@
 10016cb0          | (x87_r7_1 == temp2 ? 1 : 0) << 0xe | 0x3800):1.b & 0x40) == 0)
 10016cb5      var_8 = fconvert.d(x87_r7_1)
 10016cbd      sub_10038a50(&data_1004b3fc)
-10016cc8      data_1006c258("skill", 0x100613dc)
+10016cc8      gi.cvar_forceset("skill", 0x100613dc)
 10016cc8  
 10016cd5  var_8:4.d = arg1
 10016cd6  var_8.d = arg2
 10016cd7  sub_100305a0()
-10016ce1  data_1006c24c(0x2fe, var_8)
+10016ce1  gi.FreeTags(0x2fe, var_8)
 10016cf5  __builtin_memset(s: &data_1006c2e0, c: 0, n: 0x130)
 10016d0d  int32_t ecx_3 = data_1006ca4c * 0x3d0
 10016d1c  __builtin_memset(s: __builtin_memset(s: data_1006c2c4, c: 0, n: ecx_3 u>> 2 << 2), c: 0, 
@@ -97,7 +97,7 @@
 10016d97          break
 10016d97      
 10016da0      if (*eax_3 != 0x7b)
-10016da8          data_1006c1dc("ED_LoadFromFile: found %s when e…", eax_3)
+10016da8          gi.error("ED_LoadFromFile: found %s when e…", eax_3)
 10016da8      
 10016db3      if (esi_3 != 0)
 10016dc2          esi_3 = sub_1001b350()
@@ -158,7 +158,7 @@
 10016ebd      
 10016ec4      sub_10016750(esi_3)
 10016ec4  
-10016ed7  data_1006c1c4("%i entities inhibited\n", edi_3)
+10016ed7  gi.dprintf("%i entities inhibited\n", edi_3)
 10016ee0  sub_10016af0()
 10016ee5  sub_10033120()
 
@@ -207,7 +207,7 @@
 10016f8a      sub_10039dc0(&data_1006c2e8, &data_1006c328, 0x40)
 10016f5b  else
 10016f5e      int32_t var_10 = 0
-10016f60      data_1006c1d8(0, eax_2)
+10016f60      gi.configstring(0, eax_2)
 10016f6c      int32_t var_14 = 0x40
 10016f6e      int32_t var_18_1 = *(arg1 + 0x114)
 10016f6f      void* var_1c_1 = &data_1006c2e8
@@ -222,13 +222,13 @@
 10016fa0      __saved_esi_4 = __saved_esi_11
 10016fa0  
 10016fa8  int32_t var_10_2 = 2
-10016faa  data_1006c1d8(2, __saved_esi_4)
+10016faa  gi.configstring(2, __saved_esi_4)
 10016fbc  var_10_2.q = fconvert.d(fconvert.t(data_1006c284))
 10016fbf  void* var_14_2 = &data_1004b3fc
 10016fc4  sub_10038a50(&data_1004b3fc)
 10016fc9  int32_t var_18_2 = 0x100613dc
 10016fca  int32_t var_1c_2 = 4
-10016fcc  data_1006c1d8()
+10016fcc  gi.configstring()
 10016fdb  var_10_2.q = fconvert.d(fconvert.t(data_1006c290))
 10016fe7  var_18_2.q = fconvert.d(fconvert.t(data_1006c28c))
 10016ff3  double var_20_1 = fconvert.d(fconvert.t(data_1006c288))
@@ -236,19 +236,19 @@
 10016ffb  sub_10038a50("%f %f %f")
 10017000  int32_t var_28 = 0x100613dc
 10017001  int32_t var_2c = 3
-10017003  data_1006c1d8(3, 0x100613dc)
+10017003  gi.configstring(3, 0x100613dc)
 1001700f  int32_t var_30 = *(arg1 + 0x250)
 10017010  void* var_34 = &data_1004b778
 10017015  sub_10038a50(&data_1004b778)
 1001701a  int32_t var_38 = 0x100613dc
 1001701b  int32_t var_3c = 1
-1001701d  data_1006c1d8(1, 0x100613dc)
+1001701d  gi.configstring(1, 0x100613dc)
 10017030  int32_t var_40 = __ftol(x87control, fconvert.t(*(data_1006ca60 + 0x14)))
 10017031  void* var_44 = &data_1004b778
 10017036  sub_10038a50(&data_1004b778)
 1001703b  int32_t var_48 = 0x100613dc
 1001703c  int32_t var_4c = 0x1e
-1001703e  data_1006c1d8(0x1e, 0x100613dc)
+1001703e  gi.configstring(0x1e, 0x100613dc)
 1001704d  long double x87_r7_5 = fconvert.t(*(data_1006c118 + 0x14))
 10017050  long double temp0 = fconvert.t(0f)
 10017050  x87_r7_5 - temp0
@@ -261,15 +261,15 @@
 10017065      __saved_ebx = data_1004a99c
 10017065  
 1001706e  int32_t __saved_edi_1 = 5
-10017070  data_1006c1d8(5, __saved_ebx)
+10017070  gi.configstring(5, __saved_ebx)
 10017079  char* __saved_ebx_1 = "i_help"
-1001707e  data_1006c1e8("i_help")
+1001707e  gi.imageindex("i_help")
 10017084  char* __saved_edi_2 = "i_health"
 1001708f  char* __saved_esi_5 = "help"
-10017094  data_1006c3e8.d = data_1006c1e8("i_health")
-10017099  data_1006c1e8("help")
+10017094  data_1006c3e8.d = gi.imageindex("i_health")
+10017099  gi.imageindex("help")
 1001709f  char* var_10_3 = "field_3"
-100170a4  data_1006c1e8("field_3")
+100170a4  gi.imageindex("field_3")
 100170aa  void* __saved_ebx_9 = data_1006c2b0
 100170b4  void* __saved_ebx_2
 100170b4  
@@ -279,145 +279,145 @@
 100170b6      __saved_ebx_2 = &data_1004a440
 100170b6  
 100170be  char* __saved_edi_3 = "sv_gravity"
-100170c3  data_1006c254("sv_gravity", __saved_ebx_2)
+100170c3  gi.cvar_set("sv_gravity", __saved_ebx_2)
 100170cc  char* __saved_ebx_3 = "player/fry.wav"
 100170d7  char* __saved_edi_4 = "Blaster"
-100170dc  data_1006c1a0 = data_1006c1e4("player/fry.wav")
+100170dc  data_1006c1a0 = gi.soundindex("player/fry.wav")
 100170e7  sub_1000cd00(sub_1000b150("Blaster"))
 100170ec  char* var_10_4 = "player/lava1.wav"
-100170f1  data_1006c1e4("player/lava1.wav")
+100170f1  gi.soundindex("player/lava1.wav")
 100170f7  char* var_14_3 = "player/lava2.wav"
-100170fc  data_1006c1e4("player/lava2.wav")
+100170fc  gi.soundindex("player/lava2.wav")
 10017102  char* var_18_3 = "misc/pc_up.wav"
-10017107  data_1006c1e4("misc/pc_up.wav")
+10017107  gi.soundindex("misc/pc_up.wav")
 1001710d  char* var_1c_3 = "misc/talk1.wav"
-10017112  data_1006c1e4()
+10017112  gi.soundindex()
 10017118  var_20_1.d = "misc/udeath.wav"
-1001711d  data_1006c1e4("misc/udeath.wav")
+1001711d  gi.soundindex("misc/udeath.wav")
 10017123  char* var_24_1 = "items/respawn1.wav"
-10017128  data_1006c1e4("items/respawn1.wav")
+10017128  gi.soundindex("items/respawn1.wav")
 1001712e  char* var_28_1 = "*death1.wav"
-10017133  data_1006c1e4("*death1.wav")
+10017133  gi.soundindex("*death1.wav")
 10017139  char* var_2c_1 = "*death2.wav"
-1001713e  data_1006c1e4("*death2.wav")
+1001713e  gi.soundindex("*death2.wav")
 10017144  char* var_30_1 = "*death3.wav"
-10017149  data_1006c1e4("*death3.wav")
+10017149  gi.soundindex("*death3.wav")
 1001714f  char* var_34_1 = "*death4.wav"
-10017154  data_1006c1e4("*death4.wav")
+10017154  gi.soundindex("*death4.wav")
 1001715a  char* var_38_1 = "*fall1.wav"
-1001715f  data_1006c1e4("*fall1.wav")
+1001715f  gi.soundindex("*fall1.wav")
 10017165  char* var_3c_1 = "*fall2.wav"
-1001716a  data_1006c1e4("*fall2.wav")
+1001716a  gi.soundindex("*fall2.wav")
 10017170  char* var_40_1 = "*gurp1.wav"
-10017175  data_1006c1e4("*gurp1.wav")
+10017175  gi.soundindex("*gurp1.wav")
 1001717e  char* __saved_ebx_4 = "*gurp2.wav"
-10017183  data_1006c1e4("*gurp2.wav")
+10017183  gi.soundindex("*gurp2.wav")
 10017189  char* __saved_edi_5 = "*jump1.wav"
-1001718e  data_1006c1e4("*jump1.wav")
+1001718e  gi.soundindex("*jump1.wav")
 10017194  char* __saved_esi_7 = "*pain25_1.wav"
-10017199  data_1006c1e4("*pain25_1.wav")
+10017199  gi.soundindex("*pain25_1.wav")
 1001719f  char* var_10_5 = "*pain25_2.wav"
-100171a4  data_1006c1e4("*pain25_2.wav")
+100171a4  gi.soundindex("*pain25_2.wav")
 100171aa  char* var_14_4 = "*pain50_1.wav"
-100171af  data_1006c1e4("*pain50_1.wav")
+100171af  gi.soundindex("*pain50_1.wav")
 100171b5  char* var_18_4 = "*pain50_2.wav"
-100171ba  data_1006c1e4("*pain50_2.wav")
+100171ba  gi.soundindex("*pain50_2.wav")
 100171c0  char* var_1c_4 = "*pain75_1.wav"
-100171c5  data_1006c1e4()
+100171c5  gi.soundindex()
 100171cb  var_20_1.d = "*pain75_2.wav"
-100171d0  data_1006c1e4("*pain75_2.wav")
+100171d0  gi.soundindex("*pain75_2.wav")
 100171d6  char* var_24_2 = "*pain100_1.wav"
-100171db  data_1006c1e4("*pain100_1.wav")
+100171db  gi.soundindex("*pain100_1.wav")
 100171e1  char* var_28_2 = "*pain100_2.wav"
-100171e6  data_1006c1e4("*pain100_2.wav")
+100171e6  gi.soundindex("*pain100_2.wav")
 100171ec  char* var_2c_2 = "player/gasp1.wav"
-100171f1  data_1006c1e4("player/gasp1.wav")
+100171f1  gi.soundindex("player/gasp1.wav")
 100171f7  char* var_30_2 = "player/gasp2.wav"
-100171fc  data_1006c1e4("player/gasp2.wav")
+100171fc  gi.soundindex("player/gasp2.wav")
 10017202  char* var_34_2 = "player/watr_in.wav"
-10017207  data_1006c1e4("player/watr_in.wav")
+10017207  gi.soundindex("player/watr_in.wav")
 1001720d  char* var_38_2 = "player/watr_out.wav"
-10017212  data_1006c1e4("player/watr_out.wav")
+10017212  gi.soundindex("player/watr_out.wav")
 10017218  char* var_3c_2 = "player/watr_un.wav"
-1001721d  data_1006c1e4("player/watr_un.wav")
+1001721d  gi.soundindex("player/watr_un.wav")
 10017223  char* var_40_2 = "player/u_breath1.wav"
-10017228  data_1006c1e4("player/u_breath1.wav")
+10017228  gi.soundindex("player/u_breath1.wav")
 10017231  char* __saved_ebx_5 = "player/u_breath2.wav"
-10017236  data_1006c1e4("player/u_breath2.wav")
+10017236  gi.soundindex("player/u_breath2.wav")
 1001723c  char* __saved_edi_6 = "items/pkup.wav"
-10017241  data_1006c1e4("items/pkup.wav")
+10017241  gi.soundindex("items/pkup.wav")
 10017247  char* __saved_esi_8 = "world/land.wav"
-1001724c  data_1006c1e4("world/land.wav")
+1001724c  gi.soundindex("world/land.wav")
 10017252  char* var_10_6 = "misc/h2ohit1.wav"
-10017257  data_1006c1e4("misc/h2ohit1.wav")
+10017257  gi.soundindex("misc/h2ohit1.wav")
 1001725d  char* var_14_5 = "items/damage.wav"
-10017262  data_1006c1e4("items/damage.wav")
+10017262  gi.soundindex("items/damage.wav")
 10017268  char* var_18_5 = "items/protect.wav"
-1001726d  data_1006c1e4("items/protect.wav")
+1001726d  gi.soundindex("items/protect.wav")
 10017273  char* var_1c_5 = "items/protect4.wav"
-10017278  data_1006c1e4()
+10017278  gi.soundindex()
 1001727e  var_20_1.d = "weapons/noammo.wav"
-10017283  data_1006c1e4("weapons/noammo.wav")
+10017283  gi.soundindex("weapons/noammo.wav")
 10017289  char* var_24_3 = "infantry/inflies1.wav"
-1001728e  data_1006c1e4("infantry/inflies1.wav")
+1001728e  gi.soundindex("infantry/inflies1.wav")
 10017294  char* var_28_3 = "models/objects/gibs/sm_meat/tris…"
 1001729f  char* var_2c_3 = "models/objects/gibs/arm/tris.md2"
-100172a4  data_1006c418 = data_1006c1e0("models/objects/gibs/sm_meat/tris…")
-100172a9  data_1006c1e0("models/objects/gibs/arm/tris.md2")
+100172a4  data_1006c418 = gi.modelindex("models/objects/gibs/sm_meat/tris…")
+100172a9  gi.modelindex("models/objects/gibs/arm/tris.md2")
 100172af  char* var_30_3 = "models/objects/gibs/bone/tris.md…"
-100172b4  data_1006c1e0("models/objects/gibs/bone/tris.md…")
+100172b4  gi.modelindex("models/objects/gibs/bone/tris.md…")
 100172ba  char* var_34_3 = "models/objects/gibs/bone2/tris.m…"
-100172bf  data_1006c1e0("models/objects/gibs/bone2/tris.m…")
+100172bf  gi.modelindex("models/objects/gibs/bone2/tris.m…")
 100172c5  char* var_38_3 = "models/objects/gibs/chest/tris.m…"
-100172ca  data_1006c1e0("models/objects/gibs/chest/tris.m…")
+100172ca  gi.modelindex("models/objects/gibs/chest/tris.m…")
 100172d0  char* var_3c_3 = "models/objects/gibs/skull/tris.m…"
-100172d5  data_1006c1e0("models/objects/gibs/skull/tris.m…")
+100172d5  gi.modelindex("models/objects/gibs/skull/tris.m…")
 100172db  char* var_40_3 = "models/objects/gibs/head2/tris.m…"
-100172e0  data_1006c1e0("models/objects/gibs/head2/tris.m…")
+100172e0  gi.modelindex("models/objects/gibs/head2/tris.m…")
 100172e9  void* __saved_ebx_6 = &data_10049280
 100172ee  int32_t __saved_edi_7 = 0x320
-100172f3  data_1006c1d8(0x320, &data_10049280)
+100172f3  gi.configstring(0x320, &data_10049280)
 100172f9  char* __saved_esi_9 = "mmnmmommommnonmmonqnmmo"
 100172fe  int32_t var_10_7 = 0x321
-10017303  data_1006c1d8(0x321, "mmnmmommommnonmmonqnmmo")
+10017303  gi.configstring(0x321, "mmnmmommommnonmmonqnmmo")
 10017309  char* var_14_6 = "abcdefghijklmnopqrstuvwxyzyxwvut…"
 1001730e  int32_t var_18_6 = 0x322
-10017313  data_1006c1d8(0x322, "abcdefghijklmnopqrstuvwxyzyxwvut…")
+10017313  gi.configstring(0x322, "abcdefghijklmnopqrstuvwxyzyxwvut…")
 10017319  char* var_1c_6 = "mmmmmaaaaammmmmaaaaaabcdefgabcde…"
 1001731e  var_20_1.d = 0x323
-10017323  data_1006c1d8(0x323)
+10017323  gi.configstring(0x323)
 10017329  char* var_24_4 = "mamamamamama"
 1001732e  int32_t var_28_4 = 0x324
-10017333  data_1006c1d8(0x324, "mamamamamama")
+10017333  gi.configstring(0x324, "mamamamamama")
 10017339  char* var_2c_4 = "jklmnopqrstuvwxyzyxwvutsrqponmlk…"
 1001733e  int32_t var_30_4 = 0x325
-10017343  data_1006c1d8(0x325, "jklmnopqrstuvwxyzyxwvutsrqponmlk…")
+10017343  gi.configstring(0x325, "jklmnopqrstuvwxyzyxwvutsrqponmlk…")
 10017349  char* var_34_4 = "nmonqnmomnmomomno"
 1001734e  int32_t var_38_4 = 0x326
-10017353  data_1006c1d8(0x326, "nmonqnmomnmomomno")
+10017353  gi.configstring(0x326, "nmonqnmomnmomomno")
 10017359  char* var_3c_4 = "mmmaaaabcdefgmmmmaaaammmaamm"
 1001735e  int32_t var_40_4 = 0x327
-10017363  data_1006c1d8(0x327, "mmmaaaabcdefgmmmmaaaammmaamm")
+10017363  gi.configstring(0x327, "mmmaaaabcdefgmmmmaaaammmaamm")
 1001736c  char* __saved_ebx_7 = "mmmaaammmaaammmabcdefaaaammmmabc…"
 10017371  int32_t __saved_edi_8 = 0x328
-10017376  data_1006c1d8(0x328, "mmmaaammmaaammmabcdefaaaammmmabc…")
+10017376  gi.configstring(0x328, "mmmaaammmaaammmabcdefaaaammmmabc…")
 1001737c  char* __saved_esi_10 = "aaaaaaaazzzzzzzz"
 10017381  int32_t var_10_8 = 0x329
-10017386  data_1006c1d8(0x329, "aaaaaaaazzzzzzzz")
+10017386  gi.configstring(0x329, "aaaaaaaazzzzzzzz")
 1001738c  char* var_14_7 = "mmamammmmammamamaaamammma"
 10017391  int32_t var_18_7 = 0x32a
-10017396  data_1006c1d8(0x32a, "mmamammmmammamamaaamammma")
+10017396  gi.configstring(0x32a, "mmamammmmammamamaaamammma")
 1001739c  char* var_1c_7 = "abcdefghijklmnopqrrqponmlkjihgfe…"
 100173a1  var_20_1.d = 0x32b
-100173a6  data_1006c1d8(0x32b)
+100173a6  gi.configstring(0x32b)
 100173ac  void* var_24_5 = &data_10049284
 100173b1  int32_t var_28_5 = 0x35f
-100173bf  return data_1006c1d8(0x35f, &data_10049284)
+100173bf  return gi.configstring(0x35f, &data_10049284)
 
 
 100173c0    int32_t sub_100173c0()
 
-100173d2  return data_1006c1c8(0, 2, "Svcmd_Test_f()\n")
+100173d2  return gi.cprintf(0, 2, "Svcmd_Test_f()\n")
 
 100173d3                                                           90 90 90 90 90 90 90 90 90 90 90 90 90                     .............
 
@@ -492,8 +492,8 @@
 
 10017490    int32_t sub_10017490()
 
-1001749a  if (data_1006c25c() s< 3)
-100174af      return data_1006c1c8(0, 2, "Usage:  addip <ip-mask>\n")
+1001749a  if (gi.argc() s< 3)
+100174af      return gi.cprintf(0, 2, "Usage:  addip <ip-mask>\n")
 100174af  
 100174b0  int32_t eax_2 = data_100620d0
 100174b5  int32_t esi = 0
@@ -510,11 +510,11 @@
 100174cb  
 100174cf  if (esi == eax_2)
 100174d6      if (eax_2 == 0x400)
-100174eb          return data_1006c1c8(0, 2, "IP filter list is full\n")
+100174eb          return gi.cprintf(0, 2, "IP filter list is full\n")
 100174eb      
 100174ed      data_100620d0 = eax_2 + 1
 100174ed  
-10017506  int32_t result = sub_10017520(data_1006c260(2, (esi << 3) + &data_100620e0))
+10017506  int32_t result = sub_10017520(gi.argv(2, (esi << 3) + &data_100620e0))
 10017506  
 10017510  if (result == 0)
 10017512      *((esi << 3) + &data_100620e4) = 0xffffffff
@@ -533,7 +533,7 @@
 1001753c      char j = *esi
 1001753c      
 10017544      if (j s< 0x30 || j s> 0x39)
-100175ae          data_1006c1c8(0, 2, "Bad filter address: %s\n", esi)
+100175ae          gi.cprintf(0, 2, "Bad filter address: %s\n", esi)
 100175c2          return 0
 100175c2      
 10017546      int32_t ecx_1 = 0
@@ -569,11 +569,11 @@
 
 100175d0    int32_t sub_100175d0()
 
-100175de  if (data_1006c25c() s< 3)
-100175f7      return data_1006c1c8(0, 2, "Usage:  sv removeip <ip-mask>\n")
+100175de  if (gi.argc() s< 3)
+100175f7      return gi.cprintf(0, 2, "Usage:  sv removeip <ip-mask>\n")
 100175f7  
 10017609  int32_t var_8
-10017609  int32_t result = sub_10017520(data_1006c260(2, &var_8))
+10017609  int32_t result = sub_10017520(gi.argv(2, &var_8))
 10017609  
 10017613  if (result == 0)
 1001765f      return result
@@ -602,19 +602,19 @@
 10017681                  while (i != 1)
 10017681              
 1001768d              data_100620d0 = esi_1 - 1
-100176a1              return data_1006c1c8(0, 2, "Removed.\n")
+100176a1              return gi.cprintf(0, 2, "Removed.\n")
 100176a1          
 10017637          eax_3 += 1
 10017638          ecx_1 += 8
 1001763d      while (eax_3 s< esi_1)
 1001763d  
-10017651  return data_1006c1c8(0, 2, "Didn't find %s.\n", data_1006c260(2))
+10017651  return gi.cprintf(0, 2, "Didn't find %s.\n", gi.argv(2))
 
 100176a2        90 90 90 90 90 90 90 90 90 90 90 90 90 90                                                    ..............
 
 100176b0    int32_t sub_100176b0()
 
-100176bd  data_1006c1c8(0, 2, "Filter list:\n")
+100176bd  gi.cprintf(0, 2, "Filter list:\n")
 100176c3  int32_t result = data_100620d0
 100176cb  int32_t esi = 0
 100176cb  
@@ -623,7 +623,7 @@
 100176d2      
 10017721      do
 100176d7          int32_t eax = *edi_1
-1001770d          data_1006c1c8(0, 2, "%3i.%3i.%3i.%3i\n", eax & 0xff, zx.d(eax:1.b), 
+1001770d          gi.cprintf(0, 2, "%3i.%3i.%3i.%3i\n", eax & 0xff, zx.d(eax:1.b), 
 1001770d              zx.d(eax:2.b), zx.d(eax:3.b))
 10017713          result = data_100620d0
 1001771b          esi += 1
@@ -636,7 +636,7 @@
 
 10017730    int32_t sub_10017730()
 
-10017748  char* __saved_ebx_2 = *(data_1006c250("game", &data_10060c60, 0) + 4)
+10017748  char* __saved_ebx_2 = *(gi.cvar("game", &data_10060c60, 0) + 4)
 10017751  void* __saved_edi
 10017751  void var_80
 10017751  
@@ -650,11 +650,11 @@
 10017761      __saved_edi = &var_80
 10017761  
 1001776f  sub_10039541(__saved_edi, "%s/listip.cfg")
-10017786  data_1006c1c8(0, 2, "Writing %s.\n", &var_80)
+10017786  gi.cprintf(0, 2, "Writing %s.\n", &var_80)
 10017796  int32_t* eax_1 = sub_10039d52(&var_80, "wb")
 10017796  
 100177a2  if (eax_1 == 0)
-100177c1      return data_1006c1c8(eax_1, 2, "Couldn't open %s\n", &var_80)
+100177c1      return gi.cprintf(eax_1, 2, "Couldn't open %s\n", &var_80)
 100177c1  
 100177d1  int16_t x87control
 100177d1  int32_t __saved_edi_1 = __ftol(x87control, fconvert.t(*(data_1006c178 + 0x14)))
@@ -681,7 +681,7 @@
 
 10017850    int32_t sub_10017850()
 
-10017853  char* eax = data_1006c260(1)
+10017853  char* eax = gi.argv(1)
 10017853  
 1001786b  if (sub_10038b20(eax, "test") == 0)
 10017873      return sub_100173c0()
@@ -696,7 +696,7 @@
 100178be      return sub_100176b0()
 100178be  
 100178cf  if (sub_10038b20(eax, "writeip") != 0)
-100178ec      return data_1006c1c8(0, 2, "Unknown server command "%s"\n", eax)
+100178ec      return gi.cprintf(0, 2, "Unknown server command "%s"\n", eax)
 100178ec  
 100178d7  return sub_10017730()
 
@@ -704,10 +704,10 @@
 
 100178f0    int32_t sub_100178f0(void* arg1)
 
-100178f3  data_1006c224(3)
-10017904  data_1006c224(*(arg1 + 0x2c8))
-1001790e  data_1006c238(arg1 + 4)
-10017921  return data_1006c218(arg1 + 4, 2)
+100178f3  gi.WriteByte(3)
+10017904  gi.WriteByte(*(arg1 + 0x2c8))
+1001790e  gi.WritePosition(arg1 + 4)
+10017921  return gi.multicast(arg1 + 4, 2)
 
 10017922        90 90 90 90 90 90 90 90 90 90 90 90 90 90                                                    ..............
 
@@ -723,7 +723,7 @@
 10017944  char ecx = (*(arg1 + 0x11c)).b
 10017944  
 1001794d  if ((ecx & 3) == 0)
-1001799a      return data_1006c1d4(arg1 + 4, arg1, (sx.d(ecx) & 4) << 2 | 2, *(arg1 + 0x280), 
+1001799a      return gi.positioned_sound(arg1 + 4, arg1, (sx.d(ecx) & 4) << 2 | 2, *(arg1 + 0x280), 
 1001799a          *(arg1 + 0x288), *(arg1 + 0x28c), 0)
 1001799a  
 10017954  if (*(arg1 + 0x4c) != 0)
@@ -740,7 +740,7 @@
 100179a0  char* eax_8 = data_1006c2a4
 100179a0  
 100179aa  if (eax_8 == 0)
-100179cb      return data_1006c1c4("target_speaker with no noise set…", sub_1001b070(arg1 + 4))
+100179cb      return gi.dprintf("target_speaker with no noise set…", sub_1001b070(arg1 + 4))
 100179cb  
 100179dc  char var_40[0x40]
 100179dc  
@@ -750,7 +750,7 @@
 100179e8      int32_t var_44_2 = data_1006c2a4
 100179f1      sub_10038b40(&var_40, 0x40, "%s.wav")
 100179f1  
-10017a1f  int32_t edx = data_1006c1e4(&var_40)
+10017a1f  int32_t edx = gi.soundindex(&var_40)
 10017a24  long double x87_r7 = fconvert.t(*(arg1 + 0x288))
 10017a2a  long double temp0 = fconvert.t(0f)
 10017a2a  x87_r7 - temp0
@@ -778,7 +778,7 @@
 10017a85      *(arg1 + 0x4c) = edx
 10017a85  
 10017a89  *(arg1 + 0x200) = sub_10017940
-10017a9f  return data_1006c208(arg1)
+10017a9f  return gi.linkentity(arg1)
 
 
 10017aa0    int32_t sub_10017aa0(void* arg1)
@@ -815,14 +815,14 @@
 10017b65      return result
 10017b65  
 10017b37  char* eax_2 = sub_1001b070(arg1 + 4)
-10017b49  data_1006c1c4("%s with no message at %s\n", *(arg1 + 0x118), eax_2)
+10017b49  gi.dprintf("%s with no message at %s\n", *(arg1 + 0x118), eax_2)
 10017b59  return sub_1001b400(arg1)
 
 10017b66                    90 90 90 90 90 90 90 90 90 90                                                        ..........
 
 10017b70    uint32_t sub_10017b70(int32_t arg1, void* arg2)
 
-10017b8b  data_1006c1d0(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
+10017b8b  gi.sound(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
 10017b9d  data_1006c3f0 += 1
 10017ba2  sub_1001ae20(arg1, arg2)
 10017bb1  return sub_1001b400(arg1)
@@ -848,7 +848,7 @@
 10017bfc      eax_2 = "misc/secret.wav"
 10017c01      data_1006c2a4 = "misc/secret.wav"
 10017c01  
-10017c0d  *(arg1 + 0x280) = data_1006c1e4(eax_2)
+10017c0d  *(arg1 + 0x280) = gi.soundindex(eax_2)
 10017c13  *(arg1 + 0xb8) = 1
 10017c2e  data_1006c3ec += 1
 10017c34  int32_t result = sub_10038b20(&data_1006c328, "mine3")
@@ -863,13 +863,13 @@
 
 10017c70    uint32_t sub_10017c70(int32_t arg1, void* arg2)
 
-10017c8b  data_1006c1d0(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
+10017c8b  gi.sound(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
 10017c9f  int32_t eax_2 = data_1006c3f8 + 1
 10017ca0  bool cond:0 = eax_2 != data_1006c3f4
 10017ca2  data_1006c3f8 = eax_2
 10017ca2  
 10017ca7  if (not(cond:0))
-10017cb0      data_1006c1d8(1, &data_1004a49c)
+10017cb0      gi.configstring(1, &data_1004a49c)
 10017cb0  
 10017cbf  sub_1001ae20(arg1, arg2)
 10017cce  return sub_1001b400(arg1)
@@ -895,7 +895,7 @@
 10017d0b      eax_2 = "misc/secret.wav"
 10017d10      data_1006c2a4 = "misc/secret.wav"
 10017d10  
-10017d1c  *(arg1 + 0x280) = data_1006c1e4(eax_2)
+10017d1c  *(arg1 + 0x280) = gi.soundindex(eax_2)
 10017d22  *(arg1 + 0xb8) = 1
 10017d34  int32_t result = data_1006c3f4 + 1
 10017d35  data_1006c3f4 = result
@@ -907,11 +907,11 @@
 
 10017d40  int32_t ecx
 10017d40  int32_t var_4_1 = ecx
-10017d45  data_1006c224(3)
-10017d4d  data_1006c224(5)
+10017d45  gi.WriteByte(3)
+10017d4d  gi.WriteByte(5)
 10017d53  float esi = arg1
-10017d5b  data_1006c238(esi i+ 4)
-10017d64  int32_t ecx_1 = data_1006c218(esi i+ 4, 1)
+10017d5b  gi.WritePosition(esi i+ 4)
+10017d64  int32_t ecx_1 = gi.multicast(esi i+ 4, 1)
 10017d6a  int32_t eax = *(esi i+ 0x244)
 10017d84  int32_t var_14 = ecx_1
 10017d94  int32_t var_1c = ecx_1
@@ -999,7 +999,7 @@
 10017f20              int32_t eax_2 = *(arg3 + 0x54)
 10017f20              
 10017f25              if (eax_2 != 0)
-10017f34                  data_1006c1c0(2, "%s exited the level.\n", eax_2 + 0x2bc)
+10017f34                  gi.bprintf(2, "%s exited the level.\n", eax_2 + 0x2bc)
 10017f34          
 10017f57          if (sub_10039f00(*(arg1 + 0x238), &data_1004b974) != 0)
 10017f59              data_1006ca50
@@ -1031,7 +1031,7 @@
 10017f80    uint32_t sub_10017f80(int32_t arg1)
 
 10017f8d  if (*(arg1 + 0x238) == 0)
-10017f9e      data_1006c1c4("target_changelevel with no map a…", sub_1001b070(arg1 + 4))
+10017f9e      gi.dprintf("target_changelevel with no map a…", sub_1001b070(arg1 + 4))
 10017fae      return sub_1001b400(arg1)
 10017fae  
 10017fb9  int32_t result = sub_10038b20(&data_1006c328, "fact1")
@@ -1052,13 +1052,13 @@
 
 10018000  int32_t ecx
 10018000  int32_t var_4_1 = ecx
-10018005  data_1006c224(3)
-1001800d  data_1006c224(0xa)
-1001801e  data_1006c224(*(arg1 + 0x254))
-10018028  data_1006c238(arg1 + 4)
-10018035  data_1006c23c(arg1 + 0x154)
-10018042  data_1006c224(*(arg1 + 0x250))
-1001804b  int32_t ecx_2 = data_1006c218(arg1 + 4, 2)
+10018005  gi.WriteByte(3)
+1001800d  gi.WriteByte(0xa)
+1001801e  gi.WriteByte(*(arg1 + 0x254))
+10018028  gi.WritePosition(arg1 + 4)
+10018035  gi.WriteDir(arg1 + 0x154)
+10018042  gi.WriteByte(*(arg1 + 0x250))
+1001804b  int32_t ecx_2 = gi.multicast(arg1 + 4, 2)
 10018051  void* result = *(arg1 + 0x244)
 10018051  
 10018060  if (result == 0)
@@ -1096,9 +1096,9 @@
 10018115  *(eax + 0x14) = *(arg1 + 0x14)
 1001811b  *(eax + 0x18) = *(arg1 + 0x18)
 1001811e  sub_10016750(eax)
-10018124  data_1006c20c(eax)
+10018124  gi.unlinkentity(eax)
 1001812b  sub_1001b510(eax)
-10018131  data_1006c208(eax)
+10018131  gi.linkentity(eax)
 10018137  long double x87_r7 = fconvert.t(*(arg1 + 0x148))
 1001813d  long double temp0 = fconvert.t(0f)
 1001813d  x87_r7 - temp0
@@ -1139,7 +1139,7 @@
 100181ef  int16_t x87control
 100181ef  int32_t eax = __ftol(x87control, fconvert.t(*(arg1 + 0x148)))
 10018208  sub_1001c000(arg1, arg1 + 4, arg1 + 0x154, *(arg1 + 0x244), eax, 8, 0x21)
-1001822d  return data_1006c1d0(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
+1001822d  return gi.sound(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
 
 1001822e                                            90 90                                                                ..
 
@@ -1147,7 +1147,7 @@
 
 10018240  *(arg1 + 0x200) = sub_100181e0
 1001824a  sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
-1001825a  *(arg1 + 0x280) = data_1006c1e4("weapons/laser2.wav")
+1001825a  *(arg1 + 0x280) = gi.soundindex("weapons/laser2.wav")
 1001825a  
 1001826b  if (*(arg1 + 0x244) == 0)
 1001826d      *(arg1 + 0x244) = 0xf
@@ -1169,14 +1169,14 @@
 100182a0    int32_t sub_100182a0(int32_t arg1)
 
 100182ba  sub_1001cf50(arg1, arg1 + 4, arg1 + 0x154, *(arg1 + 0x244), 0)
-100182df  return data_1006c1d0(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
+100182df  return gi.sound(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
 
 
 100182e0    int32_t sub_100182e0(void* arg1)
 
 100182f0  *(arg1 + 0x200) = sub_100182a0
 100182fa  sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
-1001830a  *(arg1 + 0x280) = data_1006c1e4("weapons/railgf1a.wav")
+1001830a  *(arg1 + 0x280) = gi.soundindex("weapons/railgf1a.wav")
 10018310  int32_t result = *(arg1 + 0x244)
 10018310  
 1001831b  if (result == 0)
@@ -1194,7 +1194,7 @@
 10018359  int16_t x87control
 10018359  int32_t eax_1 = __ftol(x87control, fconvert.t(*(arg1 + 0x148)))
 10018372  sub_1001cad0(arg1, arg1 + 4, arg1 + 0x154, *(arg1 + 0x244), eax_1, ecx, eax)
-10018397  return data_1006c1d0(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
+10018397  return gi.sound(arg1, 2, *(arg1 + 0x280), 0x3f800000, 0x3f800000, 0)
 
 10018398                                                                          90 90 90 90 90 90 90 90                          ........
 
@@ -1202,7 +1202,7 @@
 
 100183b0  *(arg1 + 0x200) = sub_10018340
 100183ba  sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
-100183ca  *(arg1 + 0x280) = data_1006c1e4("weapons/rocklf1a.wav")
+100183ca  *(arg1 + 0x280) = gi.soundindex("weapons/rocklf1a.wav")
 100183db  int16_t x87control
 100183db  
 100183db  if (*(arg1 + 0x244) == 0)
@@ -1325,7 +1325,7 @@
 1001866c      void var_7c
 1001866c      void var_38
 1001866c      __builtin_memcpy(dest: &var_7c, 
-1001866c          src: data_1006c1f0(&var_38, &var_a0, 0, 0, &var_44, esi_2, var_b4), n: 0x38)
+1001866c          src: gi.trace(&var_38, &var_a0, 0, 0, &var_44, esi_2, var_b4), n: 0x38)
 1001866e      int32_t var_48
 1001866e      int32_t eax_7 = var_48
 10018674      float var_70
@@ -1354,14 +1354,14 @@
 100186fd          if ((eax_9 & 0x80000000) != 0)
 10018704              var_b4 = 3
 10018706              *(arg1 + 0x11c) = eax_9 & 0x7fffffff
-1001870c              data_1006c224(var_b4)
-10018714              data_1006c224(0xf)
-1001871b              data_1006c224((sbb.d(ebx_2, ebx_2, ebx_1 != 0) & 4) + 4)
-10018726              data_1006c238(&var_70)
+1001870c              gi.WriteByte(var_b4)
+10018714              gi.WriteByte(0xf)
+1001871b              gi.WriteByte((sbb.d(ebx_2, ebx_2, ebx_1 != 0) & 4) + 4)
+10018726              gi.WritePosition(&var_70)
 10018731              void var_64
-10018731              data_1006c23c(&var_64)
-1001873b              data_1006c224(*(arg1 + 0x3c))
-10018748              data_1006c218(&var_70, 2)
+10018731              gi.WriteDir(&var_64)
+1001873b              gi.WriteByte(*(arg1 + 0x3c))
+10018748              gi.multicast(&var_70, 2)
 10018748          
 100186fd          goto label_1001875d
 100186fd      
@@ -1449,7 +1449,7 @@
 100188e8          if (eax_3 == 0)
 100188ea              int32_t eax_4 = *(arg1 + 0x128)
 100188f5              char* eax_5 = sub_1001b070(arg1 + 4)
-1001890a              data_1006c1c4("%s at %s: %s is a bad target\n", *(arg1 + 0x118), eax_5, eax_4)
+1001890a              gi.dprintf("%s at %s: %s is a bad target\n", *(arg1 + 0x118), eax_5, eax_4)
 1001890a          
 10018913          *(arg1 + 0x25c) = eax_3
 10018913  
@@ -1463,7 +1463,7 @@
 1001895d  __builtin_memcpy(dest: arg1 + 0xbc, 
 1001895d      src: "\x00\x00\x00\xc1\x00\x00\x00\xc1\x00\x00\x00\xc1\x00\x00\x00\x41\x00\x00\x00\x41\x00\x00\x00\x41", 
 1001895d      n: 0x18)
-10018986  data_1006c208(arg1)
+10018986  gi.linkentity(arg1)
 10018986  
 10018998  if ((*(arg1 + 0x11c) & 1) == 0)
 100189ad      return sub_100187d0(arg1)
@@ -1494,7 +1494,7 @@
 10018a0b          * fconvert.t(10.0) + fconvert.t(*(esi + 0x154)) + fconvert.t(97f))
 10018a16  arg1.b = eax
 10018a1a  arg1:1.b = 0
-10018a31  data_1006c1d8(*(*(esi + 0x25c) + 0x2c8) + 0x320, &arg1)
+10018a31  gi.configstring(*(*(esi + 0x25c) + 0x2c8) + 0x320, &arg1)
 10018a3d  long double x87_r7_5 = fconvert.t(data_1006c2e4) - fconvert.t(*(esi + 0x120))
 10018a46  long double temp0 = fconvert.t(*(esi + 0x148))
 10018a46  x87_r7_5 - temp0
@@ -1568,14 +1568,14 @@
 10018b6a              *(arg1 + 0x25c) = edi_1
 10018b21          else
 10018b27              char* eax_7 = sub_1001b070(arg1 + 4)
-10018b39              data_1006c1c4("%s at %s ", *(arg1 + 0x118), eax_7)
+10018b39              gi.dprintf("%s at %s ", *(arg1 + 0x118), eax_7)
 10018b43              char* eax_8 = sub_1001b070(edi_1 + 4)
-10018b5c              data_1006c1c4("target %s (%s at %s) is not a li…", *(arg1 + 0x128), 
+10018b5c              gi.dprintf("target %s (%s at %s) is not a li…", *(arg1 + 0x128), 
 10018b5c                  *(edi_1 + 0x118), eax_8)
 10018b5c      
 10018b80      if (*(arg1 + 0x25c) == 0)
 10018b86          char* eax_11 = sub_1001b070(arg1 + 4)
-10018b9f          data_1006c1c4("%s target %s not found at %s\n", *(arg1 + 0x118), *(arg1 + 0x128), 
+10018b9f          gi.dprintf("%s target %s not found at %s\n", *(arg1 + 0x118), *(arg1 + 0x128), 
 10018b9f              eax_11)
 10018baf          return sub_1001b400(arg1)
 10018baf  
@@ -1621,7 +1621,7 @@
 10018c48                  
 10018c51                  if (*(arg1 + 0x128) == 0)
 10018c57                      char* eax_5 = sub_1001b070(arg1 + 4)
-10018c69                      data_1006c1c4("%s with no target at %s\n", *(arg1 + 0x118), eax_5)
+10018c69                      gi.dprintf("%s with no target at %s\n", *(arg1 + 0x118), eax_5)
 10018c7a                      return sub_1001b400(arg1)
 10018c7a                  
 10018c7b                  int32_t edi_2 = *(arg1 + 0xb8)
@@ -1637,7 +1637,7 @@
 10018ce3                  return result
 10018ce3  
 10018ce8  char* eax_8 = sub_1001b070(arg1 + 4)
-10018cfa  data_1006c1c4("target_lightramp has bad ramp (%…", *(arg1 + 0x114), eax_8)
+10018cfa  gi.dprintf("target_lightramp has bad ramp (%…", *(arg1 + 0x114), eax_8)
 10018d0b  return sub_1001b400(arg1)
 
 10018d0c                                      90 90 90 90                                                              ....
@@ -1650,7 +1650,7 @@
 10018d1b  
 10018d26  if ((((x87_r7 < temp0 ? 1 : 0) << 8 | (is_unordered.t(x87_r7, temp0) ? 1 : 0) << 0xa
 10018d26          | (x87_r7 == temp0 ? 1 : 0) << 0xe):1.b & 1) != 0)
-10018d3f      data_1006c1d4(arg1 + 4, arg1, 0, *(arg1 + 0x280), 0x3f800000, 0, 0)
+10018d3f      gi.positioned_sound(arg1 + 4, arg1, 0, *(arg1 + 0x280), 0x3f800000, 0, 0)
 10018d54      *(arg1 + 0x21c) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.5))
 10018d54  
 10018d60  int32_t i = 1
@@ -1709,7 +1709,7 @@
 
 10018ead  if (*(arg1 + 0x12c) == 0)
 10018eb3      char* eax_2 = sub_1001b070(arg1 + 4)
-10018ec5      data_1006c1c4("untargeted %s at %s\n", *(arg1 + 0x118), eax_2)
+10018ec5      gi.dprintf("untargeted %s at %s\n", *(arg1 + 0x118), eax_2)
 10018ec5  
 10018ed6  if (*(arg1 + 0x254) == 0)
 10018ed8      *(arg1 + 0x254) = 5
@@ -1729,7 +1729,7 @@
 10018f0c  *(arg1 + 0x1f4) = sub_10018d10
 10018f16  *(arg1 + 0xb8) = eax_4
 10018f1c  *(arg1 + 0x200) = sub_10018e60
-10018f26  int32_t result = data_1006c1e4("world/quake.wav")
+10018f26  int32_t result = gi.soundindex("world/quake.wav")
 10018f2f  *(arg1 + 0x280) = result
 10018f36  return result
 
@@ -1743,7 +1743,7 @@
 10018f6b  int32_t ecx = *(arg1 + 0x10c)
 10018f78  *(arg1 + 0xf8) = 1
 10018f7e  *(arg1 + 0x104) = 0
-10018f88  int32_t result = data_1006c1ec(arg1, ecx)
+10018f88  int32_t result = gi.setmodel(arg1, ecx)
 10018f91  *(arg1 + 0xb8) = 1
 10018f99  return result
 
@@ -1834,7 +1834,7 @@
 
 100190f5  *(arg1 + 0xf8) = 1
 100190ff  *(arg1 + 0x200) = sub_10019040
-10019110  return data_1006c208(arg1)
+10019110  return gi.linkentity(arg1)
 
 10019111                                                     90 90 90 90 90 90 90 90 90 90 90 90 90 90 90                   ...............
 
@@ -1843,11 +1843,11 @@
 1001912b  int32_t eax = *(arg1 + 0x250)
 1001912b  
 10019133  if (eax == 1)
-1001915b      *(arg1 + 0x280) = data_1006c1e4("misc/secret.wav")
+1001915b      *(arg1 + 0x280) = gi.soundindex("misc/secret.wav")
 10019133  else if (eax == 2)
-1001915b      *(arg1 + 0x280) = data_1006c1e4("misc/talk.wav")
+1001915b      *(arg1 + 0x280) = gi.soundindex("misc/talk.wav")
 1001913f  else if (eax == 3)
-1001915b      *(arg1 + 0x280) = data_1006c1e4("misc/trigger1.wav")
+1001915b      *(arg1 + 0x280) = gi.soundindex("misc/trigger1.wav")
 1001915b  
 10019161  long double x87_r7 = fconvert.t(*(arg1 + 0x290))
 10019167  long double temp0 = fconvert.t(0f)
@@ -1874,8 +1874,8 @@
 100191de  if (sub_100388c0(arg1 + 0x10, &data_10061c18) == 0)
 100191e8      sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
 100191e8  
-100191f8  data_1006c1ec(arg1, *(arg1 + 0x10c))
-1001920a  return data_1006c208(arg1)
+100191f8  gi.setmodel(arg1, *(arg1 + 0x10c))
+1001920a  return gi.linkentity(arg1)
 
 1001920b                                   90 90 90 90 90                                                             .....
 
@@ -1889,7 +1889,7 @@
 1001924b      eax_1.b |= 4
 1001924d      *(arg1 + 0x11c) = eax_1
 10019253      char* eax_2 = sub_1001b070(&var_c)
-10019265      data_1006c1c4("fixed TRIGGERED flag on %s at %s…", *(arg1 + 0x118), eax_2)
+10019265      gi.dprintf("fixed TRIGGERED flag on %s at %s…", *(arg1 + 0x118), eax_2)
 10019265  
 1001926f  *(arg1 + 0x290) = 0xbf800000
 10019285  return sub_10019120(arg1)
@@ -1922,8 +1922,8 @@
 100192ff          int32_t edx_3 = (esi - &data_10046928) s/ 0x48
 100192ff          
 10019310          if (*(edi_1 + (edx_3 << 2) + 0x2e4) != 0)
-1001939f              data_1006c1d0(ebx_1, 0, 
-1001939f                  data_1006c1e4("misc/keyuse.wav", 0x3f800000, 0x3f800000, 0))
+1001939f              gi.sound(ebx_1, 0, 
+1001939f                  gi.soundindex("misc/keyuse.wav", 0x3f800000, 0x3f800000, 0))
 100193ad              long double x87_r7_4 = fconvert.t(*(data_1006c42c + 0x14))
 100193b0              long double temp0_1 = fconvert.t(0f)
 100193b0              x87_r7_4 - temp0_1
@@ -2038,9 +2038,9 @@
 10019322              
 10019327              if ((result:1.b & 1) == 0)
 10019339                  *(arg1 + 0x20c) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(5.0))
-10019349                  data_1006c1cc(ebx_1, "You need the %s", *(esi + 0x28))
-10019380                  return data_1006c1d0(ebx_1, 0, 
-10019380                      data_1006c1e4("misc/keytry.wav", 0x3f800000, 0x3f800000, 0))
+10019349                  gi.centerprintf(ebx_1, "You need the %s", *(esi + 0x28))
+10019380                  return gi.sound(ebx_1, 0, 
+10019380                      gi.soundindex("misc/keytry.wav", 0x3f800000, 0x3f800000, 0))
 10019380  
 1001952e  return result
 
@@ -2051,21 +2051,21 @@
 10019530  char* eax_11 = data_1006c2ac
 10019530  
 10019538  if (eax_11 == 0)
-10019557      return data_1006c1c4("no key item for trigger_key at %…", sub_1001b070(arg1 + 4))
+10019557      return gi.dprintf("no key item for trigger_key at %…", sub_1001b070(arg1 + 4))
 10019557  
 10019559  void* eax_4 = sub_1000b100(eax_11)
 10019567  *(arg1 + 0x2cc) = eax_4
 10019567  
 1001956d  if (eax_4 == 0)
 10019573      char* eax_5 = sub_1001b070(arg1 + 4)
-1001958f      return data_1006c1c4("item %s not found for trigger_ke…", data_1006c2ac, eax_5)
+1001958f      return gi.dprintf("item %s not found for trigger_ke…", data_1006c2ac, eax_5)
 1001958f  
 10019598  if (*(arg1 + 0x128) == 0)
 1001959e      char* eax_8 = sub_1001b070(arg1 + 4)
-100195ba      return data_1006c1c4("%s at %s has no target\n", *(arg1 + 0x118), eax_8)
+100195ba      return gi.dprintf("%s at %s has no target\n", *(arg1 + 0x118), eax_8)
 100195ba  
-100195c0  data_1006c1e4("misc/keytry.wav")
-100195cb  int32_t result = data_1006c1e4("misc/keyuse.wav")
+100195c0  gi.soundindex("misc/keytry.wav")
+100195cb  int32_t result = gi.soundindex("misc/keyuse.wav")
 100195d4  *(arg1 + 0x200) = sub_100192c0
 100195df  return result
 
@@ -2082,17 +2082,17 @@
 10019648          result.b = *(arg1 + 0x11c)
 10019648          
 10019655          if ((result.b & 1) == 0)
-1001965d              data_1006c1cc(arg2, "Sequence completed!")
-10019684              data_1006c1d0(arg2, 0, 
-10019684                  data_1006c1e4("misc/talk1.wav", 0x3f800000, 0x3f800000, 0))
+1001965d              gi.centerprintf(arg2, "Sequence completed!")
+10019684              gi.sound(arg2, 0, 
+10019684                  gi.soundindex("misc/talk1.wav", 0x3f800000, 0x3f800000, 0))
 10019684          
 1001968e          *(arg1 + 0x264) = arg2
 10019694          return sub_10018fb0(arg1)
 10019694      
 10019605      if ((*(arg1 + 0x11c) & 1) == 0)
-10019616          data_1006c1cc(arg2, "%i more to go...", result)
-10019647          return data_1006c1d0(arg2, 0, 
-10019647              data_1006c1e4("misc/talk1.wav", 0x3f800000, 0x3f800000, 0))
+10019616          gi.centerprintf(arg2, "%i more to go...", result)
+10019647          return gi.sound(arg2, 0, 
+10019647              gi.soundindex("misc/talk1.wav", 0x3f800000, 0x3f800000, 0))
 10019647  
 1001969e  return result
 
@@ -2188,7 +2188,7 @@
 100197df              
 100197e4              if ((result:1.b & 1) != 0)
 100197fe                  *(arg2 + 0x218) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(1.5))
-1001980e                  result = data_1006c1d0(arg2, 0, data_10060e7c, 0x3f800000, 0x3f800000, 0)
+1001980e                  result = gi.sound(arg2, 0, data_10060e7c, 0x3f800000, 0x3f800000, 0)
 10019745  else
 10019760      int32_t var_14_1 = ecx
 10019765      result = sub_10038a20(arg1 + 0x154, 
@@ -2213,7 +2213,7 @@
 10019850    int32_t sub_10019850(void* arg1)
 
 10019856  sub_10018f40(arg1)
-10019866  data_10060e7c = data_1006c1e4("misc/windfly.wav")
+10019866  data_10060e7c = gi.soundindex("misc/windfly.wav")
 10019878  int16_t eax_1
 10019878  eax_1.b = *(arg1 + 0x11c) == 0
 10019878  
@@ -2229,7 +2229,7 @@
 100198a4          | (x87_r7 == temp0 ? 1 : 0) << 0xe):1.b & 0x40) != 0)
 100198a6      *(arg1 + 0x148) = 0x447a0000
 100198a6  
-100198bb  return data_1006c208(arg1)
+100198bb  return gi.linkentity(arg1)
 
 100198bc                                                                                      90 90 90 90                              ....
 
@@ -2238,7 +2238,7 @@
 100198d0  int32_t eax
 100198d0  eax.b = *(arg1 + 0xf8) == 0
 100198d3  *(arg1 + 0xf8) = eax
-100198d9  data_1006c208(arg1)
+100198d9  gi.linkentity(arg1)
 100198df  char result = *(arg1 + 0x11c)
 100198df  
 100198ea  if ((result & 2) == 0)
@@ -2275,7 +2275,7 @@
 10019968              int32_t temp1_1 = mods.dp.d(sx.q(data_1006c2e0.d), 0xa)
 10019968              
 1001996c              if (temp1_1 == 0)
-10019983                  data_1006c1d0(arg2, 0, *(arg1 + 0x280), 0x3f800000, 0x3f800000, temp1_1)
+10019983                  gi.sound(arg2, 0, *(arg1 + 0x280), 0x3f800000, 0x3f800000, temp1_1)
 10019983          
 10019993          int32_t ecx_1 = *(arg1 + 0x244)
 100199b5          return sub_100060d0(arg2, arg1, arg1, &data_10061c18, arg2 + 4, &data_10061c18, 
@@ -2287,7 +2287,7 @@
 100199c0    int32_t sub_100199c0(void* arg1)
 
 100199c6  sub_10018f40(arg1)
-100199d6  *(arg1 + 0x280) = data_1006c1e4("world/electro.wav")
+100199d6  *(arg1 + 0x280) = gi.soundindex("world/electro.wav")
 100199dc  int32_t eax_1 = *(arg1 + 0x244)
 100199e5  *(arg1 + 0x1fc) = sub_10019900
 100199e5  
@@ -2304,7 +2304,7 @@
 10019a1f  if ((eax_2 & 2) != 0)
 10019a21      *(arg1 + 0x200) = sub_100198c0
 10019a21  
-10019a36  return data_1006c208(arg1)
+10019a36  return gi.linkentity(arg1)
 
 10019a37                                                                       90 90 90 90 90 90 90 90 90                         .........
 
@@ -2318,7 +2318,7 @@
 10019a60    int32_t sub_10019a60(int32_t arg1)
 
 10019a6c  if (data_1006c2b0 == 0)
-10019a7d      data_1006c1c4("trigger_gravity without gravity …", sub_1001b070(arg1 + 4))
+10019a7d      gi.dprintf("trigger_gravity without gravity …", sub_1001b070(arg1 + 4))
 10019a8d      return sub_1001b400(arg1)
 10019a8d  
 10019a8f  sub_10018f40(arg1)
@@ -2392,10 +2392,10 @@
 10019bf1          void* eax_2 = sub_1001ac00(nullptr, 0x12c, *(edi_1 + 0x128))
 10019bf1          
 10019bfd          if (eax_2 == 0)
-10019c04              data_1006c1c4("Couldn't find destination\n")
+10019c04              gi.dprintf("Couldn't find destination\n")
 10019c11              return 
 10019c11          
-10019c13          data_1006c20c(arg2)
+10019c13          gi.unlinkentity(arg2)
 10019c1f          *(arg2 + 4) = *(eax_2 + 4)
 10019c25          *(arg2 + 8) = *(eax_2 + 8)
 10019c2b          *(arg2 + 0xc) = *(eax_2 + 0xc)
@@ -2444,7 +2444,7 @@
 10019cef          *(*(arg2 + 0x54) + 0xe68) = 0
 10019cf8          *(*(arg2 + 0x54) + 0xe64) = 0
 10019cfe          sub_1001b510(arg2)
-10019d04          data_1006c208(arg2)
+10019d04          gi.linkentity(arg2)
 10019baf  else if (*(arg2 + 0x54) != 0)
 10019bd3      edi_1 = arg1
 10019bd3      
@@ -2455,7 +2455,7 @@
 
 10019d20    void* sub_10019d20(void* arg1)
 
-10019d27  data_1006c1c0(2, "enabled\n")
+10019d27  gi.bprintf(2, "enabled\n")
 10019d34  *(arg1 + 0x1fc) = sub_10019ba0
 10019d3e  return arg1
 
@@ -2463,7 +2463,7 @@
 
 10019d40    void* sub_10019d40(void* arg1)
 
-10019d47  data_1006c1c0(2, "disabled\n")
+10019d47  gi.bprintf(2, "disabled\n")
 10019d54  *(arg1 + 0x1fc) = 0
 10019d5e  return arg1
 
@@ -2514,16 +2514,16 @@
 10019e05      *(arg1 + 0x200) = sub_10019d60
 10019e05      
 10019e0f      if ((1 & eax_3) != 0)
-10019e18          data_1006c1c0(2, "ignored NOMONSTER spawnflag on t…")
+10019e18          gi.bprintf(2, "ignored NOMONSTER spawnflag on t…")
 10019e18      
 10019e28      if ((*(arg1 + 0x11c) & 2) != 0)
-10019e31          data_1006c1c0(2, "ignored NOPLAYER spawnflag on tr…")
+10019e31          gi.bprintf(2, "ignored NOPLAYER spawnflag on tr…")
 10019e31      
 10019e41      if ((*(arg1 + 0x11c) & 0x10) != 0)
-10019e4a          data_1006c1c0(2, "ignored NOTOUCH spawnflag on tri…")
+10019e4a          gi.bprintf(2, "ignored NOTOUCH spawnflag on tri…")
 10019e4a  
-10019e7d  data_1006c1ec(arg1, *(arg1 + 0x10c))
-10019e8e  return data_1006c208(arg1)
+10019e7d  gi.setmodel(arg1, *(arg1 + 0x10c))
+10019e8e  return gi.linkentity(arg1)
 
 10019e8f                                               90                                                                 .
 
@@ -2656,8 +2656,8 @@
 1001a09a      fconvert.t(*(data_1006c41c + 0x14)) * fconvert.t(50f) + fconvert.t(550f))
 1001a0b8  sub_1001cad0(*(*(arg1 + 0x274) + 0x100), &var_30, &var_24, eax_4, eax_5, 0x43160000, 
 1001a0b8      eax_4)
-1001a0f1  return data_1006c1d4(&var_30, arg1, 1, 
-1001a0f1      data_1006c1e4("weapons/rocklf1a.wav", 0x3f800000, 0x3f800000, 0))
+1001a0f1  return gi.positioned_sound(&var_30, arg1, 1, 
+1001a0f1      gi.soundindex("weapons/rocklf1a.wav", 0x3f800000, 0x3f800000, 0))
 
 1001a0f2                                                        90 90 90 90 90 90 90 90 90 90 90 90 90 90                    ..............
 
@@ -2926,7 +2926,7 @@
 1001a511      sub_1001b400(eax_3)
 1001a4bd  else
 1001a4c3      char* eax_2 = sub_1001b070(arg1 i+ 4)
-1001a4d5      data_1006c1c4("%s at %s needs a target\n", *(arg1 i+ 0x118), eax_2)
+1001a4d5      gi.dprintf("%s at %s needs a target\n", *(arg1 i+ 0x118), eax_2)
 1001a4d5  
 1001a526  *(*(arg1 i+ 0x274) + 0x244) = *(arg1 i+ 0x244)
 1001a52c  *(arg1 i+ 0x1f4) = sub_1001a100
@@ -2938,7 +2938,7 @@
 1001a545  int32_t eax = *(arg1 + 0x10c)
 1001a54b  *(arg1 + 0xf8) = 3
 1001a557  *(arg1 + 0x104) = 2
-1001a561  data_1006c1ec(arg1, eax)
+1001a561  gi.setmodel(arg1, eax)
 1001a567  long double x87_r7 = fconvert.t(*(arg1 + 0x148))
 1001a56d  long double temp0 = fconvert.t(0f)
 1001a56d  x87_r7 - temp0
@@ -2992,7 +2992,7 @@
 1001a642  *(arg1 + 0x170) = edx
 1001a648  *(arg1 + 0x1f4) = sub_1001a4b0
 1001a65e  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
-1001a66e  return data_1006c208(arg1)
+1001a66e  return gi.linkentity(arg1)
 
 1001a66f                                               90                                                                 .
 
@@ -3001,9 +3001,9 @@
 1001a675  int32_t eax = *(arg1 + 0x10c)
 1001a67b  *(arg1 + 0xf8) = 3
 1001a687  *(arg1 + 0x104) = 2
-1001a691  data_1006c1ec(arg1, eax)
+1001a691  gi.setmodel(arg1, eax)
 1001a698  *(arg1 + 0x1f8) = sub_10019f90
-1001a6ac  return data_1006c208(arg1)
+1001a6ac  return gi.linkentity(arg1)
 
 1001a6ad                                         90 90 90                                                               ...
 
@@ -3145,7 +3145,7 @@
 1001aa22  
 1001aa33  *(arg1 + 0x104) = 2
 1001aa39  *(arg1 + 0xf8) = 2
-1001aa45  *(arg1 + 0x28) = data_1006c1e0("models/monsters/infantry/tris.md…")
+1001aa45  *(arg1 + 0x28) = gi.modelindex("models/monsters/infantry/tris.md…")
 1001aa4d  __builtin_memcpy(dest: arg1 + 0xbc, 
 1001aa4d      src: "\x00\x00\x80\xc1\x00\x00\x80\xc1\x00\x00\xc0\xc1\x00\x00\x80\x41\x00\x00\x80\x41\x00\x00\x00\x42", 
 1001aa4d      n: 0x18)
@@ -3184,11 +3184,11 @@
 1001ab4b      if (eax_7 == 0)
 1001ab4d          int32_t edx_5 = data_1006c2ac
 1001ab55          char* eax_8 = sub_1001b070(arg1 + 4)
-1001ab6a          data_1006c1c4("%s at %s has bad item: %s\n", *(arg1 + 0x118), eax_8, edx_5)
+1001ab6a          gi.dprintf("%s at %s has bad item: %s\n", *(arg1 + 0x118), eax_8, edx_5)
 1001ab6a  
 1001ab73  *(arg1 + 0x1f4) = sub_1001a8c0
 1001ab8a  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
-1001ab9b  return data_1006c208(arg1)
+1001ab9b  return gi.linkentity(arg1)
 
 1001ab9c                                                                                      90 90 90 90                              ....
 
@@ -3291,7 +3291,7 @@
 1001ad8b  int32_t i = 0
 1001ad8b  
 1001ad8f  if (arg1 == 0)
-1001ad96      data_1006c1c4("G_PickTarget called with NULL ta…")
+1001ad96      gi.dprintf("G_PickTarget called with NULL ta…")
 1001ada6      return 0
 1001ada6  
 1001ada8  int32_t var_20[0x8]
@@ -3311,7 +3311,7 @@
 1001adcd  if (i != 0)
 1001adf7      return var_20[mods.dp.d(sx.q(sub_10038fc0()), i)]
 1001adf7  
-1001add5  data_1006c1c4("G_PickTarget: target %s not foun…", arg1)
+1001add5  gi.dprintf("G_PickTarget: target %s not foun…", arg1)
 1001ade5  return 0
 
 1001adf8                                                                          90 90 90 90 90 90 90 90                          ........
@@ -3339,7 +3339,7 @@
 1001ae6d      *(eax_1 + 0x1ec) = fconvert.s(x87_r7_2)
 1001ae6d      
 1001ae73      if (arg2 == 0)
-1001ae7a          data_1006c1c4("Think_Delay with no activator\n")
+1001ae7a          gi.dprintf("Think_Delay with no activator\n")
 1001ae7a      
 1001ae83      int32_t eax_3 = *(arg1 + 0x114)
 1001ae89      *(eax_1 + 0x114) = eax_3
@@ -3350,13 +3350,13 @@
 1001aeab  int32_t eax_4 = *(arg1 + 0x114)
 1001aeab  
 1001aec0  if (eax_4 != 0 && (*(arg2 + 0xb8) & 4) == 0)
-1001aec9      data_1006c1cc(arg2, &data_10046140, eax_4)
+1001aec9      gi.centerprintf(arg2, &data_10046140, eax_4)
 1001aecf      int32_t eax_5 = *(arg1 + 0x280)
 1001aecf      
 1001aee6      if (eax_5 == 0)
-1001aeed          eax_5 = data_1006c1e4("misc/talk1.wav", 0x3f800000, 0x3f800000, 0)
+1001aeed          eax_5 = gi.soundindex("misc/talk1.wav", 0x3f800000, 0x3f800000, 0)
 1001aeed      
-1001aefa      data_1006c1d0(arg2, 0, eax_5, 0x3f800000, 0x3f800000, 0)
+1001aefa      gi.sound(arg2, 0, eax_5, 0x3f800000, 0x3f800000, 0)
 1001aefa  
 1001af03  char* eax_6 = *(arg1 + 0x130)
 1001af03  
@@ -3366,7 +3366,7 @@
 1001af24          sub_1001b400(i)
 1001af24          
 1001af31          if (*(arg1 + 0x58) == 0)
-1001afe7              return data_1006c1c4("entity was removed while using k…")
+1001afe7              return gi.dprintf("entity was removed while using k…")
 1001afe7  
 1001af52  void* i_2 = *(arg1 + 0x128)
 1001af52  
@@ -3387,10 +3387,10 @@
 1001aff0                      if (eax_16 != 0)
 1001aff5                          eax_16(i_1, arg1, arg2)
 1001afc4                  else
-1001afcb                      data_1006c1c4("WARNING: Entity used itself.\n")
+1001afcb                      gi.dprintf("WARNING: Entity used itself.\n")
 1001afcb                  
 1001afff                  if (*(arg1 + 0x58) == 0)
-1001b029                      return data_1006c1c4("entity was removed while using t…")
+1001b029                      return gi.dprintf("entity was removed while using t…")
 1001af90              else if (sub_10038b20(*(arg1 + 0x118), "func_door") != 0
 1001af90                      && sub_10038b20(*(arg1 + 0x118), "func_door_rotating") != 0)
 1001afc0                  goto label_1001afc4
@@ -3636,7 +3636,7 @@
 1001b3c3      result += 0x3d0
 1001b3c3  
 1001b3d3  if (ecx_3 == data_1006ca4c)
-1001b3da      data_1006c1dc("ED_Alloc: no free edicts")
+1001b3da      gi.error("ED_Alloc: no free edicts")
 1001b3e0      edx = data_1006c168
 1001b3e0  
 1001b3ea  data_1006c168 = edx + 1
@@ -3648,7 +3648,7 @@
 
 1001b400    uint32_t sub_1001b400(int32_t arg1)
 
-1001b406  data_1006c20c(arg1)
+1001b406  gi.unlinkentity(arg1)
 1001b41b  int32_t eax
 1001b41b  int32_t edx_1
 1001b41b  edx_1:eax = muls.dp.d(0x4325c53f, arg1 - data_1006c2c4)
@@ -3682,7 +3682,7 @@
 1001b4a2      result = *(arg1 + 0x220)
 1001b4a2  
 1001b4aa  if ((*(arg1 + 0x54) == 0 && (*(arg1 + 0xb8) & 4) == 0) || result s> 0)
-1001b4c6      result = data_1006c210(arg1 + 0xd4, arg1 + 0xe0, &__return_addr, 0x400, 2)
+1001b4c6      result = gi.BoxEdicts(arg1 + 0xd4, arg1 + 0xe0, &__return_addr, 0x400, 2)
 1001b4c6      
 1001b4d1      if (result s> 0)
 1001b4d5          void* const* edi_1 = &__return_addr
@@ -3715,7 +3715,7 @@
 1001b54e      void var_70
 1001b54e      void var_38
 1001b54e      __builtin_memcpy(dest: &var_70, 
-1001b54e          src: data_1006c1f0(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, arg1 + 4, 0, 
+1001b54e          src: gi.trace(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, arg1 + 4, 0, 
 1001b54e              0x2010003), 
 1001b54e          n: 0x38)
 1001b54e      
@@ -3786,7 +3786,7 @@
 1001b6ae  void var_70
 1001b6ae  void var_38
 1001b6ae  __builtin_memcpy(dest: &var_70, 
-1001b6ae      src: data_1006c1f0(&var_38, arg1 + 4, 0, 0, &var_b8, arg1, 0x6000003), n: 0x38)
+1001b6ae      src: gi.trace(&var_38, arg1 + 4, 0, 0, &var_b8, arg1, 0x6000003), n: 0x38)
 1001b6b0  float var_68
 1001b6b0  long double x87_r7_12 = fconvert.t(var_68)
 1001b6b4  long double temp4 = fconvert.t(1f)
@@ -3865,7 +3865,7 @@
 1001b910  void var_9c
 1001b910  void var_38
 1001b910  __builtin_memcpy(dest: &var_9c, 
-1001b910      src: data_1006c1f0(&var_38, arg1 + 4, 0, 0, arg2, arg1, 0x6000003), n: 0x38)
+1001b910      src: gi.trace(&var_38, arg1 + 4, 0, 0, arg2, arg1, 0x6000003), n: 0x38)
 1001b912  float var_94
 1001b912  long double x87_r7 = fconvert.t(var_94)
 1001b916  long double temp0 = fconvert.t(1.0)
@@ -3906,7 +3906,7 @@
 1001b9f6      sub_10038950(&var_c8, var_a4_1, &var_50, &var_c8)
 1001ba12      sub_10038950(&var_c8, var_d8_3, &var_44, &var_c8)
 1001ba12      
-1001ba26      if ((data_1006c1f4(arg2) & 0x38) != 0)
+1001ba26      if ((gi.pointcontents(arg2) & 0x38) != 0)
 1001ba2a          float eax_9 = arg2[1]
 1001ba2d          float ecx_1 = arg2[2]
 1001ba30          var_a0 = 1
@@ -3917,7 +3917,7 @@
 1001ba44      
 1001ba4a      ebp_1 = arg1
 1001ba78      __builtin_memcpy(dest: &var_9c, 
-1001ba78          src: data_1006c1f0(&var_38, arg2, 0, 0, &var_c8, ebp_1, ebp), n: 0x38)
+1001ba78          src: gi.trace(&var_38, arg2, 0, 0, &var_c8, ebp_1, ebp), n: 0x38)
 1001ba7f      char var_6c
 1001ba7f      
 1001ba7f      if ((var_6c & 0x38) != 0)
@@ -3972,13 +3972,13 @@
 1001bb0f              if ((eax_11.b & 0x10) != 0)
 1001bb11                  esi_3 = 4
 1001bb23                  label_1001bb23:
-1001bb23                  data_1006c224(3)
-1001bb2b                  data_1006c224(0xa)
-1001bb33                  data_1006c224(8)
-1001bb3e                  data_1006c238(&var_90)
-1001bb49                  data_1006c23c(&var_84)
-1001bb50                  data_1006c224(esi_3)
-1001bb5d                  data_1006c218(&var_90, 2)
+1001bb23                  gi.WriteByte(3)
+1001bb2b                  gi.WriteByte(0xa)
+1001bb33                  gi.WriteByte(8)
+1001bb3e                  gi.WritePosition(&var_90)
+1001bb49                  gi.WriteDir(&var_84)
+1001bb50                  gi.WriteByte(esi_3)
+1001bb5d                  gi.multicast(&var_90, 2)
 1001bb0f              else if ((eax_11.b & 8) != 0)
 1001bb1c                  esi_3 = 5
 1001bb1c                  goto label_1001bb23
@@ -4004,7 +4004,7 @@
 1001bc5d              sub_10038950(&var_c8, fconvert.s(x87_r7_29 + x87_r7_29), &var_44, &var_c8)
 1001bc5d          
 1001bc95          __builtin_memcpy(dest: &var_9c, 
-1001bc95              src: data_1006c1f0(&var_38, &var_d4, 0, 0, &var_c8, ebp_1, 0x6000003), 
+1001bc95              src: gi.trace(&var_38, &var_d4, 0, 0, &var_c8, ebp_1, 0x6000003), 
 1001bc95              n: 0x38)
 1001bc95  
 1001bcac  int32_t var_68
@@ -4020,11 +4020,11 @@
 1001bcc1      if ((eax_2:1.b & 1) != 0)
 1001bcd6          if (*(var_68 + 0x240) == 0)
 1001bd23              if (sub_100397e0(var_70, &data_10049fd8, 3) != 0)
-1001bd27                  data_1006c224(3)
-1001bd35                  data_1006c224(arg6)
-1001bd40                  data_1006c238(&var_90)
-1001bd4b                  data_1006c23c(&var_84)
-1001bd58                  data_1006c218(&var_90, 2)
+1001bd27                  gi.WriteByte(3)
+1001bd35                  gi.WriteByte(arg6)
+1001bd40                  gi.WritePosition(&var_90)
+1001bd4b                  gi.WriteDir(&var_84)
+1001bd58                  gi.multicast(&var_90, 2)
 1001bd58                  
 1001bd66                  if (*(ebp_1 + 0x54) != 0)
 1001bd70                      sub_100350a0(ebp_1, &var_90, 2)
@@ -4039,9 +4039,9 @@
 1001bdad      sub_10038900(&var_b0)
 1001bdc8      sub_10038950(&var_90, -2f, &var_b0, &var_bc)
 1001bdc8      
-1001bddd      if ((data_1006c1f4(&var_bc) & 0x38) == 0)
+1001bddd      if ((gi.pointcontents(&var_bc) & 0x38) == 0)
 1001be2d          __builtin_memcpy(dest: &var_9c, 
-1001be2d              src: data_1006c1f0(&var_38, &var_bc, 0, 0, &var_d4, var_68, 0x38), n: 0x38)
+1001be2d              src: gi.trace(&var_38, &var_bc, 0, 0, &var_d4, var_68, 0x38), n: 0x38)
 1001bddd      else
 1001bde3          float edx_10 = var_bc:4.d
 1001bdeb          var_90 = var_bc.d
@@ -4053,11 +4053,11 @@
 1001be52      var_bc:4.d = fconvert.s(fconvert.t(var_8c) + fconvert.t(var_d0))
 1001be5e      float var_b4_1 = fconvert.s(fconvert.t(var_88) + fconvert.t(var_cc))
 1001be62      sub_10038a20(&var_bc, 0.5f, &var_bc)
-1001be69      data_1006c224(3)
-1001be71      data_1006c224(0xb)
-1001be7c      data_1006c238(&var_d4)
-1001be87      data_1006c238(&var_90)
-1001be94      data_1006c218(&var_bc, 2)
+1001be69      gi.WriteByte(3)
+1001be71      gi.WriteByte(0xb)
+1001be7c      gi.WritePosition(&var_d4)
+1001be87      gi.WritePosition(&var_90)
+1001be94      gi.multicast(&var_bc, 2)
 
 1001bea8                          90 90 90 90 90 90 90 90                                                          ........
 
@@ -4102,9 +4102,9 @@
 1001bf8f              *(arg1 + 0x244), 1, 4, (sbb.d(eax_1, eax_1, temp0 != 0) & 9) + 1)
 1001bfa2          return sub_1001b400(arg1)
 1001bfa2      
-1001bfa5      data_1006c224(3)
-1001bfad      data_1006c224(2)
-1001bfb7      data_1006c238(arg1 + 4)
+1001bfa5      gi.WriteByte(3)
+1001bfad      gi.WriteByte(2)
+1001bfb7      gi.WritePosition(arg1 + 4)
 1001bfc6      int32_t* var_c_3
 1001bfc6      
 1001bfc6      if (arg3 != 0)
@@ -4112,8 +4112,8 @@
 1001bfc6      else
 1001bfc8          var_c_3 = &data_10061c18
 1001bfc8      
-1001bfd0      data_1006c23c(var_c_3)
-1001bfdc      data_1006c218(arg1 + 4, 2)
+1001bfd0      gi.WriteDir(var_c_3)
+1001bfdc      gi.multicast(arg1 + 4, 2)
 1001bfdc  
 1001bfe6  return sub_1001b400(arg1)
 
@@ -4141,8 +4141,8 @@
 1001c093  *(eax + 0xfc) = 0x6000003
 1001c0a9  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
 1001c0c7  char* var_5c = "misc/lasfly.wav"
-1001c0cc  *(eax + 0x28) = data_1006c1e0(var_58)
-1001c0d5  *(eax + 0x4c) = data_1006c1e4(var_5c)
+1001c0cc  *(eax + 0x28) = gi.modelindex(var_58)
+1001c0d5  *(eax + 0x4c) = gi.soundindex(var_5c)
 1001c0e0  *(eax + 0x100) = arg1
 1001c0ea  *(eax + 0x1fc) = sub_1001bf10
 1001c0fa  long double x87_r7_3 = fconvert.t(data_1006c2e4) + fconvert.t(2f)
@@ -4154,7 +4154,7 @@
 1001c125  if (arg7 != 0)
 1001c127      *(eax + 0x11c) = 1
 1001c127  
-1001c132  data_1006c208(eax)
+1001c132  gi.linkentity(eax)
 1001c138  void* eax_7 = arg1
 1001c138  
 1001c142  if (*(eax_7 + 0x54) != 0)
@@ -4163,7 +4163,7 @@
 1001c151  
 1001c17e  void var_38
 1001c17e  __builtin_memcpy(dest: &var_38, 
-1001c17e      src: data_1006c1f0(&var_38, eax_7 + 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
+1001c17e      src: gi.trace(&var_38, eax_7 + 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
 1001c180  float var_30
 1001c180  long double x87_r7_4 = fconvert.t(var_30)
 1001c184  long double temp0 = fconvert.t(1.0)
@@ -4206,7 +4206,7 @@
 1001c21c      float var_a8 = 8192f
 1001c222      sub_10038950(arg2, var_a8, arg3, var_a0_1)
 1001c246      void var_38
-1001c246      result = data_1006c1f0(&var_38, arg2, 0, 0, &var_7c, arg1, 0x6000003)
+1001c246      result = gi.trace(&var_38, arg2, 0, 0, &var_7c, arg1, 0x6000003)
 1001c25a      void var_70
 1001c25a      __builtin_memcpy(dest: &var_70, src: result, n: 0x38)
 1001c26c      float var_3c
@@ -4279,7 +4279,7 @@
 1001c3f8  *(eax + 0xf8) = 2
 1001c40c  *(eax + 0x40) = ebx_1 | 0x20
 1001c41b  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001c441  *(eax + 0x28) = data_1006c1e0("models/objects/grenade/tris.md2")
+1001c441  *(eax + 0x28) = gi.modelindex("models/objects/grenade/tris.md2")
 1001c448  *(eax + 0x100) = arg1
 1001c44e  *(eax + 0x1fc) = sub_1001c680
 1001c45e  long double x87_r7_13 = fconvert.t(data_1006c2e4) + fconvert.t(arg6)
@@ -4288,7 +4288,7 @@
 1001c473  *(eax + 0x24c) = arg7
 1001c479  *(eax + 0x118) = "grenade"
 1001c483  *(eax + 0x1ec) = fconvert.s(x87_r7_13)
-1001c498  return data_1006c208(eax)
+1001c498  return gi.linkentity(eax)
 
 1001c499                                                                             90 90 90 90 90 90 90                           .......
 
@@ -4341,7 +4341,7 @@
 1001c5fc      *(arg1 i+ 0x24c), eax_8)
 1001c616  float var_c
 1001c616  sub_10038950(arg1 i+ 4, -0.0199999996f, arg1 i+ 0x178, &var_c)
-1001c61d  data_1006c224(3)
+1001c61d  gi.WriteByte(3)
 1001c62e  int32_t eax_14 = *(arg1 i+ 0x268)
 1001c634  int32_t __saved_ebx_1
 1001c634  
@@ -4355,9 +4355,9 @@
 1001c638  else
 1001c63a      __saved_ebx_1 = 0x12
 1001c63a  
-1001c64c  data_1006c224(__saved_ebx_1)
-1001c65a  data_1006c238(&var_c)
-1001c663  data_1006c218(arg1 i+ 4, 1)
+1001c64c  gi.WriteByte(__saved_ebx_1)
+1001c65a  gi.WritePosition(&var_c)
+1001c663  gi.multicast(arg1 i+ 4, 1)
 1001c677  return sub_1001b400(arg1)
 
 1001c678                                                                          90 90 90 90 90 90 90 90                          ........
@@ -4398,7 +4398,7 @@
 1001c6f0      else
 1001c6f2          var_14 = "weapons/hgrenb1a.wav"
 1001c6f2  
-1001c715  return data_1006c1d0(arg1, 2, data_1006c1e4(var_14, 0x3f800000, 0x3f800000, 0))
+1001c715  return gi.sound(arg1, 2, gi.soundindex(var_14, 0x3f800000, 0x3f800000, 0))
 
 1001c73a                                                                                90 90 90 90 90 90                            ......
 
@@ -4443,7 +4443,7 @@
 1001c848  *(eax + 0xf8) = 2
 1001c85a  *(eax + 0x40) = edi_1 | 0x20
 1001c86b  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001c891  *(eax + 0x28) = data_1006c1e0("models/objects/grenade2/tris.md2")
+1001c891  *(eax + 0x28) = gi.modelindex("models/objects/grenade2/tris.md2")
 1001c898  *(eax + 0x100) = arg1
 1001c89e  *(eax + 0x1fc) = sub_1001c680
 1001c8ae  long double x87_r7_13 = fconvert.t(data_1006c2e4) + fconvert.t(arg6)
@@ -4461,7 +4461,7 @@
 1001c904  long double x87_r7_14 = fconvert.t(arg6)
 1001c908  long double temp0 = fconvert.t(0.0)
 1001c908  x87_r7_14 - temp0
-1001c90e  *(eax + 0x4c) = data_1006c1e4("weapons/hgrenc1b.wav")
+1001c90e  *(eax + 0x4c) = gi.soundindex("weapons/hgrenc1b.wav")
 1001c914  int32_t eax_9
 1001c914  eax_9.w = (x87_r7_14 < temp0 ? 1 : 0) << 8
 1001c914      | (is_unordered.t(x87_r7_14, temp0) ? 1 : 0) << 0xa
@@ -4470,8 +4470,8 @@
 1001c919  if ((eax_9:1.b & 0x41) != 0)
 1001c92a      return sub_1001c4a0(eax)
 1001c92a  
-1001c948  data_1006c1d0(arg1, 1, data_1006c1e4("weapons/hgrent1a.wav", 0x3f800000, 0x3f800000, 0))
-1001c95e  return data_1006c208(eax)
+1001c948  gi.sound(arg1, 1, gi.soundindex("weapons/hgrent1a.wav", 0x3f800000, 0x3f800000, 0))
+1001c95e  return gi.linkentity(eax)
 
 1001c95f                                                                                               90                                 .
 
@@ -4528,7 +4528,7 @@
 1001ca7b  float var_2c_4 = ecx_6
 1001ca81  sub_10006860(arg1, *(arg1 i+ 0x100), fconvert.s(float.t(*(arg1 i+ 0x248))), arg2, ecx_6, 
 1001ca81      9)
-1001ca88  data_1006c224(3)
+1001ca88  gi.WriteByte(3)
 1001ca99  int32_t var_20_4
 1001ca99  
 1001ca99  if (*(arg1 i+ 0x2a8) == 0)
@@ -4536,9 +4536,9 @@
 1001ca99  else
 1001ca9b      var_20_4 = 0x11
 1001ca9b  
-1001caa1  data_1006c224(var_20_4)
-1001caaf  data_1006c238(&var_c)
-1001cab8  data_1006c218(arg1 i+ 4, 1)
+1001caa1  gi.WriteByte(var_20_4)
+1001caaf  gi.WritePosition(&var_c)
+1001cab8  gi.multicast(arg1 i+ 4, 1)
 1001cabf  return sub_1001b400(arg1)
 
 1001cacf                                               90                                                                 .
@@ -4562,7 +4562,7 @@
 1001cb4d  *(eax + 0xfc) = 0x6000003
 1001cb57  *(eax + 0xf8) = 2
 1001cb6d  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001cb8b  *(eax + 0x28) = data_1006c1e0("models/objects/rocket/tris.md2")
+1001cb8b  *(eax + 0x28) = gi.modelindex("models/objects/rocket/tris.md2")
 1001cb92  *(eax + 0x100) = arg1
 1001cbaa  *(eax + 0x1fc) = sub_1001c960
 1001cbc5  long double x87_r7_2 = float.t(divs.dp.d(0x1f40, arg5)) + fconvert.t(data_1006c2e4)
@@ -4571,13 +4571,13 @@
 1001cbdb  *(eax + 0x248) = arg7
 1001cbe1  *(eax + 0x24c) = arg6
 1001cbe7  *(eax + 0x1ec) = fconvert.s(x87_r7_2)
-1001cbf3  *(eax + 0x4c) = data_1006c1e4("weapons/rockfly.wav")
+1001cbf3  *(eax + 0x4c) = gi.soundindex("weapons/rockfly.wav")
 1001cbfa  *(eax + 0x118) = "rocket"
 1001cbfa  
 1001cc0a  if (*(arg1 + 0x54) != 0)
 1001cc14      sub_1001c1c0(arg1, eax + 4, arg3, arg5)
 1001cc14  
-1001cc2a  return data_1006c208(eax)
+1001cc2a  return gi.linkentity(eax)
 
 1001cc2b                                   90 90 90 90 90                                                             .....
 
@@ -4660,13 +4660,13 @@
 1001ce72  *(eax + 0xfc) = 0x6000003
 1001ce7c  *(eax + 0xf8) = 2
 1001ce92  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001ceb8  *(eax + 0x28) = data_1006c1e0("models/objects/rocket/tris.md2")
+1001ceb8  *(eax + 0x28) = gi.modelindex("models/objects/rocket/tris.md2")
 1001cec4  *(eax + 0x100) = arg1
 1001ceca  *(eax + 0x1fc) = sub_1001c960
 1001ced4  *(eax + 0x244) = arg4
 1001ceda  *(eax + 0x248) = arg7
 1001cee0  *(eax + 0x24c) = arg6
-1001ceec  *(eax + 0x4c) = data_1006c1e4("weapons/rockfly.wav")
+1001ceec  *(eax + 0x4c) = gi.soundindex("weapons/rockfly.wav")
 1001ceef  *(eax + 0x118) = "rocket"
 1001cef9  int32_t edx_5 = data_1006c2e4
 1001ceff  *(eax + 0x1f4) = sub_1001cc30
@@ -4676,7 +4676,7 @@
 1001cf27  if (*(arg1 + 0x54) != 0)
 1001cf34      sub_1001c1c0(arg1, eax + 4, arg3, arg5)
 1001cf34  
-1001cf4a  return data_1006c208(eax)
+1001cf4a  return gi.linkentity(eax)
 
 1001cf4b                                   90 90 90 90 90                                                             .....
 
@@ -4704,7 +4704,7 @@
 1001cfde          void var_7c
 1001cfde          void var_38
 1001cfde          __builtin_memcpy(dest: &var_7c, 
-1001cfde              src: data_1006c1f0(&var_38, &var_88, var_b4, var_b0_1, var_ac_1, i, var_90), 
+1001cfde              src: gi.trace(&var_38, &var_88, var_b4, var_b0_1, var_ac_1, i, var_90), 
 1001cfde              n: 0x38)
 1001cfe5          char var_4c
 1001cfe5          
@@ -4738,22 +4738,22 @@
 1001d077      
 1001d07d      esi = arg2
 1001d07d  
-1001d087  data_1006c224(3)
-1001d08f  data_1006c224(3)
-1001d096  data_1006c238(esi)
-1001d0a1  data_1006c238(&var_70)
+1001d087  gi.WriteByte(3)
+1001d08f  gi.WriteByte(3)
+1001d096  gi.WritePosition(esi)
+1001d0a1  gi.WritePosition(&var_70)
 1001d0aa  int32_t var_b0_3 = 1
 1001d0ac  var_b4 = arg1 + 4
-1001d0ad  data_1006c218(var_b4, var_b0_3)
+1001d0ad  gi.multicast(var_b4, var_b0_3)
 1001d0ad  
 1001d0bc  if (var_8c != 0)
-1001d0c0      data_1006c224(3)
-1001d0c8      data_1006c224(3)
-1001d0cf      data_1006c238(esi)
-1001d0da      data_1006c238(&var_70)
+1001d0c0      gi.WriteByte(3)
+1001d0c8      gi.WriteByte(3)
+1001d0cf      gi.WritePosition(esi)
+1001d0da      gi.WritePosition(&var_70)
 1001d0e4      int32_t var_b0_4 = 1
 1001d0e6      var_b4 = &var_70
-1001d0e7      data_1006c218(var_b4, var_b0_4)
+1001d0e7      gi.multicast(var_b4, var_b0_4)
 1001d0e7  
 1001d0f0  void* result = *(arg1 + 0x54)
 1001d0f0  
@@ -4787,10 +4787,10 @@
 1001d22f              if (i == *(edi i+ 0x100))
 1001d23b                  arg1 = fconvert.s(fconvert.t(arg1) * fconvert.t(0.5))
 1001d23b              
-1001d241              data_1006c224(3)
-1001d249              data_1006c224(0x14)
-1001d250              data_1006c238(i + 4)
-1001d259              data_1006c218(i + 4, 1)
+1001d241              gi.WriteByte(3)
+1001d249              gi.WriteByte(0x14)
+1001d250              gi.WritePosition(i + 4)
+1001d259              gi.multicast(i + 4, 1)
 1001d269              int16_t x87control
 1001d269              int32_t eax_7 = __ftol(x87control, fconvert.t(arg1))
 1001d285              x87control = sub_100060d0(i, edi, *(edi i+ 0x100), edi i+ 0x178, i + 4, 
@@ -4826,14 +4826,14 @@
 1001d354          0, 0xd)
 1001d354  
 1001d372  sub_10006860(arg1, *(arg1 i+ 0x100), 200f, arg2, 100f, 0xd)
-1001d397  data_1006c1d0(arg1, 2, data_1006c1e4("weapons/bfg__x1b.wav", 0x3f800000, 0x3f800000, 0))
+1001d397  gi.sound(arg1, 2, gi.soundindex("weapons/bfg__x1b.wav", 0x3f800000, 0x3f800000, 0))
 1001d3ae  *(arg1 i+ 0xf8) = 0
 1001d3b4  *(arg1 i+ 0x1fc) = 0
 1001d3ba  sub_10038950(arg1 i+ 4, -0.100000001f, arg1 i+ 0x178, arg1 i+ 4)
 1001d3c4  *(arg1 i+ 0x180) = 0
 1001d3ca  *(arg1 i+ 0x17c) = 0
 1001d3d0  *(arg1 i+ 0x178) = 0
-1001d3d2  int32_t eax_4 = data_1006c1e0("sprites/s_bfg3.sp2")
+1001d3d2  int32_t eax_4 = gi.modelindex("sprites/s_bfg3.sp2")
 1001d3df  int32_t ebx_2
 1001d3df  ebx_2:1.b = (*(arg1 i+ 0x40)):1.b & 0xdf
 1001d3e2  *(arg1 i+ 0x28) = eax_4
@@ -4844,10 +4844,10 @@
 1001d3fe  long double x87_r7_2 = fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001)
 1001d406  *(arg1 i+ 0x25c) = arg2
 1001d40c  *(arg1 i+ 0x1ec) = fconvert.s(x87_r7_2)
-1001d412  data_1006c224(3)
-1001d41a  data_1006c224(0x15)
-1001d421  data_1006c238(arg1 i+ 4)
-1001d42a  return data_1006c218(arg1 i+ 4, 2)
+1001d412  gi.WriteByte(3)
+1001d41a  gi.WriteByte(0x15)
+1001d421  gi.WritePosition(arg1 i+ 4)
+1001d42a  return gi.multicast(arg1 i+ 4, 2)
 
 1001d438                                                                          90 90 90 90 90 90 90 90                          ........
 
@@ -4927,7 +4927,7 @@
 1001d5b1                      void var_7c
 1001d5b1                      void var_38
 1001d5b1                      __builtin_memcpy(dest: &var_7c, 
-1001d5b1                          src: data_1006c1f0(&var_38, &var_a0, 0, 0, &var_44, esi_2, 
+1001d5b1                          src: gi.trace(&var_38, &var_a0, 0, 0, &var_44, esi_2, 
 1001d5b1                              0x6000001), 
 1001d5b1                          n: 0x38)
 1001d5b3                      int32_t var_48
@@ -4945,14 +4945,14 @@
 1001d5fe                              eax_10 = var_48
 1001d5fe                      
 1001d616                      if ((*(eax_10 + 0xb8) & 4) == 0 && *(eax_10 + 0x54) == 0)
-1001d639                          data_1006c224(3)
-1001d641                          data_1006c224(0xf)
-1001d649                          data_1006c224(4)
-1001d654                          data_1006c238(&var_70)
+1001d639                          gi.WriteByte(3)
+1001d641                          gi.WriteByte(0xf)
+1001d649                          gi.WriteByte(4)
+1001d654                          gi.WritePosition(&var_70)
 1001d65f                          void var_64
-1001d65f                          data_1006c23c(&var_64)
-1001d669                          data_1006c224(*(arg1 + 0x3c))
-1001d676                          data_1006c218(&var_70, 2)
+1001d65f                          gi.WriteDir(&var_64)
+1001d669                          gi.WriteByte(*(arg1 + 0x3c))
+1001d676                          gi.multicast(&var_70, 2)
 1001d67c                          break
 1001d67c                      
 1001d620                      esi_2 = eax_10
@@ -4962,11 +4962,11 @@
 1001d62e                      int32_t var_68
 1001d62e                      int32_t var_98_2 = var_68
 1001d62e                  
-1001d681                  data_1006c224(3)
-1001d689                  data_1006c224(0x17)
-1001d693                  data_1006c238(arg1 + 4)
-1001d69e                  data_1006c238(&var_70)
-1001d6a7                  data_1006c218(arg1 + 4, 1)
+1001d681                  gi.WriteByte(3)
+1001d689                  gi.WriteByte(0x17)
+1001d693                  gi.WritePosition(arg1 + 4)
+1001d69e                  gi.WritePosition(&var_70)
+1001d6a7                  gi.multicast(arg1 + 4, 1)
 1001d6a7          
 1001d6bf          ebx = sub_1001aca0(ebx, arg1 + 4, 256f)
 1001d6bf          
@@ -4996,7 +4996,7 @@
 1001d770  *(eax + 0xfc) = 0x6000003
 1001d77a  *(eax + 0xf8) = 2
 1001d790  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001d7ae  *(eax + 0x28) = data_1006c1e0("sprites/s_bfg1.sp2")
+1001d7ae  *(eax + 0x28) = gi.modelindex("sprites/s_bfg1.sp2")
 1001d7b5  *(eax + 0x100) = arg1
 1001d7cd  *(eax + 0x1fc) = sub_1001d2e0
 1001d7e4  long double x87_r7_2 = float.t(divs.dp.d(0x1f40, arg5)) + fconvert.t(data_1006c2e4)
@@ -5005,7 +5005,7 @@
 1001d7fa  *(eax + 0x24c) = arg6
 1001d800  *(eax + 0x118) = "bfg blast"
 1001d80a  *(eax + 0x1ec) = fconvert.s(x87_r7_2)
-1001d816  *(eax + 0x4c) = data_1006c1e4("weapons/bfg__l1a.wav")
+1001d816  *(eax + 0x4c) = gi.soundindex("weapons/bfg__l1a.wav")
 1001d81d  *(eax + 0x1f4) = sub_1001d440
 1001d830  long double x87_r7_4 = fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001)
 1001d836  *(eax + 0x274) = eax
@@ -5015,7 +5015,7 @@
 1001d84b  if (*(arg1 + 0x54) != 0)
 1001d855      sub_1001c1c0(arg1, eax + 4, arg3, arg5)
 1001d855  
-1001d86b  return data_1006c208(eax)
+1001d86b  return gi.linkentity(eax)
 
 1001d86c                                      90 90 90 90                                                              ....
 
@@ -5066,7 +5066,7 @@
 1001d9b0  *(esi + 0xcc) = 0x40000000
 1001d9b6  *(esi + 0xd0) = 0x40000000
 1001d9c2  int32_t edi_1 = arg1
-1001d9c9  *(esi + 0x28) = data_1006c1e0("models/objects/mine/tris.md2")
+1001d9c9  *(esi + 0x28) = gi.modelindex("models/objects/mine/tris.md2")
 1001d9e2  *(esi + 0x100) = edi_1
 1001d9e8  *(esi + 0x1fc) = sub_1001ded0
 1001d9f2  *(esi + 0x1ec) = 0
@@ -5079,8 +5079,8 @@
 1001da38  *(esi + 0x248) = 0x64
 1001da42  *(esi + 0x224) = 0xa
 1001da48  *(esi + 0x220) = 0xa
-1001da5b  data_1006c1d0(edi_1, 1, data_1006c1e4("weapons/hgrent1a.wav", 0x3f800000, 0x3f800000, 0))
-1001da62  data_1006c208(esi)
+1001da5b  gi.sound(edi_1, 1, gi.soundindex("weapons/hgrent1a.wav", 0x3f800000, 0x3f800000, 0))
+1001da62  gi.linkentity(esi)
 1001da71  *(esi + 0x120) = data_1006c2e4
 1001da7c  void* edx_3 = data_1006c2c4
 1001da82  arg3 = 0
@@ -5169,7 +5169,7 @@
 1001db87  sub_10006860(arg1, ecx_1, fconvert.s(x87_r7), 0, eax, 0x2a)
 1001db9b  float var_c
 1001db9b  sub_10038950(arg1 i+ 4, -0.0199999996f, arg1 i+ 0x178, &var_c)
-1001dba2  data_1006c224(3)
+1001dba2  gi.WriteByte(3)
 1001dbb3  int32_t eax_2 = *(arg1 i+ 0x268)
 1001dbb9  int32_t var_1c
 1001dbb9  
@@ -5183,9 +5183,9 @@
 1001dbbd  else
 1001dbbf      var_1c = 0x12
 1001dbbf  
-1001dbd1  data_1006c224(var_1c)
-1001dbdf  data_1006c238(&var_c)
-1001dbe8  data_1006c218(arg1 i+ 4, 2)
+1001dbd1  gi.WriteByte(var_1c)
+1001dbdf  gi.WritePosition(&var_c)
+1001dbe8  gi.multicast(arg1 i+ 4, 2)
 1001dbfd  return sub_1001b400(arg1)
 
 1001dbfe                                                                                            90 90                                ..
@@ -5230,7 +5230,7 @@
 1001dcd2  *(arg1 + 0x254) = 0
 1001dcd8  *(arg1 + 0x1f4) = sub_1001dd00
 1001dce2  *(arg1 + 0x1ec) = fconvert.s(x87_r7_1)
-1001dce8  int32_t result = data_1006c1e4("weapons/hgrenc1b.wav")
+1001dce8  int32_t result = gi.soundindex("weapons/hgrenc1b.wav")
 1001dcf1  *(arg1 + 0x4c) = result
 1001dcf6  return result
 
@@ -5289,7 +5289,7 @@
 1001de10          *(eax_2 + 0x118) = "mine laser"
 1001de1a          *(ebp_1 + 0x258) = eax_2
 1001de20          sub_10018830(eax_2)
-1001de26          data_1006c208(eax_2)
+1001de26          gi.linkentity(eax_2)
 1001de33          cond:2_1 = arg1 != 1
 1001de34          ebp_1 = eax_2
 1001de36          arg1 -= 1
@@ -5317,7 +5317,7 @@
 
 1001ded0    int32_t sub_1001ded0(void* arg1, int32_t arg2)
 
-1001def5  data_1006c1d0(arg1, 2, data_1006c1e4("weapons/hgrenb1a.wav", 0x3f800000, 0x3f800000, 0))
+1001def5  gi.sound(arg1, 2, gi.soundindex("weapons/hgrenb1a.wav", 0x3f800000, 0x3f800000, 0))
 1001df0e  bool cond:0 = *(arg2 + 0x240) != 2
 1001df15  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
 1001df15  
@@ -5353,18 +5353,18 @@
 1001dfb7  if (*(result + 0x54) != 0)
 1001dfc0      sub_100350a0(result, arg1 + 4, 2)
 1001dfc0  
-1001dfe7  data_1006c1d0(arg1, 2, data_1006c1e4("deatom/dimpact.wav", 0x3f800000, 0x3f800000, 0))
+1001dfe7  gi.sound(arg1, 2, gi.soundindex("deatom/dimpact.wav", 0x3f800000, 0x3f800000, 0))
 1001dfe7  
 1001dffc  if (*(arg2 + 0x240) != 0)
 1001e020      sub_100060d0(arg2, arg1, *(arg1 + 0x100), arg1 + 0x178, arg1 + 4, arg3, 
 1001e020          *(arg1 + 0x244), 1, 4, 0x23)
 1001e020  
 1001e02e  if (arg2 == data_1006c2c4)
-1001e032      data_1006c224(3)
-1001e03a      data_1006c224(0x37)
-1001e044      data_1006c238(arg1 + 4)
-1001e04b      data_1006c23c(arg3)
-1001e054      data_1006c218(arg1 + 4, 2)
+1001e032      gi.WriteByte(3)
+1001e03a      gi.WriteByte(0x37)
+1001e044      gi.WritePosition(arg1 + 4)
+1001e04b      gi.WriteDir(arg3)
+1001e054      gi.multicast(arg1 + 4, 2)
 1001e054  
 1001e05e  return sub_1001b400(arg1)
 
@@ -5463,8 +5463,8 @@
 1001e2e9  *(eax + 0x104) = 8
 1001e2f3  *(eax + 0xfc) = 0x6000003
 1001e309  __builtin_memset(s: eax + 0xbc, c: 0, n: 0x18)
-1001e32c  *(eax + 0x28) = data_1006c1e0(var_70)
-1001e33c  *(eax + 0x4c) = data_1006c1e4("deatom/dfly.wav")
+1001e32c  *(eax + 0x28) = gi.modelindex(var_70)
+1001e33c  *(eax + 0x4c) = gi.soundindex("deatom/dfly.wav")
 1001e344  *(eax + 0x40) = 0x40080000
 1001e34b  *(eax + 0x44) = 0x1008
 1001e352  *(eax + 0xf8) = 2
@@ -5473,10 +5473,10 @@
 1001e365  *(eax + 0x1fc) = sub_1001df80
 1001e36f  *(eax + 0x244) = arg4
 1001e375  *(eax + 0x118) = "deatom_bolt"
-1001e37f  data_1006c208(eax)
+1001e37f  gi.linkentity(eax)
 1001e3af  void var_38
 1001e3af  __builtin_memcpy(dest: &var_38, 
-1001e3af      src: data_1006c1f0(&var_38, arg1 i+ 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
+1001e3af      src: gi.trace(&var_38, arg1 i+ 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
 1001e3b1  float var_30
 1001e3b1  long double x87_r7_2 = fconvert.t(var_30)
 1001e3b5  long double temp0 = fconvert.t(1.0)
@@ -5578,7 +5578,7 @@
 1001e574      else
 1001e576          var_18_1 = "plasma2/hit.wav"
 1001e576      
-1001e58f      data_1006c1d0(arg1, 2, data_1006c1e4(var_18_1, 0x3f800000, 0x3f800000, 0))
+1001e58f      gi.sound(arg1, 2, gi.soundindex(var_18_1, 0x3f800000, 0x3f800000, 0))
 1001e58f      
 1001e5a0      if (*(arg2 + 0x240) != 0)
 1001e5b2          int32_t eax_3
@@ -5587,9 +5587,9 @@
 1001e5d3              *(arg1 + 0x244), 1, 4, eax_3)
 1001e5e6          return sub_1001b400(arg1)
 1001e5e6      
-1001e5e9      data_1006c224(3)
-1001e5f1      data_1006c224(0x1e)
-1001e5fb      data_1006c238(arg1 + 4)
+1001e5e9      gi.WriteByte(3)
+1001e5f1      gi.WriteByte(0x1e)
+1001e5fb      gi.WritePosition(arg1 + 4)
 1001e60a      int32_t* var_c_3
 1001e60a      
 1001e60a      if (arg3 != 0)
@@ -5597,8 +5597,8 @@
 1001e60a      else
 1001e60c          var_c_3 = &data_10061c18
 1001e60c      
-1001e614      data_1006c23c(var_c_3)
-1001e620      data_1006c218(arg1 + 4, 2)
+1001e614      gi.WriteDir(var_c_3)
+1001e620      gi.multicast(arg1 + 4, 2)
 1001e620  
 1001e62a  return sub_1001b400(arg1)
 
@@ -5634,8 +5634,8 @@
 1001e70e  else
 1001e710      var_4c_2 = "models/objects/plasma/tris.md2"
 1001e710  
-1001e725  *(eax + 0x28) = data_1006c1e0(var_4c_2)
-1001e737  *(eax + 0x4c) = data_1006c1e4("misc/lasfly.wav")
+1001e725  *(eax + 0x28) = gi.modelindex(var_4c_2)
+1001e737  *(eax + 0x4c) = gi.soundindex("misc/lasfly.wav")
 1001e73e  *(eax + 0x100) = arg1
 1001e744  *(eax + 0x1fc) = sub_1001e520
 1001e757  long double x87_r7_3 = fconvert.t(data_1006c2e4) + fconvert.t(4f)
@@ -5647,7 +5647,7 @@
 1001e783  if (arg6 != 0)
 1001e785      *(eax + 0x11c) = 1
 1001e785  
-1001e790  data_1006c208(eax)
+1001e790  gi.linkentity(eax)
 1001e796  void* eax_8 = arg1
 1001e796  
 1001e7a0  if (*(eax_8 + 0x54) != 0)
@@ -5656,7 +5656,7 @@
 1001e7af  
 1001e7dc  void var_38
 1001e7dc  __builtin_memcpy(dest: &var_38, 
-1001e7dc      src: data_1006c1f0(&var_38, eax_8 + 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
+1001e7dc      src: gi.trace(&var_38, eax_8 + 4, 0, 0, eax + 4, eax, 0x6000003), n: 0x38)
 1001e7de  float var_30
 1001e7de  long double x87_r7_4 = fconvert.t(var_30)
 1001e7e2  long double temp0 = fconvert.t(1.0)
@@ -5689,7 +5689,7 @@
 1001e871      *(arg1 i+ 0x25c), *(arg1 i+ 0x24c), 0x26)
 1001e88b  float var_c
 1001e88b  sub_10038950(arg1 i+ 4, -0.0199999996f, arg1 i+ 0x178, &var_c)
-1001e892  data_1006c224(3)
+1001e892  gi.WriteByte(3)
 1001e8a3  int32_t eax_4 = *(arg1 i+ 0x268)
 1001e8a9  int32_t var_18
 1001e8a9  
@@ -5703,9 +5703,9 @@
 1001e8ad  else
 1001e8af      var_18 = 0x12
 1001e8af  
-1001e8c1  data_1006c224(var_18)
-1001e8cf  data_1006c238(&var_c)
-1001e8d8  data_1006c218(arg1 i+ 4, 1)
+1001e8c1  gi.WriteByte(var_18)
+1001e8cf  gi.WritePosition(&var_c)
+1001e8d8  gi.multicast(arg1 i+ 4, 1)
 1001e8ec  return sub_1001b400(arg1)
 
 1001e8ed                                         90 90 90                                                               ...
@@ -5755,7 +5755,7 @@
 1001ea69  long double x87_r7_17 = fconvert.t(arg7)
 1001ea70  long double temp0 = fconvert.t(0f)
 1001ea70  x87_r7_17 - temp0
-1001ea7a  *(esi + 0x28) = data_1006c1e0("models/objects/detpack/tris.md2")
+1001ea7a  *(esi + 0x28) = gi.modelindex("models/objects/detpack/tris.md2")
 1001ea80  *(esi + 0x100) = arg1
 1001ea86  *(esi + 0x1fc) = sub_1001ebf0
 1001ea90  int32_t eax_8
@@ -5773,7 +5773,7 @@
 1001eac9  *(esi + 0x24c) = arg5
 1001eacf  *(esi + 0x118) = "detpack"
 1001eae0  *(esi + 0x120) = data_1006c2e4
-1001eae6  data_1006c208(esi)
+1001eae6  gi.linkentity(esi)
 1001eaf1  void* edx_4 = data_1006c2c4
 1001eaf7  void* ebp = edx_4
 1001eaff  arg7 = 0f
@@ -5880,7 +5880,7 @@
 1001ec7a          int32_t var_8_1 = edx
 1001ec87          int32_t var_4_1 = eax_3
 1001ec8b          sub_1001b1e0(&var_c, arg1 + 0x10)
-1001ec91          data_1006c208(arg1)
+1001ec91          gi.linkentity(arg1)
 
 1001ec9f                                                                                               90                                 .
 
@@ -5949,7 +5949,7 @@
 1001ede3  *(eax + 0x104) = 6
 1001eded  *(eax + 0xf8) = 2
 1001edf7  *(eax + 0x240) = 0
-1001ee19  *(eax + 0x28) = data_1006c1e0("models/objects/dod/tris.md2")
+1001ee19  *(eax + 0x28) = gi.modelindex("models/objects/dod/tris.md2")
 1001ee1c  *(eax + 0x38) = 0
 1001ee1f  *(eax + 0x44) = 8
 1001ee26  *(eax + 0x100) = arg1
@@ -5959,8 +5959,8 @@
 1001ee5f  *(eax + 0x1ec) = fconvert.s(x87_r7_1)
 1001ee65  *(eax + 0x24c) = 0x42800000
 1001ee6f  *(eax + 0x118) = &data_1004c128
-1001ee86  data_1006c1d0(arg1, 2, data_1006c1e4("dod/dod.wav", 0x3f800000, 0x3f800000, 0))
-1001ee8d  int32_t result = data_1006c208(eax)
+1001ee86  gi.sound(arg1, 2, gi.soundindex("dod/dod.wav", 0x3f800000, 0x3f800000, 0))
+1001ee8d  int32_t result = gi.linkentity(eax)
 1001ee93  void* ebx_1 = *(arg1 + 0x54)
 1001ee93  
 1001ee9b  if (ebx_1 != 0)
@@ -6083,7 +6083,7 @@
 1001f065              if (edx_5 s< 0)
 1001f06b                  edx_5 = ((edx_5 - 1) | 0xfffffff8) + 1
 1001f06b              
-1001f09e              return data_1006c1c8(arg2, 3, "%s: %s!\n", (&data_1004c158)[edx_5], 
+1001f09e              return gi.cprintf(arg2, 3, "%s: %s!\n", (&data_1004c158)[edx_5], 
 1001f09e                  (&data_1004c658)[mods.dp.d(sx.q(sub_10038fc0()), 3)])
 1001f09e      
 1001f0a4      int32_t eax_11
@@ -6334,7 +6334,7 @@
 1001f57f          n: 0x18)
 1001f5ab      *(arg1 + 0xb8) = edx_6
 1001f5b1      *(arg1 + 0x1ec) = 0
-1001f5c7      return data_1006c208(arg1)
+1001f5c7      return gi.linkentity(arg1)
 1001f5c7  
 1001f5c8  int32_t edx_7 = *(arg1 + 0x128)
 1001f5ce  *(arg1 + 0x204) = sub_1001ef70
@@ -6356,7 +6356,7 @@
 1001f643  int32_t eax_9
 1001f643  eax_9:1.b = (*(arg1 + 0x35c)):1.b | 1
 1001f646  *(arg1 + 0x35c) = eax_9
-1001f64c  data_1006c208(arg1)
+1001f64c  gi.linkentity(arg1)
 1001f653  *(arg1 + 0x358) = 0x1004c358
 1001f65d  *(arg1 + 0x364) = 0x3f800000
 1001f667  sub_10012b30(arg1)
@@ -6393,7 +6393,7 @@
 1001f71f                      if (edx_4 s< 0)
 1001f725                          edx_4 = ((edx_4 - 1) | 0xfffffff8) + 1
 1001f725                      
-1001f736                      data_1006c1c8(ebx_1 + eax_1, 3, "%s: %s\n", (&data_1004c158)[edx_4], 
+1001f736                      gi.cprintf(ebx_1 + eax_1, 3, "%s: %s\n", (&data_1004c158)[edx_4], 
 1001f736                          *(arg1 + 0x114))
 1001f73c                      eax_1 = data_1006c2c4
 1001f73c                  
@@ -6412,8 +6412,8 @@
 1001f793          if (not(cond:1_1))
 1001f797              *(esi + 0x268) = 0
 1001f7b6              *(esi + 0x180) = *(arg1 + 0x15c)
-1001f7c9              data_1006c1d0(esi, 2, 
-1001f7c9                  data_1006c1e4("player/male/jump1.wav", 0x3f800000, 0x3f800000, 0))
+1001f7c9              gi.sound(esi, 2, 
+1001f7c9                  gi.soundindex("player/male/jump1.wav", 0x3f800000, 0x3f800000, 0))
 1001f7c9      
 1001f7d9      if ((*(arg1 + 0x11c) & 6) != 0)
 1001f7e2          int32_t eax_8 = sub_1001ad80(*(arg1 + 0x138))
@@ -6509,7 +6509,7 @@
 1001f9da      sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
 1001f9e8      *(arg1 + 0x15c) = fconvert.s(float.t(data_1006c2a0))
 1001f9e8  
-1001f9f9  return data_1006c208(arg1)
+1001f9f9  return gi.linkentity(arg1)
 
 1001f9fa                                                                                90 90 90 90 90 90                            ......
 
@@ -6520,7 +6520,7 @@
 1001fa0f  else
 1001fa11      *(arg1 + 0x358) = 0x1004c8f0
 1001fa11  
-1001fa45  return data_1006c1d0(arg1, 2, data_10060ff4, 0x3f800000, 0x3f800000, 0)
+1001fa45  return gi.sound(arg1, 2, data_10060ff4, 0x3f800000, 0x3f800000, 0)
 
 1001fa46                    90 90 90 90 90 90 90 90 90 90                                                        ..........
 
@@ -6663,10 +6663,10 @@
 
 1001fd40    int32_t sub_1001fd40(float arg1)
 
-1001fd44  data_1006c224(3)
-1001fd4c  data_1006c224(5)
-1001fd5a  data_1006c238(arg1 i+ 4)
-1001fd63  data_1006c218(arg1 i+ 4, 2)
+1001fd44  gi.WriteByte(3)
+1001fd4c  gi.WriteByte(5)
+1001fd5a  gi.WritePosition(arg1 i+ 4)
+1001fd63  gi.multicast(arg1 i+ 4, 2)
 1001fd79  sub_10006860(arg1, arg1, 100f, 0, 100f, 0x19)
 1001fd7e  int32_t result = *(arg1 i+ 0x1f4)
 1001fd7e  
@@ -6733,7 +6733,7 @@
 1001feef      
 1001fefb      switch (arg1)
 1001ff10          case 0
-1001ff10              *(eax_1 + 0x28) = data_1006c1e0("models/monsters/badass/gib_torso…")
+1001ff10              *(eax_1 + 0x28) = gi.modelindex("models/monsters/badass/gib_torso…")
 1001ff13              __builtin_memcpy(dest: eax_1 + 0xbc, 
 1001ff13                  src: "\x00\x00\x88\xc1\x00\x00\x70\xc1\x00\x00\x48\xc2\x00\x00\x24\x42\x00\x00\xb0\x41\x00\x00\xe8\xc1", 
 1001ff13                  n: 0x18)
@@ -6747,21 +6747,21 @@
 1001ff77                  eax_1 + 0x178)
 1001ff88              sub_10038950(eax_1 + 0x178, 300f, &var_18, eax_1 + 0x178)
 1001ffac          case 1
-1001ffac              *(eax_1 + 0x28) = data_1006c1e0("models/monsters/badass/gib_lleg.…")
+1001ffac              *(eax_1 + 0x28) = gi.modelindex("models/monsters/badass/gib_lleg.…")
 1001ffaf              __builtin_memcpy(dest: eax_1 + 0xbc, 
 1001ffaf                  src: "\x00\x00\x0c\xc2\x00\x00\x80\x3f\x00\x00\x38\xc2\x00\x00\x3c\x42\x00\x00\x54\x42\x00\x00\xb0\xc1", 
 1001ffaf                  n: 0x18)
 1001ffeb              sub_10038950(eax_1 + 0x178, 200f, &var_18, eax_1 + 0x178)
 1001fffc              sub_10038950(eax_1 + 0x178, -200f, &var_24, eax_1 + 0x178)
 10020014          case 2
-10020014              *(eax_1 + 0x28) = data_1006c1e0("models/monsters/badass/gib_rleg.…")
+10020014              *(eax_1 + 0x28) = gi.modelindex("models/monsters/badass/gib_rleg.…")
 10020023              __builtin_memcpy(dest: eax_1 + 0xbc, 
 10020023                  src: "\x00\x00\x08\xc2\x00\x00\x4c\xc2\x00\x00\x30\xc2\x00\x00\x40\x42\x00\x00\x80\xbf\x00\x00\xa8\xc1", 
 10020023                  n: 0x18)
 1002005f              sub_10038950(eax_1 + 0x178, 200f, &var_18, eax_1 + 0x178)
 10020070              sub_10038950(eax_1 + 0x178, 200f, &var_24, eax_1 + 0x178)
 10020088          case 3
-10020088              *(eax_1 + 0x28) = data_1006c1e0("models/monsters/badass/gib_larm.…")
+10020088              *(eax_1 + 0x28) = gi.modelindex("models/monsters/badass/gib_larm.…")
 1002009b              __builtin_memcpy(dest: eax_1 + 0xbc, 
 1002009b                  src: "\x00\x00\xe8\xc1\x00\x00\x40\xc1\x00\x00\x04\xc2\x00\x00\xf8\x41\x00\x00\x54\x42\x00\x00\x40\xc1", 
 1002009b                  n: 0x18)
@@ -6776,7 +6776,7 @@
 10020106                  &var_18, eax_1 + 0x178)
 100201b2              sub_10038950(eax_1 + 0x178, -100f, &var_24, eax_1 + 0x178)
 10020131          case 4
-10020131              *(eax_1 + 0x28) = data_1006c1e0("models/monsters/badass/gib_rarm.…")
+10020131              *(eax_1 + 0x28) = gi.modelindex("models/monsters/badass/gib_rarm.…")
 10020134              __builtin_memcpy(dest: eax_1 + 0xbc, 
 10020134                  src: "\x00\x00\x08\xc2\x00\x00\x4c\xc2\x00\x00\x28\xc2\x00\x00\xd0\x41\x00\x00\xf0\xc1\x00\x00\xa8\xc1", 
 10020134                  n: 0x18)
@@ -6791,7 +6791,7 @@
 100201a1                  &var_18, eax_1 + 0x178)
 100201b2              sub_10038950(eax_1 + 0x178, 50f, &var_24, eax_1 + 0x178)
 100201b2      
-100201bb      data_1006c208(eax_1)
+100201bb      gi.linkentity(eax_1)
 100201c9      cond:0_1 = arg1 + 1 s< 5
 100201cc      arg1 += 1
 100201d0  while (cond:0_1)

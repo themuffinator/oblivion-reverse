@@ -12,7 +12,7 @@
 1000d460    int32_t ShutdownGame()
 1000d490    game_export_t* GetGameAPI(game_import_t* import)
 
-1000d4a5  __builtin_memcpy(dest: &data_1006c1c0, src: import, n: 0xb0)
+1000d4a5  __builtin_memcpy(dest: &gi, src: import, n: 0xb0)
 1000d4a8  globals.apiversion = 3
 1000d4b2  globals.Init = InitGame
 1000d4bc  globals.Shutdown = ShutdownGame

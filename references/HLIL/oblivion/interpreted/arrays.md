@@ -6,10 +6,10 @@
 | 0x100001d8 | 0 | mixed | , ".text\x00\x00", 0, , ".rdata\x00", 0, , ".data\x00\x00", 0 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0005_Section_Header.txt |
 | 0x10003190 | 0x10002f8c | uint32_t | 0x10002f8c, 0x10002f8c, 0x10003099, 0x1000310d | references/HLIL/oblivion/split/gamex86.dll_hlil_block0008___builtin_memset.txt |
 | 0x100050b0 | 0x10004fea | uint32_t | 0x10004fea, 0x10005011, 0x10005038, 0x1000505f | references/HLIL/oblivion/split/gamex86.dll_hlil_block0067_block.txt |
-| 0x100141f0 | 0x100141b2 | uint32_t | 0x100141b2, 0x100141bd, 0x100141a7, 0x100141a7, 0x100141de, 0x100141c8 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0091_data_1006c1dc.txt |
+| 0x100141f0 | 0x100141b2 | uint32_t | 0x100141b2, 0x100141bd, 0x100141a7, 0x100141a7, 0x100141de, 0x100141c8 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0091_gi.error.txt |
 | 0x10015d8c | 0x10015d88 | uint32_t | 0x10015d88, 0x10015d88, 0x10015cbb, 0x10015cbb, 0x10015d88, 0x10015d88 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0092_block.txt |
 | 0x10015f08 | 0x10015f05 | uint32_t | 0x10015f05, 0x10015f05, 0x10015e2c, 0x10015ef7, 0x10015f05, 0x10015f05 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0093_block.txt |
-| 0x100169dc | 0x1001697b | uint32_t | 0x1001697b, 0x10016994, 0x1001691b, 0x100168f6, 0x10016934, 0x100169ad | references/HLIL/oblivion/split/gamex86.dll_hlil_block0098_data_1006c1c4.txt |
+| 0x100169dc | 0x1001697b | uint32_t | 0x1001697b, 0x10016994, 0x1001691b, 0x100168f6, 0x10016934, 0x100169ad | references/HLIL/oblivion/split/gamex86.dll_hlil_block0098_gi.dprintf.txt |
 | 0x10020224 | 0x1001ff02 | uint32_t | 0x1001ff02, 0x1001ff95, 0x10020009, 0x1002007d, 0x1002011b | references/HLIL/oblivion/split/gamex86.dll_hlil_block0121_sub_1001b400.txt |
 | 0x1002e63c | 0x1002e4b1 | uint32_t | 0x1002e4b1, 0x1002e50c, 0x1002e526, 0x1002e532, 0x1002e54f, 0x1002e56c … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0197_block.txt |
 | 0x1002fd5c | 0x1002f997 | uint32_t | 0x1002f997, 0x1002f99e, 0x1002f9a5, 0x1002f990, 0x1002f9e2, 0x1002f989 … | references/HLIL/oblivion/split/gamex86.dll_hlil_block0201_block.txt |
