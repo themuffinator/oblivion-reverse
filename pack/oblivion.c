@@ -603,6 +603,7 @@ Only used for the world.
 "sky"	environment map name
 "skyaxis"	vector axis for rotating sky
 "skyrotate"	speed of rotation in degrees/second
+"nextmap"	map to load after completing the level
 "sounds"	music cd track number
 "gravity"	800 is default gravity
 "message"	text to print at user logon

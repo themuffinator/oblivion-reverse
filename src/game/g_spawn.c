@@ -27,6 +27,22 @@ typedef struct
 } spawn_t;
 
 
+static void CopyStringSafe(char *dest, size_t dest_size, const char *src)
+{
+	if (!dest || dest_size == 0)
+		return;
+
+	if (!src)
+	{
+		dest[0] = '\0';
+		return;
+	}
+
+	strncpy(dest, src, dest_size - 1);
+	dest[dest_size - 1] = '\0';
+}
+
+
 void SP_item_health (edict_t *self);
 void SP_item_health_small (edict_t *self);
 void SP_item_health_large (edict_t *self);
@@ -785,21 +801,6 @@ char *dm_statusbar =
 "yt 2 "
 "num 3 14 "
 
-// spectator
-"if 17 "
-  "xv 0 "
-  "yb -58 "
-  "string2 \"SPECTATOR MODE\" "
-"endif "
-
-// chase camera
-"if 16 "
-  "xv 0 "
-  "yb -68 "
-  "string \"Chasing\" "
-  "xv 64 "
-  "stat_string 16 "
-"endif "
 ;
 
 
@@ -809,6 +810,7 @@ Only used for the world.
 "sky"	environment map name
 "skyaxis"	vector axis for rotating sky
 "skyrotate"	speed of rotation in degrees/second
+"nextmap"	map to load after completing the level
 "sounds"	music cd track number
 "gravity"	800 is default gravity
 "message"	text to print at user logon
@@ -828,36 +830,44 @@ void SP_worldspawn (edict_t *ent)
 	// set configstrings for items
 	SetItemNames ();
 
-	if (st.nextmap)
-		strcpy (level.nextmap, st.nextmap);
+        if (st.nextmap && st.nextmap[0])
+                CopyStringSafe(level.nextmap, sizeof(level.nextmap), st.nextmap);
 
-	// make some data visible to the server
+        // make some data visible to the server
 
-	if (ent->message && ent->message[0])
-	{
-		gi.configstring (CS_NAME, ent->message);
-		strncpy (level.level_name, ent->message, sizeof(level.level_name));
-	}
-	else
-		strncpy (level.level_name, level.mapname, sizeof(level.level_name));
+        if (ent->message && ent->message[0])
+        {
+                gi.configstring (CS_NAME, ent->message);
+                CopyStringSafe(level.level_name, sizeof(level.level_name), ent->message);
+        }
+        else
+                CopyStringSafe(level.level_name, sizeof(level.level_name), level.mapname);
 
-	if (st.sky && st.sky[0])
-		gi.configstring (CS_SKY, st.sky);
-	else
-		gi.configstring (CS_SKY, "unit1_");
+        if (st.sky && st.sky[0])
+                gi.configstring (CS_SKY, st.sky);
+        else
+                gi.configstring (CS_SKY, "unit1_");
 
-	gi.configstring (CS_SKYROTATE, va("%f", st.skyrotate) );
+        {
+                char buffer[64];
 
-	gi.configstring (CS_SKYAXIS, va("%f %f %f",
-		st.skyaxis[0], st.skyaxis[1], st.skyaxis[2]) );
+                Com_sprintf(buffer, sizeof(buffer), "%f", st.skyrotate);
+                gi.configstring (CS_SKYROTATE, buffer);
 
-	gi.configstring (CS_CDTRACK, va("%i", ent->sounds) );
+                Com_sprintf(buffer, sizeof(buffer), "%f %f %f",
+                        st.skyaxis[0], st.skyaxis[1], st.skyaxis[2]);
+                gi.configstring (CS_SKYAXIS, buffer);
 
-	gi.configstring (CS_MAXCLIENTS, va("%i", (int)(maxclients->value) ) );
+                Com_sprintf(buffer, sizeof(buffer), "%i", ent->sounds);
+                gi.configstring (CS_CDTRACK, buffer);
 
-	// status bar program
-	if (deathmatch->value)
-		gi.configstring (CS_STATUSBAR, dm_statusbar);
+                Com_sprintf(buffer, sizeof(buffer), "%i", (int)(maxclients->value));
+                gi.configstring (CS_MAXCLIENTS, buffer);
+        }
+
+        // status bar program
+        if (deathmatch->value)
+                gi.configstring (CS_STATUSBAR, dm_statusbar);
 	else
 		gi.configstring (CS_STATUSBAR, single_statusbar);
 
