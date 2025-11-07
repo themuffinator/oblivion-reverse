@@ -518,6 +518,72 @@ void SP_target_blaster (edict_t *self)
 
 //==========================================================
 
+static void target_rocket_fire (edict_t *self)
+{
+	vec3_t	start;
+	vec3_t	forward;
+
+	VectorCopy (self->move_origin, start);
+	AngleVectors (self->move_angles, forward, NULL, NULL);
+
+	fire_rocket (self, start, forward, self->dmg, (int)self->speed,
+		self->dmg_radius, self->count);
+	gi.sound (self, CHAN_VOICE, self->noise_index, 1, ATTN_NORM, 0);
+
+	self->think = NULL;
+	self->nextthink = 0;
+}
+
+static void target_rocket_use (edict_t *self, edict_t *other, edict_t *activator)
+{
+	float	delay;
+
+	self->activator = activator;
+
+	delay = self->wait;
+	if (delay < 0)
+		delay = 0;
+	if (self->random > 0)
+		delay += random() * self->random;
+
+	if (delay <= 0)
+		delay = FRAMETIME;
+
+	self->think = target_rocket_fire;
+	self->nextthink = level.time + delay;
+}
+
+void SP_target_rocket (edict_t *self)
+{
+	self->use = target_rocket_use;
+	G_SetMovedir (self->s.angles, self->movedir);
+	self->noise_index = gi.soundindex ("weapons/rocklf1a.wav");
+
+	if (!self->speed)
+		self->speed = 650;
+	if (!self->dmg)
+		self->dmg = 100 + (int)(random() * 20.0f);
+	if (!self->count)
+		self->count = 120;
+	if (!self->dmg_radius)
+	{
+		if (self->delay > 0)
+		{
+			self->dmg_radius = self->delay;
+			self->delay = 0;
+		}
+		else
+			self->dmg_radius = 120;
+	}
+
+	VectorCopy (self->s.origin, self->move_origin);
+	VectorCopy (self->s.angles, self->move_angles);
+
+	self->svflags = SVF_NOCLIENT;
+}
+
+//==========================================================
+
 /*QUAKED target_crosslevel_trigger (.5 .5 .5) (-8 -8 -8) (8 8 8) trigger1 trigger2 trigger3 trigger4 trigger5 trigger6 trigger7 trigger8
 Once this trigger is touched/used, any trigger_crosslevel_target with the same trigger number is automatically used when a level is started within the same unit.  It is OK to check multiple triggers.  Message, delay, target, and killtarget also work.
 */
