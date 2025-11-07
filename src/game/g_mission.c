@@ -22,17 +22,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <string.h>
 
-#define MISSION_EVENT_UPDATE     0
-#define MISSION_EVENT_START      1
-#define MISSION_EVENT_COMPLETE   2
-#define MISSION_EVENT_CLEAR      3
-#define MISSION_EVENT_FAIL       4
-
-#define MISSION_FLAG_PRIMARY     0x0001
-#define MISSION_FLAG_PERSISTENT  0x0002
-
-#define MISSION_TIMER_TICKS_PER_SECOND ((int)(1.0f / FRAMETIME))
-
 static mission_state_t *MissionState (void)
 {
         return &game.mission;
