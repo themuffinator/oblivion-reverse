@@ -28,18 +28,131 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define ACTOR_SPAWNFLAG_START_ON        32
 #define ACTOR_SPAWNFLAG_WIMPY           64
 
-char *actor_names[MAX_ACTOR_NAMES] =
+ 
+static const char *Actor_FallbackName(edict_t *self)
 {
-	"Hellrot",
-	"Tokay",
-	"Killme",
-	"Disruptor",
-	"Adrianator",
-	"Rambear",
-	"Titus",
-	"Bitterman"
-};
+        static const char *const fallback[MAX_ACTOR_NAMES] =
+        {
+                "Hellrot",
+                "Tokay",
+                "Killme",
+                "Disruptor",
+                "Adrianator",
+                "Rambear",
+                "Titus",
+                "Bitterman"
+        };
+        int index;
 
+        if (!self)
+                return fallback[0];
+
+        index = (int)(self - g_edicts);
+        if (index < 0)
+                index = 0;
+
+        return fallback[index % MAX_ACTOR_NAMES];
+}
+
+static const char *Actor_DisplayName(edict_t *self)
+{
+        if (self && self->oblivion.custom_name && self->oblivion.custom_name[0])
+                return self->oblivion.custom_name;
+
+        return Actor_FallbackName(self);
+}
+
+static void Actor_BroadcastMessage(edict_t *self, const char *message)
+{
+        const char *name;
+        int i;
+
+        if (!self || !message || !message[0])
+                return;
+
+        name = Actor_DisplayName(self);
+
+        for (i = 1; i <= game.maxclients; i++)
+        {
+                edict_t *ent = &g_edicts[i];
+
+                if (!ent->inuse)
+                        continue;
+
+                gi.cprintf(ent, PRINT_CHAT, "%s: %s\n", name, message);
+        }
+}
+
+static void Actor_ConfigureMovementState(edict_t *self)
+{
+        if (!self)
+                return;
+
+        self->movetype = MOVETYPE_STEP;
+        self->solid = SOLID_BBOX;
+        self->clipmask = MASK_MONSTERSOLID;
+        VectorSet(self->mins, -16, -16, -24);
+        VectorSet(self->maxs, 16, 16, 32);
+
+        if (self->spawnflags & ACTOR_SPAWNFLAG_CORPSE)
+        {
+                VectorSet(self->mins, -16, -16, -24);
+                VectorSet(self->maxs, 16, 16, -8);
+                self->health = -1;
+                self->max_health = self->health;
+                self->deadflag = DEAD_DEAD;
+                self->takedamage = DAMAGE_YES;
+                self->svflags |= SVF_DEADMONSTER;
+        }
+
+        self->monsterinfo.currentmove = &actor_move_stand;
+        self->monsterinfo.scale = MODEL_SCALE;
+}
+
+static void Actor_InitMissionTimer(edict_t *self)
+{
+        if (!self)
+                return;
+
+        if (self->oblivion.mission_timer_limit < 0)
+                self->oblivion.mission_timer_limit = 0;
+
+        if (self->oblivion.mission_timer_remaining <= 0
+                && self->oblivion.mission_timer_limit > 0)
+        {
+                self->oblivion.mission_timer_remaining = self->oblivion.mission_timer_limit;
+        }
+}
+
+static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
+{
+        vec3_t dir;
+
+        if (!self)
+                return false;
+
+        self->goalentity = controller;
+        self->movetarget = controller;
+
+        if (!controller || !controller->classname
+                || strcmp(controller->classname, "target_actor") != 0)
+        {
+                self->goalentity = NULL;
+                self->movetarget = NULL;
+                return false;
+        }
+
+        VectorSubtract(controller->s.origin, self->s.origin, dir);
+        self->ideal_yaw = self->s.angles[YAW] = vectoyaw(dir);
+        self->monsterinfo.walk(self);
+
+        self->oblivion.controller = controller;
+        self->oblivion.last_controller = controller;
+        self->oblivion.controller_distance = VectorLength(dir);
+        self->oblivion.controller_resume = level.time;
+
+        return true;
+}
 
 mframe_t actor_frames_stand [] =
 {
@@ -256,7 +369,7 @@ void actor_pain (edict_t *self, edict_t *other, float kick, int damage)
 			self->monsterinfo.currentmove = &actor_move_flipoff;
 		else
 			self->monsterinfo.currentmove = &actor_move_taunt;
-		name = actor_names[(self - g_edicts)%MAX_ACTOR_NAMES];
+		name = Actor_DisplayName(self);
 		gi.cprintf (other, PRINT_CHAT, "%s: %s!\n", name, messages[rand()%3]);
 		return;
 	}
@@ -405,21 +518,22 @@ void actor_attack(edict_t *self)
 
 void actor_use (edict_t *self, edict_t *other, edict_t *activator)
 {
-	vec3_t		v;
+	edict_t *controller;
 
-	self->goalentity = self->movetarget = G_PickTarget(self->target);
-	if ((!self->movetarget) || (strcmp(self->movetarget->classname, "target_actor") != 0))
+	(void)other;
+	(void)activator;
+
+	controller = G_PickTarget(self->target);
+	if (!Actor_AttachController(self, controller))
 	{
-		gi.dprintf ("%s has bad target %s at %s\n", self->classname, self->target, vtos(self->s.origin));
+		gi.dprintf("%s has bad target %s at %s\n", self->classname,
+			self->target ? self->target : "<null>", vtos(self->s.origin));
 		self->target = NULL;
 		self->monsterinfo.pausetime = 100000000;
-		self->monsterinfo.stand (self);
+		self->monsterinfo.stand(self);
 		return;
 	}
 
-	VectorSubtract (self->goalentity->s.origin, self->s.origin, v);
-	self->ideal_yaw = self->s.angles[YAW] = vectoyaw(v);
-	self->monsterinfo.walk (self);
 	self->target = NULL;
 }
 
@@ -472,9 +586,8 @@ void SP_misc_actor (edict_t *self)
 
 	if (!self->targetname)
 	{
-		gi.dprintf("untargeted %s at %s\n", self->classname, vtos(self->s.origin));
-		G_FreeEdict (self);
-		return;
+		self->targetname = G_CopyString("Yo Mama");
+		self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
 	}
 
 	if (!self->target)
@@ -484,20 +597,26 @@ void SP_misc_actor (edict_t *self)
 		return;
 	}
 
-	self->movetype = MOVETYPE_STEP;
-	self->solid = SOLID_BBOX;
 	self->s.modelindex = gi.modelindex("players/male/tris.md2");
-	VectorSet (self->mins, -16, -16, -24);
-	VectorSet (self->maxs, 16, 16, 32);
 
-	if (!self->health)
+	Actor_ConfigureMovementState(self);
+
+	if (!(self->spawnflags & ACTOR_SPAWNFLAG_CORPSE))
 	{
-		if (self->spawnflags & ACTOR_SPAWNFLAG_WIMPY)
-			self->health = 50;
-		else
-			self->health = 100;
+		if (!self->health)
+		{
+			if (self->spawnflags & ACTOR_SPAWNFLAG_WIMPY)
+				self->health = 50;
+			else
+				self->health = 100;
+		}
+		self->max_health = self->health;
 	}
-	self->max_health = self->health;
+	else
+	{
+		self->max_health = self->health;
+	}
+
 	self->mass = 200;
 
 	self->pain = actor_pain;
@@ -510,19 +629,19 @@ void SP_misc_actor (edict_t *self)
 	self->monsterinfo.melee = NULL;
 	self->monsterinfo.sight = NULL;
 
-	self->monsterinfo.aiflags |= AI_GOOD_GUY;
+	if (!(self->spawnflags & ACTOR_SPAWNFLAG_WIMPY))
+		self->monsterinfo.aiflags |= AI_GOOD_GUY;
+
+	Actor_InitMissionTimer(self);
 
 	gi.linkentity (self);
-
-	self->monsterinfo.currentmove = &actor_move_stand;
-	self->monsterinfo.scale = MODEL_SCALE;
 
 	walkmonster_start (self);
 
 	// actors always start in a dormant state, they *must* be used to get going
 	self->use = actor_use;
 
-	if ((self->spawnflags & ACTOR_SPAWNFLAG_START_ON) && !(self->spawnflags & 2))
+	if ((self->spawnflags & ACTOR_SPAWNFLAG_START_ON) && !(self->spawnflags & ACTOR_SPAWNFLAG_TRIGGER_SPAWN))
 		actor_use (self, self, self);
 }
 
@@ -556,16 +675,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 
 	if (self->message)
 	{
-		int		n;
-		edict_t	*ent;
-
-		for (n = 1; n <= game.maxclients; n++)
-		{
-			ent = &g_edicts[n];
-			if (!ent->inuse)
-				continue;
-			gi.cprintf (ent, PRINT_CHAT, "%s: %s\n", actor_names[(other - g_edicts)%MAX_ACTOR_NAMES], self->message);
-		}
+		Actor_BroadcastMessage(other, self->message);
 	}
 
 	if (self->spawnflags & 1)		//jump
