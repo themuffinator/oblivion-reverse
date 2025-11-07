@@ -10,21 +10,21 @@
 10016186      sub_10039ca4(eax)
 10016190      gi.error("Savegame from an older version.\n")
 10016190  
-100161b0  int32_t eax_5 = gi.TagMalloc(data_1006ca4c * 0x3d0, 0x2fd)
-100161c3  data_1006c2c4 = eax_5
+100161b0  int32_t eax_5 = gi.TagMalloc(game.maxentities * 0x3d0, 0x2fd)
+100161c3  g_edicts = eax_5
 100161c8  data_1006c160 = eax_5
 100161cd  sub_10039b8d(&data_1006c440, 0x61c, 1, eax)
-100161f2  data_1006c844 = gi.TagMalloc(data_1006ca48 * 0xf34, 0x2fd)
+100161f2  game.clients = gi.TagMalloc(game.maxclients * 0xf34, 0x2fd)
 100161ff  int32_t i = 0
 100161ff  
-10016203  if (data_1006ca48 s> 0)
+10016203  if (game.maxclients s> 0)
 10016206      void* edi_1 = nullptr
 10016206      
 10016228      do
-10016212          sub_10015fd0(eax, edi_1 + data_1006c844)
+10016212          sub_10015fd0(eax, edi_1 + game.clients)
 1001621f          i += 1
 10016220          edi_1 += 0xf34
-10016228      while (i s< data_1006ca48)
+10016228      while (i s< game.maxclients)
 10016228  
 10016239  return sub_10039ca4(eax)
 
@@ -64,7 +64,7 @@
 
 100162d0  char (* eax)[0xa] = data_10049e80
 100162eb  char var_130[0x130]
-100162eb  __builtin_memcpy(dest: &var_130, src: &data_1006c2e0, n: 0x130)
+100162eb  __builtin_memcpy(dest: &var_130, src: &level.framenum, n: 0x130)
 100162f4  char (** esi)[0xa] = &data_10049e80
 100162f4  
 100162fb  if (eax != 0)
@@ -82,7 +82,7 @@
 10016332  void* esi_1 = &data_10049e80
 10016332  
 10016337  while (i_1 != 0)
-10016340      sub_10015dc0(arg1, esi_1, &data_1006c2e0)
+10016340      sub_10015dc0(arg1, esi_1, &level.framenum)
 10016345      i_1 = *(esi_1 + 0x10)
 10016348      esi_1 += 0x10
 10016348  
@@ -107,12 +107,12 @@
 
 100163b0    char (*)[0xa] sub_100163b0(int32_t* arg1)
 
-100163c3  sub_10039b8d(&data_1006c2e0, 0x130, 1, arg1)
+100163c3  sub_10039b8d(&level.framenum, 0x130, 1, arg1)
 100163c8  char (* i)[0xa] = data_10049e80
 100163d2  char (** esi)[0xa] = &data_10049e80
 100163d2  
 100163d7  while (i != 0)
-100163e0      sub_10015e00(arg1, esi, &data_1006c2e0)
+100163e0      sub_10015e00(arg1, esi, &level.framenum)
 100163e5      i = esi[4]
 100163e8      esi = &esi[4]
 100163e8  
@@ -136,14 +136,14 @@
 10016453  sub_10039a54(&var_4, 4, 1, eax)
 10016459  sub_100162d0(eax)
 10016467  PSTR eax_1 = nullptr
-10016469  bool cond:0 = data_1006c168 s<= 0
+10016469  bool cond:0 = globals.num_edicts s<= 0
 1001646b  arg_4 = nullptr
 1001646b  
 1001646f  if (not(cond:0))
 100164b6      bool cond:1_1
 100164b6      
 100164b6      do
-10016483          void* esi_3 = (&eax_1[eax_1 * 0x3c] << 4) + data_1006c2c4
+10016483          void* esi_3 = (&eax_1[eax_1 * 0x3c] << 4) + g_edicts
 10016483          
 1001648a          if (*(esi_3 + 0x58) != 0)
 10016496              sub_10039a54(&arg_4, 4, 1, eax)
@@ -151,7 +151,7 @@
 100164a2              eax_1 = arg_4
 100164a2          
 100164af          eax_1 = &eax_1[1]
-100164b0          cond:1_1 = eax_1 s< data_1006c168
+100164b0          cond:1_1 = eax_1 s< globals.num_edicts
 100164b2          arg_4 = eax_1
 100164b6      while (cond:1_1)
 100164b6  
@@ -170,11 +170,11 @@
 10016504      gi.error("Couldn't open %s", esi)
 10016504  
 10016512  gi.FreeTags(0x2fe)
-1001652e  int32_t ecx_3 = data_1006ca4c * 0x3d0
-1001653d  __builtin_memset(s: __builtin_memset(s: data_1006c2c4, c: 0, n: ecx_3 u>> 2 << 2), c: 0, 
+1001652e  int32_t ecx_3 = game.maxentities * 0x3d0
+1001653d  __builtin_memset(s: __builtin_memset(s: g_edicts, c: 0, n: ecx_3 u>> 2 << 2), c: 0, 
 1001653d      n: ecx_3 & 3)
 1001655c  int16_t x87control
-1001655c  data_1006c168 = __ftol(x87control, fconvert.t(*(data_1006ca60 + 0x14)) + fconvert.t(1f))
+1001655c  globals.num_edicts = __ftol(x87control, fconvert.t(*(maxclients + 0x14)) + fconvert.t(1f))
 10016561  sub_10039b8d(&arg1, 4, 1, eax)
 10016561  
 10016572  if (arg1 != 0x3d0)
@@ -202,17 +202,17 @@
 100165f4      if (eax_7 == 0xffffffff)
 100165f4          break
 100165f4      
-100165fc      if (eax_7 s>= data_1006c168)
-10016601          data_1006c168 = eax_7 + 1
+100165fc      if (eax_7 s>= globals.num_edicts)
+10016601          globals.num_edicts = eax_7 + 1
 10016601      
-10016619      void* esi_3 = eax_7 * 0x3d0 + data_1006c2c4
+10016619      void* esi_3 = eax_7 * 0x3d0 + g_edicts
 1001661d      sub_10016360(eax, esi_3)
 10016628      *(esi_3 + 0x60) = 0
 1001662a      *(esi_3 + 0x64) = 0
 1001662d      gi.linkentity(esi_3)
 1001662d  
 10016639  sub_10039ca4(eax)
-1001663e  void* edx_2 = data_1006ca60
+1001663e  void* edx_2 = maxclients
 10016644  void* ecx_11 = nullptr
 10016646  long double x87_r7_2 = fconvert.t(0f)
 1001664c  arg1 = nullptr
@@ -224,10 +224,10 @@
 100166af      void* eax_14
 100166af      
 100166af      do
-10016685          void* ecx_13 = data_1006c844 + ecx_11 * 0xf34
-10016688          *(((ecx_11 + (ecx_11 * 3 + 3) * 0x14 + 1) << 4) + data_1006c2c4 + 0x54) = ecx_13
+10016685          void* ecx_13 = game.clients + ecx_11 * 0xf34
+10016688          *(((ecx_11 + (ecx_11 * 3 + 3) * 0x14 + 1) << 4) + g_edicts + 0x54) = ecx_13
 1001668b          *(ecx_13 + 0x2d0) = 0
-10016699          eax_14 = data_1006ca60
+10016699          eax_14 = maxclients
 1001669e          ecx_11 = &arg1[1]
 1001669f          arg1 = ecx_11
 100166a3          long double x87_r7_3 = float.t(arg1)
@@ -238,13 +238,13 @@
 100166aa              | (x87_r7_3 == temp1_1 ? 1 : 0) << 0xe
 100166af      while ((eax_14:1.b & 1) != 0)
 100166af  
-100166b1  int32_t result = data_1006c168
+100166b1  int32_t result = globals.num_edicts
 100166b6  PSTR ebp_1 = nullptr
 100166ba  arg1 = nullptr
 100166ba  
 100166be  if (result s> 0)
 100166c0      while (true)
-100166d4          void* edi_4 = (&ebp_1[ebp_1 * 0x3c] << 4) + data_1006c2c4
+100166d4          void* edi_4 = (&ebp_1[ebp_1 * 0x3c] << 4) + g_edicts
 100166d4          
 100166db          if (*(edi_4 + 0x58) != 0)
 100166dd              void* eax_17 = *(edi_4 + 0x118)
@@ -285,11 +285,11 @@
 10016712                      break
 10016712                  
 10016717                  if (eax_19 == 0)
-10016725                      *(edi_4 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4)
+10016725                      *(edi_4 + 0x1ec) = fconvert.s(fconvert.t(level.time)
 10016725                          + fconvert.t(*(edi_4 + 0x294)))
 1001672b                      ebp_1 = arg1
 1001672b          
-1001672f          result = data_1006c168
+1001672f          result = globals.num_edicts
 10016734          ebp_1 = &ebp_1[1]
 10016737          arg1 = ebp_1
 10016737          

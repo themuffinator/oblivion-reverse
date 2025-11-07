@@ -40,7 +40,7 @@
 100138b5          cond:2_1 = arg2 + 1 s< globals.num_edicts
 100158d0    int32_t InitGame()
 10015c3c  globals.edicts = eax_33
-10015c46  globals.max_edicts = data_1006ca4c
+10015c46  globals.max_edicts = game.maxentities
 10015c82  globals.num_edicts = ecx_6
 10015d63              *esi_2 = eax_14 - InitGame
 10015d66              return eax_14 - InitGame
@@ -53,7 +53,7 @@
 10016469  bool cond:0 = globals.num_edicts s<= 0
 100164b0          cond:1_1 = eax_1 s< globals.num_edicts
 100164e0    int32_t ReadLevel(PSTR arg1)
-1001655c  globals.num_edicts = __ftol(x87control, fconvert.t(*(data_1006ca60 + 0x14)) + fconvert.t(1f))
+1001655c  globals.num_edicts = __ftol(x87control, fconvert.t(*(maxclients + 0x14)) + fconvert.t(1f))
 100165a3  if (var_8 != InitGame)
 100165fc      if (eax_7 s>= globals.num_edicts)
 10016601          globals.num_edicts = eax_7 + 1

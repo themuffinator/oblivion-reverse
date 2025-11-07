@@ -4,10 +4,10 @@
 
 .text section started  {0x10001000-0x100433d6}
 
-10001000    void* sub_10001000()
+10001000    void* AI_SetSightClient()
 
-10001000  int32_t eax_8 = data_1006c3cc
-10001007  int32_t esi = data_1006c2c4
+10001000  int32_t eax_8 = level.sight_client
+10001007  int32_t esi = g_edicts
 10001010  int32_t edx
 10001010  
 10001010  if (eax_8 != 0)
@@ -21,18 +21,18 @@
 1000106a  do
 10001036      ecx_2 += 1
 10001036      
-10001039      if (ecx_2 s> data_1006ca48)
+10001039      if (ecx_2 s> game.maxclients)
 1000103b          ecx_2 = 1
 1000103b      
 1000104c      result = ecx_2 * 0x3d0 + esi
 1000104c      
 10001066      if (*(result + 0x58) != 0 && *(result + 0x220) s> 0
 10001066              && (*(result + 0x108) & 0x20) == 0)
-10001070          data_1006c3cc = result
+10001070          level.sight_client = result
 10001076          return result
 1000106a  while (ecx_2 != edx)
 1000106a  
-10001079  data_1006c3cc = 0
+10001079  level.sight_client = 0
 10001084  return result
 
 10001085                 90 90 90 90 90 90 90 90 90 90 90                                                       ...........
@@ -49,7 +49,7 @@
 100010c2      int32_t ecx_1 = *(arg1 + 0x36c)
 100010c2      
 100010ca      if (ecx_1 != 0)
-100010d0          long double x87_r7_1 = fconvert.t(data_1006c2e4)
+100010d0          long double x87_r7_1 = fconvert.t(level.time)
 100010d6          long double temp0_1 = fconvert.t(*(arg1 + 0x3c0))
 100010d6          x87_r7_1 - temp0_1
 100010d6          
@@ -66,11 +66,11 @@
 100010f7                  ecx_1(arg1)
 1000112b                  *(arg1 + 0x3c0) = fconvert.s((
 1000112b                      float.t(sub_10038fc0() & 0x7fff) * fconvert.t(3.05185094e-05f)
-1000112b                      + fconvert.t(1f)) * fconvert.t(15f) + fconvert.t(data_1006c2e4))
+1000112b                      + fconvert.t(1f)) * fconvert.t(15f) + fconvert.t(level.time))
 10001132                  return 1
 10001132              
 10001157              *(arg1 + 0x3c0) = fconvert.s(float.t(sub_10038fc0() & 0x7fff)
-10001157                  * fconvert.t(3.05185094e-05f) * fconvert.t(15f) + fconvert.t(data_1006c2e4))
+10001157                  * fconvert.t(3.05185094e-05f) * fconvert.t(15f) + fconvert.t(level.time))
 10001157  
 10001160  return 0
 
@@ -102,7 +102,7 @@
 100011e8      | (x87_r7_8 == temp0_1 ? 1 : 0) << 0xe
 100011e8  
 100011ed  if ((result:1.b & 0x40) == 0)
-100011ef      long double x87_r7_9 = fconvert.t(data_1006c2e4)
+100011ef      long double x87_r7_9 = fconvert.t(level.time)
 100011f5      long double temp1_1 = fconvert.t(*(arg1 i+ 0x390))
 100011f5      x87_r7_9 - temp1_1
 100011fb      result.w = (x87_r7_9 < temp1_1 ? 1 : 0) << 8
@@ -145,7 +145,7 @@
 1000130a          | (x87_r7_8 == temp1_1 ? 1 : 0) << 0xe
 1000130a      
 1000130f      if ((result:1.b & 0x40) == 0)
-10001311          long double x87_r7_9 = fconvert.t(data_1006c2e4)
+10001311          long double x87_r7_9 = fconvert.t(level.time)
 10001317          long double temp3_1 = fconvert.t(*(arg1 i+ 0x390))
 10001317          x87_r7_9 - temp3_1
 1000131d          result.w = (x87_r7_9 < temp3_1 ? 1 : 0) << 8
@@ -197,7 +197,7 @@
 10001395          int32_t ecx_1 = *(arg1 + 0x370)
 10001395          
 1000139d          if (ecx_1 != 0)
-100013a3              long double x87_r7_1 = fconvert.t(data_1006c2e4)
+100013a3              long double x87_r7_1 = fconvert.t(level.time)
 100013a9              long double temp0_1 = fconvert.t(*(arg1 + 0x3c0))
 100013a9              x87_r7_1 - temp0_1
 100013af              eax.w = (x87_r7_1 < temp0_1 ? 1 : 0) << 8
@@ -217,13 +217,13 @@
 100013d4                      int32_t eax_3 = sub_10038fc0() & 0x7fff
 100013f9                      *(arg1 + 0x3c0) = fconvert.s((
 100013f9                          float.t(eax_3) * fconvert.t(3.05185094e-05f) + fconvert.t(1f))
-100013f9                          * fconvert.t(15f) + fconvert.t(data_1006c2e4))
+100013f9                          * fconvert.t(15f) + fconvert.t(level.time))
 10001400                      return eax_3
 10001400                  
 10001406                  eax = sub_10038fc0() & 0x7fff
 10001425                  *(arg1 + 0x3c0) = fconvert.s(
 10001425                      float.t(eax) * fconvert.t(3.05185094e-05f) * fconvert.t(15f)
-10001425                      + fconvert.t(data_1006c2e4))
+10001425                      + fconvert.t(level.time))
 1000136c  else if ((eax & 0x2000000) != 0)
 10001383      return sub_10001bc0(arg1)
 10001383  
@@ -394,8 +394,8 @@
 
 10001730    void sub_10001730(int32_t arg1)
 
-10001733  int32_t eax = data_1006c168
-1000173a  void* i = data_1006c2c4
+10001733  int32_t eax = globals.num_edicts
+1000173a  void* i = g_edicts
 10001743  void* i_1 = nullptr
 10001746  float var_10 = 999999f
 10001746  
@@ -425,10 +425,10 @@
 100017d4                          var_10 = fconvert.s(st0_1)
 100017d8                          i_1 = i
 100017d8                  
-100017de                  eax = data_1006c168
+100017de                  eax = globals.num_edicts
 100017de          
 100017e6          i += 0x3d0
-100017ff      while (i u< eax * 0x3d0 + data_1006c2c4)
+100017ff      while (i u< eax * 0x3d0 + g_edicts)
 100017ff      
 10001807      if (i_1 != 0)
 10001823          *(arg1 + 0x35c) &= 0xf7ffffff
@@ -488,8 +488,8 @@
 1000192e  
 1000192e  if ((*(arg1 i+ 0x35c) & 0x8000000) == 0)
 10001951      label_10001951:
-10001951      int32_t eax_3 = data_1006c168
-10001956      void* i = data_1006c2c4
+10001951      int32_t eax_3 = globals.num_edicts
+10001956      void* i = g_edicts
 10001956      
 1000196c      if (i u>= eax_3 * 0x3d0 + i)
 10001ab1          return 0
@@ -513,10 +513,10 @@
 100019dd                      i_1 = i
 100019df                      var_10 = fconvert.s(st0_1)
 100019df              
-100019e3              eax_3 = data_1006c168
+100019e3              eax_3 = globals.num_edicts
 100019e3          
 100019eb          i += 0x3d0
-10001a04      while (i u< eax_3 * 0x3d0 + data_1006c2c4)
+10001a04      while (i u< eax_3 * 0x3d0 + g_edicts)
 10001a04      
 10001a0c      if (i_1 == 0)
 10001ab1          return 0
@@ -555,18 +555,18 @@
 10001ac0    int32_t sub_10001ac0(int32_t arg1)
 
 10001ad0  if (*(*(arg1 + 0x25c) + 0x54) != 0)
-10001ad2      int32_t ecx_1 = data_1006c2e0.d
+10001ad2      int32_t ecx_1 = level.framenum.d
 10001ad8      data_1006c3d0 = arg1
 10001ade      data_1006c3d4 = ecx_1
 10001ae4      *(arg1 + 0x2c4) = 0x80
 10001ae4  
 10001aff  int16_t x87control
-10001aff  *(arg1 + 0x230) = __ftol(x87control, fconvert.t(data_1006c2e4) + fconvert.t(1f))
+10001aff  *(arg1 + 0x230) = __ftol(x87control, fconvert.t(level.time) + fconvert.t(1f))
 10001b05  void* eax_2 = *(arg1 + 0x25c)
 10001b0e  *(arg1 + 0x3ac) = *(eax_2 + 4)
 10001b17  *(arg1 + 0x3b0) = *(eax_2 + 8)
 10001b20  *(arg1 + 0x3b4) = *(eax_2 + 0xc)
-10001b2b  *(arg1 + 0x3a8) = data_1006c2e4
+10001b2b  *(arg1 + 0x3a8) = level.time
 10001b31  char* eax_4 = *(arg1 + 0x140)
 10001b31  
 10001b39  if (eax_4 == 0)
@@ -599,7 +599,7 @@
 10001bd3  if ((eax:1.b & 1) == 0)
 10001c13      if ((eax:1.b & 0x10) == 0)
 10001c24          int32_t ecx_1 = 0
-10001c26          int32_t eax_5 = data_1006c2e0.d - 1
+10001c26          int32_t eax_5 = level.framenum.d - 1
 10001c32          void* esi_1
 10001c32          
 10001c32          if (data_1006c3d4 s>= eax_5 && (*(arg1 + 0x11c) & 1) == 0)
@@ -617,7 +617,7 @@
 10001c89                  ecx_1 = 1
 10001c8e                  goto label_10001c9d
 10001c8e              
-10001c90              esi_1 = data_1006c3cc
+10001c90              esi_1 = level.sight_client
 10001c90              
 10001c98              if (esi_1 != 0)
 10001c98                  goto label_10001c9d
@@ -694,7 +694,7 @@
 10001d1d                                      && sub_10001560(arg1, esi_1) != 0)
 10001d30                                  if (eax_14 == 1)
 10001d32                                      long double x87_r7_2 = float.t(*(esi_1 + 0x230))
-10001d38                                      long double temp1_1 = fconvert.t(data_1006c2e4)
+10001d38                                      long double temp1_1 = fconvert.t(level.time)
 10001d38                                      x87_r7_2 - temp1_1
 10001d3e                                      int32_t eax_15
 10001d3e                                      eax_15.w = (x87_r7_2 < temp1_1 ? 1 : 0) << 8
@@ -849,7 +849,7 @@
 10002029              *(ebp + 0x3b8) = 4
 1000203c              return 1
 10001fe7      else if (*(ebp + 0x380) != 0)
-1000204b          long double x87_r7_6 = fconvert.t(data_1006c2e4)
+1000204b          long double x87_r7_6 = fconvert.t(level.time)
 10002051          long double temp1_1 = fconvert.t(*(ebp + 0x394))
 10002051          x87_r7_6 - temp1_1
 10002057          int32_t eax_8
@@ -905,7 +905,7 @@
 1000211e                      long double x87_r7_15 =
 1000211e                          float.t(sub_10038fc0() & 0x7fff) * fconvert.t(3.05185094e-05f)
 1000212c                      *(ebp + 0x394) =
-1000212c                          fconvert.s(x87_r7_15 + x87_r7_15 + fconvert.t(data_1006c2e4))
+1000212c                          fconvert.s(x87_r7_15 + x87_r7_15 + fconvert.t(level.time))
 10002136                      return 1
 10002136                  
 1000213e                  if ((*(ebp + 0x108) & 1) != 0)
@@ -998,7 +998,7 @@
 100022c5      
 100022c9      if ((ebx_1.b & 4) != 0)
 100022cb          void* edx_1 = *(arg1 i+ 0x25c)
-100022d7          long double x87_r7_2 = fconvert.t(data_1006c2e4) - fconvert.t(*(edx_1 + 0x2a0))
+100022d7          long double x87_r7_2 = fconvert.t(level.time) - fconvert.t(*(edx_1 + 0x2a0))
 100022dd          long double temp0_1 = fconvert.t(5.0)
 100022dd          x87_r7_2 - temp0_1
 100022dd          
@@ -1006,7 +1006,7 @@
 100022e8                  | (is_unordered.t(x87_r7_2, temp0_1) ? 1 : 0) << 0xa
 100022e8                  | (x87_r7_2 == temp0_1 ? 1 : 0) << 0xe):1.b & 0x41) != 0)
 1000235c              *(arg1 i+ 0x230) =
-1000235c                  __ftol(x87control, fconvert.t(data_1006c2e4) + fconvert.t(1f))
+1000235c                  __ftol(x87control, fconvert.t(level.time) + fconvert.t(1f))
 10002369              return 0
 10002369          
 100022ec          if (ecx == edx_1)
@@ -1051,7 +1051,7 @@
 100024ad              (*(arg1 i+ 0x374))(arg1)
 100024c0              return 1
 100024c0          
-100024ce          *(arg1 i+ 0x390) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(100000000f))
+100024ce          *(arg1 i+ 0x390) = fconvert.s(fconvert.t(level.time) + fconvert.t(100000000f))
 100024d4          (*(arg1 i+ 0x368))(arg1)
 100024e7          return 1
 100024e7      
@@ -1059,13 +1059,13 @@
 100023ad      *(arg1 i+ 0x260) = 0
 100023b7      x87control = sub_10001690(arg1)
 100023b7  
-100023d0  *(arg1 i+ 0x230) = __ftol(x87control, fconvert.t(data_1006c2e4) + fconvert.t(1f))
+100023d0  *(arg1 i+ 0x230) = __ftol(x87control, fconvert.t(level.time) + fconvert.t(1f))
 100023de  int32_t eax_10 = sub_10001560(arg1, *(arg1 i+ 0x25c))
 100023e6  data_1006ca64 = eax_10
 100023e6  
 100023ed  if (eax_10 != 0)
 100023fb      void* eax_11 = *(arg1 i+ 0x25c)
-10002401      *(arg1 i+ 0x3a4) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(5f))
+10002401      *(arg1 i+ 0x3a4) = fconvert.s(fconvert.t(level.time) + fconvert.t(5f))
 1000240a      *(arg1 i+ 0x3ac) = *(eax_11 + 4)
 10002413      *(arg1 i+ 0x3b0) = *(eax_11 + 8)
 1000241c      *(arg1 i+ 0x3b4) = *(eax_11 + 0xc)
@@ -1146,7 +1146,7 @@
 1000264d          *(arg1 + 0x3ac) = *(eax_8 + 4)
 10002656          *(arg1 + 0x3b0) = *(eax_8 + 8)
 1000265f          *(arg1 + 0x3b4) = *(eax_8 + 0xc)
-1000266a          *(arg1 + 0x3a8) = data_1006c2e4
+1000266a          *(arg1 + 0x3a8) = level.time
 10002677          return 
 10002677      
 1000267e      long double x87_r7_8 = fconvert.t(*(data_1006c42c + 0x14))
@@ -1168,7 +1168,7 @@
 100026ab          
 100026b0          if ((eax_6:1.b & 0x40) == 0)
 100026b8              long double x87_r7_11 = fconvert.t(*(arg1 + 0x3a4)) + fconvert.t(20f)
-100026be              long double temp3_1 = fconvert.t(data_1006c2e4)
+100026be              long double temp3_1 = fconvert.t(level.time)
 100026be              x87_r7_11 - temp3_1
 100026c4              eax_6.w = (x87_r7_11 < temp3_1 ? 1 : 0) << 8
 100026c4                  | (is_unordered.t(x87_r7_11, temp3_1) ? 1 : 0) << 0xa
@@ -1196,7 +1196,7 @@
 10002726          if ((eax_12.b & 0x20) != 0)
 1000272c              eax_12.b &= 0xdf
 1000272e              *(arg1 + 0x35c) = eax_12
-10002742              *(arg1 + 0x3a4) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(5f))
+10002742              *(arg1 + 0x3a4) = fconvert.s(fconvert.t(level.time) + fconvert.t(5f))
 10002742              
 10002748              if ((eax_12.b & 0x40) == 0)
 1000277a                  void* eax_14
@@ -1601,7 +1601,7 @@
 10003062              gi.bprintf(2, "no main move\n")
 10003062          
 10003091          *(esi i+ 0x32c) =
-10003091              fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(*(esi i+ 0x32c)))
+10003091              fconvert.s(fconvert.t(level.time) + fconvert.t(*(esi i+ 0x32c)))
 10003099      case 2
 10003099          long double x87_r7_16 = fconvert.t(*(esi i+ 0x34c))
 1000309f          long double temp0 = fconvert.t(0f)
@@ -1621,13 +1621,13 @@
 100030dc          
 100030e2          *(esi i+ 0x34c) = 0
 100030e8          *(esi i+ 0x348) = 0
-100030f4          long double x87_r7_19 = fconvert.t(data_1006c2e4) + fconvert.t(*(esi i+ 0x32c))
+100030f4          long double x87_r7_19 = fconvert.t(level.time) + fconvert.t(*(esi i+ 0x32c))
 100030fa          *(esi i+ 0x330) = 3
 10003105          *(esi i+ 0x32c) = fconvert.s(x87_r7_19)
 10003117      case 3
 10003117          if (*(esi i+ 0x294) != 0xbf800000)
 1000312f              long double x87_r7_21 =
-1000312f                  fconvert.t(data_1006c2e4) + fconvert.t(*(esi i+ 0x294))
+1000312f                  fconvert.t(level.time) + fconvert.t(*(esi i+ 0x294))
 10003137              *(esi i+ 0x330) = 1
 10003141              *(esi i+ 0x294) = 0
 10003147              *(esi i+ 0x32c) = fconvert.s(x87_r7_21)

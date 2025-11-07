@@ -2,7 +2,7 @@
 /* Kind: type */
 /* Name: block */
 
-1000348f          unimplemented  {fld st0, dword [&data_1006c2e4]}
+1000348f          unimplemented  {fld st0, dword [&level.time]}
 10003495          long double temp2_1 = fconvert.t(*(arg1 i+ 0x32c))
 10003495          unimplemented  {fcomp st0, dword [esi+0x32c]} f- temp2_1
 10003495          bool c0_3 = unimplemented  {fcomp st0, dword [esi+0x32c]} f< temp2_1
@@ -63,7 +63,7 @@
 10003572  int32_t result = *(arg1 i+ 0x25c)
 10003572  
 1000357a  if (result != 0)
-1000357c      unimplemented  {fld st0, dword [&data_1006c2e4]}
+1000357c      unimplemented  {fld st0, dword [&level.time]}
 10003582      unimplemented  {fadd qword [&data_10044168]}
 10003588      *(arg1 i+ 0x1ec) = fconvert.s(unimplemented  {fstp dword [esi+0x1ec], st0})
 10003588      unimplemented  {fstp dword [esi+0x1ec], st0}
@@ -146,7 +146,7 @@
 10003741          bool c3_3
 10003741          
 10003741          do
-10003714              unimplemented  {fld st0, dword [&data_1006c2e4]}
+10003714              unimplemented  {fld st0, dword [&level.time]}
 1000371a              long double temp1_1 = fconvert.t(*(arg1 i+ 0x32c))
 1000371a              unimplemented  {fcomp st0, dword [esi+0x32c]} f- temp1_1
 1000371a              bool c0_2 = unimplemented  {fcomp st0, dword [esi+0x32c]} f< temp1_1
@@ -216,14 +216,14 @@
 1000380e              *(arg1 + 4) = *(ecx_1 + 4)
 10003814              *(arg1 + 8) = *(ecx_1 + 8)
 1000381a              *(arg1 + 0xc) = *(ecx_1 + 0xc)
-10003823              *(arg1 + 0x32c) = data_1006c2e4
+10003823              *(arg1 + 0x32c) = level.time
 100037b3          else
 100037b5              int32_t eax_2 = *(arg1 + 0x128)
 100037c0              char* eax_3 = sub_1001b070(arg1 + 4)
 100037d7              gi.bprintf(2, "%s at %s: invalid target %s\n", *(arg1 + 0x118), eax_3, 
 100037d7                  eax_2)
 100037d7  
-10003836  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
+10003836  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(level.time) + fconvert.t(0.10000000000000001))
 
 1000387d                                                                                         90 90 90                               ...
 
@@ -309,7 +309,7 @@
 10003a7e                      void* var_10_3 = arg1
 10003a80                      sub_100035d0(i)
 10003a68                  else
-10003a6f                      *(i + 0x120) = data_1006c2e4
+10003a6f                      *(i + 0x120) = level.time
 10003a6f                  
 10003a4a                  break
 10003a4a              
@@ -325,11 +325,11 @@
 10003a9a      if ((result:1.b & 0x41) == 0)
 10003a9c          *(arg1 + 0x1f4) = sub_10018fa0
 10003ab2          *(arg1 + 0x1ec) =
-10003ab2              fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(*(arg1 + 0x294)))
+10003ab2              fconvert.s(fconvert.t(level.time) + fconvert.t(*(arg1 + 0x294)))
 10003ab9          return result
 10003ab9      
 10003aba      *(arg1 + 0x1fc) = 0
-10003aca      long double x87_r7_6 = fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001)
+10003aca      long double x87_r7_6 = fconvert.t(level.time) + fconvert.t(0.10000000000000001)
 10003ad0      *(arg1 + 0x1f4) = sub_1001b400
 10003ada      *(arg1 + 0x1ec) = fconvert.s(x87_r7_6)
 10003ada  
@@ -442,7 +442,7 @@
 10003cd9  
 10003ce9  int16_t x87control
 10003ce9  
-10003ce9  if ((__ftol(x87control, fconvert.t(*(data_1006c414 + 0x14))) & 0x80) == 0)
+10003ce9  if ((__ftol(x87control, fconvert.t(*(dmflags + 0x14))) & 0x80) == 0)
 10003cf9      return eax_4 + 1
 10003cf9  
 10003ceb  *eax_4 = 0
@@ -454,7 +454,7 @@
 
 10003d15  int16_t x87control
 10003d15  
-10003d15  if ((__ftol(x87control, fconvert.t(*(data_1006c414 + 0x14))) & 0xc0) == 0)
+10003d15  if ((__ftol(x87control, fconvert.t(*(dmflags + 0x14))) & 0xc0) == 0)
 10003d1f      return 0
 10003d1f  
 10003d27  int32_t ebx
@@ -600,7 +600,7 @@
 
 10003f20    int32_t sub_10003f20(void* arg1)
 
-10003f28  long double x87_r7 = fconvert.t(*(data_1006c118 + 0x14))
+10003f28  long double x87_r7 = fconvert.t(*(deathmatch + 0x14))
 10003f2b  long double temp0 = fconvert.t(0f)
 10003f2b  x87_r7 - temp0
 10003f32  void* eax
@@ -797,7 +797,7 @@
 
 10004350    int32_t sub_10004350(void* arg1)
 
-10004355  long double x87_r7 = fconvert.t(*(data_1006c118 + 0x14))
+10004355  long double x87_r7 = fconvert.t(*(deathmatch + 0x14))
 10004358  long double temp0 = fconvert.t(0f)
 10004358  x87_r7 - temp0
 1000435e  void* eax
@@ -830,7 +830,7 @@
 
 100043d0    int32_t sub_100043d0(void* arg1)
 
-100043d5  long double x87_r7 = fconvert.t(*(data_1006c118 + 0x14))
+100043d5  long double x87_r7 = fconvert.t(*(deathmatch + 0x14))
 100043d8  long double temp0 = fconvert.t(0f)
 100043d8  x87_r7 - temp0
 100043de  void* eax
@@ -863,7 +863,7 @@
 
 10004450    int32_t sub_10004450(void* arg1)
 
-10004455  long double x87_r7 = fconvert.t(*(data_1006c118 + 0x14))
+10004455  long double x87_r7 = fconvert.t(*(deathmatch + 0x14))
 10004458  long double temp0 = fconvert.t(0f)
 10004458  x87_r7 - temp0
 1000445e  void* eax
@@ -1340,7 +1340,7 @@
 
 10004d30    void* sub_10004d30(float arg1)
 
-10004d3d  long double x87_r7_1 = fconvert.t(data_1006c2e4) - fconvert.t(*(*(arg1 i+ 0x54) + 0xf00))
+10004d3d  long double x87_r7_1 = fconvert.t(level.time) - fconvert.t(*(*(arg1 i+ 0x54) + 0xf00))
 10004d43  long double temp0 = fconvert.t(5f)
 10004d43  x87_r7_1 - temp0
 10004d49  void* result
@@ -1374,7 +1374,7 @@
 
 10004dc0    int32_t sub_10004dc0(int32_t* arg1, int32_t* arg2)
 
-10004dc5  int32_t esi = data_1006c844
+10004dc5  int32_t esi = game.clients
 10004ddf  int32_t edx_1 = sx.d(*(esi + *arg1 * 0xf34 + 0x94))
 10004df3  int32_t eax_4 = sx.d(*(esi + *arg2 * 0xf34 + 0x94))
 10004df3  
@@ -1390,7 +1390,7 @@
 10004e10    int32_t sub_10004e10(int32_t arg1)
 
 10004e16  long double x87_r7 = fconvert.t(0f)
-10004e1d  void* ebx = data_1006ca60
+10004e1d  void* ebx = maxclients
 10004e25  long double temp0 = fconvert.t(*(ebx + 0x14))
 10004e25  x87_r7 - temp0
 10004e28  void* esi = nullptr
@@ -1401,7 +1401,7 @@
 10004e36  if ((((x87_r7 < temp0 ? 1 : 0) << 8 | (is_unordered.t(x87_r7, temp0) ? 1 : 0) << 0xa
 10004e36          | (x87_r7 == temp0 ? 1 : 0) << 0xe):1.b & 1) != 0)
 10004e3d      int32_t* edx_1 = &var_400
-10004e44      int32_t* edi_1 = data_1006c844 + 0x2d0
+10004e44      int32_t* edi_1 = game.clients + 0x2d0
 10004e6c      void* eax_1
 10004e6c      
 10004e6c      do
@@ -1429,7 +1429,7 @@
 10004e99      void* ebx_1 = &var_400
 10004e99      
 10004f35      do
-10004eb4          void* eax_4 = data_1006c844 + *ebx_1 * 0xf34
+10004eb4          void* eax_4 = game.clients + *ebx_1 * 0xf34
 10004ec8          void* var_958_1 = eax_4 + 0x2bc
 10004ec9          int32_t var_95c_1 = sx.d(*(eax_4 + 0x94))
 10004ed2          char var_940[0x40]

@@ -162,13 +162,13 @@
 1002f4fe      | (x87_r7 == temp0 ? 1 : 0) << 0xe
 1002f4fe  
 1002f503  if ((result:1.b & 0x40) == 0)
-1002f50f      result = sub_10038b20(&data_1006c328, "security")
+1002f50f      result = sub_10038b20(&level.mapname, "security")
 1002f50f      
 1002f519      if (result == 0)
 1002f51b          result = arg1
 1002f51f          *(result + 0x1f4) = sub_1002f540
 1002f535          *(result + 0x1ec) =
-1002f535              fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
+1002f535              fconvert.s(fconvert.t(level.time) + fconvert.t(0.10000000000000001))
 1002f535  
 1002f53b  return result
 
@@ -176,7 +176,7 @@
 
 1002f540    int32_t sub_1002f540()
 
-1002f54a  int32_t result = sub_10038b20(&data_1006c328, "security")
+1002f54a  int32_t result = sub_10038b20(&level.mapname, "security")
 1002f54a  
 1002f554  if (result == 0)
 1002f55a      void* eax = sub_1001b350()
@@ -207,7 +207,7 @@
 
 1002f600    uint32_t sub_1002f600(int32_t arg1)
 
-1002f605  long double x87_r7 = fconvert.t(*(data_1006c118 + 0x14))
+1002f605  long double x87_r7 = fconvert.t(*(deathmatch + 0x14))
 1002f608  long double temp0 = fconvert.t(0f)
 1002f608  x87_r7 - temp0
 1002f60e  void* eax
@@ -235,50 +235,50 @@
 1002f652  
 1002f667  int32_t result
 1002f667  
-1002f667  if (sub_10038b20(&data_1006c328, "jail2") == 0)
+1002f667  if (sub_10038b20(&level.mapname, "jail2") == 0)
 1002f7a7      label_1002f7a7:
 1002f7a7      result = arg1
 1002f7ab      *(result + 0x1f4) = sub_1002f7d0
 1002f7c1      *(result + 0x1ec) =
-1002f7c1          fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
+1002f7c1          fconvert.s(fconvert.t(level.time) + fconvert.t(0.10000000000000001))
 1002f667  else
-1002f681      if (sub_10038b20(&data_1006c328, "jail4") == 0)
+1002f681      if (sub_10038b20(&level.mapname, "jail4") == 0)
 1002f681          goto label_1002f7a7
 1002f681      
-1002f69b      if (sub_10038b20(&data_1006c328, "mine1") == 0)
+1002f69b      if (sub_10038b20(&level.mapname, "mine1") == 0)
 1002f69b          goto label_1002f7a7
 1002f69b      
-1002f6b5      if (sub_10038b20(&data_1006c328, "mine2") == 0)
+1002f6b5      if (sub_10038b20(&level.mapname, "mine2") == 0)
 1002f6b5          goto label_1002f7a7
 1002f6b5      
-1002f6cf      if (sub_10038b20(&data_1006c328, "mine3") == 0)
+1002f6cf      if (sub_10038b20(&level.mapname, "mine3") == 0)
 1002f6cf          goto label_1002f7a7
 1002f6cf      
-1002f6e9      if (sub_10038b20(&data_1006c328, "mine4") == 0)
+1002f6e9      if (sub_10038b20(&level.mapname, "mine4") == 0)
 1002f6e9          goto label_1002f7a7
 1002f6e9      
-1002f703      if (sub_10038b20(&data_1006c328, "lab") == 0)
+1002f703      if (sub_10038b20(&level.mapname, "lab") == 0)
 1002f703          goto label_1002f7a7
 1002f703      
-1002f71d      if (sub_10038b20(&data_1006c328, "boss1") == 0)
+1002f71d      if (sub_10038b20(&level.mapname, "boss1") == 0)
 1002f71d          goto label_1002f7a7
 1002f71d      
-1002f737      if (sub_10038b20(&data_1006c328, "fact3") == 0)
+1002f737      if (sub_10038b20(&level.mapname, "fact3") == 0)
 1002f737          goto label_1002f7a7
 1002f737      
-1002f74d      if (sub_10038b20(&data_1006c328, "biggun") == 0)
+1002f74d      if (sub_10038b20(&level.mapname, "biggun") == 0)
 1002f74d          goto label_1002f7a7
 1002f74d      
-1002f763      if (sub_10038b20(&data_1006c328, "space") == 0)
+1002f763      if (sub_10038b20(&level.mapname, "space") == 0)
 1002f763          goto label_1002f7a7
 1002f763      
-1002f779      if (sub_10038b20(&data_1006c328, "command") == 0)
+1002f779      if (sub_10038b20(&level.mapname, "command") == 0)
 1002f779          goto label_1002f7a7
 1002f779      
-1002f78f      if (sub_10038b20(&data_1006c328, "power2") == 0)
+1002f78f      if (sub_10038b20(&level.mapname, "power2") == 0)
 1002f78f          goto label_1002f7a7
 1002f78f      
-1002f79b      result = sub_10038b20(&data_1006c328, "strike")
+1002f79b      result = sub_10038b20(&level.mapname, "strike")
 1002f79b      
 1002f7a5      if (result == 0)
 1002f7a5          goto label_1002f7a7
@@ -374,7 +374,7 @@
 1002f917      ecx_3 = data_1006c104 | 0x8000000
 1002f91d      data_1006c104 = ecx_3
 1002f91d  
-1002f936  long double x87_r7_1 = fconvert.t(*(data_1006c118 + 0x14))
+1002f936  long double x87_r7_1 = fconvert.t(*(deathmatch + 0x14))
 1002f939  long double temp1 = fconvert.t(0f)
 1002f939  x87_r7_1 - temp1
 1002f941  void* eax_2
@@ -410,7 +410,7 @@
 1002f9b3              case 0x1c
 1002f9b3                  eax_3 = "found a way out"
 1002f9c6              case 0x1e
-1002f9c6                  if (arg2 == data_1006c2c4)
+1002f9c6                  if (arg2 == g_edicts)
 1002f9c8                      eax_3 = "saw the light"
 1002f9cf              case 0x21
 1002f9cf                  eax_3 = "got blasted"
@@ -460,7 +460,7 @@
 1002fa00      
 1002faad      if (eax_3 != 0)
 1002fac0          gi.bprintf(1, "%s %s.\n", *(arg1 + 0x54) + 0x2bc, eax_3)
-1002facf          long double x87_r7_3 = fconvert.t(*(data_1006c118 + 0x14))
+1002facf          long double x87_r7_3 = fconvert.t(*(deathmatch + 0x14))
 1002fad2          long double temp4 = fconvert.t(0f)
 1002fad2          x87_r7_3 - temp4
 1002fad8          void* eax_13
@@ -577,7 +577,7 @@
 1002fcb3      
 1002fcd5      gi.bprintf(1, "%s %s %s%s\n", *(arg1 + 0x54) + 0x2bc, eax_16, 
 1002fcd5          *(arg2 + 0x54) + 0x2bc, esi_1)
-1002fce4      long double x87_r7_4 = fconvert.t(*(data_1006c118 + 0x14))
+1002fce4      long double x87_r7_4 = fconvert.t(*(deathmatch + 0x14))
 1002fce7      long double temp5_1 = fconvert.t(0f)
 1002fce7      x87_r7_4 - temp5_1
 1002fced      eax_21.w = (x87_r7_4 < temp5_1 ? 1 : 0) << 8
@@ -606,7 +606,7 @@
 1002f956      
 1002fd2d      label_1002fd2d:
 1002fd2d      gi.bprintf(1, "%s died.\n", *(arg1 + 0x54) + 0x2bc)
-1002fd3c      long double x87_r7_5 = fconvert.t(*(data_1006c118 + 0x14))
+1002fd3c      long double x87_r7_5 = fconvert.t(*(deathmatch + 0x14))
 1002fd3f      long double temp3_1 = fconvert.t(0f)
 1002fd3f      x87_r7_5 - temp3_1
 1002fd45      eax_21.w = (x87_r7_5 < temp3_1 ? 1 : 0) << 8
