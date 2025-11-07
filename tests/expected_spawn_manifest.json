@@ -5764,13 +5764,9 @@
         "function": "SP_info_null",
         "spawnflags": {
           "assignments": [],
-          "checks": [
-            1
-          ],
+          "checks": [],
           "clears": [],
-          "sets": [
-            1
-          ]
+          "sets": []
         }
       },
       "func_killbox": {
@@ -5922,13 +5918,9 @@
         "function": "SP_info_null",
         "spawnflags": {
           "assignments": [],
-          "checks": [
-            1
-          ],
+          "checks": [],
           "clears": [],
-          "sets": [
-            1
-          ]
+          "sets": []
         }
       },
       "info_player_coop": {
@@ -5964,6 +5956,16 @@
       "info_player_start": {
         "defaults": {},
         "function": "SP_info_player_start",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_teleport_dest": {
+        "defaults": {},
+        "function": "SP_info_teleport_dest",
         "spawnflags": {
           "assignments": [],
           "checks": [],
@@ -6280,6 +6282,16 @@
           "dmg": 1000.0
         },
         "function": "SP_misc_viper_bomb",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_badass": {
+        "defaults": {},
+        "function": "SP_monster_badass",
         "spawnflags": {
           "assignments": [],
           "checks": [],
@@ -6830,6 +6842,34 @@
           "sets": []
         }
       },
+      "target_railgun": {
+        "defaults": {
+          "dmg": 150.0
+        },
+        "function": "SP_target_railgun",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_rocket": {
+        "defaults": {
+          "count": 120.0,
+          "delay": 0.0,
+          "dmg": 100.0,
+          "dmg_radius": 120.0,
+          "speed": 650.0
+        },
+        "function": "SP_target_rocket",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
       "target_secret": {
         "defaults": {},
         "function": "SP_target_secret",
@@ -7032,6 +7072,23 @@
         "spawnflags": {
           "assignments": [],
           "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_teleport": {
+        "defaults": {
+          "nextthink": 0.0
+        },
+        "function": "SP_trigger_teleport",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4,
+            16
+          ],
           "clears": [],
           "sets": []
         }
@@ -7823,6 +7880,17 @@
               "offset": 248,
               "value": 3
             },
+            {
+              "offset": 248,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "info_teleport_dest": {
+        "offset_0xf8": [
+          [
             {
               "offset": 248,
               "value": 0
@@ -9146,6 +9214,165 @@
             {
               "offset": 248,
               "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "monster_badass": {
+        "currentmove": [
+          [
+            {
+              "offset": 856,
+              "value": 268749592
+            }
+          ],
+          null
+        ],
+        "dodge": [
+          [
+            {
+              "offset": 892,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "health": [
+          [
+            {
+              "offset": 544,
+              "value": 1500
+            },
+            {
+              "offset": 544,
+              "value": 4294967295
+            }
+          ],
+          null
+        ],
+        "mass": [
+          [
+            {
+              "offset": 400,
+              "value": 1000
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "offset": 260,
+              "value": 5
+            }
+          ],
+          null
+        ],
+        "offset_0x1e4": [
+          [
+            {
+              "offset": 484,
+              "value": 1103626240
+            }
+          ],
+          null
+        ],
+        "offset_0x1ec": [
+          [
+            {
+              "offset": 492,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "offset": 552,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "offset": 556,
+              "value": 2
+            }
+          ],
+          null
+        ],
+        "offset_0x364": [
+          [
+            {
+              "offset": 868,
+              "value": 1065353216
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "offset": 188,
+              "value": 3254255616
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "offset": 192,
+              "value": 3266314240
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "offset": 196,
+              "value": 3263168512
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "offset": 200,
+              "value": 1108869120
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "offset": 204,
+              "value": 1101529088
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "offset": 208,
+              "value": 3243245568
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "offset": 248,
+              "value": 2
             }
           ],
           null
@@ -11403,6 +11630,37 @@
           null
         ]
       },
+      "target_railgun": {
+        "offset_0x244": [
+          [
+            {
+              "offset": 580,
+              "value": 150
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "offset": 184,
+              "value": 1
+            }
+          ],
+          null
+        ]
+      },
+      "target_rocket": {
+        "offset_0x244": [
+          [
+            {
+              "offset": 580,
+              "value": 100
+            }
+          ],
+          null
+        ]
+      },
       "target_secret": {
         "offset_0xb8": [
           [
@@ -11545,6 +11803,48 @@
             {
               "offset": 656,
               "value": -1.0
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_teleport": {
+        "offset_0x104": [
+          [
+            {
+              "offset": 260,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "offset": 248,
+              "value": 1
+            }
+          ],
+          null
+        ],
+        "touch": [
+          [
+            {
+              "offset": 508,
+              "value": 0
+            },
+            {
+              "offset": 508,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "wait": [
+          [
+            {
+              "offset": 656,
+              "value": 0.20000000298023224
             }
           ],
           null
@@ -11740,7 +12040,6 @@
       "ammo_rockets",
       "ammo_shells",
       "ammo_slugs",
-      "info_teleport_dest",
       "item_adrenaline",
       "item_ancient_head",
       "item_armor_body",
@@ -11766,10 +12065,6 @@
       "key_pyramid",
       "key_red_key",
       "misc_screenfader",
-      "monster_badass",
-      "target_railgun",
-      "target_rocket",
-      "trigger_teleport",
       "weapon_bfg",
       "weapon_chaingun",
       "weapon_deatomizer",
@@ -11845,20 +12140,6 @@
           ]
         ]
       },
-      "func_group": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ],
-        "sets": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
       "func_object": {
         "checks": [
           [],
@@ -11931,20 +12212,6 @@
           [],
           [
             32
-          ]
-        ]
-      },
-      "info_null": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ],
-        "sets": [
-          [],
-          [
-            1
           ]
         ]
       },
@@ -12057,6 +12324,20 @@
           [],
           [
             4
+          ]
+        ]
+      },
+      "trigger_teleport": {
+        "checks": [
+          [
+            2,
+            16
+          ],
+          [
+            1,
+            2,
+            4,
+            16
           ]
         ]
       }
