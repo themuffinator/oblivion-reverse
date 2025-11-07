@@ -24,6 +24,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define	MAX_ACTOR_NAMES		8
 
+/*
+ * Oblivion extends the Quake II actor AI flags with additional high bits
+ * that coordinate scripted mission controllers.  Use local names so the
+ * spawn routine can describe the behaviour from the HLIL dump without
+ * resorting to raw literals.
+ */
+#define	AI_ACTOR_PATH_IDLE		0x02000000
+#define	AI_ACTOR_FRIENDLY		0x01000000
+
 /* misc_actor spawnflags */
 #define ACTOR_SPAWNFLAG_START_ON        32
 #define ACTOR_SPAWNFLAG_WIMPY           64
@@ -538,66 +547,57 @@ void actor_use (edict_t *self, edict_t *other, edict_t *activator)
 }
 
 
-/*QUAKED misc_actor (1 .5 0) (-16 -16 -24) (16 16 32)  Ambush Trigger_Spawn Sight Corpse x START_ON WIMPY
-START_ON		actor immediately begins walking its path instead of waiting for a use event
-WIMPY		reduce the actor's health so it can be dispatched quickly
-*/
-
-void SP_misc_actor (edict_t *self)
+static void Actor_UseOblivion(edict_t *self, edict_t *other, edict_t *activator)
 {
-        /*
-        ** Reverse-engineering notes (sub_1001f460): the retail DLL edits the
-        ** actor edict via raw offsets.  The relevant slots line up with the
-        ** symbolic fields below and should be used when translating the HLIL
-        ** logic back into C.
-        **
-        **   0x11c == offsetof(edict_t, spawnflags)        // set hidden START_ON bit
-        **   0x12c == offsetof(edict_t, targetname)        // inject "Yo Mama" default
-        **   0x028 == offsetof(edict_t, s.modelindex)      // skin/muzzle setup
-        **   0x02c == offsetof(edict_t, s.modelindex2)
-        **   0x038 == offsetof(edict_t, s.frame)           // corpse skin override
-        **   0x0b8 == offsetof(edict_t, svflags)
-        **   0x0bc == offsetof(edict_t, mins)              // mins/maxs memcpy block
-        **   0x0f8 == offsetof(edict_t, solid)
-        **   0x104 == offsetof(edict_t, movetype)
-        **   0x128 == offsetof(edict_t, target)
-        **   0x190 == offsetof(edict_t, mass)
-        **   0x1ec == offsetof(edict_t, deadflag)
-        **   0x200 == offsetof(edict_t, use)
-        **   0x204 == offsetof(edict_t, pain)
-        **   0x208 == offsetof(edict_t, die)
-        **   0x220 == offsetof(edict_t, oldenemy)          // reused as spawn timer
-        **   0x22c == offsetof(edict_t, groundentity_linkcount)
-        **   0x358 == offsetof(edict_t, monsterinfo.currentmove)
-        **   0x35c == offsetof(edict_t, monsterinfo.aiflags)
-        **   0x364 == offsetof(edict_t, monsterinfo.scale)
-        **   0x368 == offsetof(edict_t, monsterinfo.stand)
-        **   0x374 == offsetof(edict_t, monsterinfo.walk)
-        **   0x378 == offsetof(edict_t, monsterinfo.run)
-        **   0x380 == offsetof(edict_t, monsterinfo.attack)
-        **   0x384 == offsetof(edict_t, monsterinfo.melee)
-        **   0x388 == offsetof(edict_t, monsterinfo.sight)
-        */
-        if (deathmatch->value)
-        {
-                G_FreeEdict (self);
-                return;
-        }
+	edict_t *target = G_PickTarget(self->target);
 
-	if (!self->targetname)
-	{
-		self->targetname = G_CopyString("Yo Mama");
-		self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
-	}
+	self->goalentity = target;
+	self->movetarget = target;
 
-	if (!self->target)
+	if (target && target->classname && strcmp(target->classname, "target_actor") == 0)
 	{
-		gi.dprintf("%s with no target at %s\n", self->classname, vtos(self->s.origin));
-		G_FreeEdict (self);
+		vec3_t delta;
+
+		VectorSubtract(target->s.origin, self->s.origin, delta);
+		self->s.angles[YAW] = self->ideal_yaw = vectoyaw(delta);
+
+		if (self->monsterinfo.walk)
+			self->monsterinfo.walk(self);
+
+		self->target = NULL;
 		return;
 	}
 
-	self->s.modelindex = gi.modelindex("players/male/tris.md2");
+	self->target = NULL;
+	self->monsterinfo.pausetime = 100000000.0f;
+
+	if (self->monsterinfo.stand)
+		self->monsterinfo.stand(self);
+}
+
+static qboolean Actor_SpawnOblivion(edict_t *self)
+{
+	static const char *const kDefaultTargetName = "Yo Mama";
+
+	if (deathmatch->value)
+	{
+		G_FreeEdict(self);
+		return false;
+	}
+
+	if (!self->targetname)
+	{
+		self->targetname = (char *)kDefaultTargetName;
+		self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
+	}
+
+	self->s.modelindex = 0xff;
+	self->s.modelindex2 = 0xff;
+
+	self->movetype = MOVETYPE_STEP;
+	self->solid = SOLID_BBOX;
+	VectorSet(self->mins, -16, -16, -24);
+	VectorSet(self->maxs, 16, 16, 32);
 
 	Actor_ConfigureMovementState(self);
 
@@ -612,15 +612,28 @@ void SP_misc_actor (edict_t *self)
 		}
 		self->max_health = self->health;
 	}
+
+	self->speed = 200;
+	self->mass = 200;
+
+	if (!(self->spawnflags & ACTOR_SPAWNFLAG_WIMPY))
+	{
+		self->monsterinfo.aiflags |= AI_GOOD_GUY;
+		self->monsterinfo.aiflags |= AI_ACTOR_FRIENDLY;
+	}
 	else
 	{
-		self->max_health = self->health;
+		self->monsterinfo.aiflags &= ~AI_GOOD_GUY;
 	}
 
-	self->mass = 200;
+	if (!self->target)
+		self->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
+
+	self->monsterinfo.aiflags |= AI_STAND_GROUND;
 
 	self->pain = actor_pain;
 	self->die = actor_die;
+	self->use = Actor_UseOblivion;
 
 	self->monsterinfo.stand = actor_stand;
 	self->monsterinfo.walk = actor_walk;
@@ -629,21 +642,49 @@ void SP_misc_actor (edict_t *self)
 	self->monsterinfo.melee = NULL;
 	self->monsterinfo.sight = NULL;
 
-	if (!(self->spawnflags & ACTOR_SPAWNFLAG_WIMPY))
-		self->monsterinfo.aiflags |= AI_GOOD_GUY;
+	self->monsterinfo.currentmove = &actor_move_stand;
+	self->monsterinfo.scale = MODEL_SCALE;
 
-	Actor_InitMissionTimer(self);
+	if (self->spawnflags & ACTOR_SPAWNFLAG_CORPSE)
+	{
+		static const int corpse_frames[] = { FRAME_stand216, FRAME_stand222, FRAME_swim07 };
 
-	gi.linkentity (self);
+		self->s.frame = corpse_frames[rand() % 3];
+		self->svflags |= SVF_DEADMONSTER;
+		self->health = -1;
+		self->deadflag = DEAD_DEAD;
+		VectorSet(self->mins, -16, -16, -24);
+		VectorSet(self->maxs, 16, 16, -8);
+		self->nextthink = 0;
+		gi.linkentity(self);
+		return false;
+	}
 
-	walkmonster_start (self);
+	gi.linkentity(self);
+	walkmonster_start(self);
 
-	// actors always start in a dormant state, they *must* be used to get going
-	self->use = actor_use;
+	if (self->spawnflags & ACTOR_SPAWNFLAG_START_ON)
+	{
+		edict_t *world = &g_edicts[0];
 
-	if ((self->spawnflags & ACTOR_SPAWNFLAG_START_ON) && !(self->spawnflags & ACTOR_SPAWNFLAG_TRIGGER_SPAWN))
-		actor_use (self, self, self);
+		if (self->use)
+			self->use(self, world, world);
+	}
+
+	return true;
 }
+
+/*QUAKED misc_actor (1 .5 0) (-16 -16 -24) (16 16 32)  Ambush Trigger_Spawn Sight Corpse x START_ON WIMPY
+START_ON		actor immediately begins walking its path instead of waiting for a use event
+WIMPY		reduce the actor's health so it can be dispatched quickly
+*/
+
+void SP_misc_actor (edict_t *self)
+{
+	if (!Actor_SpawnOblivion(self))
+		return;
+}
+
 
 
 /*QUAKED target_actor (.5 .3 0) (-8 -8 -8) (8 8 8) JUMP SHOOT ATTACK x HOLD BRUTAL
