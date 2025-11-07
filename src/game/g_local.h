@@ -843,6 +843,9 @@ void ThrowClientHead (edict_t *self, int damage);
 void ThrowGib (edict_t *self, char *gibname, int damage, int type);
 void BecomeExplosion1(edict_t *self);
 
+void G_ScreenFade_Reset (void);
+void G_ScreenFade_AddBlend (edict_t *ent);
+
 //
 // g_ai.c
 //

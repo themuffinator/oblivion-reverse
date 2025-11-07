@@ -1056,6 +1056,7 @@ void ClientEndServerFrame (edict_t *ent)
 	// FIXME: with client prediction, the contents
 	// should be determined by the client
 	SV_CalcBlend (ent);
+	G_ScreenFade_AddBlend (ent);
 
 	// chase cam stuff
 	if (ent->client->resp.spectator)
