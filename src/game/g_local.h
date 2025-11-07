@@ -33,21 +33,38 @@ struct edict_s;
 
 typedef struct edict_oblivion_ext_s
 {
-        struct edict_s *controller;
-        struct edict_s *last_controller;
-        struct edict_s *prev_path;
-        int                     mission_timer_remaining;
-        int                     mission_timer_limit;
-        int                     mission_timer_cooldown;
-        int                     mission_state;
-        vec3_t          mission_origin;
-        vec3_t          mission_angles;
-        vec3_t          mission_velocity;
-        float           mission_blend;
-        float           mission_radius;
-        char            *mission_id;
-        char            *mission_title;
-        char            *mission_text;
+        struct edict_s *controller;              // active mission / path controller
+        struct edict_s *last_controller;         // controller that most recently fired us
+        struct edict_s *prev_path;               // last target_actor that we visited
+        struct edict_s *path_target;             // cached pointer for the pending path step
+        struct edict_s *script_target;           // auxiliary entity referenced by scripted actions
+        int                     controller_serial;      // cached controller serial used by save games
+        int                     path_toggle;            // persistent toggle state for scripted paths
+        float           controller_distance;    // most recent distance to the active controller
+        float           controller_resume;      // time when the controller may resume the sequence
+        float           path_wait_time;         // override for node wait behaviour (-1 = inherit)
+        float           path_time;              // next time to advance along the scripted path
+        float           path_speed;             // desired travel speed toward the controller
+        float           path_step_speed;        // instantaneous speed used for the current leg
+        float           path_remaining;         // distance remaining to the current controller
+        int                     path_state;             // internal state machine for scripted motion
+        vec3_t          path_dir;               // normalized direction toward the controller
+        vec3_t          path_velocity;          // velocity vector applied while marching the path
+        char            *custom_name;           // optional in-world display name for actor barks
+        float           custom_name_time;       // debounce timer for repeated chat broadcasts
+
+        int                     mission_timer_remaining;        // seconds remaining before mission timeout
+        int                     mission_timer_limit;             // configured mission time limit (seconds)
+        int                     mission_timer_cooldown;          // mission flag bitmask from spawn data
+        int                     mission_state;                   // next mission event to publish
+        vec3_t          mission_origin;                  // world-space mission marker
+        vec3_t          mission_angles;                  // mission marker orientation
+        vec3_t          mission_velocity;                // mission marker velocity for moving targets
+        float           mission_blend;                   // HUD blend strength for mission markers
+        float           mission_radius;                  // mission trigger radius in world units
+        char            *mission_id;                     // mission objective identifier
+        char            *mission_title;                  // mission log title override
+        char            *mission_text;                   // mission log body text
 } edict_oblivion_ext_t;
 
 // the "gameversion" client command will print this plus compile date
@@ -842,6 +859,9 @@ void ThrowHead (edict_t *self, char *gibname, int damage, int type);
 void ThrowClientHead (edict_t *self, int damage);
 void ThrowGib (edict_t *self, char *gibname, int damage, int type);
 void BecomeExplosion1(edict_t *self);
+
+void G_ScreenFade_Reset (void);
+void G_ScreenFade_AddBlend (edict_t *ent);
 
 //
 // g_ai.c

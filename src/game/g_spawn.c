@@ -27,6 +27,22 @@ typedef struct
 } spawn_t;
 
 
+static void CopyStringSafe(char *dest, size_t dest_size, const char *src)
+{
+	if (!dest || dest_size == 0)
+		return;
+
+	if (!src)
+	{
+		dest[0] = '\0';
+		return;
+	}
+
+	strncpy(dest, src, dest_size - 1);
+	dest[dest_size - 1] = '\0';
+}
+
+
 void SP_item_health (edict_t *self);
 void SP_item_health_small (edict_t *self);
 void SP_item_health_large (edict_t *self);
@@ -67,6 +83,7 @@ void SP_trigger_elevator (edict_t *ent);
 void SP_trigger_gravity (edict_t *ent);
 void SP_trigger_monsterjump (edict_t *ent);
 void SP_trigger_misc_camera (edict_t *ent);
+void SP_trigger_teleport (edict_t *ent);
 
 void SP_target_temp_entity (edict_t *ent);
 void SP_target_speaker (edict_t *ent);
@@ -77,6 +94,8 @@ void SP_target_goal (edict_t *ent);
 void SP_target_splash (edict_t *ent);
 void SP_target_spawner (edict_t *ent);
 void SP_target_blaster (edict_t *ent);
+void SP_target_rocket (edict_t *ent);
+void SP_target_railgun (edict_t *ent);
 void SP_target_crosslevel_trigger (edict_t *ent);
 void SP_target_crosslevel_target (edict_t *ent);
 void SP_target_laser (edict_t *self);
@@ -95,6 +114,7 @@ void SP_light_mine1 (edict_t *ent);
 void SP_light_mine2 (edict_t *ent);
 void SP_info_null (edict_t *self);
 void SP_info_notnull (edict_t *self);
+void SP_info_teleport_dest (edict_t *self);
 void SP_path_corner (edict_t *self);
 void SP_point_combat (edict_t *self);
 
@@ -119,11 +139,13 @@ void SP_misc_blackhole (edict_t *self);
 void SP_misc_eastertank (edict_t *self);
 void SP_misc_easterchick (edict_t *self);
 void SP_misc_easterchick2 (edict_t *self);
+void SP_misc_screenfader (edict_t *self);
 
 void SP_monster_berserk (edict_t *self);
 void SP_monster_gladiator (edict_t *self);
 void SP_monster_gunner (edict_t *self);
 void SP_monster_infantry (edict_t *self);
+void SP_monster_badass (edict_t *self);
 void SP_monster_soldier_light (edict_t *self);
 void SP_monster_soldier (edict_t *self);
 void SP_monster_soldier_ss (edict_t *self);
@@ -194,6 +216,7 @@ spawn_t	spawns[] = {
 	{"trigger_elevator", SP_trigger_elevator},
 	{"trigger_gravity", SP_trigger_gravity},
 	{"trigger_monsterjump", SP_trigger_monsterjump},
+	{"trigger_teleport", SP_trigger_teleport},
 	{"trigger_misc_camera", SP_trigger_misc_camera},
 
 	{"target_temp_entity", SP_target_temp_entity},
@@ -205,6 +228,8 @@ spawn_t	spawns[] = {
 	{"target_splash", SP_target_splash},
 	{"target_spawner", SP_target_spawner},
 	{"target_blaster", SP_target_blaster},
+	{"target_rocket", SP_target_rocket},
+	{"target_railgun", SP_target_railgun},
 	{"target_crosslevel_trigger", SP_target_crosslevel_trigger},
 	{"target_crosslevel_target", SP_target_crosslevel_target},
 	{"target_laser", SP_target_laser},
@@ -221,11 +246,12 @@ spawn_t	spawns[] = {
 	{"light", SP_light},
 	{"light_mine1", SP_light_mine1},
 	{"light_mine2", SP_light_mine2},
-	{"info_null", SP_info_null},
-	{"func_group", SP_info_null},
-	{"info_notnull", SP_info_notnull},
-	{"path_corner", SP_path_corner},
-	{"point_combat", SP_point_combat},
+        {"info_null", SP_info_null},
+        {"func_group", SP_info_null},
+        {"info_notnull", SP_info_notnull},
+        {"info_teleport_dest", SP_info_teleport_dest},
+        {"path_corner", SP_path_corner},
+        {"point_combat", SP_point_combat},
 
 	{"misc_explobox", SP_misc_explobox},
 	{"misc_banner", SP_misc_banner},
@@ -248,8 +274,10 @@ spawn_t	spawns[] = {
 	{"misc_eastertank", SP_misc_eastertank},
 	{"misc_easterchick", SP_misc_easterchick},
 	{"misc_easterchick2", SP_misc_easterchick2},
+	{"misc_screenfader", SP_misc_screenfader},
 
-	{"monster_berserk", SP_monster_berserk},
+        {"monster_berserk", SP_monster_berserk},
+        {"monster_badass", SP_monster_badass},
 	{"monster_gladiator", SP_monster_gladiator},
 	{"monster_gunner", SP_monster_gunner},
 	{"monster_infantry", SP_monster_infantry},
@@ -785,21 +813,6 @@ char *dm_statusbar =
 "yt 2 "
 "num 3 14 "
 
-// spectator
-"if 17 "
-  "xv 0 "
-  "yb -58 "
-  "string2 \"SPECTATOR MODE\" "
-"endif "
-
-// chase camera
-"if 16 "
-  "xv 0 "
-  "yb -68 "
-  "string \"Chasing\" "
-  "xv 64 "
-  "stat_string 16 "
-"endif "
 ;
 
 
@@ -809,6 +822,7 @@ Only used for the world.
 "sky"	environment map name
 "skyaxis"	vector axis for rotating sky
 "skyrotate"	speed of rotation in degrees/second
+"nextmap"	map to load after completing the level
 "sounds"	music cd track number
 "gravity"	800 is default gravity
 "message"	text to print at user logon
@@ -824,40 +838,49 @@ void SP_worldspawn (edict_t *ent)
 
 	// reserve some spots for dead player bodies for coop / deathmatch
 	InitBodyQue ();
+	G_ScreenFade_Reset ();
 
 	// set configstrings for items
 	SetItemNames ();
 
-	if (st.nextmap)
-		strcpy (level.nextmap, st.nextmap);
+        if (st.nextmap && st.nextmap[0])
+                CopyStringSafe(level.nextmap, sizeof(level.nextmap), st.nextmap);
 
-	// make some data visible to the server
+        // make some data visible to the server
 
-	if (ent->message && ent->message[0])
-	{
-		gi.configstring (CS_NAME, ent->message);
-		strncpy (level.level_name, ent->message, sizeof(level.level_name));
-	}
-	else
-		strncpy (level.level_name, level.mapname, sizeof(level.level_name));
+        if (ent->message && ent->message[0])
+        {
+                gi.configstring (CS_NAME, ent->message);
+                CopyStringSafe(level.level_name, sizeof(level.level_name), ent->message);
+        }
+        else
+                CopyStringSafe(level.level_name, sizeof(level.level_name), level.mapname);
 
-	if (st.sky && st.sky[0])
-		gi.configstring (CS_SKY, st.sky);
-	else
-		gi.configstring (CS_SKY, "unit1_");
+        if (st.sky && st.sky[0])
+                gi.configstring (CS_SKY, st.sky);
+        else
+                gi.configstring (CS_SKY, "unit1_");
 
-	gi.configstring (CS_SKYROTATE, va("%f", st.skyrotate) );
+        {
+                char buffer[64];
 
-	gi.configstring (CS_SKYAXIS, va("%f %f %f",
-		st.skyaxis[0], st.skyaxis[1], st.skyaxis[2]) );
+                Com_sprintf(buffer, sizeof(buffer), "%f", st.skyrotate);
+                gi.configstring (CS_SKYROTATE, buffer);
 
-	gi.configstring (CS_CDTRACK, va("%i", ent->sounds) );
+                Com_sprintf(buffer, sizeof(buffer), "%f %f %f",
+                        st.skyaxis[0], st.skyaxis[1], st.skyaxis[2]);
+                gi.configstring (CS_SKYAXIS, buffer);
 
-	gi.configstring (CS_MAXCLIENTS, va("%i", (int)(maxclients->value) ) );
+                Com_sprintf(buffer, sizeof(buffer), "%i", ent->sounds);
+                gi.configstring (CS_CDTRACK, buffer);
 
-	// status bar program
-	if (deathmatch->value)
-		gi.configstring (CS_STATUSBAR, dm_statusbar);
+                Com_sprintf(buffer, sizeof(buffer), "%i", (int)(maxclients->value));
+                gi.configstring (CS_MAXCLIENTS, buffer);
+        }
+
+        // status bar program
+        if (deathmatch->value)
+                gi.configstring (CS_STATUSBAR, dm_statusbar);
 	else
 		gi.configstring (CS_STATUSBAR, single_statusbar);
 

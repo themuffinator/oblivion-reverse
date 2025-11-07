@@ -1,0 +1,7097 @@
+{
+  "hlil": {
+    "Bitterman": {
+      "defaults": {},
+      "function": "sub_10001220",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "Check your targets": {
+      "defaults": {},
+      "function": "sub_10001090",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_bullets": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_cells": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_detpack": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_dod": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_grenades": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_mines": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_pistolplasma": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_rifleplasma": {
+      "defaults": {},
+      "function": "sub_10037c80",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_rockets": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_shells": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "ammo_slugs": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_areaportal": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1000da70",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_button": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 3
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x330": [
+          {
+            "offset": 816,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 40.0
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 3.0
+          }
+        ]
+      },
+      "function": "sub_10008d30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_clock": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 3600
+          }
+        ]
+      },
+      "function": "sub_10011160",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_conveyor": {
+      "defaults": {
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 100.0
+          },
+          {
+            "offset": 328,
+            "value": 0.0
+          }
+        ]
+      },
+      "function": "sub_1000ab80",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door": {
+      "defaults": {},
+      "function": "sub_10009830",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door_rotating": {
+      "defaults": {
+        "offset_0x10": [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        "offset_0x154": [
+          {
+            "offset": 340,
+            "value": 0
+          },
+          {
+            "offset": 340,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x158": [
+          {
+            "offset": 344,
+            "value": 0
+          },
+          {
+            "offset": 344,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x15c": [
+          {
+            "offset": 348,
+            "value": 0
+          },
+          {
+            "offset": 348,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x18": [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 2
+          }
+        ],
+        "offset_0x330": [
+          {
+            "offset": 816,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 100.0
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 3.0
+          }
+        ]
+      },
+      "function": "sub_10009bd0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door_secret": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 0
+          }
+        ],
+        "offset_0x10": [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        "offset_0x18": [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          },
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 2
+          }
+        ],
+        "offset_0x31c": [
+          {
+            "offset": 796,
+            "value": 1112014848
+          }
+        ],
+        "offset_0x320": [
+          {
+            "offset": 800,
+            "value": 1112014848
+          }
+        ],
+        "offset_0x324": [
+          {
+            "offset": 804,
+            "value": 1112014848
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 5.0
+          }
+        ]
+      },
+      "function": "sub_1000ae30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_explosive": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 1
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1000f250",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_group": {
+      "defaults": {},
+      "function": "sub_1000fd20",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_killbox": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_1000b0b0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_object": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          },
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 100
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          },
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "offset_0xfc": [
+          {
+            "offset": 252,
+            "value": 33685507
+          }
+        ]
+      },
+      "function": "sub_1000ede0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_plat": {
+      "defaults": {
+        "accel": [
+          {
+            "offset": 332,
+            "value": 5.0
+          }
+        ],
+        "decel": [
+          {
+            "offset": 336,
+            "value": 5.0
+          }
+        ],
+        "offset_0x10": [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        "offset_0x18": [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 2
+          }
+        ],
+        "offset_0x330": [
+          {
+            "offset": 816,
+            "value": 1
+          },
+          {
+            "offset": 816,
+            "value": 2
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 20.0
+          }
+        ]
+      },
+      "function": "sub_100074f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_rotate_train": {
+      "defaults": {
+        "duration": [
+          {
+            "offset": 664,
+            "value": 0.0
+          }
+        ],
+        "offset_0x10": [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        "offset_0x18": [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 0
+          },
+          {
+            "offset": 580,
+            "value": 100
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 100.0
+          }
+        ]
+      },
+      "function": "sub_10015750",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_rotating": {
+      "defaults": {},
+      "function": "sub_100086a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_timer": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 1.0
+          }
+        ]
+      },
+      "function": "sub_1000aa60",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_train": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 10
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 75
+          }
+        ],
+        "offset_0x10": [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        "offset_0x18": [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 0
+          },
+          {
+            "offset": 580,
+            "value": 20
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 100.0
+          }
+        ]
+      },
+      "function": "sub_1000a680",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_wall": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          },
+          {
+            "offset": 248,
+            "value": 3
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1000ec40",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_water": {
+      "defaults": {},
+      "function": "sub_10009fa0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_notnull": {
+      "defaults": {},
+      "function": "sub_1000eaa0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_null": {
+      "defaults": {},
+      "function": "sub_1000fd20",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_coop": {
+      "defaults": {},
+      "function": "sub_1002f630",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_deathmatch": {
+      "defaults": {},
+      "function": "sub_1002f600",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_intermission": {
+      "defaults": {},
+      "function": "sub_10002c90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_start": {
+      "defaults": {},
+      "function": "sub_1002f4f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_teleport_dest": {
+      "defaults": {
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10011510",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_adrenaline": {
+      "defaults": {},
+      "function": "sub_1000b410",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_ancient_head": {
+      "defaults": {},
+      "function": "sub_1000b490",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_armor_body": {
+      "defaults": {},
+      "function": "sub_1000c2e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_armor_combat": {
+      "defaults": {},
+      "function": "sub_1000c2e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_armor_jacket": {
+      "defaults": {},
+      "function": "sub_1000c2e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_armor_shard": {
+      "defaults": {},
+      "function": "sub_1000c2e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_bandolier": {
+      "defaults": {
+        "offset_0x6e4": [
+          {
+            "offset": 1764,
+            "value": 250
+          }
+        ],
+        "offset_0x6e8": [
+          {
+            "offset": 1768,
+            "value": 150
+          }
+        ],
+        "offset_0x6f8": [
+          {
+            "offset": 1784,
+            "value": 250
+          }
+        ],
+        "offset_0x6fc": [
+          {
+            "offset": 1788,
+            "value": 75
+          }
+        ]
+      },
+      "function": "sub_1000b4f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_breather": {
+      "defaults": {},
+      "function": "sub_1000b270",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          131072
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_enviro": {
+      "defaults": {},
+      "function": "sub_1000b270",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          131072
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 10
+          }
+        ]
+      },
+      "function": "sub_1000d160",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_large": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 25
+          }
+        ]
+      },
+      "function": "sub_1000d250",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_mega": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 100
+          }
+        ]
+      },
+      "function": "sub_1000d2c0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_small": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000d1d0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_invulnerability": {
+      "defaults": {},
+      "function": "sub_1000b270",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          131072
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_pack": {
+      "defaults": {
+        "offset_0x6e4": [
+          {
+            "offset": 1764,
+            "value": 300
+          }
+        ],
+        "offset_0x6e8": [
+          {
+            "offset": 1768,
+            "value": 200
+          }
+        ],
+        "offset_0x6ec": [
+          {
+            "offset": 1772,
+            "value": 100
+          }
+        ],
+        "offset_0x6f0": [
+          {
+            "offset": 1776,
+            "value": 100
+          }
+        ],
+        "offset_0x6f4": [
+          {
+            "offset": 1780,
+            "value": 10
+          }
+        ],
+        "offset_0x6f8": [
+          {
+            "offset": 1784,
+            "value": 300
+          }
+        ],
+        "offset_0x6fc": [
+          {
+            "offset": 1788,
+            "value": 100
+          }
+        ],
+        "offset_0x708": [
+          {
+            "offset": 1800,
+            "value": 5
+          }
+        ],
+        "offset_0x70c": [
+          {
+            "offset": 1804,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000b650",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_power_screen": {
+      "defaults": {},
+      "function": "sub_1000c560",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_power_shield": {
+      "defaults": {},
+      "function": "sub_1000c560",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_quad": {
+      "defaults": {},
+      "function": "sub_1000b270",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          131072
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_silencer": {
+      "defaults": {},
+      "function": "sub_1000b270",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          131072
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_airstrike_target": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_blue_key": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_commander_head": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_data_cd": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_data_spinner": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_pass": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_power_cube": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_pyramid": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "key_red_key": {
+      "defaults": {},
+      "function": "sub_1000bc90",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light": {
+      "defaults": {},
+      "function": "sub_1000eae0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light_mine1": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100109d0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light_mine2": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10010a10",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_actor": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268747608
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          },
+          {
+            "offset": 544,
+            "value": 4294967295
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x28": [
+          {
+            "offset": 40,
+            "value": 255
+          }
+        ],
+        "offset_0x2c": [
+          {
+            "offset": 44,
+            "value": 255
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 183
+          },
+          {
+            "offset": 56,
+            "value": 189
+          },
+          {
+            "offset": 56,
+            "value": 197
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        "sight": [
+          {
+            "offset": 904,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1001f460",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_banner": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10010200",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_bigviper": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100104f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_blackhole": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x44": [
+          {
+            "offset": 68,
+            "value": 32
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1000fd60",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_camera": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 8
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 3.0
+          }
+        ]
+      },
+      "function": "sub_100035f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_camera_target": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 0
+          }
+        ],
+        "movetarget": [
+          {
+            "offset": 480,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 8
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10003880",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_deadsoldier": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 1
+          },
+          {
+            "offset": 56,
+            "value": 2
+          },
+          {
+            "offset": 56,
+            "value": 3
+          },
+          {
+            "offset": 56,
+            "value": 4
+          },
+          {
+            "offset": 56,
+            "value": 0
+          },
+          {
+            "offset": 56,
+            "value": 5
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100102d0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_easterchick": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 208
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000fee0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_easterchick2": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 248
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000ffa0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_eastertank": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 254
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000fe20",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_explobox": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 10
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 150
+          }
+        ],
+        "offset_0x35c": [
+          {
+            "offset": 860,
+            "value": 1024
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1109393408
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000fbe0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_arm": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10010a50",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_head": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10010c30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_leg": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10010b40",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_insane": {
+      "defaults": {
+        "attack": [
+          {
+            "offset": 896,
+            "value": 0
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 300
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967246
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 0
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        "sight": [
+          {
+            "offset": 904,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10028ba0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_satellite_dish": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1124073472
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10010960",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_screenfader": {
+      "defaults": {
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_100116e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_strogg_ship": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 300.0
+          }
+        ]
+      },
+      "function": "sub_100107f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_teleporter": {
+      "defaults": {
+        "offset_0x3c": [
+          {
+            "offset": 60,
+            "value": 1
+          }
+        ],
+        "offset_0x40": [
+          {
+            "offset": 64,
+            "value": 131072
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3238002688
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3238002688
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1103101952
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          },
+          {
+            "offset": 248,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10011390",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_teleporter_dest": {
+      "defaults": {
+        "offset_0x3c": [
+          {
+            "offset": 60,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100114a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_viper": {
+      "defaults": {},
+      "function": "sub_100103f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_viper_bomb": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 1000
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10010710",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_badass": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268749592
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 1500
+          },
+          {
+            "offset": 544,
+            "value": 4294967295
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 1000
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1e4": [
+          {
+            "offset": 484,
+            "value": 1103626240
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 0
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254255616
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3266314240
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1108869120
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1101529088
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 3243245568
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10020430",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_berserk": {
+      "defaults": {
+        "attack": [
+          {
+            "offset": 896,
+            "value": 0
+          }
+        ],
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268750864
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 240
+          },
+          {
+            "offset": 544,
+            "value": 4294967295
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 250
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967236
+          }
+        ],
+        "offset_0x22c": [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 243
+          },
+          {
+            "offset": 56,
+            "value": 243
+          },
+          {
+            "offset": 56,
+            "value": 235
+          },
+          {
+            "offset": 56,
+            "value": 211
+          },
+          {
+            "offset": 56,
+            "value": 185
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10020ae0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_boss2": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268752896
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 2000
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 1000
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967096
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3261071360
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3261071360
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1113587712
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1113587712
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1117782016
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10021690",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_boss3_stand": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 414
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1119092736
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100218a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_brain": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268762928
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 300
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967146
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 145
+          },
+          {
+            "offset": 56,
+            "value": 140
+          },
+          {
+            "offset": 56,
+            "value": 128
+          }
+        ],
+        "offset_0x3c8": [
+          {
+            "offset": 968,
+            "value": 1
+          }
+        ],
+        "offset_0x3cc": [
+          {
+            "offset": 972,
+            "value": 100
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10023830",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_chick": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 175
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967226
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 82
+          },
+          {
+            "offset": 56,
+            "value": 59
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          },
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          },
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          },
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          },
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          },
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1113587712
+          },
+          {
+            "offset": 208,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10024230",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_commander_body": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x108": [
+          {
+            "offset": 264,
+            "value": 16
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1111490560
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10010100",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_cyborg": {
+      "defaults": {
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 300
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 300
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967176
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10025200",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_flipper": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 50
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 100
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100256d0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_floater": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268775664
+          },
+          {
+            "offset": 856,
+            "value": 268775024
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 200
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 300
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967216
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10025ce0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_flyer": {
+      "defaults": {},
+      "function": "sub_10026370",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_gladiator": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268782600
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 400
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967121
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 82
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10026a30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_gunner": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268784976
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 175
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967226
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1066611507
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 200
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_100272f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_hover": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268787224
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 240
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 150
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967196
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10027a20",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_infantry": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          },
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 200
+          },
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          },
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967256
+          },
+          {
+            "offset": 552,
+            "value": 4294967256
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 178
+          },
+          {
+            "offset": 56,
+            "value": 169
+          },
+          {
+            "offset": 56,
+            "value": 144
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          },
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10028260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_jorg": {
+      "defaults": {
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 3000
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 1000
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294965296
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3265265664
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3265265664
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1117782016
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1117782016
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1124859904
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        "sight": [
+          {
+            "offset": 904,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10022100",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_kigrax": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268797976
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 200
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 150
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1e4": [
+          {
+            "offset": 484,
+            "value": 1101004800
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967196
+          }
+        ],
+        "offset_0x23c": [
+          {
+            "offset": 572,
+            "value": 90
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10029330",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_medic": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268801528
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 300
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967166
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_10029ed0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_mutant": {
+      "defaults": {
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 300
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 300
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967176
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1002b7c0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_parasite": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 175
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 250
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967246
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1002c060",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 30
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ]
+      },
+      "function": "sub_1002d200",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_deatom": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 40
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ]
+      },
+      "function": "sub_1002d300",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_light": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 20
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ],
+        "offset_0x3c": [
+          {
+            "offset": 60,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1002d170",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_ss": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 40
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ]
+      },
+      "function": "sub_1002d280",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_spider": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268814848
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 400
+          },
+          {
+            "offset": 544,
+            "value": 4294967295
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          },
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967121
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 3253731328
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1002dcf0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_supertank": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268817184
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 1500
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 800
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294966796
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3263168512
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1115684864
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1121976320
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        "sight": [
+          {
+            "offset": 904,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_1002e6b0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_tank": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268820464
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 750
+          },
+          {
+            "offset": 544,
+            "value": 1000
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 500
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967096
+          },
+          {
+            "offset": 552,
+            "value": 4294967071
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 253
+          }
+        ],
+        "offset_0x3c": [
+          {
+            "offset": 60,
+            "value": 2
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1002f190",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_tank_commander": {
+      "defaults": {
+        "currentmove": [
+          {
+            "offset": 856,
+            "value": 268820464
+          }
+        ],
+        "dodge": [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        "health": [
+          {
+            "offset": 544,
+            "value": 750
+          },
+          {
+            "offset": 544,
+            "value": 1000
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 500
+          }
+        ],
+        "melee": [
+          {
+            "offset": 900,
+            "value": 0
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        "offset_0x1ec": [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 4294967096
+          },
+          {
+            "offset": 552,
+            "value": 4294967071
+          }
+        ],
+        "offset_0x364": [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 253
+          }
+        ],
+        "offset_0x3c": [
+          {
+            "offset": 60,
+            "value": 2
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1002f190",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "path_corner": {
+      "defaults": {},
+      "function": "sub_1000e670",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "point_combat": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "offset_0xbc": [
+          {
+            "offset": 188,
+            "value": 3238002688
+          }
+        ],
+        "offset_0xc0": [
+          {
+            "offset": 192,
+            "value": 3238002688
+          }
+        ],
+        "offset_0xc4": [
+          {
+            "offset": 196,
+            "value": 3246391296
+          }
+        ],
+        "offset_0xc8": [
+          {
+            "offset": 200,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xcc": [
+          {
+            "offset": 204,
+            "value": 1090519040
+          }
+        ],
+        "offset_0xd0": [
+          {
+            "offset": 208,
+            "value": 1098907648
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_1000e940",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_actor": {
+      "defaults": {
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 1135869952
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 200.0
+          }
+        ]
+      },
+      "function": "sub_1001f930",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_blaster": {
+      "defaults": {
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 15
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 1000.0
+          }
+        ]
+      },
+      "function": "sub_10018230",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_changelevel": {
+      "defaults": {},
+      "function": "sub_10017f80",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_character": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x38": [
+          {
+            "offset": 56,
+            "value": 12
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ]
+      },
+      "function": "sub_10010d20",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_crosslevel_target": {
+      "defaults": {
+        "delay": [
+          {
+            "offset": 660,
+            "value": 1.0
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_100184f0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_crosslevel_trigger": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10018490",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_earthquake": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 5
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 200.0
+          }
+        ]
+      },
+      "function": "sub_10018ea0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_explosion": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10017e30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_goal": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10017cd0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_help": {
+      "defaults": {},
+      "function": "sub_10017b00",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_laser": {
+      "defaults": {},
+      "function": "sub_100189b0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_lightramp": {
+      "defaults": {},
+      "function": "sub_10018bd0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_railgun": {
+      "defaults": {
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 150
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_100182e0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_rocket": {
+      "defaults": {
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 100
+          }
+        ]
+      },
+      "function": "sub_100183a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_secret": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10017bc0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_spawner": {
+      "defaults": {
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10018180",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_speaker": {
+      "defaults": {},
+      "function": "sub_100179a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_splash": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 32
+          }
+        ],
+        "offset_0xb8": [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ]
+      },
+      "function": "sub_10018090",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_string": {
+      "defaults": {},
+      "function": "sub_10010de0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_temp_entity": {
+      "defaults": {},
+      "function": "sub_10017930",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_always": {
+      "defaults": {
+        "delay": [
+          {
+            "offset": 660,
+            "value": 0.20000000298023224
+          }
+        ]
+      },
+      "function": "sub_100196d0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_counter": {
+      "defaults": {
+        "count": [
+          {
+            "offset": 596,
+            "value": 2
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": -1.0
+          }
+        ]
+      },
+      "function": "sub_100196a0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_elevator": {
+      "defaults": {},
+      "function": "sub_1000a970",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_gravity": {
+      "defaults": {},
+      "function": "sub_10019a60",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_hurt": {
+      "defaults": {
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 5
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_100199c0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_key": {
+      "defaults": {},
+      "function": "sub_10019530",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_misc_camera": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ]
+      },
+      "function": "sub_10003ba0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_monsterjump": {
+      "defaults": {
+        "offset_0x14": [
+          {
+            "offset": 20,
+            "value": 1135869952
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 200.0
+          }
+        ]
+      },
+      "function": "sub_10019b30",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_multiple": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 0.20000000298023224
+          }
+        ]
+      },
+      "function": "sub_10019120",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_once": {
+      "defaults": {
+        "wait": [
+          {
+            "offset": 656,
+            "value": -1.0
+          }
+        ]
+      },
+      "function": "sub_10019210",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_push": {
+      "defaults": {
+        "speed": [
+          {
+            "offset": 328,
+            "value": 1000.0
+          }
+        ]
+      },
+      "function": "sub_10019850",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_relay": {
+      "defaults": {},
+      "function": "sub_100192b0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_teleport": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 1
+          }
+        ],
+        "touch": [
+          {
+            "offset": 508,
+            "value": 0
+          },
+          {
+            "offset": 508,
+            "value": 0
+          }
+        ],
+        "wait": [
+          {
+            "offset": 656,
+            "value": 0.20000000298023224
+          }
+        ]
+      },
+      "function": "sub_10019db0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          2,
+          16
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_base": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ]
+      },
+      "function": "sub_1001a670",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_breach": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x244": [
+          {
+            "offset": 580,
+            "value": 10
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        "speed": [
+          {
+            "offset": 328,
+            "value": 50.0
+          }
+        ]
+      },
+      "function": "sub_1001a540",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_driver": {
+      "defaults": {
+        "health": [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        "mass": [
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x228": [
+          {
+            "offset": 552,
+            "value": 0
+          }
+        ],
+        "offset_0x23c": [
+          {
+            "offset": 572,
+            "value": 24
+          }
+        ],
+        "offset_0x240": [
+          {
+            "offset": 576,
+            "value": 2
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        "offset_0xfc": [
+          {
+            "offset": 252,
+            "value": 33685507
+          }
+        ]
+      },
+      "function": "sub_1001aa00",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "viewthing": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        "offset_0x44": [
+          {
+            "offset": 68,
+            "value": 64
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ]
+      },
+      "function": "sub_1000ea00",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_bfg": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_chaingun": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_deatomizer": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_dod": {
+      "defaults": {},
+      "function": "sub_1000bef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_grenadelauncher": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_hellfury": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_hyperblaster": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_machinegun": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_plasma_rifle": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_railgun": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_rocketlauncher": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_rtdu": {
+      "defaults": {},
+      "function": "sub_10014220",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_shotgun": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "weapon_supershotgun": {
+      "defaults": {},
+      "function": "sub_10035260",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          65536,
+          196608
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "worldspawn": {
+      "defaults": {
+        "offset_0x104": [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        "offset_0x28": [
+          {
+            "offset": 40,
+            "value": 1
+          }
+        ],
+        "offset_0x58": [
+          {
+            "offset": 88,
+            "value": 1
+          }
+        ],
+        "offset_0xf8": [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ]
+      },
+      "function": "sub_10016ef0",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    }
+  },
+  "repo": {
+    "func_areaportal": {
+      "defaults": {},
+      "function": "SP_func_areaportal",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_button": {
+      "defaults": {},
+      "function": "SP_func_button",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_clock": {
+      "defaults": {
+        "count": 60.0
+      },
+      "function": "SP_func_clock",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_conveyor": {
+      "defaults": {
+        "speed": 0.0
+      },
+      "function": "SP_func_conveyor",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door": {
+      "defaults": {},
+      "function": "SP_func_door",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          16,
+          64
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door_rotating": {
+      "defaults": {},
+      "function": "SP_func_door_rotating",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          16,
+          64,
+          128
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_door_secret": {
+      "defaults": {},
+      "function": "SP_func_door_secret",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_explosive": {
+      "defaults": {
+        "health": 100.0
+      },
+      "function": "SP_func_explosive",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_group": {
+      "defaults": {},
+      "function": "SP_info_null",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": [
+          1
+        ]
+      }
+    },
+    "func_killbox": {
+      "defaults": {},
+      "function": "SP_func_killbox",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_object": {
+      "defaults": {
+        "dmg": 100.0
+      },
+      "function": "SP_func_object",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          2,
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_plat": {
+      "defaults": {},
+      "function": "SP_func_plat",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_rotate_train": {
+      "defaults": {
+        "dmg": 100.0,
+        "speed": 100.0
+      },
+      "function": "SP_func_rotate_train",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_rotating": {
+      "defaults": {},
+      "function": "SP_func_rotating",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          4,
+          8,
+          32,
+          64,
+          128
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_timer": {
+      "defaults": {
+        "wait": 1.0
+      },
+      "function": "SP_func_timer",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_train": {
+      "defaults": {
+        "dmg": 100.0,
+        "speed": 100.0
+      },
+      "function": "SP_func_train",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "func_wall": {
+      "defaults": {},
+      "function": "SP_func_wall",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2,
+          4,
+          7,
+          8,
+          16
+        ],
+        "clears": [],
+        "sets": [
+          1,
+          2
+        ]
+      }
+    },
+    "func_water": {
+      "defaults": {
+        "speed": 25.0,
+        "wait": -1.0
+      },
+      "function": "SP_func_water",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": [
+          32
+        ]
+      }
+    },
+    "info_notnull": {
+      "defaults": {},
+      "function": "SP_info_notnull",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_null": {
+      "defaults": {},
+      "function": "SP_info_null",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": [
+          1
+        ]
+      }
+    },
+    "info_player_coop": {
+      "defaults": {},
+      "function": "SP_info_player_coop",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_deathmatch": {
+      "defaults": {},
+      "function": "SP_info_player_deathmatch",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_intermission": {
+      "defaults": {},
+      "function": "SP_info_player_intermission",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "info_player_start": {
+      "defaults": {},
+      "function": "SP_info_player_start",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health": {
+      "defaults": {},
+      "function": "SP_item_health",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_large": {
+      "defaults": {
+        "count": 25.0
+      },
+      "function": "SP_item_health_large",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_mega": {
+      "defaults": {
+        "count": 100.0
+      },
+      "function": "SP_item_health_mega",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "item_health_small": {
+      "defaults": {
+        "count": 2.0
+      },
+      "function": "SP_item_health_small",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light": {
+      "defaults": {},
+      "function": "SP_light",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light_mine1": {
+      "defaults": {},
+      "function": "SP_light_mine1",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "light_mine2": {
+      "defaults": {},
+      "function": "SP_light_mine2",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_actor": {
+      "defaults": {
+        "health": 100.0,
+        "mass": 200.0
+      },
+      "function": "SP_misc_actor",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          2,
+          32,
+          64
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_banner": {
+      "defaults": {},
+      "function": "SP_misc_banner",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_bigviper": {
+      "defaults": {},
+      "function": "SP_misc_bigviper",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_blackhole": {
+      "defaults": {},
+      "function": "SP_misc_blackhole",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_camera": {
+      "defaults": {},
+      "function": "SP_misc_camera",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_camera_target": {
+      "defaults": {},
+      "function": "SP_misc_camera_target",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_deadsoldier": {
+      "defaults": {},
+      "function": "SP_misc_deadsoldier",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          2,
+          4,
+          8,
+          16,
+          32
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_easterchick": {
+      "defaults": {},
+      "function": "SP_misc_easterchick",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_easterchick2": {
+      "defaults": {},
+      "function": "SP_misc_easterchick2",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_eastertank": {
+      "defaults": {},
+      "function": "SP_misc_eastertank",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_explobox": {
+      "defaults": {
+        "dmg": 150.0,
+        "health": 10.0,
+        "mass": 400.0
+      },
+      "function": "SP_misc_explobox",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_arm": {
+      "defaults": {},
+      "function": "SP_misc_gib_arm",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_head": {
+      "defaults": {},
+      "function": "SP_misc_gib_head",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_gib_leg": {
+      "defaults": {},
+      "function": "SP_misc_gib_leg",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_insane": {
+      "defaults": {
+        "gib_health": -50.0,
+        "health": 100.0,
+        "mass": 300.0
+      },
+      "function": "SP_misc_insane",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          8,
+          16
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_satellite_dish": {
+      "defaults": {},
+      "function": "SP_misc_satellite_dish",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_strogg_ship": {
+      "defaults": {},
+      "function": "SP_misc_strogg_ship",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_teleporter": {
+      "defaults": {},
+      "function": "SP_misc_teleporter",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_teleporter_dest": {
+      "defaults": {},
+      "function": "SP_misc_teleporter_dest",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_viper": {
+      "defaults": {},
+      "function": "SP_misc_viper",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "misc_viper_bomb": {
+      "defaults": {
+        "dmg": 1000.0
+      },
+      "function": "SP_misc_viper_bomb",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_berserk": {
+      "defaults": {
+        "gib_health": -60.0,
+        "health": 240.0,
+        "mass": 250.0
+      },
+      "function": "SP_monster_berserk",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_boss2": {
+      "defaults": {
+        "gib_health": -200.0,
+        "health": 2000.0,
+        "mass": 1000.0
+      },
+      "function": "SP_monster_boss2",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_boss3_stand": {
+      "defaults": {},
+      "function": "SP_monster_boss3_stand",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_brain": {
+      "defaults": {
+        "gib_health": -150.0,
+        "health": 300.0,
+        "mass": 400.0,
+        "monsterinfo.power_armor_power": 100.0
+      },
+      "function": "SP_monster_brain",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_chick": {
+      "defaults": {
+        "gib_health": -70.0,
+        "health": 175.0,
+        "mass": 200.0
+      },
+      "function": "SP_monster_chick",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_commander_body": {
+      "defaults": {},
+      "function": "SP_monster_commander_body",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_cyborg": {
+      "defaults": {
+        "gib_health": -120.0,
+        "health": 300.0,
+        "mass": 300.0,
+        "monsterinfo.max_ideal_distance": 512.0
+      },
+      "function": "SP_monster_cyborg",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_flipper": {
+      "defaults": {
+        "gib_health": -30.0,
+        "health": 50.0,
+        "mass": 100.0
+      },
+      "function": "SP_monster_flipper",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_floater": {
+      "defaults": {
+        "gib_health": -80.0,
+        "health": 200.0,
+        "mass": 300.0
+      },
+      "function": "SP_monster_floater",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_flyer": {
+      "defaults": {
+        "health": 50.0,
+        "mass": 50.0
+      },
+      "function": "SP_monster_flyer",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_gladiator": {
+      "defaults": {
+        "gib_health": -175.0,
+        "health": 400.0,
+        "mass": 400.0
+      },
+      "function": "SP_monster_gladiator",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_gunner": {
+      "defaults": {
+        "gib_health": -70.0,
+        "health": 175.0,
+        "mass": 200.0
+      },
+      "function": "SP_monster_gunner",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_hover": {
+      "defaults": {
+        "gib_health": -100.0,
+        "health": 240.0,
+        "mass": 150.0
+      },
+      "function": "SP_monster_hover",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_infantry": {
+      "defaults": {
+        "gib_health": -40.0,
+        "health": 100.0,
+        "mass": 200.0
+      },
+      "function": "SP_monster_infantry",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_jorg": {
+      "defaults": {
+        "gib_health": -2000.0,
+        "health": 3000.0,
+        "mass": 1000.0
+      },
+      "function": "SP_monster_jorg",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_kigrax": {
+      "defaults": {
+        "gib_health": -100.0,
+        "health": 200.0,
+        "mass": 120.0
+      },
+      "function": "SP_monster_kigrax",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_medic": {
+      "defaults": {
+        "gib_health": -130.0,
+        "health": 300.0,
+        "mass": 400.0
+      },
+      "function": "SP_monster_medic",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_mutant": {
+      "defaults": {
+        "gib_health": -120.0,
+        "health": 300.0,
+        "mass": 300.0
+      },
+      "function": "SP_monster_mutant",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_parasite": {
+      "defaults": {
+        "gib_health": -50.0,
+        "health": 175.0,
+        "mass": 250.0
+      },
+      "function": "SP_monster_parasite",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_sentinel": {
+      "defaults": {
+        "gib_health": -200.0,
+        "health": 1000.0,
+        "mass": 550.0,
+        "monsterinfo.speed": 28.0
+      },
+      "function": "SP_monster_sentinel",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier": {
+      "defaults": {
+        "gib_health": -30.0,
+        "health": 30.0,
+        "s.skinnum": 2.0
+      },
+      "function": "SP_monster_soldier",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_deatom": {
+      "defaults": {
+        "count": 1.0,
+        "gib_health": -40.0,
+        "health": 55.0,
+        "s.skinnum": 4.0
+      },
+      "function": "SP_monster_soldier_deatom",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_light": {
+      "defaults": {
+        "gib_health": -30.0,
+        "health": 20.0,
+        "s.skinnum": 0.0
+      },
+      "function": "SP_monster_soldier_light",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_soldier_ss": {
+      "defaults": {
+        "gib_health": -30.0,
+        "health": 40.0,
+        "s.skinnum": 4.0
+      },
+      "function": "SP_monster_soldier_ss",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_spider": {
+      "defaults": {
+        "gib_health": -120.0,
+        "health": 400.0,
+        "mass": 300.0
+      },
+      "function": "SP_monster_spider",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_supertank": {
+      "defaults": {
+        "gib_health": -500.0,
+        "health": 1500.0,
+        "mass": 800.0
+      },
+      "function": "SP_monster_supertank",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_tank": {
+      "defaults": {
+        "gib_health": -200.0,
+        "health": 750.0,
+        "mass": 500.0,
+        "s.skinnum": 2.0
+      },
+      "function": "SP_monster_tank",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "monster_tank_commander": {
+      "defaults": {
+        "gib_health": -200.0,
+        "health": 750.0,
+        "mass": 500.0,
+        "s.skinnum": 2.0
+      },
+      "function": "SP_monster_tank",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "path_corner": {
+      "defaults": {},
+      "function": "SP_path_corner",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "point_combat": {
+      "defaults": {},
+      "function": "SP_point_combat",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_actor": {
+      "defaults": {
+        "speed": 200.0
+      },
+      "function": "SP_target_actor",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_blaster": {
+      "defaults": {
+        "dmg": 15.0,
+        "speed": 1000.0
+      },
+      "function": "SP_target_blaster",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_changelevel": {
+      "defaults": {},
+      "function": "SP_target_changelevel",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_character": {
+      "defaults": {
+        "s.frame": 12.0
+      },
+      "function": "SP_target_character",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_crosslevel_target": {
+      "defaults": {
+        "delay": 1.0
+      },
+      "function": "SP_target_crosslevel_target",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_crosslevel_trigger": {
+      "defaults": {},
+      "function": "SP_target_crosslevel_trigger",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_earthquake": {
+      "defaults": {
+        "count": 5.0,
+        "speed": 200.0
+      },
+      "function": "SP_target_earthquake",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_explosion": {
+      "defaults": {},
+      "function": "SP_target_explosion",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_goal": {
+      "defaults": {},
+      "function": "SP_target_goal",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_help": {
+      "defaults": {},
+      "function": "SP_target_help",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_laser": {
+      "defaults": {},
+      "function": "SP_target_laser",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_lightramp": {
+      "defaults": {},
+      "function": "SP_target_lightramp",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_secret": {
+      "defaults": {},
+      "function": "SP_target_secret",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_spawner": {
+      "defaults": {},
+      "function": "SP_target_spawner",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_speaker": {
+      "defaults": {},
+      "function": "SP_target_speaker",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_splash": {
+      "defaults": {
+        "count": 32.0
+      },
+      "function": "SP_target_splash",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_string": {
+      "defaults": {},
+      "function": "SP_target_string",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "target_temp_entity": {
+      "defaults": {},
+      "function": "SP_target_temp_entity",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_always": {
+      "defaults": {},
+      "function": "SP_trigger_always",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_counter": {
+      "defaults": {
+        "count": 2.0,
+        "wait": -1.0
+      },
+      "function": "SP_trigger_counter",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_elevator": {
+      "defaults": {},
+      "function": "SP_trigger_elevator",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_gravity": {
+      "defaults": {},
+      "function": "SP_trigger_gravity",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_hurt": {
+      "defaults": {
+        "dmg": 5.0
+      },
+      "function": "SP_trigger_hurt",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1,
+          2
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_key": {
+      "defaults": {},
+      "function": "SP_trigger_key",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_misc_camera": {
+      "defaults": {
+        "delay": 1.0
+      },
+      "function": "SP_trigger_misc_camera",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_monsterjump": {
+      "defaults": {
+        "speed": 200.0
+      },
+      "function": "SP_trigger_monsterjump",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_multiple": {
+      "defaults": {},
+      "function": "SP_trigger_multiple",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_once": {
+      "defaults": {},
+      "function": "SP_trigger_once",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          1
+        ],
+        "clears": [],
+        "sets": [
+          4
+        ]
+      }
+    },
+    "trigger_push": {
+      "defaults": {
+        "speed": 1000.0
+      },
+      "function": "SP_trigger_push",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "trigger_relay": {
+      "defaults": {},
+      "function": "SP_trigger_relay",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_base": {
+      "defaults": {},
+      "function": "SP_turret_base",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_breach": {
+      "defaults": {
+        "dmg": 10.0,
+        "speed": 50.0
+      },
+      "function": "SP_turret_breach",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "turret_driver": {
+      "defaults": {
+        "gib_health": 0.0,
+        "health": 100.0,
+        "mass": 200.0,
+        "viewheight": 24.0
+      },
+      "function": "SP_turret_driver",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "viewthing": {
+      "defaults": {},
+      "function": "SP_viewthing",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    },
+    "worldspawn": {
+      "defaults": {},
+      "function": "SP_worldspawn",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [],
+        "clears": [],
+        "sets": []
+      }
+    }
+  }
+}

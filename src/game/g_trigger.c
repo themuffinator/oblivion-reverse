@@ -596,3 +596,200 @@ void SP_trigger_monsterjump (edict_t *self)
 	self->movedir[2] = st.height;
 }
 
+
+/*
+==============================================================================
+
+trigger_teleport
+
+==============================================================================
+*/
+
+#define TELEPORT_SF_NOMONSTER     1
+#define TELEPORT_SF_NOPLAYER      2
+#define TELEPORT_SF_START_OFF     4
+#define TELEPORT_SF_NOEFFECTS     8
+#define TELEPORT_SF_NOTOUCH       16
+
+static void trigger_teleport_touch(edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf);
+
+static void trigger_teleport_disable(edict_t *self)
+{
+	self->touch = NULL;
+	self->think = NULL;
+	self->nextthink = 0;
+}
+
+static void trigger_teleport_enable(edict_t *self)
+{
+	self->touch = trigger_teleport_touch;
+	self->think = NULL;
+	self->nextthink = 0;
+}
+
+static void trigger_teleport_toggle(edict_t *self, edict_t *other, edict_t *activator)
+{
+	if (self->touch)
+		trigger_teleport_disable(self);
+	else
+		trigger_teleport_enable(self);
+}
+
+static void trigger_teleport_activate(edict_t *self, edict_t *other, edict_t *activator)
+{
+	trigger_teleport_enable(self);
+	self->think = trigger_teleport_disable;
+	self->nextthink = level.time + FRAMETIME;
+}
+
+static void trigger_teleport_normalize_angles(vec3_t angles)
+{
+	int i;
+
+	for (i = 0; i < 2; i++)
+	{
+		while (angles[i] >= 360.0f)
+			angles[i] -= 360.0f;
+		while (angles[i] < 0.0f)
+			angles[i] += 360.0f;
+	}
+}
+
+static edict_t *trigger_teleport_find_destination(edict_t *self)
+{
+	edict_t *ent = NULL;
+	edict_t *fallback = NULL;
+
+	while ((ent = G_Find(ent, FOFS(targetname), self->target)) != NULL)
+	{
+		if (!ent->classname)
+			continue;
+
+		if (!Q_stricmp(ent->classname, "info_teleport_dest"))
+			return ent;
+
+		if (!fallback && !Q_stricmp(ent->classname, "misc_teleporter_dest"))
+			fallback = ent;
+	}
+
+	return fallback;
+}
+
+static void trigger_teleport_touch(edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
+{
+	edict_t *dest;
+	vec3_t dest_angles;
+	int i;
+
+	if (!other)
+		return;
+
+	if (other->client)
+	{
+		if (self->spawnflags & TELEPORT_SF_NOPLAYER)
+			return;
+	}
+	else if (other->svflags & SVF_MONSTER)
+	{
+		if (self->spawnflags & TELEPORT_SF_NOMONSTER)
+			return;
+	}
+	else
+	{
+		return;
+	}
+
+	if (!self->target)
+		return;
+
+	dest = trigger_teleport_find_destination(self);
+	if (!dest)
+	{
+		gi.dprintf ("Couldn't find destination\n");
+		return;
+	}
+
+	VectorCopy(dest->s.angles, dest_angles);
+	trigger_teleport_normalize_angles(dest_angles);
+
+	gi.unlinkentity(other);
+
+	VectorCopy(dest->s.origin, other->s.origin);
+	VectorCopy(dest->s.origin, other->s.old_origin);
+	other->s.origin[2] += 10;
+
+	VectorClear(other->velocity);
+	VectorClear(other->avelocity);
+	other->groundentity = NULL;
+	other->teleport_time = level.time;
+
+	if (!(self->spawnflags & TELEPORT_SF_NOEFFECTS))
+	{
+		self->s.event = EV_PLAYER_TELEPORT;
+		other->s.event = EV_PLAYER_TELEPORT;
+	}
+
+	if (other->client)
+	{
+		other->client->ps.pmove.pm_time = 160>>3;
+		other->client->ps.pmove.pm_flags |= PMF_TIME_TELEPORT;
+
+		for (i = 0; i < 3; i++)
+		{
+			other->client->ps.pmove.delta_angles[i] = ANGLE2SHORT(dest_angles[i] - other->client->resp.cmd_angles[i]);
+		}
+
+		VectorClear(other->s.angles);
+		VectorClear(other->client->ps.viewangles);
+		VectorClear(other->client->v_angle);
+	}
+	else
+	{
+		VectorCopy(dest_angles, other->s.angles);
+	}
+
+	KillBox(other);
+
+	gi.linkentity(other);
+}
+
+void SP_trigger_teleport (edict_t *self)
+{
+	if (!self->target)
+	{
+		gi.dprintf ("teleporter without a target.\n");
+		G_FreeEdict (self);
+		return;
+	}
+
+	self->movetype = MOVETYPE_NONE;
+	self->solid = SOLID_TRIGGER;
+	self->svflags |= SVF_NOCLIENT;
+	self->touch = NULL;
+	self->use = NULL;
+	self->think = NULL;
+	self->nextthink = 0;
+
+	gi.setmodel (self, self->model);
+
+	if (self->spawnflags & TELEPORT_SF_NOTOUCH)
+	{
+		self->use = trigger_teleport_activate;
+
+		if (self->spawnflags & TELEPORT_SF_NOMONSTER)
+			gi.dprintf ("ignored NOMONSTER spawnflag on trigger_teleport\n");
+		if (self->spawnflags & TELEPORT_SF_NOPLAYER)
+			gi.dprintf ("ignored NOPLAYER spawnflag on trigger_teleport\n");
+		gi.dprintf ("ignored NOTOUCH spawnflag on trigger_teleport\n");
+	}
+	else
+	{
+		self->use = trigger_teleport_toggle;
+
+		if (!(self->spawnflags & TELEPORT_SF_START_OFF))
+			trigger_teleport_enable(self);
+	}
+
+	gi.linkentity (self);
+}
+
