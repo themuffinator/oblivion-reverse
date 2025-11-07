@@ -95,7 +95,7 @@
       "0x100141d3"
     ],
     "inferred_type": "uint32_t",
-    "source_file": "references/HLIL/oblivion/split/gamex86.dll_hlil_block0091_data_1006c1dc.txt"
+    "source_file": "references/HLIL/oblivion/split/gamex86.dll_hlil_block0091_gi.error.txt"
   },
   {
     "address": "0x10015d8c",
@@ -152,7 +152,7 @@
       "0x100169ad"
     ],
     "inferred_type": "uint32_t",
-    "source_file": "references/HLIL/oblivion/split/gamex86.dll_hlil_block0098_data_1006c1c4.txt"
+    "source_file": "references/HLIL/oblivion/split/gamex86.dll_hlil_block0098_gi.dprintf.txt"
   },
   {
     "address": "0x10020224",

@@ -106,7 +106,7 @@
 10003625  __builtin_memset(s: arg1 + 0xbc, c: 0, n: 0x18)
 10003625  
 1000363d  if (ecx == 0)
-1000364d      data_1006c1c0(2, "%s with no targetname\n", *(arg1 + 0x118))
+1000364d      gi.bprintf(2, "%s with no targetname\n", *(arg1 + 0x118))
 10003656      *(arg1 + 0x12c) = &data_10060c60
 10003656  
 10003660  long double x87_r7 = fconvert.t(*(arg1 + 0x290))
@@ -119,8 +119,8 @@
 10003673  
 10003682  *(arg1 + 0x200) = sub_100035d0
 1000368c  *(arg1 + 0x1f4) = sub_10003420
-1000369d  *(arg1 + 0x28) = data_1006c1e0("sprites/s_deatom1.sp2")
-100036aa  return data_1006c208(arg1)
+1000369d  *(arg1 + 0x28) = gi.modelindex("sprites/s_deatom1.sp2")
+100036aa  return gi.linkentity(arg1)
 
 100036ab                                   90 90 90 90 90                                                             .....
 
@@ -220,7 +220,7 @@
 100037b3          else
 100037b5              int32_t eax_2 = *(arg1 + 0x128)
 100037c0              char* eax_3 = sub_1001b070(arg1 + 4)
-100037d7              data_1006c1c0(2, "%s at %s: invalid target %s\n", *(arg1 + 0x118), eax_3, 
+100037d7              gi.bprintf(2, "%s at %s: invalid target %s\n", *(arg1 + 0x118), eax_3, 
 100037d7                  eax_2)
 100037d7  
 10003836  *(arg1 + 0x1ec) = fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(0.10000000000000001))
@@ -236,15 +236,15 @@
 100038b6  __builtin_memset(s: arg1 + 0xbc, c: 0, n: 0x18)
 100038b6  
 100038ce  if (eax == 0)
-100038de      data_1006c1c0(2, "%s with no targetname\n", *(arg1 + 0x118))
+100038de      gi.bprintf(2, "%s with no targetname\n", *(arg1 + 0x118))
 100038e7      *(arg1 + 0x12c) = &data_10060c60
 100038e7  
 100038f6  *(arg1 + 0x254) = 0
 100038fc  *(arg1 + 0x1e0) = 0
 10003902  *(arg1 + 0x200) = sub_10003760
 1000390c  *(arg1 + 0x1f4) = sub_100036b0
-1000391d  *(arg1 + 0x28) = data_1006c1e0("sprites/s_deatom1.sp2")
-1000392b  return data_1006c208(arg1)
+1000391d  *(arg1 + 0x28) = gi.modelindex("sprites/s_deatom1.sp2")
+1000392b  return gi.linkentity(arg1)
 
 1000392c                                      90 90 90 90                                                              ....
 
@@ -264,13 +264,13 @@
 10003956          void* ecx_1 = *(arg1 + 0x264)
 10003956          
 10003963          if ((*(ecx_1 + 0xb8) & 4) == 0)
-1000396c              data_1006c1cc(ecx_1, &data_10046140, eax)
+1000396c              gi.centerprintf(ecx_1, &data_10046140, eax)
 10003972              int32_t eax_1 = *(arg1 + 0x280)
 10003989              int32_t var_1c_1
 10003989              int32_t var_14_1
 10003989              
 10003989              if (eax_1 == 0)
-100039ab                  var_14_1 = data_1006c1e4("misc/talk1.wav", 0x3f800000, 0x3f800000, 0)
+100039ab                  var_14_1 = gi.soundindex("misc/talk1.wav", 0x3f800000, 0x3f800000, 0)
 100039ac                  int32_t var_18_2 = 0
 100039ae                  var_1c_1 = *(arg1 + 0x264)
 10003989              else
@@ -278,7 +278,7 @@
 10003992                  int32_t var_18_1 = 0
 10003994                  var_1c_1 = *(arg1 + 0x264)
 10003994              
-100039af              data_1006c1d0(var_1c_1, 0, var_14_1, 0x3f800000, 0x3f800000, 0)
+100039af              gi.sound(var_1c_1, 0, var_14_1, 0x3f800000, 0x3f800000, 0)
 100039af      
 100039b8      result = *(arg1 + 0x128)
 100039b8      
@@ -313,7 +313,7 @@
 10003a6f                  
 10003a4a                  break
 10003a4a              
-10003a00              data_1006c1c0(2, "Illegal target for trigger_misc_…")
+10003a00              gi.bprintf(2, "Illegal target for trigger_misc_…")
 10003a00      
 10003a88      long double x87_r7_2 = fconvert.t(*(arg1 + 0x294))
 10003a8e      long double temp1_1 = fconvert.t(0f)
@@ -384,11 +384,11 @@
 10003bab  int32_t eax = *(arg1 + 0x250)
 10003bab  
 10003bb3  if (eax == 1)
-10003bdb      *(arg1 + 0x280) = data_1006c1e4("misc/secret.wav")
+10003bdb      *(arg1 + 0x280) = gi.soundindex("misc/secret.wav")
 10003bb3  else if (eax == 2)
-10003bdb      *(arg1 + 0x280) = data_1006c1e4("misc/talk.wav")
+10003bdb      *(arg1 + 0x280) = gi.soundindex("misc/talk.wav")
 10003bbf  else if (eax == 3)
-10003bdb      *(arg1 + 0x280) = data_1006c1e4("misc/trigger1.wav")
+10003bdb      *(arg1 + 0x280) = gi.soundindex("misc/trigger1.wav")
 10003bdb  
 10003bef  int32_t edx_1 = *(arg1 + 0xb8) | 1
 10003bf1  bool cond:0 = (*(arg1 + 0x11c) & 4) == 0
@@ -406,8 +406,8 @@
 10003c41  if (sub_100388c0(arg1 + 0x10, &data_10061c18) == 0)
 10003c4b      sub_1001b0c0(arg1 + 0x10, arg1 + 0x154)
 10003c4b  
-10003c5b  data_1006c1ec(arg1, *(arg1 + 0x10c))
-10003c6d  return data_1006c208(arg1)
+10003c5b  gi.setmodel(arg1, *(arg1 + 0x10c))
+10003c6d  return gi.linkentity(arg1)
 
 10003c6e                                            90 90                                                                ..
 
@@ -616,16 +616,16 @@
 10003f48          | (x87_r7_1 == temp1_1 ? 1 : 0) << 0xe
 10003f48      
 10003f4d      if ((eax:1.b & 0x40) != 0)
-10003f68          return data_1006c1c8(arg1, 2, "You must run the server with '+s…")
+10003f68          return gi.cprintf(arg1, 2, "You must run the server with '+s…")
 10003f68  
-10003f69  char* eax_2 = data_1006c264()
+10003f69  char* eax_2 = gi.args()
 10003f85  int32_t eax_8
 10003f85  int32_t ebp
 10003f85  
 10003f85  if (sub_10038b20(eax_2, "all") != 0)
 10003f95      ebp = 0
 10003f95      
-10003fab      if (sub_10038b20(data_1006c260(1, "health")) == 0)
+10003fab      if (sub_10038b20(gi.argv(1, "health")) == 0)
 10003fab          goto label_10003fad
 10003fab      
 10003ff1      if (sub_10038b20(eax_2, "weapons") != 0)
@@ -636,21 +636,21 @@
 10004240                          void* esi_1 = sub_1000b150(eax_2)
 10004240                          
 10004247                          if (esi_1 == 0)
-10004257                              esi_1 = sub_1000b150(data_1006c260(1))
+10004257                              esi_1 = sub_1000b150(gi.argv(1))
 10004257                              
 1000425e                              if (esi_1 == 0)
-10004279                                  return data_1006c1c8(arg1, 2, "unknown item\n")
+10004279                                  return gi.cprintf(arg1, 2, "unknown item\n")
 10004279                          
 1000427f                          if (*(esi_1 + 4) == 0)
-1000429a                              return data_1006c1c8(arg1, 2, "non-pickup item\n")
+1000429a                              return gi.cprintf(arg1, 2, "non-pickup item\n")
 1000429a                          
 100042b2                          int32_t edx_15 = (esi_1 - &data_10046928) s/ 0x48
 100042b4                          uint32_t eax_47
 100042b4                          eax_47.b = *(esi_1 + 0x38)
 100042b4                          
 100042bb                          if ((eax_47.b & 2) != 0)
-100042c6                              if (data_1006c25c() == 3)
-100042d1                                  int32_t eax_50 = sub_10039237(data_1006c260(2))
+100042c6                              if (gi.argc() == 3)
+100042d1                                  int32_t eax_50 = sub_10039237(gi.argv(2))
 100042e0                                  *(*(arg1 + 0x54) + (edx_15 << 2) + 0x2e4) = eax_50
 100042eb                                  return eax_50
 100042eb                              
@@ -782,10 +782,10 @@
 10003f87      ebp = 1
 10003fad      label_10003fad:
 10003fad      
-10003fb6      if (data_1006c25c() != 3)
+10003fb6      if (gi.argc() != 3)
 10003fcb          eax_8 = *(arg1 + 0x224)
 10003fb6      else
-10003fc1          eax_8 = sub_10039237(data_1006c260(2))
+10003fc1          eax_8 = sub_10039237(gi.argv(2))
 10003fc1      
 10003fd3      *(arg1 + 0x220) = eax_8
 10003fd3      
@@ -813,7 +813,7 @@
 10004374          | (x87_r7_1 == temp1_1 ? 1 : 0) << 0xe
 10004374      
 10004379      if ((eax:1.b & 0x40) != 0)
-10004390          return data_1006c1c8(arg1, 2, "You must run the server with '+s…")
+10004390          return gi.cprintf(arg1, 2, "You must run the server with '+s…")
 10004390  
 1000439b  int32_t edx_2 = *(arg1 + 0x108) ^ 0x10
 1000439e  void* ecx
@@ -824,7 +824,7 @@
 100043ae  if ((ecx.b & 0x10) != 0)
 100043b0      ecx_1 = "godmode ON\n"
 100043b0  
-100043c2  return data_1006c1c8(arg1, 2, ecx_1)
+100043c2  return gi.cprintf(arg1, 2, ecx_1)
 
 100043c3           90 90 90 90 90 90 90 90 90 90 90 90 90                                                     .............
 
@@ -846,7 +846,7 @@
 100043f4          | (x87_r7_1 == temp1_1 ? 1 : 0) << 0xe
 100043f4      
 100043f9      if ((eax:1.b & 0x40) != 0)
-10004410          return data_1006c1c8(arg1, 2, "You must run the server with '+s…")
+10004410          return gi.cprintf(arg1, 2, "You must run the server with '+s…")
 10004410  
 1000441b  int32_t edx_2 = *(arg1 + 0x108) ^ 0x20
 1000441e  void* ecx
@@ -857,7 +857,7 @@
 1000442e  if ((ecx.b & 0x20) != 0)
 10004430      ecx_1 = "notarget ON\n"
 10004430  
-10004442  return data_1006c1c8(arg1, 2, ecx_1)
+10004442  return gi.cprintf(arg1, 2, ecx_1)
 
 10004443           90 90 90 90 90 90 90 90 90 90 90 90 90                                                     .............
 
@@ -879,14 +879,14 @@
 10004474          | (x87_r7_1 == temp1_1 ? 1 : 0) << 0xe
 10004474      
 10004479      if ((eax:1.b & 0x40) != 0)
-10004490          return data_1006c1c8(arg1, 2, "You must run the server with '+s…")
+10004490          return gi.cprintf(arg1, 2, "You must run the server with '+s…")
 10004490  
 100044a0  if (*(arg1 + 0x104) == 1)
 100044a7      *(arg1 + 0x104) = 4
-100044be      return data_1006c1c8(arg1, 2, "noclip OFF\n")
+100044be      return gi.cprintf(arg1, 2, "noclip OFF\n")
 100044be  
 100044bf  *(arg1 + 0x104) = 1
-100044d7  return data_1006c1c8(arg1, 2, "noclip ON\n")
+100044d7  return gi.cprintf(arg1, 2, "noclip ON\n")
 
 100044d8                                                                          90 90 90 90 90 90 90 90                          ........
 
@@ -916,7 +916,7 @@
 // This function has unresolved stack usage. View graph of stack usage to resolve.
 
 10004560  char* var_4 = arg3
-10004564  char* eax = data_1006c264()
+10004564  char* eax = gi.args()
 10004570  var_4 = eax
 10004570  
 10004587  if (sub_10038b20(eax, "Grenades") == 0)
@@ -950,23 +950,23 @@
 100046b7  void* eax_14 = sub_1000b150(var_4)
 100046b7  
 100046c3  if (eax_14 == 0)
-100046df      return data_1006c1c8(arg4, 2, "unknown item: %s\n", var_4)
+100046df      return gi.cprintf(arg4, 2, "unknown item: %s\n", var_4)
 100046df  
 100046e0  int32_t ebx = *(eax_14 + 8)
 100046e0  
 100046e5  if (ebx == 0)
-100046fc      return data_1006c1c8(arg4, 2, "Item is not usable.\n")
+100046fc      return gi.cprintf(arg4, 2, "Item is not usable.\n")
 100046fc  
 10004722  if (*(*(arg4 + 0x54) + (((eax_14 - &data_10046928) s/ 0x48) << 2) + 0x2e4) != 0)
 1000474a      return ebx(arg4, eax_14)
 1000474a  
-1000473e  return data_1006c1c8(arg4, 2, "Out of item: %s\n", var_4)
+1000473e  return gi.cprintf(arg4, 2, "Out of item: %s\n", var_4)
 
 1000474b                                   90 90 90 90 90                                                             .....
 
 10004750    char* sub_10004750(char* arg1, int32_t* arg2, int32_t arg3)
 
-10004766  char* edx = data_1006c260(*arg2)
+10004766  char* edx = gi.argv(*arg2)
 1000476b  *arg1 = 0
 1000476e  char* eax_1
 1000476e  eax_1.b = *edx
@@ -1092,7 +1092,7 @@
 100047f4              __builtin_memcpy(dest: edi_12, src: esi_4, n: ecx_9 & 3)
 100047f9              int32_t edi_14 = *arg2 + 1
 100047fc              *arg2 = edi_14
-10004809              edx_1 = data_1006c260(edi_14)
+10004809              edx_1 = gi.argv(edi_14)
 10004814          while (*arg2 s< arg3)
 10004814          
 1000481e          return arg3
@@ -1103,7 +1103,7 @@
 
 10004870    void* sub_10004870(void* arg1)
 
-10004877  int32_t eax = data_1006c25c()
+10004877  int32_t eax = gi.argc()
 1000487d  void* ebp = arg1
 10004888  void* result_2 = nullptr
 10004892  void* result_1 = 1
@@ -1147,7 +1147,7 @@
 10004935              if (ebx_1 != 0)
 1000495c                  if (*(*(ebp + 0x54) + (((eax_5 - &data_10046928) s/ 0x48) << 2) + 0x2e4)
 1000495c                          == 0)
-10004974                      result = data_1006c1c8(ebp, 2, "Out of item: %s\n", &var_40)
+10004974                      result = gi.cprintf(ebp, 2, "Out of item: %s\n", &var_40)
 1000495c                  else
 10004960                      result = ebx_1(ebp, eax_5)
 10004960                  
@@ -1165,21 +1165,21 @@
 
 100049b0    int32_t sub_100049b0(void* arg1)
 
-100049b3  char* eax = data_1006c264()
+100049b3  char* eax = gi.args()
 100049bc  void* eax_1 = sub_1000b150(eax)
 100049bc  
 100049c8  if (eax_1 == 0)
-100049e3      return data_1006c1c8(arg1, 2, "unknown item: %s\n", eax)
+100049e3      return gi.cprintf(arg1, 2, "unknown item: %s\n", eax)
 100049e3  
 100049e4  int32_t edi = *(eax_1 + 0xc)
 100049e4  
 100049e9  if (edi == 0)
-10004a03      return data_1006c1c8(arg1, 2, "Item is not dropable.\n")
+10004a03      return gi.cprintf(arg1, 2, "Item is not dropable.\n")
 10004a03  
 10004a2f  if (*(*(arg1 + 0x54) + (((eax_1 - &data_10046928) s/ 0x48) << 2) + 0x2e4) != 0)
 10004a51      return edi(arg1, eax_1)
 10004a51  
-10004a46  return data_1006c1c8(arg1, 2, "Out of item: %s\n", eax)
+10004a46  return gi.cprintf(arg1, 2, "Out of item: %s\n", eax)
 
 10004a52                                                        90 90 90 90 90 90 90 90 90 90 90 90 90 90                    ..............
 
@@ -1195,18 +1195,18 @@
 10004a89      return 0
 10004a89  
 10004a8d  *(esi + 0xddc) = 1
-10004a97  data_1006c224(5)
+10004a97  gi.WriteByte(5)
 10004aa0  void* esi_1 = esi + 0x2e4
 10004aa6  int32_t i_1 = 0x100
 10004abb  int32_t i
 10004abb  
 10004abb  do
-10004aae      data_1006c228(*esi_1)
+10004aae      gi.WriteShort(*esi_1)
 10004ab7      esi_1 += 4
 10004aba      i = i_1
 10004aba      i_1 -= 1
 10004abb  while (i != 1)
-10004acc  return data_1006c21c(arg1, 1)
+10004acc  return gi.unicast(arg1, 1)
 
 10004acd                                         90 90 90                                                               ...
 
@@ -1216,7 +1216,7 @@
 10004ae1  int32_t eax_1 = *(*(arg1 + 0x54) + 0x2e0)
 10004ae1  
 10004aea  if (eax_1 == 0xffffffff)
-10004afe      return data_1006c1c8(arg1, 2, "No item to use.\n")
+10004afe      return gi.cprintf(arg1, 2, "No item to use.\n")
 10004afe  
 10004aff  int32_t ecx = eax_1 * 9
 10004b09  int32_t ecx_1 = *((ecx << 3) + &data_10046930)
@@ -1224,7 +1224,7 @@
 10004b12  if (ecx_1 != 0)
 10004b2f      return ecx_1(arg1, (ecx << 3) + &data_10046928)
 10004b2f  
-10004b26  return data_1006c1c8(arg1, 2, "Item is not usable.\n")
+10004b26  return gi.cprintf(arg1, 2, "Item is not usable.\n")
 
 
 10004b30    int32_t sub_10004b30(void* arg1)
@@ -1327,7 +1327,7 @@
 10004ce1  int32_t eax_1 = *(*(arg1 + 0x54) + 0x2e0)
 10004ce1  
 10004cea  if (eax_1 == 0xffffffff)
-10004cfe      return data_1006c1c8(arg1, 2, "No item to drop.\n")
+10004cfe      return gi.cprintf(arg1, 2, "No item to drop.\n")
 10004cfe  
 10004cff  int32_t ecx = eax_1 * 9
 10004d09  int32_t ecx_1 = *((ecx << 3) + &data_10046934)
@@ -1335,7 +1335,7 @@
 10004d12  if (ecx_1 != 0)
 10004d2f      return ecx_1(arg1, (ecx << 3) + &data_10046928)
 10004d2f  
-10004d26  return data_1006c1c8(arg1, 2, "Item is not dropable.\n")
+10004d26  return gi.cprintf(arg1, 2, "Item is not dropable.\n")
 
 
 10004d30    void* sub_10004d30(float arg1)
@@ -1521,45 +1521,45 @@
 10004f35      
 10004f6b      esi = var_944
 10004f6b  
-10004f97  return data_1006c1c8(arg1, 2, "%s\n%i players\n", &var_900, esi)
+10004f97  return gi.cprintf(arg1, 2, "%s\n%i players\n", &var_900, esi)
 
 10004f98                                                                          90 90 90 90 90 90 90 90                          ........
 
 10004fa0    int32_t sub_10004fa0(void* arg1)
 
-10004faa  int32_t eax_1 = sub_10039237(data_1006c260(1))
+10004faa  int32_t eax_1 = sub_10039237(gi.argv(1))
 10004fb6  void* ecx = *(arg1 + 0x54)
 10004fb6  
 10004fca  if ((*(ecx + 0x10) & 1) == 0 && *(ecx + 0xea0) s<= 1)
 10004fd3      *(ecx + 0xea0) = 1
 10004fd3      
 10004fdd      if (eax_1 u> 3)
-1000508e          eax_1 = data_1006c1c8(arg1, 2, "point\n")
+1000508e          eax_1 = gi.cprintf(arg1, 2, "point\n")
 10005094          void* ecx_2 = *(arg1 + 0x54)
 10005097          *(arg1 + 0x38) = 0x7a
 100050a1          *(ecx_2 + 0xe9c) = 0x86
 10004fdd      else
 10004fe3          switch (eax_1)
 10004ff2              case 0
-10004ff2                  data_1006c1c8(arg1, 2, "flipoff\n")
+10004ff2                  gi.cprintf(arg1, 2, "flipoff\n")
 10004ff8                  void* eax_2 = *(arg1 + 0x54)
 10004ffe                  *(arg1 + 0x38) = 0x47
 10005005                  *(eax_2 + 0xe9c) = 0x53
 10005010                  return eax_2
 10005019              case 1
-10005019                  int32_t eax_3 = data_1006c1c8(arg1, 2, "salute\n")
+10005019                  int32_t eax_3 = gi.cprintf(arg1, 2, "salute\n")
 1000501f                  void* ecx_1 = *(arg1 + 0x54)
 10005025                  *(arg1 + 0x38) = 0x53
 1000502c                  *(ecx_1 + 0xe9c) = 0x5e
 10005037                  return eax_3
 10005040              case 2
-10005040                  int32_t eax_4 = data_1006c1c8(arg1, 2, "taunt\n")
+10005040                  int32_t eax_4 = gi.cprintf(arg1, 2, "taunt\n")
 10005046                  void* edx = *(arg1 + 0x54)
 1000504c                  *(arg1 + 0x38) = 0x5e
 10005053                  *(edx + 0xe9c) = 0x6f
 1000505e                  return eax_4
 10005067              case 3
-10005067                  data_1006c1c8(arg1, 2, "wave\n")
+10005067                  gi.cprintf(arg1, 2, "wave\n")
 1000506d                  void* eax_5 = *(arg1 + 0x54)
 10005073                  *(arg1 + 0x38) = 0x6f
 1000507a                  *(eax_5 + 0xe9c) = 0x7a

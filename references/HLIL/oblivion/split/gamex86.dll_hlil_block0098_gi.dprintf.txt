@@ -1,5 +1,5 @@
 /* Extracted from: gamex86.dll_hlil.txt */
-/* Block: 98 | Name: data_1006c1c4 */
+/* Block: 98 | Name: gi.dprintf */
 
 100169dc  {
 100169dc      [0x0] =  0x1001697b

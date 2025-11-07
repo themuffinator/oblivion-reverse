@@ -234,7 +234,7 @@ Skipped files:
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0246_block.txt
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0247_block.txt
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0248_sub_10035db0.txt
-- references/HLIL/oblivion/split/gamex86.dll_hlil_block0249_data_1006c228.txt
+- references/HLIL/oblivion/split/gamex86.dll_hlil_block0249_gi.WriteShort.txt
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0250_block.txt
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0251_block.txt
 - references/HLIL/oblivion/split/gamex86.dll_hlil_block0252_block.txt

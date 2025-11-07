@@ -321,7 +321,7 @@
 100015bb  float var_48 = fconvert.s(x87_r7_3)
 100015d3  void var_38
 100015d3  __builtin_memcpy(dest: &var_38, 
-100015d3      src: data_1006c1f0(&var_38, var_70, var_6c, var_68, var_64, arg1, var_5c), n: 0x38)
+100015d3      src: gi.trace(&var_38, var_70, var_6c, var_68, var_64, arg1, var_5c), n: 0x38)
 100015d5  float var_30
 100015d5  long double x87_r7_4 = fconvert.t(var_30)
 100015d9  long double temp0 = fconvert.t(1.0)
@@ -648,7 +648,7 @@
 10001e15                                  
 10001e0d                                  goto label_10001e3a
 10001e0d                              
-10001e29                              if (data_1006c1fc(arg1 + 4, esi_1 + 4) != 0)
+10001e29                              if (gi.inPHS(arg1 + 4, esi_1 + 4) != 0)
 10001e3a                                  label_10001e3a:
 10001e3a                                  float var_c = fconvert.s(fconvert.t(*(esi_1 + 4))
 10001e3a                                      - fconvert.t(*(arg1 + 4)))
@@ -668,7 +668,7 @@
 10001e79                                      int32_t eax_29
 10001e79                                      
 10001e79                                      if (eax_28 != ecx_6)
-10001e7d                                          eax_29 = data_1006c204(ecx_6, eax_28)
+10001e7d                                          eax_29 = gi.AreasConnected(ecx_6, eax_28)
 10001e7d                                      
 10001e88                                      if (eax_28 == ecx_6 || eax_29 != 0)
 10001e98                                          *(arg1 + 0x1e8) = fconvert.s(sub_1001b160(&var_c))
@@ -819,7 +819,7 @@
 10001f9f      int32_t var_70 = 0
 10001fb1      float var_48_2 = fconvert.s(x87_r7_3 + fconvert.t(ecx_3))
 10001fb5      void var_38
-10001fb5      int32_t eax_1 = data_1006c1f0(&var_38, &var_44, 0, var_70, var_6c_1, ebp, var_64_1)
+10001fb5      int32_t eax_1 = gi.trace(&var_38, &var_44, 0, var_70, var_6c_1, ebp, var_64_1)
 10001fc2      eax_2 = *(ebp + 0x25c)
 10001fcf      __builtin_memcpy(dest: &var_38, src: eax_1, n: 0x38)
 10001fcf  
@@ -1249,7 +1249,7 @@
 10002860          if (edi_1 != 0)
 10002898              void var_70
 10002898              __builtin_memcpy(dest: &var_70, 
-10002898                  src: data_1006c1f0(&var_70, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
+10002898                  src: gi.trace(&var_70, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
 10002898                      arg1 + 0x3ac, arg1, 0x2010003), 
 10002898                  n: 0x38)
 1000289a              float var_68
@@ -1284,7 +1284,7 @@
 10002955                  sub_1001aba0(arg1 + 4, &var_c4, &var_7c, &var_88, &var_b0)
 10002993                  void var_38
 10002993                  __builtin_memcpy(dest: &var_70, 
-10002993                      src: data_1006c1f0(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
+10002993                      src: gi.trace(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
 10002993                          &var_b0, arg1, 0x2010003), 
 10002993                      n: 0x38)
 100029a5                  var_c4 = var_b4_1
@@ -1295,7 +1295,7 @@
 10002a0d                  long double x87_r7_37 =
 10002a0d                      fconvert.t(var_68) * fconvert.t(var_98_1) / fconvert.t(var_b4_1)
 10002a11                  __builtin_memcpy(dest: &var_70, 
-10002a11                      src: data_1006c1f0(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
+10002a11                      src: gi.trace(&var_38, arg1 + 4, arg1 + 0xbc, arg1 + 0xc8, 
 10002a11                          &var_a4, arg1, 0x2010003), 
 10002a11                      n: 0x38)
 10002a13                  long double x87_r6_1 = fconvert.t(var_68)
@@ -1456,7 +1456,7 @@
 10002d16      *(result + 0x184) = *(arg1 + 0x184)
 10002d22      *(result + 0x188) = *(arg1 + 0x188)
 10002d2e      *(result + 0x18c) = *(arg1 + 0x18c)
-10002d34      result = data_1006c208(result)
+10002d34      result = gi.linkentity(result)
 10002d34  
 10002d3b  return result
 
@@ -1468,7 +1468,7 @@
 10002d51  *(*(arg1 + 0x54) + 0xf14) = eax
 10002d5f  *(*(arg1 + 0x54) + 0xf0c) = 1
 10002d6d  *(arg1 + 0xb8) |= 1
-10002d73  data_1006c208(arg1)
+10002d73  gi.linkentity(arg1)
 10002d79  *(eax + 0x25c) = arg1
 10002d7f  *(eax + 0x118) = "dummy_body"
 10002d90  *(eax + 0xbc) = *(arg1 + 0xbc)
@@ -1488,7 +1488,7 @@
 10002df1  *(ecx + 0xf14) = 0
 10002dfa  *(*(arg1 + 0x54) + 0xf0c) = 0
 10002e09  *(arg1 + 0xb8) &= 0xfffffffe
-10002e0f  data_1006c208(arg1)
+10002e0f  gi.linkentity(arg1)
 10002e1f  return sub_1001b400(esi)
 
 
@@ -1598,7 +1598,7 @@
 1000307c              sub_10038a20(esi i+ 0x334, *(esi i+ 0x320), esi i+ 0x178)
 1000304f          else
 1000305c              *(esi i+ 0x32c) = arg1
-10003062              data_1006c1c0(2, "no main move\n")
+10003062              gi.bprintf(2, "no main move\n")
 10003062          
 10003091          *(esi i+ 0x32c) =
 10003091              fconvert.s(fconvert.t(data_1006c2e4) + fconvert.t(*(esi i+ 0x32c)))

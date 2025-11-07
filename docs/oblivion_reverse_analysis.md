@@ -69,7 +69,7 @@ Keep this document updated as deeper reverse-engineering yields more precise map
 
 - `target` continues to drive the scripted path: `sub_1001f380` resolves the string via `sub_1001ad80`, verifies the destination classname is `target_actor`, and aims the actor toward the node before clearing the key. Failing the lookup falls back to the idle routine instead of aborting the spawn, so the translation must mirror that graceful behaviour.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24004-L24056】
 - `targetname` becomes optional: when it is absent the spawn path writes the literal `"Yo Mama"` into the field and sets bit `0x20` in the spawnflags so the mission controller can still address the actor. Stock Quake II emits an error and frees the edict in this situation, so the Oblivion port needs to adopt the new defaulting rule.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24071-L24075】【F:src/game/m_actor.c†L440-L451】
-- `target_actor` fields retain Quake II semantics. `sub_1001f690` honours the `JUMP`, `SHOOT`, `ATTACK`, `HOLD`, and `BRUTAL` bits, applies jump impulses and `AI_BRUTAL`/`AI_STAND_GROUND` flags, forwards `pathtarget` actions, and, when a `message` is present, relays it to every connected client via `data_1006c1c8`. This mirrors the stock handler but must be reimplemented against the expanded edict layout.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24146-L24211】【F:src/game/m_actor.c†L512-L599】
+- `target_actor` fields retain Quake II semantics. `sub_1001f690` honours the `JUMP`, `SHOOT`, `ATTACK`, `HOLD`, and `BRUTAL` bits, applies jump impulses and `AI_BRUTAL`/`AI_STAND_GROUND` flags, forwards `pathtarget` actions, and, when a `message` is present, relays it to every connected client via `gi.cprintf`. This mirrors the stock handler but must be reimplemented against the expanded edict layout.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24146-L24211】【F:src/game/m_actor.c†L512-L599】
 
 ### Spawn-time defaults
 
@@ -81,7 +81,7 @@ Keep this document updated as deeper reverse-engineering yields more precise map
 
 - `sub_1001ef70` owns the per-node pause timer, faces the actor toward the `target_actor`, randomises between taunt/flipoff/idle mmoves, and prints one of three flavour barks when the node supplies a `message`, extending the stock implementation that always resumed walking immediately.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L23809-L23878】
 - `sub_1001f340` schedules the follow-up think 1–2 s in the future and switches to the idle loop, while `sub_1001f300`/`sub_1001f0f0` feed the path helper that honours HOLD/BRUTAL directives and enemy assignment on scripted targets.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L23882-L23999】
-- The touch handler also broadcasts mission text to every active client (`data_1006c1c8` loop) instead of the single `gi.cprintf` used in Quake II, so the translation must escalate the messaging scope accordingly.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24146-L24176】【F:src/game/m_actor.c†L524-L535】
+- The touch handler also broadcasts mission text to every active client (`gi.cprintf` loop) instead of the single `gi.cprintf` used in Quake II, so the translation must escalate the messaging scope accordingly.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L24146-L24176】【F:src/game/m_actor.c†L524-L535】
 
 ### New spawn keys and persistent state
 
