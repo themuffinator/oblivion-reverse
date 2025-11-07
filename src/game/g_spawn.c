@@ -144,6 +144,7 @@ void SP_monster_berserk (edict_t *self);
 void SP_monster_gladiator (edict_t *self);
 void SP_monster_gunner (edict_t *self);
 void SP_monster_infantry (edict_t *self);
+void SP_monster_badass (edict_t *self);
 void SP_monster_soldier_light (edict_t *self);
 void SP_monster_soldier (edict_t *self);
 void SP_monster_soldier_ss (edict_t *self);
@@ -273,7 +274,8 @@ spawn_t	spawns[] = {
 	{"misc_easterchick", SP_misc_easterchick},
 	{"misc_easterchick2", SP_misc_easterchick2},
 
-	{"monster_berserk", SP_monster_berserk},
+        {"monster_berserk", SP_monster_berserk},
+        {"monster_badass", SP_monster_badass},
 	{"monster_gladiator", SP_monster_gladiator},
 	{"monster_gunner", SP_monster_gunner},
 	{"monster_infantry", SP_monster_infantry},
