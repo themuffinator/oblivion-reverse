@@ -431,11 +431,44 @@ WIMPY		reduce the actor's health so it can be dispatched quickly
 
 void SP_misc_actor (edict_t *self)
 {
-	if (deathmatch->value)
-	{
-		G_FreeEdict (self);
-		return;
-	}
+        /*
+        ** Reverse-engineering notes (sub_1001f460): the retail DLL edits the
+        ** actor edict via raw offsets.  The relevant slots line up with the
+        ** symbolic fields below and should be used when translating the HLIL
+        ** logic back into C.
+        **
+        **   0x11c == offsetof(edict_t, spawnflags)        // set hidden START_ON bit
+        **   0x12c == offsetof(edict_t, targetname)        // inject "Yo Mama" default
+        **   0x028 == offsetof(edict_t, s.modelindex)      // skin/muzzle setup
+        **   0x02c == offsetof(edict_t, s.modelindex2)
+        **   0x038 == offsetof(edict_t, s.frame)           // corpse skin override
+        **   0x0b8 == offsetof(edict_t, svflags)
+        **   0x0bc == offsetof(edict_t, mins)              // mins/maxs memcpy block
+        **   0x0f8 == offsetof(edict_t, solid)
+        **   0x104 == offsetof(edict_t, movetype)
+        **   0x128 == offsetof(edict_t, target)
+        **   0x190 == offsetof(edict_t, mass)
+        **   0x1ec == offsetof(edict_t, deadflag)
+        **   0x200 == offsetof(edict_t, use)
+        **   0x204 == offsetof(edict_t, pain)
+        **   0x208 == offsetof(edict_t, die)
+        **   0x220 == offsetof(edict_t, oldenemy)          // reused as spawn timer
+        **   0x22c == offsetof(edict_t, groundentity_linkcount)
+        **   0x358 == offsetof(edict_t, monsterinfo.currentmove)
+        **   0x35c == offsetof(edict_t, monsterinfo.aiflags)
+        **   0x364 == offsetof(edict_t, monsterinfo.scale)
+        **   0x368 == offsetof(edict_t, monsterinfo.stand)
+        **   0x374 == offsetof(edict_t, monsterinfo.walk)
+        **   0x378 == offsetof(edict_t, monsterinfo.run)
+        **   0x380 == offsetof(edict_t, monsterinfo.attack)
+        **   0x384 == offsetof(edict_t, monsterinfo.melee)
+        **   0x388 == offsetof(edict_t, monsterinfo.sight)
+        */
+        if (deathmatch->value)
+        {
+                G_FreeEdict (self);
+                return;
+        }
 
 	if (!self->targetname)
 	{
