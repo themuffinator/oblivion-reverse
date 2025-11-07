@@ -77,6 +77,7 @@ void SP_target_goal (edict_t *ent);
 void SP_target_splash (edict_t *ent);
 void SP_target_spawner (edict_t *ent);
 void SP_target_blaster (edict_t *ent);
+void SP_target_railgun (edict_t *ent);
 void SP_target_crosslevel_trigger (edict_t *ent);
 void SP_target_crosslevel_target (edict_t *ent);
 void SP_target_laser (edict_t *self);
@@ -206,6 +207,7 @@ spawn_t	spawns[] = {
 	{"target_splash", SP_target_splash},
 	{"target_spawner", SP_target_spawner},
 	{"target_blaster", SP_target_blaster},
+	{"target_railgun", SP_target_railgun},
 	{"target_crosslevel_trigger", SP_target_crosslevel_trigger},
 	{"target_crosslevel_target", SP_target_crosslevel_target},
 	{"target_laser", SP_target_laser},

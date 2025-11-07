@@ -416,6 +416,68 @@ void SP_target_spawner (edict_t *self)
 
 //==========================================================
 
+static void use_target_railgun (edict_t *self, edict_t *other, edict_t *activator)
+{
+	vec3_t	start;
+	vec3_t	dir;
+
+	if (self->wait > 0.0f && self->timestamp > level.time)
+		return;
+
+	VectorCopy (self->move_origin, start);
+
+	if (VectorCompare (start, vec3_origin))
+	{
+		if (!VectorCompare (self->moveinfo.start_origin, vec3_origin))
+			VectorCopy (self->moveinfo.start_origin, start);
+		else
+			VectorCopy (self->s.origin, start);
+	}
+
+	if (!VectorCompare (self->movedir, vec3_origin))
+	{
+		VectorCopy (self->movedir, dir);
+	}
+	else if (!VectorCompare (self->move_angles, vec3_origin))
+	{
+		AngleVectors (self->move_angles, dir, NULL, NULL);
+	}
+	else
+	{
+		AngleVectors (self->moveinfo.start_angles, dir, NULL, NULL);
+	}
+
+	if (VectorCompare (dir, vec3_origin))
+		return;
+
+	fire_rail (self, start, dir, self->dmg, self->count);
+
+	if (self->noise_index)
+		gi.sound (self, CHAN_WEAPON, self->noise_index, 1, ATTN_NORM, 0);
+
+	if (self->wait > 0.0f)
+		self->timestamp = level.time + self->wait;
+}
+
+void SP_target_railgun (edict_t *self)
+{
+	VectorCopy (self->s.origin, self->moveinfo.start_origin);
+	VectorCopy (self->s.angles, self->moveinfo.start_angles);
+	VectorCopy (self->moveinfo.start_origin, self->move_origin);
+	VectorCopy (self->moveinfo.start_angles, self->move_angles);
+	G_SetMovedir (self->s.angles, self->movedir);
+
+	self->noise_index = gi.soundindex ("weapons/railgf1a.wav");
+
+	if (!self->dmg)
+		self->dmg = 150;
+
+	self->svflags |= SVF_NOCLIENT;
+	self->use = use_target_railgun;
+}
+
+//==========================================================
+
 /*QUAKED target_blaster (1 0 0) (-8 -8 -8) (8 8 8) NOTRAIL NOEFFECTS
 Fires a blaster bolt in the set direction when triggered.
 
