@@ -30,6 +30,7 @@
 #define CYBORG_FRAME_PAIN_RECOVER_END          0x51
 #define CYBORG_FRAME_DEATH_START       15
 #define CYBORG_FRAME_DEATH_END         17
+#define CYBORG_STAND_GROUND_DURATION   3.0f
 
 static int sound_sight;
 static int sound_search;
@@ -164,9 +165,13 @@ static void cyborg_land (edict_t *self)
 static void cyborg_idle_loop (edict_t *self);
 static void cyborg_locomotion_resume (edict_t *self);
 static void cyborg_attack_dispatch (edict_t *self);
+static qboolean cyborg_update_stand_ground (edict_t *self);
+static void cyborg_schedule_stand_ground (edict_t *self, float duration);
+static void cyborg_wound_stand_ground (edict_t *self);
+static void cyborg_stand_ground_think (edict_t *self);
 
 static mframe_t cyborg_frames_stand[] = {
-	{ai_stand, 0.0f, NULL}
+{ai_stand, 0.0f, cyborg_stand_ground_think}
 };
 static mmove_t cyborg_move_stand = {
 	CYBORG_FRAME_STAND_START, CYBORG_FRAME_STAND_END, cyborg_frames_stand, NULL
@@ -257,8 +262,97 @@ static mframe_t cyborg_frames_attack_barrage[] = {
     {ai_charge, 0, NULL}
 };
 static mmove_t cyborg_move_attack_barrage = {
-    CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_attack_finished
 };
+
+/*
+=============
+cyborg_update_stand_ground
+
+Check whether the wounded stand-ground timer has elapsed and clear the flag.
+=============
+*/
+static qboolean cyborg_update_stand_ground (edict_t *self)
+{
+	if (!(self->monsterinfo.aiflags & AI_STAND_GROUND))
+		return false;
+
+	if (self->oblivion.cyborg_anchor_time <= 0.0f)
+		return false;
+
+	if (level.time < self->oblivion.cyborg_anchor_time)
+		return false;
+
+	self->monsterinfo.aiflags &= ~(AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
+	self->oblivion.cyborg_anchor_time = 0.0f;
+	return true;
+}
+
+/*
+=============
+cyborg_schedule_stand_ground
+
+Apply the wounded stand-ground anchor and extend the release timer.
+=============
+*/
+static void cyborg_schedule_stand_ground (edict_t *self, float duration)
+{
+	float		anchor_expire;
+
+	if (duration <= 0.0f)
+		return;
+
+	self->monsterinfo.aiflags |= AI_STAND_GROUND;
+	anchor_expire = level.time + duration;
+
+	if (self->oblivion.cyborg_anchor_time <= level.time || self->oblivion.cyborg_anchor_time < anchor_expire)
+		self->oblivion.cyborg_anchor_time = anchor_expire;
+}
+
+/*
+=============
+cyborg_stand_ground_think
+
+Drive the scripted stand-ground timer while the cyborg is anchored in place.
+=============
+*/
+static void cyborg_stand_ground_think (edict_t *self)
+{
+	if (cyborg_update_stand_ground (self))
+		cyborg_locomotion_stage (self);
+}
+
+/*
+=============
+cyborg_wound_stand_ground
+
+Trigger the wounded stand-ground timer when health thresholds are crossed.
+=============
+*/
+static void cyborg_wound_stand_ground (edict_t *self)
+{
+	int		max_health;
+
+	max_health = self->max_health;
+	if (!max_health)
+		max_health = self->health;
+
+	if (!max_health)
+		return;
+
+	if (self->health <= max_health / 4 && self->oblivion.cyborg_anchor_stage < 2)
+	{
+		self->oblivion.cyborg_anchor_stage = 2;
+		cyborg_schedule_stand_ground (self, CYBORG_STAND_GROUND_DURATION);
+		return;
+	}
+
+	if (self->health <= max_health / 2 && self->oblivion.cyborg_anchor_stage < 1)
+	{
+		self->oblivion.cyborg_anchor_stage = 1;
+		cyborg_schedule_stand_ground (self, CYBORG_STAND_GROUND_DURATION);
+	}
+}
 
 /*
 =============
@@ -294,6 +388,8 @@ Select between the walk and run chains based on the enemy state.
 */
 static void cyborg_locomotion_stage (edict_t *self)
 {
+	cyborg_update_stand_ground (self);
+
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
 		cyborg_stand (self);
@@ -325,6 +421,8 @@ Return to the staged walk/run loop after a transient animation.
 */
 static void cyborg_locomotion_resume (edict_t *self)
 {
+	cyborg_update_stand_ground (self);
+
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
 		cyborg_stand (self);
@@ -370,30 +468,32 @@ static void cyborg_attack_dispatch (edict_t *self)
 {
 	float choice;
 
-    if (!self->enemy)
-    {
-        cyborg_stand (self);
-        return;
-    }
+	if (!self->enemy)
+	{
+		cyborg_stand (self);
+		return;
+	}
 
-    choice = random ();
+	choice = random ();
 
-    if (choice < 0.34f)
-        self->monsterinfo.currentmove = &cyborg_move_attack_primary;
-    else if (choice < 0.67f)
-        self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
-    else
-        self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
+	if (choice < 0.34f)
+		self->monsterinfo.currentmove = &cyborg_move_attack_primary;
+	else if (choice < 0.67f)
+		self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
+	else
+		self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
 }
 
 static void cyborg_attack_finished (edict_t *self)
 {
-    self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
+	self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
 
-    if (self->monsterinfo.aiflags & AI_STAND_GROUND)
-        cyborg_stand (self);
-    else
-        cyborg_locomotion_stage (self);
+	cyborg_update_stand_ground (self);
+
+	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
+		cyborg_stand (self);
+	else
+		cyborg_locomotion_stage (self);
 }
 
 /*
@@ -427,20 +527,24 @@ static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 
 static void cyborg_dead (edict_t *self)
 {
-    self->deadflag = DEAD_DEAD;
-    self->takedamage = DAMAGE_YES;
+	self->deadflag = DEAD_DEAD;
+	self->takedamage = DAMAGE_YES;
 }
 
 static void cyborg_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
-    static mframe_t death_frames[] = {
-        {ai_move, 0, NULL},
-        {ai_move, 0, NULL},
-        {ai_move, 0, cyborg_dead}
-    };
-    static mmove_t death_move = {CYBORG_FRAME_DEATH_START, CYBORG_FRAME_DEATH_END, death_frames, cyborg_dead};
+static mframe_t death_frames[] = {
+{ai_move, 0, NULL},
+{ai_move, 0, NULL},
+{ai_move, 0, cyborg_dead}
+};
+static mmove_t death_move = {CYBORG_FRAME_DEATH_START, CYBORG_FRAME_DEATH_END, death_frames, cyborg_dead};
 
-    gi.sound (self, CHAN_VOICE, sound_death, 1, ATTN_NORM, 0);
+	self->oblivion.cyborg_anchor_time = 0.0f;
+	self->oblivion.cyborg_anchor_stage = 0;
+	self->monsterinfo.aiflags &= ~AI_STAND_GROUND;
+
+	gi.sound (self, CHAN_VOICE, sound_death, 1, ATTN_NORM, 0);
 
     if (self->health <= self->gib_health)
     {
@@ -485,8 +589,11 @@ void SP_monster_cyborg (edict_t *self)
 
     self->s.sound = gi.soundindex ("cyborg/mutidle1.wav");
 
-    self->health = 300;
-    self->gib_health = -120;
+	self->health = 300;
+	self->gib_health = -120;
+	self->max_health = self->health;
+	self->oblivion.cyborg_anchor_time = 0.0f;
+	self->oblivion.cyborg_anchor_stage = 0;
 
 	self->oblivion.cyborg_pain_time = 0.0f;
 	self->oblivion.cyborg_pain_slot = 0;
