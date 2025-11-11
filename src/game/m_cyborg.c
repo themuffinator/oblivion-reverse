@@ -35,7 +35,8 @@ static int sound_idle;
 static int sound_step[3];
 static int sound_pain;
 static int sound_death;
-static int sound_attack;
+static int sound_attack[3];
+static int sound_thud;
 
 static void cyborg_step (edict_t *self)
 {
@@ -54,47 +55,108 @@ static void cyborg_search (edict_t *self)
 
 static vec3_t cyborg_flash_offset = {20.0f, 7.0f, 24.0f};
 
-static void cyborg_fire_deatom (edict_t *self)
+/*
+=============
+cyborg_fire_deatom
+
+Fire a deatomizer bolt using the frame-selectable weapon sample recovered from the HLIL snapshot.
+=============
+*/
+static void cyborg_fire_deatom (edict_t *self, int sample_index)
 {
-    vec3_t  start, dir, forward, right, target;
+	vec3_t  start, dir, forward, right, target;
 
-    if (!self->enemy)
-        return;
+	if (!self->enemy)
+		return;
 
-    AngleVectors (self->s.angles, forward, right, NULL);
-    G_ProjectSource (self->s.origin, cyborg_flash_offset, forward, right, start);
+	if (sample_index < 0 || sample_index >= (int) (sizeof (sound_attack) / sizeof (sound_attack[0])))
+		sample_index = 0;
 
-    VectorCopy (self->enemy->s.origin, target);
-    target[2] += self->enemy->viewheight;
+	AngleVectors (self->s.angles, forward, right, NULL);
+	G_ProjectSource (self->s.origin, cyborg_flash_offset, forward, right, start);
 
-    VectorSubtract (target, start, dir);
-    VectorNormalize (dir);
+	VectorCopy (self->enemy->s.origin, target);
+	target[2] += self->enemy->viewheight;
 
-    gi.sound (self, CHAN_WEAPON, sound_attack, 1, ATTN_NORM, 0);
+	VectorSubtract (target, start, dir);
+	VectorNormalize (dir);
 
-    // The original DLL rolled cyborg deatom damage from a narrow band per shot
-    // before spawning a high-speed tracking projectile.  Match that behaviour
-    // here so kill feeds attribute the hits to the proper deatomizer mods.
-    {
-        int     damage;
-        int     splash;
-        const int       speed = 1000;
-        const float     damage_radius = 480.0f;
+	gi.sound (self, CHAN_WEAPON, sound_attack[sample_index], 1.0f, ATTN_NORM, 0.0f);
 
-        damage = 90 + (int) (random () * 30.0f);
-        if (damage > 119)
-            damage = 119;
+	/* The original DLL rolled cyborg deatom damage from a narrow band per shot
+	 * before spawning a high-speed tracking projectile.  Match that behaviour
+	 * here so kill feeds attribute the hits to the proper deatomizer mods.
+	 */
+	{
+		int     damage;
+		int     splash;
+		const int       speed = 1000;
+		const float     damage_radius = 480.0f;
 
-        splash = damage / 2;
+		damage = 90 + (int) (random () * 30.0f);
+		if (damage > 119)
+			damage = 119;
 
-        fire_deatomizer (self, start, dir, damage, speed, damage_radius, splash);
-    }
+		splash = damage / 2;
+
+		fire_deatomizer (self, start, dir, damage, speed, damage_radius, splash);
+	}
 }
 
+/*
+=============
+cyborg_attack_fire_check
+
+Gate deatomizer bursts to visible targets and align the mutatck sample selection with the active firing frame.
+=============
+*/
 static void cyborg_attack_fire_check (edict_t *self)
 {
-    if (visible (self, self->enemy) && range (self, self->enemy) <= RANGE_FAR)
-        cyborg_fire_deatom (self);
+	int     sample_index;
+
+	if (!self->enemy)
+		return;
+
+	if (!visible (self, self->enemy) || range (self, self->enemy) > RANGE_FAR)
+		return;
+
+	switch (self->s.frame)
+	{
+	case CYBORG_FRAME_ATTACK1_START + 1:
+	case CYBORG_FRAME_ATTACK1_START + 4:
+	case CYBORG_FRAME_ATTACK2_START + 4:
+	case CYBORG_FRAME_ATTACK3_START + 4:
+		sample_index = 0;
+		break;
+
+	case CYBORG_FRAME_ATTACK1_START + 3:
+	case CYBORG_FRAME_ATTACK1_START + 8:
+	case CYBORG_FRAME_ATTACK2_START + 1:
+	case CYBORG_FRAME_ATTACK3_START + 1:
+		sample_index = 1;
+		break;
+
+	case CYBORG_FRAME_ATTACK1_START + 6:
+	case CYBORG_FRAME_ATTACK1_START + 10:
+	case CYBORG_FRAME_ATTACK3_START + 2:
+	default:
+		sample_index = 2;
+		break;
+	}
+
+	cyborg_fire_deatom (self, sample_index);
+}
+
+/*
+=============
+cyborg_land
+
+Play the heavy landing thud captured in the retail animation callbacks.
+=============
+*/
+static void cyborg_land (edict_t *self)
+{
+	gi.sound (self, CHAN_WEAPON, sound_thud, 1.0f, ATTN_NORM, 0.0f);
 }
 
 static void cyborg_idle_loop (edict_t *self);
@@ -139,7 +201,7 @@ static mmove_t cyborg_move_run = {
 static void cyborg_attack_finished (edict_t *self);
 
 static mframe_t cyborg_frames_attack_primary[] = {
-    {ai_charge, 0, NULL},
+    {ai_charge, 0, cyborg_land},
     {ai_charge, 0, cyborg_attack_fire_check},
     {ai_charge, 0, NULL},
     {ai_charge, 0, cyborg_attack_fire_check},
@@ -157,7 +219,7 @@ static mmove_t cyborg_move_attack_primary = {
 };
 
 static mframe_t cyborg_frames_attack_secondary[] = {
-    {ai_charge, 0, NULL},
+    {ai_charge, 0, cyborg_land},
     {ai_charge, 0, cyborg_attack_fire_check},
     {ai_charge, 0, NULL},
     {ai_charge, 0, NULL},
@@ -169,7 +231,7 @@ static mmove_t cyborg_move_attack_secondary = {
 };
 
 static mframe_t cyborg_frames_attack_barrage[] = {
-    {ai_charge, 0, NULL},
+    {ai_charge, 0, cyborg_land},
     {ai_charge, 0, cyborg_attack_fire_check},
     {ai_charge, 0, cyborg_attack_fire_check},
     {ai_charge, 0, NULL},
@@ -381,7 +443,10 @@ void SP_monster_cyborg (edict_t *self)
     sound_idle = gi.soundindex ("cyborg/mutidle1.wav");
     sound_pain = gi.soundindex ("cyborg/mutpain1.wav");
     sound_death = gi.soundindex ("cyborg/mutdeth1.wav");
-    sound_attack = gi.soundindex ("deatom/dfire.wav");
+	sound_attack[0] = gi.soundindex ("cyborg/mutatck1.wav");
+	sound_attack[1] = gi.soundindex ("cyborg/mutatck2.wav");
+	sound_attack[2] = gi.soundindex ("cyborg/mutatck3.wav");
+	sound_thud = gi.soundindex ("mutant/thud1.wav");
     sound_step[0] = gi.soundindex ("cyborg/step1.wav");
     sound_step[1] = gi.soundindex ("cyborg/step2.wav");
     sound_step[2] = gi.soundindex ("cyborg/step3.wav");
