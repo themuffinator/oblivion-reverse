@@ -36,7 +36,8 @@ static int sound_sight;
 static int sound_search;
 static int sound_idle;
 static int sound_step[3];
-static int sound_pain[2];
+static int sound_pain_samples[2];
+static int sound_pain;
 static int sound_death;
 static int sound_attack[3];
 static int sound_thud;
@@ -56,7 +57,8 @@ static void cyborg_search (edict_t *self)
     gi.sound (self, CHAN_VOICE, sound_search, 1, ATTN_IDLE, 0);
 }
 
-static vec3_t cyborg_flash_offset = {20.0f, 7.0f, 24.0f};
+static vec3_t cyborg_muzzle_right = {15.0f, 12.0f, 12.0f};
+static vec3_t cyborg_muzzle_left = {15.0f, -12.0f, 12.0f};
 
 /*
 =============
@@ -65,9 +67,9 @@ cyborg_fire_deatom
 Fire a deatomizer bolt using the frame-selectable weapon sample recovered from the HLIL snapshot.
 =============
 */
-static void cyborg_fire_deatom (edict_t *self, int sample_index)
+static void cyborg_fire_deatom (edict_t *self, const vec3_t muzzle_offset, int sample_index)
 {
-	vec3_t  start, dir, forward, right, target;
+	vec3_t	start, dir, forward, right, target;
 
 	if (!self->enemy)
 		return;
@@ -76,7 +78,7 @@ static void cyborg_fire_deatom (edict_t *self, int sample_index)
 		sample_index = 0;
 
 	AngleVectors (self->s.angles, forward, right, NULL);
-	G_ProjectSource (self->s.origin, cyborg_flash_offset, forward, right, start);
+	G_ProjectSource (self->s.origin, muzzle_offset, forward, right, start);
 
 	VectorCopy (self->enemy->s.origin, target);
 	target[2] += self->enemy->viewheight;
@@ -91,10 +93,10 @@ static void cyborg_fire_deatom (edict_t *self, int sample_index)
 	 * here so kill feeds attribute the hits to the proper deatomizer mods.
 	 */
 	{
-		int     damage;
-		int     splash;
-		const int       speed = 1000;
-		const float     damage_radius = 480.0f;
+		int		 damage;
+		int		 splash;
+		const int	 speed = 1000;
+		const float	 damage_radius = 480.0f;
 
 		damage = 90 + (int) (random () * 30.0f);
 		if (damage > 119)
@@ -108,59 +110,33 @@ static void cyborg_fire_deatom (edict_t *self, int sample_index)
 
 /*
 =============
-cyborg_attack_fire_check
+cyborg_fire_muzzle_right
 
-Gate deatomizer bursts to visible targets and align the mutatck sample selection with the active firing frame.
+Fire the right-arm deatomizer burst using the recovered muzzle offset.
 =============
 */
-static void cyborg_attack_fire_check (edict_t *self)
+static void cyborg_fire_muzzle_right (edict_t *self)
 {
-	int     sample_index;
-
-	if (!self->enemy)
-		return;
-
-	if (!visible (self, self->enemy) || range (self, self->enemy) > RANGE_FAR)
-		return;
-
-	switch (self->s.frame)
-	{
-	case CYBORG_FRAME_ATTACK1_START + 1:
-	case CYBORG_FRAME_ATTACK1_START + 4:
-	case CYBORG_FRAME_ATTACK2_START + 4:
-	case CYBORG_FRAME_ATTACK3_START + 4:
-		sample_index = 0;
-		break;
-
-	case CYBORG_FRAME_ATTACK1_START + 3:
-	case CYBORG_FRAME_ATTACK1_START + 8:
-	case CYBORG_FRAME_ATTACK2_START + 1:
-	case CYBORG_FRAME_ATTACK3_START + 1:
-		sample_index = 1;
-		break;
-
-	case CYBORG_FRAME_ATTACK1_START + 6:
-	case CYBORG_FRAME_ATTACK1_START + 10:
-	case CYBORG_FRAME_ATTACK3_START + 2:
-	default:
-		sample_index = 2;
-		break;
-	}
-
-	cyborg_fire_deatom (self, sample_index);
+	cyborg_fire_deatom (self, cyborg_muzzle_right, 0);
 }
 
 /*
 =============
-cyborg_land
+cyborg_fire_muzzle_left
 
-Play the heavy landing thud captured in the retail animation callbacks.
+Fire the left-arm deatomizer burst and alternate the retail firing samples.
 =============
 */
-static void cyborg_land (edict_t *self)
+static void cyborg_fire_muzzle_left (edict_t *self)
 {
-	gi.sound (self, CHAN_WEAPON, sound_thud, 1.0f, ATTN_NORM, 0.0f);
+	int		 sample_index;
+
+	sample_index = (self->monsterinfo.lefty & 1) ? 2 : 1;
+	self->monsterinfo.lefty ^= 1;
+
+	cyborg_fire_deatom (self, cyborg_muzzle_left, sample_index);
 }
+
 
 static void cyborg_idle_loop (edict_t *self);
 static void cyborg_locomotion_resume (edict_t *self);
@@ -221,49 +197,48 @@ static mmove_t cyborg_move_pain_recover = {
 	CYBORG_FRAME_PAIN_RECOVER_START, CYBORG_FRAME_PAIN_RECOVER_END, cyborg_frames_run, cyborg_locomotion_resume
 };
 
-static void cyborg_attack_finished (edict_t *self);
-
 static mframe_t cyborg_frames_attack_primary[] = {
-    {ai_charge, 0, cyborg_land},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 5.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 9.0f, cyborg_fire_muzzle_right},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 5.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 9.0f, cyborg_fire_muzzle_left}
 };
 static mmove_t cyborg_move_attack_primary = {
-    CYBORG_FRAME_ATTACK1_START, CYBORG_FRAME_ATTACK1_END, cyborg_frames_attack_primary, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK1_START, CYBORG_FRAME_ATTACK1_END, cyborg_frames_attack_primary, cyborg_locomotion_stage
 };
 
 static mframe_t cyborg_frames_attack_secondary[] = {
-    {ai_charge, 0, cyborg_land},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 0.0f, cyborg_fire_muzzle_right},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL}
 };
 static mmove_t cyborg_move_attack_secondary = {
-    CYBORG_FRAME_ATTACK2_START, CYBORG_FRAME_ATTACK2_END, cyborg_frames_attack_secondary, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK2_START, CYBORG_FRAME_ATTACK2_END, cyborg_frames_attack_secondary, cyborg_locomotion_stage
 };
 
 static mframe_t cyborg_frames_attack_barrage[] = {
-    {ai_charge, 0, cyborg_land},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 0.0f, cyborg_fire_muzzle_left},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL}
 };
 static mmove_t cyborg_move_attack_barrage = {
-	CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_locomotion_stage
 };
+
 
 /*
 =============
@@ -459,6 +434,19 @@ static void cyborg_run (edict_t *self)
 	cyborg_locomotion_stage (self);
 }
 
+/*
+=============
+cyborg_attack_roll
+
+Mirror the DLL's 15-bit random scaling used by the dispatcher to keep
+the retail selection probabilities intact.
+=============
+*/
+static float cyborg_attack_roll (void)
+{
+	return (rand () & 0x7fff) * (1.0f / 32768.0f);
+}
+
 static void cyborg_attack (edict_t *self)
 {
 	cyborg_attack_dispatch (self);
@@ -466,7 +454,7 @@ static void cyborg_attack (edict_t *self)
 
 static void cyborg_attack_dispatch (edict_t *self)
 {
-	float choice;
+	float	choice;
 
 	if (!self->enemy)
 	{
@@ -474,26 +462,22 @@ static void cyborg_attack_dispatch (edict_t *self)
 		return;
 	}
 
-	choice = random ();
-
-	if (choice < 0.34f)
-		self->monsterinfo.currentmove = &cyborg_move_attack_primary;
-	else if (choice < 0.67f)
-		self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
-	else
-		self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
-}
-
-static void cyborg_attack_finished (edict_t *self)
-{
 	self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
 
-	cyborg_update_stand_ground (self);
+	choice = cyborg_attack_roll ();
 
-	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
-		cyborg_stand (self);
+	if (choice < 0.5f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_primary;
+	}
+	else if (choice < 0.7f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
+	}
 	else
-		cyborg_locomotion_stage (self);
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
+	}
 }
 
 /*
@@ -512,11 +496,11 @@ static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 	if (level.time < self->oblivion.cyborg_pain_time)
 		return;
 
-	self->oblivion.cyborg_pain_time = level.time + 3.0f;
-	self->pain_debounce_time = self->oblivion.cyborg_pain_time;
+	self->pain_debounce_time = level.time + 3.0f;
+	self->oblivion.cyborg_pain_time = self->pain_debounce_time;
 
 	slot = self->oblivion.cyborg_pain_slot & 1;
-	gi.sound (self, CHAN_VOICE, sound_pain[slot], 1, ATTN_NORM, 0);
+	gi.sound (self, CHAN_VOICE, sound_pain_samples[slot], 1, ATTN_NORM, 0);
 	self->oblivion.cyborg_pain_slot ^= 1;
 
 	if (damage > 40 || random () > 0.5f)
@@ -576,8 +560,9 @@ void SP_monster_cyborg (edict_t *self)
     sound_sight = gi.soundindex ("cyborg/mutsght1.wav");
     sound_search = gi.soundindex ("cyborg/mutsrch1.wav");
     sound_idle = gi.soundindex ("cyborg/mutidle1.wav");
-	sound_pain[0] = gi.soundindex ("cyborg/mutpain1.wav");
-	sound_pain[1] = gi.soundindex ("cyborg/mutpain2.wav");
+	sound_pain = gi.soundindex ("cyborg/mutpain1.wav");
+	sound_pain_samples[0] = sound_pain;
+	sound_pain_samples[1] = gi.soundindex ("cyborg/mutpain2.wav");
     sound_death = gi.soundindex ("cyborg/mutdeth1.wav");
 	sound_attack[0] = gi.soundindex ("cyborg/mutatck1.wav");
 	sound_attack[1] = gi.soundindex ("cyborg/mutatck2.wav");

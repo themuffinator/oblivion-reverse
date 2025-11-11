@@ -46,6 +46,7 @@ def parse_mmoves(source: str, frames: dict) -> dict:
         if len(parts) < 2:
             continue
         start_symbol, end_symbol = parts[0], parts[1]
+        endfunc = parts[3] if len(parts) > 3 else None
         start_value = frames.get(start_symbol, None)
         end_value = frames.get(end_symbol, None)
         if start_value is None:
@@ -53,6 +54,8 @@ def parse_mmoves(source: str, frames: dict) -> dict:
         if end_value is None:
             end_value = int(end_symbol, 0)
         mmoves[name] = {"start": start_value, "end": end_value}
+        if endfunc:
+            mmoves[name]["endfunc"] = endfunc
     return mmoves
 
 
@@ -113,6 +116,12 @@ class CyborgRegressionTests(unittest.TestCase):
             self.fixture["expected_attack_sequence"],
             "Attack mmove dispatch order no longer matches the captured baseline",
         )
+        for variant in variants:
+            self.assertEqual(
+                self.mmoves[variant].get("endfunc"),
+                "cyborg_locomotion_stage",
+                f"Attack mmove {variant} no longer routes back through cyborg_locomotion_stage",
+            )
 
     def test_pain_cooldown_matches_fixture(self) -> None:
         block = extract_function_block(self.source_text, "cyborg_pain")
@@ -126,7 +135,7 @@ class CyborgRegressionTests(unittest.TestCase):
         )
 
     def test_attack_finished_timer_and_stand_ground(self) -> None:
-        block = extract_function_block(self.source_text, "cyborg_attack_finished")
+        block = extract_function_block(self.source_text, "cyborg_attack_dispatch")
         match = ATTACK_FINISHED_RE.search(block)
         self.assertIsNotNone(match, "Attack finished timer not found")
         base, random_scale = map(float, match.groups())
@@ -135,12 +144,7 @@ class CyborgRegressionTests(unittest.TestCase):
             random_scale,
             self.fixture["stand_ground"]["attack_finished_random"],
         )
-        self.assertIn("cyborg_stand", block, "Stand-ground branch missing from attack finished")
-        self.assertIn(
-            "cyborg_locomotion_stage",
-            block,
-            "Attack finished no longer routes back to locomotion stage",
-        )
+        self.assertIn("cyborg_stand", block, "Stand-ground branch missing from attack dispatch")
 
     def test_audio_configuration_matches_fixture(self) -> None:
         sounds: dict[str, list[str]] = {}
