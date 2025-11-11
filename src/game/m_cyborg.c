@@ -42,15 +42,9 @@ static void cyborg_step (edict_t *self)
     gi.sound (self, CHAN_BODY, sound_step[rand () % 3], 1, ATTN_NORM, 0);
 }
 
-static void cyborg_idle (edict_t *self)
-{
-    if (random () < 0.3f)
-        gi.sound (self, CHAN_VOICE, sound_idle, 1, ATTN_IDLE, 0);
-}
-
 static void cyborg_sight (edict_t *self, edict_t *other)
 {
-    gi.sound (self, CHAN_VOICE, sound_sight, 1, ATTN_NORM, 0);
+	gi.sound (self, CHAN_VOICE, sound_sight, 1, ATTN_NORM, 0);
 }
 
 static void cyborg_search (edict_t *self)
@@ -108,38 +102,38 @@ static void cyborg_locomotion_resume (edict_t *self);
 static void cyborg_attack_dispatch (edict_t *self);
 
 static mframe_t cyborg_frames_stand[] = {
-    {ai_stand, 0, cyborg_idle}
+	{ai_stand, 0.0f, NULL}
 };
 static mmove_t cyborg_move_stand = {
-    CYBORG_FRAME_STAND_START, CYBORG_FRAME_STAND_END, cyborg_frames_stand, cyborg_idle_loop
+	CYBORG_FRAME_STAND_START, CYBORG_FRAME_STAND_END, cyborg_frames_stand, NULL
 };
 
 static mframe_t cyborg_frames_idle[] = {
-    {ai_stand, 0, cyborg_idle}
+	{ai_stand, 0.0f, NULL}
 };
 static mmove_t cyborg_move_idle = {
-    CYBORG_FRAME_IDLE_START, CYBORG_FRAME_IDLE_END, cyborg_frames_idle, cyborg_idle_loop
+	CYBORG_FRAME_IDLE_START, CYBORG_FRAME_IDLE_END, cyborg_frames_idle, cyborg_stand
 };
 
 static mframe_t cyborg_frames_walk[] = {
-    {ai_walk, 10, cyborg_step},
-    {ai_walk, 2, NULL},
-    {ai_walk, 8, cyborg_step},
-    {ai_walk, 2, NULL},
-    {ai_walk, 9, cyborg_step},
-    {ai_walk, 0, NULL}
+	{ai_walk, 6.0f, NULL},
+	{ai_walk, 23.0f, cyborg_step},
+	{ai_walk, 8.0f, NULL},
+	{ai_walk, 6.0f, cyborg_step},
+	{ai_walk, 23.0f, NULL},
+	{ai_walk, 8.0f, NULL}
 };
 static mmove_t cyborg_move_walk = {
-    CYBORG_FRAME_WALK_START, CYBORG_FRAME_WALK_END, cyborg_frames_walk, cyborg_locomotion_resume
+	CYBORG_FRAME_WALK_START, CYBORG_FRAME_WALK_END, cyborg_frames_walk, NULL
 };
 
 static mframe_t cyborg_frames_run[] = {
-    {ai_run, 14, cyborg_step},
-    {ai_run, 4, NULL},
-    {ai_run, 16, cyborg_step}
+	{ai_run, -11.0f, NULL},
+	{ai_run, -8.0f, NULL},
+	{ai_run, 4.0f, NULL}
 };
 static mmove_t cyborg_move_run = {
-    CYBORG_FRAME_RUN_START, CYBORG_FRAME_RUN_END, cyborg_frames_run, cyborg_locomotion_resume
+	CYBORG_FRAME_RUN_START, CYBORG_FRAME_RUN_END, cyborg_frames_run, cyborg_locomotion_resume
 };
 
 static void cyborg_attack_finished (edict_t *self);
@@ -186,70 +180,115 @@ static mmove_t cyborg_move_attack_barrage = {
     CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_attack_finished
 };
 
+/*
+=============
+cyborg_idle_loop
+
+Queue the retail idle mmove and trigger the ambient vocal line.
+=============
+*/
 static void cyborg_idle_loop (edict_t *self)
 {
-    self->monsterinfo.currentmove = &cyborg_move_idle;
+	self->monsterinfo.currentmove = &cyborg_move_idle;
+	gi.sound (self, CHAN_VOICE, sound_idle, 1.0f, ATTN_IDLE, 0.0f);
 }
 
+/*
+=============
+cyborg_stand
+
+Route the monsterinfo state back to the one-frame stand loop.
+=============
+*/
 static void cyborg_stand (edict_t *self)
 {
-    self->monsterinfo.currentmove = &cyborg_move_stand;
+	self->monsterinfo.currentmove = &cyborg_move_stand;
 }
 
+/*
+=============
+cyborg_locomotion_stage
+
+Select between the walk and run chains based on the enemy state.
+=============
+*/
 static void cyborg_locomotion_stage (edict_t *self)
 {
-    if (self->monsterinfo.aiflags & AI_STAND_GROUND)
-    {
-        cyborg_stand (self);
-        return;
-    }
+	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
+	{
+		cyborg_stand (self);
+		return;
+	}
 
-    if (!self->enemy)
-    {
-        cyborg_stand (self);
-        return;
-    }
+	if (!self->enemy)
+	{
+		cyborg_idle_loop (self);
+		return;
+	}
 
-    if (range (self, self->enemy) > RANGE_NEAR && random () > 0.4f)
-        self->monsterinfo.currentmove = &cyborg_move_run;
-    else
-        self->monsterinfo.currentmove = &cyborg_move_walk;
+	if (range (self, self->enemy) > RANGE_NEAR && random () > 0.4f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_run;
+	}
+	else
+	{
+		self->monsterinfo.currentmove = &cyborg_move_walk;
+	}
+}
+
+/*
+=============
+cyborg_locomotion_resume
+
+Return to the staged walk/run loop after a transient animation.
+=============
+*/
+static void cyborg_locomotion_resume (edict_t *self)
+{
+	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
+	{
+		cyborg_stand (self);
+		return;
+	}
+
+	if (!self->enemy)
+	{
+		cyborg_idle_loop (self);
+		return;
+	}
+
+	if (range (self, self->enemy) > RANGE_NEAR)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_run;
+	}
+	else if (random () > 0.5f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_walk;
+	}
+	else
+	{
+		self->monsterinfo.currentmove = &cyborg_move_run;
+	}
 }
 
 static void cyborg_walk (edict_t *self)
 {
-    cyborg_locomotion_stage (self);
+	cyborg_locomotion_stage (self);
 }
 
 static void cyborg_run (edict_t *self)
 {
-    cyborg_locomotion_stage (self);
-}
-
-static void cyborg_locomotion_resume (edict_t *self)
-{
-    if (self->monsterinfo.aiflags & AI_STAND_GROUND || !self->enemy)
-    {
-        cyborg_stand (self);
-        return;
-    }
-
-    if (range (self, self->enemy) > RANGE_NEAR)
-        self->monsterinfo.currentmove = &cyborg_move_run;
-    else if (random () > 0.5f)
-        self->monsterinfo.currentmove = &cyborg_move_walk;
-    else
-        self->monsterinfo.currentmove = &cyborg_move_run;
+	cyborg_locomotion_stage (self);
 }
 
 static void cyborg_attack (edict_t *self)
 {
-    cyborg_attack_dispatch (self);
+	cyborg_attack_dispatch (self);
 }
 
 static void cyborg_attack_dispatch (edict_t *self)
 {
-    float choice;
+	float choice;
 
     if (!self->enemy)
     {
