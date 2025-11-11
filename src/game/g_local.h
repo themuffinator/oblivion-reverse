@@ -73,6 +73,8 @@ struct edict_s *controller;              // active mission / path controller
 	int                     spider_combo_last;              // most recent combo chain
 	int                     spider_combo_stage;             // current combo stage
 	float           spider_combo_time;             // combo chaining timer
+	float           cyborg_pain_time;              // cooldown timer for cyborg pain reactions
+	int             cyborg_pain_slot;              // alternating pain sound selector
 } edict_oblivion_ext_t;
 
 typedef enum mission_event_e

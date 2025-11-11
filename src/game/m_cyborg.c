@@ -24,8 +24,10 @@
 #define CYBORG_FRAME_ATTACK2_END       0x34
 #define CYBORG_FRAME_ATTACK3_START     0x35
 #define CYBORG_FRAME_ATTACK3_END       0x3a
-#define CYBORG_FRAME_PAIN_START        13
-#define CYBORG_FRAME_PAIN_END          14
+#define CYBORG_FRAME_PAIN_STAGGER_START        0x49
+#define CYBORG_FRAME_PAIN_STAGGER_END          0x4e
+#define CYBORG_FRAME_PAIN_RECOVER_START        0x4f
+#define CYBORG_FRAME_PAIN_RECOVER_END          0x51
 #define CYBORG_FRAME_DEATH_START       15
 #define CYBORG_FRAME_DEATH_END         17
 
@@ -33,7 +35,7 @@ static int sound_sight;
 static int sound_search;
 static int sound_idle;
 static int sound_step[3];
-static int sound_pain;
+static int sound_pain[2];
 static int sound_death;
 static int sound_attack;
 
@@ -134,6 +136,22 @@ static mframe_t cyborg_frames_run[] = {
 };
 static mmove_t cyborg_move_run = {
 	CYBORG_FRAME_RUN_START, CYBORG_FRAME_RUN_END, cyborg_frames_run, cyborg_locomotion_resume
+};
+
+static mframe_t cyborg_frames_pain_stagger[] = {
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL}
+};
+static mmove_t cyborg_move_pain_stagger = {
+	CYBORG_FRAME_PAIN_STAGGER_START, CYBORG_FRAME_PAIN_STAGGER_END, cyborg_frames_pain_stagger, cyborg_locomotion_resume
+};
+
+static mmove_t cyborg_move_pain_recover = {
+	CYBORG_FRAME_PAIN_RECOVER_START, CYBORG_FRAME_PAIN_RECOVER_END, cyborg_frames_run, cyborg_locomotion_resume
 };
 
 static void cyborg_attack_finished (edict_t *self);
@@ -316,20 +334,33 @@ static void cyborg_attack_finished (edict_t *self)
         cyborg_locomotion_stage (self);
 }
 
+/*
+=============
+cyborg_pain
+
+Mirror the retail stagger handler by enforcing the dedicated cooldown,
+alternating the voice samples, and branching into the extended mmove
+tables recovered from the HLIL dump.
+=============
+*/
 static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
-    static mframe_t pain_frames[] = {
-        {ai_move, 0, NULL},
-        {ai_move, 0, NULL}
-    };
-    static mmove_t pain_move = {CYBORG_FRAME_PAIN_START, CYBORG_FRAME_PAIN_END, pain_frames, cyborg_run};
+	int	slot;
 
-    if (level.time < self->pain_debounce_time)
-        return;
+	if (level.time < self->oblivion.cyborg_pain_time)
+		return;
 
-    self->pain_debounce_time = level.time + 2.0f;
-    gi.sound (self, CHAN_VOICE, sound_pain, 1, ATTN_NORM, 0);
-    self->monsterinfo.currentmove = &pain_move;
+	self->oblivion.cyborg_pain_time = level.time + 3.0f;
+	self->pain_debounce_time = self->oblivion.cyborg_pain_time;
+
+	slot = self->oblivion.cyborg_pain_slot & 1;
+	gi.sound (self, CHAN_VOICE, sound_pain[slot], 1, ATTN_NORM, 0);
+	self->oblivion.cyborg_pain_slot ^= 1;
+
+	if (damage > 40 || random () > 0.5f)
+		self->monsterinfo.currentmove = &cyborg_move_pain_stagger;
+	else
+		self->monsterinfo.currentmove = &cyborg_move_pain_recover;
 }
 
 static void cyborg_dead (edict_t *self)
@@ -379,7 +410,8 @@ void SP_monster_cyborg (edict_t *self)
     sound_sight = gi.soundindex ("cyborg/mutsght1.wav");
     sound_search = gi.soundindex ("cyborg/mutsrch1.wav");
     sound_idle = gi.soundindex ("cyborg/mutidle1.wav");
-    sound_pain = gi.soundindex ("cyborg/mutpain1.wav");
+	sound_pain[0] = gi.soundindex ("cyborg/mutpain1.wav");
+	sound_pain[1] = gi.soundindex ("cyborg/mutpain2.wav");
     sound_death = gi.soundindex ("cyborg/mutdeth1.wav");
     sound_attack = gi.soundindex ("deatom/dfire.wav");
     sound_step[0] = gi.soundindex ("cyborg/step1.wav");
@@ -391,7 +423,9 @@ void SP_monster_cyborg (edict_t *self)
     self->health = 300;
     self->gib_health = -120;
 
-    self->pain = cyborg_pain;
+	self->oblivion.cyborg_pain_time = 0.0f;
+	self->oblivion.cyborg_pain_slot = 0;
+	self->pain = cyborg_pain;
     self->die = cyborg_die;
 
     self->monsterinfo.stand = cyborg_stand;
