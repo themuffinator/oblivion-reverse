@@ -67,6 +67,9 @@ struct edict_s *controller;              // active mission / path controller
 	char            *mission_title;                  // mission log title override
 	char            *mission_text;                   // mission log body text
 
+	float           cyborg_anchor_time;             // wounded stand-ground release timer
+	int             cyborg_anchor_stage;            // highest wounded anchor stage applied
+
 	qboolean        spider_alt_idle;                // alternate idle loop for boss variant
 	qboolean        spider_staggered;               // pain stagger flag
 	int                     spider_combo_next;              // next combo chain seed
