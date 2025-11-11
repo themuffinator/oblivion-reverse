@@ -34,7 +34,7 @@ struct edict_s;
 
 typedef struct edict_oblivion_ext_s
 {
-        struct edict_s *controller;              // active mission / path controller
+struct edict_s *controller;              // active mission / path controller
         struct edict_s *last_controller;         // controller that most recently fired us
         struct edict_s *prev_path;               // last target_actor that we visited
         struct edict_s *path_target;             // cached pointer for the pending path step
@@ -61,11 +61,18 @@ typedef struct edict_oblivion_ext_s
         vec3_t          mission_origin;                  // world-space mission marker
         vec3_t          mission_angles;                  // mission marker orientation
         vec3_t          mission_velocity;                // mission marker velocity for moving targets
-        float           mission_blend;                   // HUD blend strength for mission markers
-        float           mission_radius;                  // mission trigger radius in world units
-        char            *mission_id;                     // mission objective identifier
-        char            *mission_title;                  // mission log title override
-        char            *mission_text;                   // mission log body text
+	float           mission_blend;                   // HUD blend strength for mission markers
+	float           mission_radius;                  // mission trigger radius in world units
+	char            *mission_id;                     // mission objective identifier
+	char            *mission_title;                  // mission log title override
+	char            *mission_text;                   // mission log body text
+
+	qboolean        spider_alt_idle;                // alternate idle loop for boss variant
+	qboolean        spider_staggered;               // pain stagger flag
+	int                     spider_combo_next;              // next combo chain seed
+	int                     spider_combo_last;              // most recent combo chain
+	int                     spider_combo_stage;             // current combo stage
+	float           spider_combo_time;             // combo chaining timer
 } edict_oblivion_ext_t;
 
 typedef enum mission_event_e
