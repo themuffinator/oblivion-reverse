@@ -145,47 +145,59 @@ static void kigrax_die (edict_t *self, edict_t *inflictor, edict_t *attacker, in
     self->monsterinfo.currentmove = &death_move;
 }
 
+/*
+=============
+SP_monster_kigrax
+
+Register the hovering Kigrax sentry and align its spawn defaults with the
+extracted HLIL manifest.
+=============
+*/
 void SP_monster_kigrax (edict_t *self)
 {
-    if (deathmatch->value)
-    {
-        G_FreeEdict (self);
-        return;
-    }
+	if (deathmatch->value)
+	{
+		G_FreeEdict (self);
+		return;
+	}
 
-    self->s.modelindex = gi.modelindex ("models/monsters/kigrax/tris.md2");
-    VectorSet (self->mins, -20.0f, -20.0f, -32.0f);
-    VectorSet (self->maxs, 20.0f, 20.0f, 12.0f);
-    self->movetype = MOVETYPE_FLY;
-    self->solid = SOLID_BBOX;
-    self->flags |= FL_FLY;
-    self->mass = 120;
+	self->s.modelindex = gi.modelindex ("models/monsters/kigrax/tris.md2");
+	VectorSet (self->mins, -20.0f, -20.0f, -32.0f);
+	VectorSet (self->maxs, 20.0f, 20.0f, 12.0f);
+	self->movetype = MOVETYPE_STEP; /* HLIL offset_0x104 keeps Kigrax on the step mover */
+	self->solid = SOLID_BBOX;
+	self->flags |= FL_FLY;
+	self->mass = 150; /* HLIL mass default */
+	self->yaw_speed = 20.0f; /* HLIL offset_0x1e4 yaw speed */
 
-    sound_sight = gi.soundindex ("hover/hovsght1.wav");
-    sound_search = gi.soundindex ("hover/hovsrch1.wav");
-    sound_idle = gi.soundindex ("kigrax/hovidle1.wav");
-    sound_pain = gi.soundindex ("hover/hovpain1.wav");
-    sound_death = gi.soundindex ("hover/hovdeth1.wav");
-    sound_attack = gi.soundindex ("kigrax/hovatck1.wav");
+	sound_sight = gi.soundindex ("hover/hovsght1.wav");
+	sound_search = gi.soundindex ("hover/hovsrch1.wav");
+	sound_idle = gi.soundindex ("kigrax/hovidle1.wav");
+	sound_pain = gi.soundindex ("hover/hovpain1.wav");
+	sound_death = gi.soundindex ("hover/hovdeth1.wav");
+	sound_attack = gi.soundindex ("kigrax/hovatck1.wav");
 
-    self->s.sound = sound_idle;
+	self->s.sound = sound_idle;
 
-    self->health = 200;
-    self->gib_health = -100;
+	self->health = 200;
+	self->gib_health = -100;
+	self->viewheight = 90; /* HLIL offset_0x23c view height */
 
-    self->pain = kigrax_pain;
-    self->die = kigrax_die;
+	self->pain = kigrax_pain;
+	self->die = kigrax_die;
 
-    self->monsterinfo.stand = kigrax_hover;
-    self->monsterinfo.walk = kigrax_fly;
-    self->monsterinfo.run = kigrax_fly;
-    self->monsterinfo.attack = kigrax_attack;
-    self->monsterinfo.melee = NULL;
-    self->monsterinfo.sight = kigrax_sight;
-    self->monsterinfo.search = kigrax_search;
-    self->monsterinfo.aiflags |= AI_FLOAT;
+	self->monsterinfo.stand = kigrax_hover;
+	self->monsterinfo.walk = kigrax_fly;
+	self->monsterinfo.run = kigrax_fly;
+	self->monsterinfo.attack = kigrax_attack;
+	self->monsterinfo.melee = NULL;
+	self->monsterinfo.sight = kigrax_sight;
+	self->monsterinfo.search = kigrax_search;
+	self->monsterinfo.aiflags |= AI_FLOAT;
+	self->monsterinfo.scale = 1.0f; /* HLIL offset_0x364 model scale */
 
-    kigrax_hover (self);
+	kigrax_hover (self);
 
-    flymonster_start (self);
+	flymonster_start (self);
 }
+
