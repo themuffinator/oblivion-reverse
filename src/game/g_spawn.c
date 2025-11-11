@@ -174,11 +174,568 @@ void SP_turret_base (edict_t *self);
 void SP_turret_driver (edict_t *self);
 
 
+/*
+=============
+SP_SpawnItemByClassname
+
+Resolves an item classname to a gitem_t and spawns it if possible.
+=============
+*/
+static void SP_SpawnItemByClassname (edict_t *ent, const char *classname)
+{
+	gitem_t	*item;
+
+	if (!classname)
+		return;
+
+	item = FindItemByClassname ((char *)classname);
+	if (!item)
+	{
+		gi.dprintf ("SP_SpawnItemByClassname: unknown item %s\n", classname);
+		return;
+	}
+
+	SpawnItem (ent, item);
+}
+
+/*
+=============
+SP_ammo_bullets
+=============
+*/
+void SP_ammo_bullets (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_bullets");
+}
+
+/*
+=============
+SP_ammo_cells
+=============
+*/
+void SP_ammo_cells (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_cells");
+}
+
+/*
+=============
+SP_ammo_detpack
+=============
+*/
+void SP_ammo_detpack (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_detpack");
+}
+
+/*
+=============
+SP_ammo_dod
+=============
+*/
+void SP_ammo_dod (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_dod");
+}
+
+/*
+=============
+SP_ammo_grenades
+=============
+*/
+void SP_ammo_grenades (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_grenades");
+}
+
+/*
+=============
+SP_ammo_mines
+=============
+*/
+void SP_ammo_mines (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_mines");
+}
+
+/*
+=============
+SP_ammo_pistolplasma
+=============
+*/
+void SP_ammo_pistolplasma (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_pistolplasma");
+}
+
+/*
+=============
+SP_ammo_rifleplasma
+=============
+*/
+void SP_ammo_rifleplasma (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_rifleplasma");
+}
+
+/*
+=============
+SP_ammo_rockets
+=============
+*/
+void SP_ammo_rockets (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_rockets");
+}
+
+/*
+=============
+SP_ammo_shells
+=============
+*/
+void SP_ammo_shells (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_shells");
+}
+
+/*
+=============
+SP_ammo_slugs
+=============
+*/
+void SP_ammo_slugs (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "ammo_slugs");
+}
+
+/*
+=============
+SP_item_adrenaline
+=============
+*/
+void SP_item_adrenaline (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_adrenaline");
+}
+
+/*
+=============
+SP_item_ancient_head
+=============
+*/
+void SP_item_ancient_head (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_ancient_head");
+}
+
+/*
+=============
+SP_item_armor_body
+=============
+*/
+void SP_item_armor_body (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_armor_body");
+}
+
+/*
+=============
+SP_item_armor_combat
+=============
+*/
+void SP_item_armor_combat (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_armor_combat");
+}
+
+/*
+=============
+SP_item_armor_jacket
+=============
+*/
+void SP_item_armor_jacket (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_armor_jacket");
+}
+
+/*
+=============
+SP_item_armor_shard
+=============
+*/
+void SP_item_armor_shard (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_armor_shard");
+}
+
+/*
+=============
+SP_item_bandolier
+=============
+*/
+void SP_item_bandolier (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_bandolier");
+}
+
+/*
+=============
+SP_item_breather
+=============
+*/
+void SP_item_breather (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_breather");
+}
+
+/*
+=============
+SP_item_enviro
+=============
+*/
+void SP_item_enviro (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_enviro");
+}
+
+/*
+=============
+SP_item_invulnerability
+=============
+*/
+void SP_item_invulnerability (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_invulnerability");
+}
+
+/*
+=============
+SP_item_pack
+=============
+*/
+void SP_item_pack (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_pack");
+}
+
+/*
+=============
+SP_item_power_screen
+=============
+*/
+void SP_item_power_screen (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_power_screen");
+}
+
+/*
+=============
+SP_item_power_shield
+=============
+*/
+void SP_item_power_shield (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_power_shield");
+}
+
+/*
+=============
+SP_item_quad
+=============
+*/
+void SP_item_quad (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_quad");
+}
+
+/*
+=============
+SP_item_silencer
+=============
+*/
+void SP_item_silencer (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "item_silencer");
+}
+
+/*
+=============
+SP_key_airstrike_target
+=============
+*/
+void SP_key_airstrike_target (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_airstrike_target");
+}
+
+/*
+=============
+SP_key_blue_key
+=============
+*/
+void SP_key_blue_key (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_blue_key");
+}
+
+/*
+=============
+SP_key_commander_head
+=============
+*/
+void SP_key_commander_head (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_commander_head");
+}
+
+/*
+=============
+SP_key_data_cd
+=============
+*/
+void SP_key_data_cd (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_data_cd");
+}
+
+/*
+=============
+SP_key_data_spinner
+=============
+*/
+void SP_key_data_spinner (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_data_spinner");
+}
+
+/*
+=============
+SP_key_pass
+=============
+*/
+void SP_key_pass (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_pass");
+}
+
+/*
+=============
+SP_key_power_cube
+=============
+*/
+void SP_key_power_cube (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_power_cube");
+}
+
+/*
+=============
+SP_key_pyramid
+=============
+*/
+void SP_key_pyramid (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_pyramid");
+}
+
+/*
+=============
+SP_key_red_key
+=============
+*/
+void SP_key_red_key (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "key_red_key");
+}
+
+/*
+=============
+SP_weapon_bfg
+=============
+*/
+void SP_weapon_bfg (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_bfg");
+}
+
+/*
+=============
+SP_weapon_chaingun
+=============
+*/
+void SP_weapon_chaingun (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_chaingun");
+}
+
+/*
+=============
+SP_weapon_deatomizer
+=============
+*/
+void SP_weapon_deatomizer (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_deatomizer");
+}
+
+/*
+=============
+SP_weapon_dod
+=============
+*/
+void SP_weapon_dod (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_dod");
+}
+
+/*
+=============
+SP_weapon_grenadelauncher
+=============
+*/
+void SP_weapon_grenadelauncher (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_grenadelauncher");
+}
+
+/*
+=============
+SP_weapon_hellfury
+=============
+*/
+void SP_weapon_hellfury (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_hellfury");
+}
+
+/*
+=============
+SP_weapon_hyperblaster
+=============
+*/
+void SP_weapon_hyperblaster (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_hyperblaster");
+}
+
+/*
+=============
+SP_weapon_machinegun
+=============
+*/
+void SP_weapon_machinegun (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_machinegun");
+}
+
+/*
+=============
+SP_weapon_plasma_rifle
+=============
+*/
+void SP_weapon_plasma_rifle (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_plasma_rifle");
+}
+
+/*
+=============
+SP_weapon_railgun
+=============
+*/
+void SP_weapon_railgun (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_railgun");
+}
+
+/*
+=============
+SP_weapon_rocketlauncher
+=============
+*/
+void SP_weapon_rocketlauncher (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_rocketlauncher");
+}
+
+/*
+=============
+SP_weapon_rtdu
+=============
+*/
+void SP_weapon_rtdu (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_rtdu");
+}
+
+/*
+=============
+SP_weapon_shotgun
+=============
+*/
+void SP_weapon_shotgun (edict_t *ent)
+{
+	SP_SpawnItemByClassname (ent, "weapon_shotgun");
+}
+
+
 spawn_t	spawns[] = {
+	{"ammo_bullets", SP_ammo_bullets},
+	{"ammo_cells", SP_ammo_cells},
+	{"ammo_detpack", SP_ammo_detpack},
+	{"ammo_dod", SP_ammo_dod},
+	{"ammo_grenades", SP_ammo_grenades},
+	{"ammo_mines", SP_ammo_mines},
+	{"ammo_pistolplasma", SP_ammo_pistolplasma},
+	{"ammo_rifleplasma", SP_ammo_rifleplasma},
+	{"ammo_rockets", SP_ammo_rockets},
+	{"ammo_shells", SP_ammo_shells},
+	{"ammo_slugs", SP_ammo_slugs},
+
+	{"item_adrenaline", SP_item_adrenaline},
+	{"item_ancient_head", SP_item_ancient_head},
+	{"item_armor_body", SP_item_armor_body},
+	{"item_armor_combat", SP_item_armor_combat},
+	{"item_armor_jacket", SP_item_armor_jacket},
+	{"item_armor_shard", SP_item_armor_shard},
+	{"item_bandolier", SP_item_bandolier},
+	{"item_breather", SP_item_breather},
+	{"item_enviro", SP_item_enviro},
+	{"item_invulnerability", SP_item_invulnerability},
+	{"item_pack", SP_item_pack},
+	{"item_power_screen", SP_item_power_screen},
+	{"item_power_shield", SP_item_power_shield},
+	{"item_quad", SP_item_quad},
+	{"item_silencer", SP_item_silencer},
+
 	{"item_health", SP_item_health},
 	{"item_health_small", SP_item_health_small},
 	{"item_health_large", SP_item_health_large},
 	{"item_health_mega", SP_item_health_mega},
+
+	{"key_airstrike_target", SP_key_airstrike_target},
+	{"key_blue_key", SP_key_blue_key},
+	{"key_commander_head", SP_key_commander_head},
+	{"key_data_cd", SP_key_data_cd},
+	{"key_data_spinner", SP_key_data_spinner},
+	{"key_pass", SP_key_pass},
+	{"key_power_cube", SP_key_power_cube},
+	{"key_pyramid", SP_key_pyramid},
+	{"key_red_key", SP_key_red_key},
+
+	{"weapon_bfg", SP_weapon_bfg},
+	{"weapon_chaingun", SP_weapon_chaingun},
+	{"weapon_deatomizer", SP_weapon_deatomizer},
+	{"weapon_dod", SP_weapon_dod},
+	{"weapon_grenadelauncher", SP_weapon_grenadelauncher},
+	{"weapon_hellfury", SP_weapon_hellfury},
+	{"weapon_hyperblaster", SP_weapon_hyperblaster},
+	{"weapon_machinegun", SP_weapon_machinegun},
+	{"weapon_plasma_rifle", SP_weapon_plasma_rifle},
+	{"weapon_railgun", SP_weapon_railgun},
+	{"weapon_rocketlauncher", SP_weapon_rocketlauncher},
+	{"weapon_rtdu", SP_weapon_rtdu},
+	{"weapon_shotgun", SP_weapon_shotgun},
 
 	{"info_player_start", SP_info_player_start},
 	{"info_player_deathmatch", SP_info_player_deathmatch},
