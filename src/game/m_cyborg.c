@@ -52,49 +52,70 @@ static void cyborg_search (edict_t *self)
     gi.sound (self, CHAN_VOICE, sound_search, 1, ATTN_IDLE, 0);
 }
 
-static vec3_t cyborg_flash_offset = {20.0f, 7.0f, 24.0f};
+/*
+=============
+cyborg_fire_deatom_shot
 
-static void cyborg_fire_deatom (edict_t *self)
+Project a deatomizer burst from the requested muzzle offset.
+=============
+*/
+static void cyborg_fire_deatom_shot (edict_t *self, float forward_off, float right_off, float up_off)
 {
-    vec3_t  start, dir, forward, right, target;
+	vec3_t	forward, right, start, target, dir;
+	vec3_t	offset = {forward_off, right_off, up_off};
 
-    if (!self->enemy)
-        return;
+	if (!self->enemy)
+		return;
 
-    AngleVectors (self->s.angles, forward, right, NULL);
-    G_ProjectSource (self->s.origin, cyborg_flash_offset, forward, right, start);
+	AngleVectors (self->s.angles, forward, right, NULL);
+	G_ProjectSource (self->s.origin, offset, forward, right, start);
 
-    VectorCopy (self->enemy->s.origin, target);
-    target[2] += self->enemy->viewheight;
+	VectorCopy (self->enemy->s.origin, target);
+	target[2] += self->enemy->viewheight;
 
-    VectorSubtract (target, start, dir);
-    VectorNormalize (dir);
+	VectorSubtract (target, start, dir);
+	VectorNormalize (dir);
 
-    gi.sound (self, CHAN_WEAPON, sound_attack, 1, ATTN_NORM, 0);
+	gi.sound (self, CHAN_WEAPON, sound_attack, 1, ATTN_NORM, 0);
 
-    // The original DLL rolled cyborg deatom damage from a narrow band per shot
-    // before spawning a high-speed tracking projectile.  Match that behaviour
-    // here so kill feeds attribute the hits to the proper deatomizer mods.
-    {
-        int     damage;
-        int     splash;
-        const int       speed = 1000;
-        const float     damage_radius = 480.0f;
+	{
+		int	 damage;
+		int	 splash;
+		const int	 speed = 1000;
+		const float	 damage_radius = 480.0f;
 
-        damage = 90 + (int) (random () * 30.0f);
-        if (damage > 119)
-            damage = 119;
+		damage = 90 + (int) (random () * 30.0f);
+		if (damage > 119)
+			damage = 119;
 
-        splash = damage / 2;
+		splash = damage / 2;
 
-        fire_deatomizer (self, start, dir, damage, speed, damage_radius, splash);
-    }
+		fire_deatomizer (self, start, dir, damage, speed, damage_radius, splash);
+	}
 }
 
-static void cyborg_attack_fire_check (edict_t *self)
+/*
+=============
+cyborg_fire_deatom_starboard
+
+Fire the right-hand muzzle burst used by the retail attack frames.
+=============
+*/
+static void cyborg_fire_deatom_starboard (edict_t *self)
 {
-    if (visible (self, self->enemy) && range (self, self->enemy) <= RANGE_FAR)
-        cyborg_fire_deatom (self);
+	cyborg_fire_deatom_shot (self, 15.0f, 12.0f, 12.0f);
+}
+
+/*
+=============
+cyborg_fire_deatom_port
+
+Fire the left-hand muzzle burst used by the retail attack frames.
+=============
+*/
+static void cyborg_fire_deatom_port (edict_t *self)
+{
+	cyborg_fire_deatom_shot (self, 15.0f, -12.0f, 12.0f);
 }
 
 static void cyborg_idle_loop (edict_t *self);
@@ -136,48 +157,46 @@ static mmove_t cyborg_move_run = {
 	CYBORG_FRAME_RUN_START, CYBORG_FRAME_RUN_END, cyborg_frames_run, cyborg_locomotion_resume
 };
 
-static void cyborg_attack_finished (edict_t *self);
-
 static mframe_t cyborg_frames_attack_primary[] = {
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 5.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 9.0f, cyborg_fire_deatom_starboard},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 4.0f, NULL},
+	{ai_charge, 5.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 7.0f, NULL},
+	{ai_charge, 9.0f, cyborg_fire_deatom_port}
 };
 static mmove_t cyborg_move_attack_primary = {
-    CYBORG_FRAME_ATTACK1_START, CYBORG_FRAME_ATTACK1_END, cyborg_frames_attack_primary, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK1_START, CYBORG_FRAME_ATTACK1_END, cyborg_frames_attack_primary, cyborg_locomotion_resume
 };
 
 static mframe_t cyborg_frames_attack_secondary[] = {
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 0.0f, cyborg_fire_deatom_starboard},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL}
 };
 static mmove_t cyborg_move_attack_secondary = {
-    CYBORG_FRAME_ATTACK2_START, CYBORG_FRAME_ATTACK2_END, cyborg_frames_attack_secondary, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK2_START, CYBORG_FRAME_ATTACK2_END, cyborg_frames_attack_secondary, cyborg_locomotion_resume
 };
 
 static mframe_t cyborg_frames_attack_barrage[] = {
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL},
-    {ai_charge, 0, cyborg_attack_fire_check},
-    {ai_charge, 0, NULL}
+	{ai_charge, 0.0f, cyborg_fire_deatom_port},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL},
+	{ai_charge, 0.0f, NULL}
 };
 static mmove_t cyborg_move_attack_barrage = {
-    CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_attack_finished
+	CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_locomotion_resume
 };
 
 /*
@@ -288,32 +307,29 @@ static void cyborg_attack (edict_t *self)
 
 static void cyborg_attack_dispatch (edict_t *self)
 {
-	float choice;
+	float	choice;
 
-    if (!self->enemy)
-    {
-        cyborg_stand (self);
-        return;
-    }
+	if (!self->enemy)
+	{
+		cyborg_stand (self);
+		return;
+	}
 
-    choice = random ();
+	self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
+	choice = random ();
 
-    if (choice < 0.34f)
-        self->monsterinfo.currentmove = &cyborg_move_attack_primary;
-    else if (choice < 0.67f)
-        self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
-    else
-        self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
-}
-
-static void cyborg_attack_finished (edict_t *self)
-{
-    self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
-
-    if (self->monsterinfo.aiflags & AI_STAND_GROUND)
-        cyborg_stand (self);
-    else
-        cyborg_locomotion_stage (self);
+	if (choice < 0.5f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_primary;
+	}
+	else if (choice < 0.7f)
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
+	}
+	else
+	{
+		self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
+	}
 }
 
 static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
