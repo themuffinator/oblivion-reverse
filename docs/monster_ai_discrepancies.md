@@ -45,6 +45,11 @@ Manual regression passes compare the reconstructed C sources against the Binary 
 - Restore the multi-sample weapon audio and the heavy landing thud triggers so combat audio cues align with the DLL snapshot.【F:src/game/m_cyborg.c†L209-L217】【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L27887-L27899】
 - Add the wounded stand-ground flag writes and scheduled callbacks from `sub_10024920` so that low-health behaviour respects the original scripted pauses.【F:src/game/m_cyborg.c†L120-L147】【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L27435-L27539】
 
+### Automated regression coverage
+
+- The cyborg regression fixture `tests/fixtures/cyborg_expected_behaviour.json` describes the expected frame ranges, dispatch thresholds, timers, and audio cues recovered from the restored mmove tables.【F:tests/fixtures/cyborg_expected_behaviour.json†L1-L39】
+- `tests/test_cyborg_regression.py` parses `m_cyborg.c`, compares its definitions to the fixture, and simulates representative combat timelines to ensure state transitions, cooldowns, and sound triggers remain aligned with the captured baseline.【F:tests/test_cyborg_regression.py†L1-L147】
+
 ## monster_spider
 
 ### HLIL initialization snapshot (0x1002ddb5–0x1002df3b)
