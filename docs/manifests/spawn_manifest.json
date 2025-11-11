@@ -326,9 +326,7 @@
       }
     },
     "item_health": {
-      "defaults": {
-        "count": 10.0
-      },
+      "defaults": {},
       "function": "SP_item_health",
       "spawnflags": {
         "assignments": [],
@@ -876,7 +874,10 @@
       "defaults": {
         "gib_health": -100.0,
         "health": 200.0,
-        "mass": 120.0
+        "mass": 150.0,
+        "monsterinfo.scale": 1.0,
+        "viewheight": 90.0,
+        "yaw_speed": 20.0
       },
       "function": "SP_monster_kigrax",
       "spawnflags": {
