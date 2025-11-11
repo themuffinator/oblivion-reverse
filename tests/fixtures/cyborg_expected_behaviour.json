@@ -7,23 +7,24 @@
     "cyborg_move_attack_primary": {"start": 24, "end": 35},
     "cyborg_move_attack_secondary": {"start": 47, "end": 52},
     "cyborg_move_attack_barrage": {"start": 53, "end": 58},
-    "pain_move": {"start": 13, "end": 14},
+    "cyborg_move_pain_stagger": {"start": 73, "end": 78},
+    "cyborg_move_pain_recover": {"start": 79, "end": 81},
     "death_move": {"start": 15, "end": 17}
   },
-  "attack_thresholds": [0.34, 0.67],
+  "attack_thresholds": [0.5, 0.7],
   "expected_attack_sequence": [
     "cyborg_move_attack_primary",
-    "cyborg_move_attack_secondary",
-    "cyborg_move_attack_barrage"
+    "cyborg_move_attack_barrage",
+    "cyborg_move_attack_secondary"
   ],
-  "pain_cooldown": 2.0,
+  "pain_cooldown": 3.0,
   "stand_ground": {
     "attack_finished_base": 0.9,
     "attack_finished_random": 0.6
   },
   "audio_cues": {
-    "attack": "deatom/dfire.wav",
-    "pain": ["cyborg/mutpain1.wav"],
+    "attack": "cyborg/mutatck1.wav",
+    "pain": ["cyborg/mutpain1.wav", "cyborg/mutpain2.wav"],
     "steps": [
       "cyborg/step1.wav",
       "cyborg/step2.wav",
@@ -36,7 +37,7 @@
     "pain_timestamps": [10.0, 11.0, 12.5, 14.1],
     "expected_pain_events": 2,
     "expected_audio_timeline": [
-      {"event": "attack", "sound": "deatom/dfire.wav"},
+      {"event": "attack", "sound": "cyborg/mutatck1.wav"},
       {"event": "pain", "sound": "cyborg/mutpain1.wav"},
       {"event": "pain", "sound": "cyborg/mutpain1.wav"},
       {"event": "landing_thud", "sound": "cyborg/step3.wav"}
