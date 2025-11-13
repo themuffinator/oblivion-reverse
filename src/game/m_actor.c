@@ -30,6 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  * spawn routine can describe the behaviour from the HLIL dump without
  * resorting to raw literals.
  */
+#define	AI_ACTOR_SHOOT_ONCE		0x04000000
 #define	AI_ACTOR_PATH_IDLE		0x02000000
 #define	AI_ACTOR_FRIENDLY		0x01000000
 
@@ -260,8 +261,25 @@ mframe_t actor_frames_run [] =
 };
 mmove_t actor_move_run = {FRAME_run02, FRAME_run07, actor_frames_run, NULL};
 
+/*
+=============
+actor_run
+
+Advance the actor's run behaviour, resuming scripted movement after
+scripted attacks.
+=============
+*/
 void actor_run (edict_t *self)
 {
+	if (self->monsterinfo.aiflags & AI_ACTOR_SHOOT_ONCE)
+	{
+		self->monsterinfo.aiflags &= ~(AI_ACTOR_SHOOT_ONCE | AI_STAND_GROUND);
+		self->enemy = NULL;
+
+		if (self->movetarget)
+			self->goalentity = self->movetarget;
+	}
+
 	if ((level.time < self->pain_debounce_time) && (!self->enemy))
 	{
 		if (self->movetarget)
@@ -279,7 +297,6 @@ void actor_run (edict_t *self)
 
 	self->monsterinfo.currentmove = &actor_move_run;
 }
-
 
 mframe_t actor_frames_pain1 [] =
 {
@@ -702,17 +719,31 @@ for JUMP only:
 "height"		speed thrown upwards (default 200)
 */
 
+/*
+=============
+target_actor_touch
+
+Handle scripted path targets and immediate actions when an actor
+reaches a target_actor waypoint.
+=============
+*/
 void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf)
 {
 	vec3_t	v;
+	edict_t	*pathtarget_ent;
+	edict_t	*next_target;
 
 	if (other->movetarget != self)
 		return;
-	
+
 	if (other->enemy)
 		return;
 
 	other->goalentity = other->movetarget = NULL;
+
+	pathtarget_ent = NULL;
+	if (self->pathtarget)
+		pathtarget_ent = G_PickTarget(self->pathtarget);
 
 	if (self->message)
 	{
@@ -723,7 +754,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 	{
 		other->velocity[0] = self->movedir[0] * self->speed;
 		other->velocity[1] = self->movedir[1] * self->speed;
-		
+
 		if (other->groundentity)
 		{
 			other->groundentity = NULL;
@@ -732,18 +763,27 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		}
 	}
 
-	if (self->spawnflags & 2)	//shoot
+	if ((self->spawnflags & 2) && pathtarget_ent)	//shoot
 	{
+		other->goalentity = pathtarget_ent;
+		other->movetarget = pathtarget_ent;
+		other->enemy = pathtarget_ent;
+		other->monsterinfo.aiflags |= AI_STAND_GROUND | AI_ACTOR_SHOOT_ONCE;
+
+		if (other->monsterinfo.attack)
+			other->monsterinfo.attack(other);
+		else
+			actor_attack(other);
 	}
 	else if (self->spawnflags & 4)	//attack
 	{
-		other->enemy = G_PickTarget(self->pathtarget);
+		other->enemy = pathtarget_ent;
 		if (other->enemy)
 		{
 			other->goalentity = other->enemy;
 			if (self->spawnflags & 32)
 				other->monsterinfo.aiflags |= AI_BRUTAL;
-			if (self->spawnflags & 16)
+			if (self->spawnflags & 0x12)
 			{
 				other->monsterinfo.aiflags |= AI_STAND_GROUND;
 				actor_stand (other);
@@ -765,7 +805,8 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		self->target = savetarget;
 	}
 
-	other->movetarget = G_PickTarget(self->target);
+	next_target = G_PickTarget(self->target);
+	other->movetarget = next_target;
 
 	if (!other->goalentity)
 		other->goalentity = other->movetarget;
@@ -781,7 +822,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		other->ideal_yaw = vectoyaw (v);
 	}
 }
-
+ 
 void SP_target_actor (edict_t *self)
 {
 	if (!self->targetname)
