@@ -77,7 +77,8 @@ static const char *Actor_DisplayName(edict_t *self)
 =============
 Actor_ResetChatCooldown
 
-Allow the actor to speak immediately by rewinding the broadcast timer.
+Allow the actor to speak immediately by aligning the broadcast timer with the
+current level clock.
 =============
 */
 static void Actor_ResetChatCooldown(edict_t *self)
@@ -85,7 +86,7 @@ static void Actor_ResetChatCooldown(edict_t *self)
 	if (!self)
 		return;
 
-	self->oblivion.custom_name_time = level.time - ACTOR_CHAT_COOLDOWN;
+	self->oblivion.custom_name_time = level.time;
 }
 
 /*
@@ -104,7 +105,7 @@ static void Actor_BroadcastMessage(edict_t *self, const char *message)
 	if (!self || !message || !message[0])
 		return;
 
-	if (self->oblivion.custom_name_time > level.time)
+	if (level.time < self->oblivion.custom_name_time)
 		return;
 
 	name = Actor_DisplayName(self);
@@ -447,6 +448,9 @@ static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
 
 	Actor_PathAssignController(self, controller);
 	self->oblivion.last_controller = controller;
+	self->oblivion.controller_distance = VectorLength(dir);
+	self->oblivion.controller_resume = level.time;
+	Actor_ResetChatCooldown(self);
 
 	return true;
 }

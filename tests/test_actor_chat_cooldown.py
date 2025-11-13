@@ -33,7 +33,7 @@ class ActorChatCooldownTests(unittest.TestCase):
     def test_broadcast_message_cooldown_sequence(self) -> None:
         block = extract_function_block(self.source_text, "Actor_BroadcastMessage")
         guard = re.search(
-            r"if\s*\(\s*self->oblivion\.custom_name_time\s*>\s*level\.time\s*\)\s*return\s*;",
+            r"if\s*\(\s*level\.time\s*<\s*self->oblivion\.custom_name_time\s*\)\s*return\s*;",
             block,
         )
         self.assertIsNotNone(guard, "Cooldown guard missing from Actor_BroadcastMessage")
@@ -61,13 +61,42 @@ class ActorChatCooldownTests(unittest.TestCase):
             r"Actor_ResetChatCooldown\s*\(\s*self\s*\)\s*;",
             msg="Use path must reset the broadcast cooldown",
         )
+        attach_block = extract_function_block(self.source_text, "Actor_AttachController")
+        self.assertRegex(
+            attach_block,
+            r"Actor_ResetChatCooldown\s*\(\s*self\s*\)\s*;",
+            msg="Controller reattachment should align the broadcast cooldown",
+        )
 
     def test_reset_helper_rewinds_timer(self) -> None:
         reset_block = extract_function_block(self.source_text, "Actor_ResetChatCooldown")
         self.assertIn(
-            "level.time - ACTOR_CHAT_COOLDOWN",
+            "self->oblivion.custom_name_time = level.time;",
             reset_block,
             "Reset helper should rewind the cooldown to allow future messages",
+        )
+
+    def test_repeated_touch_events_are_throttled(self) -> None:
+        cooldown_match = re.search(
+            r"#define\s+ACTOR_CHAT_COOLDOWN\s+([0-9.]+)f",
+            self.source_text,
+        )
+        self.assertIsNotNone(cooldown_match, "Cooldown constant definition missing")
+        cooldown = float(cooldown_match.group(1))
+
+        custom_name_time = 0.0
+        emissions = []
+        for level_time in (5.0, 5.5, 6.0, 7.1):
+            if level_time < custom_name_time:
+                emissions.append(False)
+                continue
+            custom_name_time = level_time + cooldown
+            emissions.append(True)
+
+        self.assertEqual(
+            emissions,
+            [True, False, False, True],
+            "Repeated touches within the cooldown window should not emit duplicate chat lines",
         )
 
 
