@@ -136,32 +136,34 @@ static void Actor_InitMissionTimer(edict_t *self)
 
 static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
 {
-        vec3_t dir;
+	vec3_t dir;
 
-        if (!self)
-                return false;
+	if (!self)
+		return false;
 
-        self->goalentity = controller;
-        self->movetarget = controller;
+	self->goalentity = controller;
+	self->movetarget = controller;
 
-        if (!controller || !controller->classname
-                || strcmp(controller->classname, "target_actor") != 0)
-        {
-                self->goalentity = NULL;
-                self->movetarget = NULL;
-                return false;
-        }
+	if (!controller || !controller->classname
+		|| strcmp(controller->classname, "target_actor") != 0)
+	{
+		self->goalentity = NULL;
+		self->movetarget = NULL;
+		return false;
+	}
 
-        VectorSubtract(controller->s.origin, self->s.origin, dir);
-        self->ideal_yaw = self->s.angles[YAW] = vectoyaw(dir);
-        self->monsterinfo.walk(self);
+	self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
-        self->oblivion.controller = controller;
-        self->oblivion.last_controller = controller;
-        self->oblivion.controller_distance = VectorLength(dir);
-        self->oblivion.controller_resume = level.time;
+	VectorSubtract(controller->s.origin, self->s.origin, dir);
+	self->ideal_yaw = self->s.angles[YAW] = vectoyaw(dir);
+	self->monsterinfo.walk(self);
 
-        return true;
+	self->oblivion.controller = controller;
+	self->oblivion.last_controller = controller;
+	self->oblivion.controller_distance = VectorLength(dir);
+	self->oblivion.controller_resume = level.time;
+
+	return true;
 }
 
 mframe_t actor_frames_stand [] =
@@ -570,6 +572,8 @@ static void Actor_UseOblivion(edict_t *self, edict_t *other, edict_t *activator)
 
 	self->goalentity = target;
 	self->movetarget = target;
+	if (target)
+		self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
 	if (target && target->classname && strcmp(target->classname, "target_actor") == 0)
 	{
@@ -768,6 +772,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		other->goalentity = pathtarget_ent;
 		other->movetarget = pathtarget_ent;
 		other->enemy = pathtarget_ent;
+		other->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 		other->monsterinfo.aiflags |= AI_STAND_GROUND | AI_ACTOR_SHOOT_ONCE;
 
 		if (other->monsterinfo.attack)
@@ -781,6 +786,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		if (other->enemy)
 		{
 			other->goalentity = other->enemy;
+			other->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 			if (self->spawnflags & 32)
 				other->monsterinfo.aiflags |= AI_BRUTAL;
 			if (self->spawnflags & 0x12)
@@ -807,6 +813,8 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 
 	next_target = G_PickTarget(self->target);
 	other->movetarget = next_target;
+	if (other->movetarget)
+		other->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
 	if (!other->goalentity)
 		other->goalentity = other->movetarget;
@@ -814,6 +822,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 	if (!other->movetarget && !other->enemy)
 	{
 		other->monsterinfo.pausetime = level.time + 100000000;
+		other->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
 		other->monsterinfo.stand (other);
 	}
 	else if (other->movetarget == other->goalentity)
