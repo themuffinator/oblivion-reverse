@@ -12,7 +12,7 @@ import struct
 import sys
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, Iterable, List, Optional, Sequence, Tuple
+from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
 
 # ----------------------------- utility helpers -----------------------------
 
@@ -191,8 +191,133 @@ class HLILParser:
                         continue
                     func = m_func.group("func")
                     spawn_entries[classname] = func
+            for block in self.function_blocks.values():
+                for classname, func in self._extract_spawn_map_from_strcmp(block).items():
+                    if classname not in spawn_entries:
+                        spawn_entries[classname] = func
             self._spawn_map = spawn_entries
         return self._spawn_map
+
+    def _extract_spawn_map_from_strcmp(self, block: List[str]) -> Dict[str, str]:
+        literal_pattern = re.compile(r'char\*\s+[^=]+\s*=\s*"([^"]+)"')
+        if_pattern = re.compile(r'^100[0-9a-f]+\s+if\s*\([^)]*==\s*0\)')
+        goto_pattern = re.compile(r'goto\s+(label_[0-9a-f]+)')
+        return_pattern = re.compile(r'return\s+(sub_[0-9a-f]+)\b')
+        label_pattern = re.compile(r'(label_[0-9a-f]+):')
+        label_indices: Dict[str, int] = {}
+        for idx, line in enumerate(block):
+            m_label = label_pattern.search(line)
+            if m_label:
+                label_indices[m_label.group(1)] = idx
+
+        results: Dict[str, str] = {}
+        idx = 0
+        while idx < len(block):
+            line = block[idx]
+            m_literal = literal_pattern.search(line)
+            if not m_literal:
+                idx += 1
+                continue
+            classname = m_literal.group(1)
+            target_func: Optional[str] = None
+            search_limit = min(len(block), idx + 80)
+            inner = idx + 1
+            while inner < search_limit:
+                next_line = block[inner]
+                if literal_pattern.search(next_line):
+                    break
+                stripped = next_line.strip()
+                m_direct_return = return_pattern.search(stripped)
+                if m_direct_return:
+                    target_func = m_direct_return.group(1)
+                    break
+                if if_pattern.match(stripped):
+                    candidate = self._resolve_strcmp_if(
+                        block,
+                        inner,
+                        label_indices,
+                        goto_pattern,
+                        return_pattern,
+                        label_pattern,
+                    )
+                    if candidate:
+                        target_func = candidate
+                        break
+                inner += 1
+            if target_func:
+                results[classname] = target_func
+            idx += 1
+        return results
+
+    def _resolve_strcmp_if(
+        self,
+        block: List[str],
+        if_index: int,
+        label_indices: Dict[str, int],
+        goto_pattern: re.Pattern[str],
+        return_pattern: re.Pattern[str],
+        label_pattern: re.Pattern[str],
+    ) -> Optional[str]:
+        for offset in range(1, 12):
+            idx = if_index + offset
+            if idx >= len(block):
+                break
+            text = block[idx].strip()
+            if not text:
+                continue
+            m_return = return_pattern.search(text)
+            if m_return:
+                return m_return.group(1)
+            m_goto = goto_pattern.search(text)
+            if m_goto:
+                return self._resolve_strcmp_label(
+                    block,
+                    m_goto.group(1),
+                    label_indices,
+                    goto_pattern,
+                    return_pattern,
+                    label_pattern,
+                )
+            if text.startswith("else"):
+                break
+        return None
+
+    def _resolve_strcmp_label(
+        self,
+        block: List[str],
+        label: str,
+        label_indices: Dict[str, int],
+        goto_pattern: re.Pattern[str],
+        return_pattern: re.Pattern[str],
+        label_pattern: re.Pattern[str],
+    ) -> Optional[str]:
+        if label not in label_indices:
+            return None
+        visited: Set[str] = set()
+        queue: List[str] = [label]
+        while queue:
+            current = queue.pop()
+            if current in visited:
+                continue
+            visited.add(current)
+            start = label_indices.get(current)
+            if start is None:
+                continue
+            end = min(len(block), start + 80)
+            for idx in range(start + 1, end):
+                text = block[idx].strip()
+                if not text:
+                    continue
+                m_return = return_pattern.search(text)
+                if m_return:
+                    return m_return.group(1)
+                m_goto = goto_pattern.search(text)
+                if m_goto and m_goto.group(1) not in visited:
+                    queue.append(m_goto.group(1))
+                m_label = label_pattern.search(text)
+                if m_label and m_label.group(1) not in visited:
+                    queue.append(m_label.group(1))
+        return None
 
     # -- extraction --
     def build_manifest(self) -> Dict[str, HLILSpawnInfo]:
