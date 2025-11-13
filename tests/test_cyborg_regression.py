@@ -144,6 +144,18 @@ class CyborgRegressionTests(unittest.TestCase):
             "Pain handler must update the wounded stand-ground anchoring",
         )
 
+        debounce_assign = "self->oblivion.cyborg_pain_time = self->pain_debounce_time;"
+        self.assertIn(
+            debounce_assign,
+            block,
+            "Pain handler should still assign the wound debounce timer",
+        )
+        self.assertGreater(
+            block.index("cyborg_wound_stand_ground"),
+            block.index(debounce_assign),
+            "Wounded anchor update must run after the debounce check succeeds",
+        )
+
     def test_attack_finished_timer_and_stand_ground(self) -> None:
         block = extract_function_block(self.source_text, "cyborg_attack_dispatch")
         match = ATTACK_FINISHED_RE.search(block)

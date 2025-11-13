@@ -516,17 +516,17 @@ static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
 	int	slot;
 
-	/* Update the wounded anchor thresholds on every damage event so the
-	 * locomotion helpers can later release the cyborg through
-	 * cyborg_update_stand_ground even if the pain animation is skipped.
-	 */
-	cyborg_wound_stand_ground (self);
-
 	if (level.time < self->oblivion.cyborg_pain_time)
 		return;
 
 	self->pain_debounce_time = level.time + 3.0f;
 	self->oblivion.cyborg_pain_time = self->pain_debounce_time;
+
+	/* Update the wounded anchor thresholds on every damage event so the
+	 * locomotion helpers can later release the cyborg through
+	 * cyborg_update_stand_ground even if the pain animation is skipped.
+	 */
+	cyborg_wound_stand_ground (self);
 
 	slot = self->oblivion.cyborg_pain_slot & 1;
 	gi.sound (self, CHAN_VOICE, sound_pain_samples[slot], 1, ATTN_NORM, 0);
