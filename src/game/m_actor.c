@@ -265,8 +265,8 @@ mmove_t actor_move_run = {FRAME_run02, FRAME_run07, actor_frames_run, NULL};
 =============
 actor_run
 
-Advance the actor's run behaviour, resuming scripted movement after
-scripted attacks.
+Advance the actor's run behaviour, clearing single-shot locks before
+resuming scripted movement after scripted attacks.
 =============
 */
 void actor_run (edict_t *self)
@@ -763,12 +763,20 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		}
 	}
 
-	if ((self->spawnflags & 2) && pathtarget_ent)	//shoot
+	if (self->spawnflags & 2)	//shoot
 	{
+		if (self->pathtarget)
+			pathtarget_ent = G_PickTarget(self->pathtarget);
+
+		other->enemy = pathtarget_ent;
 		other->goalentity = pathtarget_ent;
 		other->movetarget = pathtarget_ent;
-		other->enemy = pathtarget_ent;
+
+		if (self->spawnflags & 32)
+			other->monsterinfo.aiflags |= AI_BRUTAL;
+
 		other->monsterinfo.aiflags |= AI_STAND_GROUND | AI_ACTOR_SHOOT_ONCE;
+		actor_stand(other);
 
 		if (other->monsterinfo.attack)
 			other->monsterinfo.attack(other);
