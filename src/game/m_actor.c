@@ -287,7 +287,10 @@ void actor_run (edict_t *self)
 		self->enemy = NULL;
 
 		if (self->movetarget)
+		{
 			self->goalentity = self->movetarget;
+			self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
+		}
 	}
 
 	if ((level.time < self->pain_debounce_time) && (!self->enemy))
@@ -307,6 +310,7 @@ void actor_run (edict_t *self)
 
 	self->monsterinfo.currentmove = &actor_move_run;
 }
+
 
 mframe_t actor_frames_pain1 [] =
 {
@@ -574,12 +578,21 @@ void actor_use (edict_t *self, edict_t *other, edict_t *activator)
 }
 
 
+/*
+=============
+Actor_UseOblivion
+
+Select the actor's initial path target and clear any idle markers so the
+actor resumes scripted motion when activated.
+=============
+*/
 static void Actor_UseOblivion(edict_t *self, edict_t *other, edict_t *activator)
 {
 	edict_t *target = G_PickTarget(self->target);
 
 	self->goalentity = target;
 	self->movetarget = target;
+	self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
 	if (target && target->classname && strcmp(target->classname, "target_actor") == 0)
 	{
@@ -750,6 +763,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		return;
 
 	other->goalentity = other->movetarget = NULL;
+	other->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
 	pathtarget_ent = NULL;
 	if (self->pathtarget)
