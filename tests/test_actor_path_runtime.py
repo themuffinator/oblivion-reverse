@@ -68,6 +68,16 @@ class ActorPathRuntimeTests(unittest.TestCase):
         self.assertIn("Actor_PathAssignController(self, NULL);", block)
         self.assertIn("Actor_UpdateMissionObjective(self);", block)
 
+    def test_use_schedules_path_think(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_UseOblivion")
+        self.assertIn("self->think = Actor_PathThink;", block)
+        self.assertIn("self->nextthink = level.time + FRAMETIME;", block)
+
+    def test_actor_use_wires_think(self) -> None:
+        block = extract_function_block(self.source_text, "actor_use")
+        self.assertIn("self->think = Actor_PathThink;", block)
+        self.assertIn("self->nextthink = level.time + FRAMETIME;", block)
+
     def test_target_actor_advances_path_state(self) -> None:
         block = extract_function_block(self.source_text, "target_actor_touch")
         self.assertIn("wait = Actor_PathResolveWait(other, self);", block)
@@ -83,6 +93,61 @@ class ActorPathRuntimeTests(unittest.TestCase):
             r"self->oblivion.path_state\s*==\s*ACTOR_PATH_STATE_WAITING",
         )
         self.assertIn("Actor_UpdateMissionObjective(self);", block)
+
+    def test_path_select_idle_randomises(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathSelectIdleAnimation")
+        self.assertIn("rand() % 3", block)
+        self.assertIn("self->monsterinfo.pausetime = level.time + delay;", block)
+
+    def test_path_schedule_idle_sets_flag(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathScheduleIdle")
+        self.assertIn("self->monsterinfo.pausetime = level.time + delay;", block)
+        self.assertIn("self->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;", block)
+
+    def test_path_reconcile_updates_goal(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathReconcileTargets")
+        self.assertIn("self->goalentity = self->oblivion.controller;", block)
+        self.assertIn("self->oblivion.controller_serial = self->oblivion.controller->count;", block)
+
+    def test_path_think_calls_monster_think(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathThink")
+        self.assertIn("self->think = Actor_PathThink;", block)
+        self.assertIn("monster_think(self);", block)
+
+    def test_path_apply_wait_schedules_idle(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathApplyWait")
+        self.assertIn("Actor_PathScheduleIdle(self);", block)
+
+    def test_path_advance_updates_toggle_and_serial(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathAdvance")
+        self.assertIn("self->oblivion.path_toggle ^= 1;", block)
+        self.assertIn("self->oblivion.controller_serial = next_target ? next_target->count : 0;", block)
+
+    def test_path_assign_controller_sets_serial(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathAssignController")
+        self.assertIn("self->oblivion.controller_serial = controller ? controller->count : 0;", block)
+        self.assertIn("Actor_PathScheduleIdle(self);", block)
+
+    def test_actor_walk_updates_state(self) -> None:
+        block = extract_function_block(self.source_text, "actor_walk")
+        self.assertIn("self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;", block)
+        self.assertIn("self->oblivion.path_state = ACTOR_PATH_STATE_SEEKING;", block)
+
+    def test_actor_run_updates_state(self) -> None:
+        block = extract_function_block(self.source_text, "actor_run")
+        self.assertIn("self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;", block)
+        self.assertIn("self->oblivion.path_state = ACTOR_PATH_STATE_SEEKING;", block)
+
+    def test_path_fields_persisted_in_save(self) -> None:
+        save_text = (REPO_ROOT / "src" / "game" / "g_save.c").read_text(encoding="utf-8")
+        for token in (
+            "mission_path_target",
+            "mission_script_target",
+            "mission_path_toggle",
+            "mission_path_wait",
+            "mission_path_time",
+        ):
+            self.assertIn(token, save_text)
 
 
 if __name__ == "__main__":
