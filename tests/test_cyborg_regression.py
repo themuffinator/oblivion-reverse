@@ -23,6 +23,8 @@ ATTACK_FINISHED_RE = re.compile(
 SOUND_SETUP_RE = re.compile(
     r"sound_([a-z0-9_\[\]]+)\s*=\s*gi.soundindex\s*\(\"([^\"]+)\"\);"
 )
+LAND_HELPER_CALL_RE = re.compile(r"cyborg_land\s*\(\s*self\s*\)\s*;")
+LANDING_FLAG_SET_RE = re.compile(r"self->oblivion\.cyborg_landing_thud\s*=\s*true\s*;")
 
 
 def load_fixture() -> dict:
@@ -170,6 +172,47 @@ class CyborgRegressionTests(unittest.TestCase):
         self.assertTrue(pain_sounds, "Pain sound not configured in spawn function")
         for sound in pain_sounds:
             self.assertIn(sound, audio_fixture["pain"])
+
+    def test_landing_thud_helper_wiring(self) -> None:
+        landing_block = extract_function_block(self.source_text, "cyborg_land")
+        self.assertIn(
+            "sound_thud",
+            landing_block,
+            "Landing helper no longer references the heavy impact cue",
+        )
+        self.assertIn(
+            "CHAN_BODY",
+            landing_block,
+            "Landing helper must emit the thud on the body channel",
+        )
+
+        for function_name in (
+            "cyborg_locomotion_stage",
+            "cyborg_locomotion_resume",
+            "cyborg_update_stand_ground",
+        ):
+            block = extract_function_block(self.source_text, function_name)
+            self.assertRegex(
+                block,
+                LAND_HELPER_CALL_RE,
+                msg=f"{function_name} no longer routes through cyborg_land",
+            )
+
+        schedule_block = extract_function_block(
+            self.source_text, "cyborg_schedule_stand_ground"
+        )
+        self.assertRegex(
+            schedule_block,
+            LANDING_FLAG_SET_RE,
+            msg="Wounded anchor helper must arm the landing thud flag",
+        )
+
+        attack_block = extract_function_block(self.source_text, "cyborg_attack_dispatch")
+        self.assertGreaterEqual(
+            len(LANDING_FLAG_SET_RE.findall(attack_block)),
+            3,
+            "Attack dispatch must set the landing thud flag for each variant",
+        )
 
     def test_simulated_combat_timeline_from_fixture(self) -> None:
         fixture = self.fixture["simulation"]
