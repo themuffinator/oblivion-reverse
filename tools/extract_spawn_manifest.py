@@ -71,7 +71,19 @@ class RepoSpawnInfo:
 class HLILParser:
     def __init__(self, path: Path):
         self.path = path
-        self.lines = self.path.read_text(encoding="utf-8", errors="replace").splitlines()
+        split_root = self.path.parent / "split"
+        source_paths: List[Path] = [self.path]
+        if split_root.exists():
+            extra_paths = sorted(split_root.glob("**/*.txt"))
+            source_paths.extend(extra_paths)
+
+        self._sources: List[Tuple[Path, List[str]]] = []
+        self.lines: List[str] = []
+        for source_path in source_paths:
+            source_lines = source_path.read_text(encoding="utf-8", errors="replace").splitlines()
+            self._sources.append((source_path, source_lines))
+            self.lines.extend(source_lines)
+
         self._function_blocks: Optional[Dict[str, List[str]]] = None
         self._fields: Optional[Dict[int, FieldInfo]] = None
         self._spawn_map: Optional[Dict[str, str]] = None
@@ -84,24 +96,33 @@ class HLILParser:
                 r"^(?:\d+:)?\s*100[0-9a-f]+\s+(?P<prefix>[^\s].*?)\b(sub_[0-9a-f]+)\("
             )
             blocks: Dict[str, List[str]] = {}
-            current_name: Optional[str] = None
-            current_lines: List[str] = []
-            for raw_line in self.lines:
-                line = raw_line.strip()
-                match = func_pattern.match(raw_line)
-                if match:
-                    prefix = match.group("prefix")
-                    if "return" in prefix or "=" in prefix:
+
+            def append_block(name: str, new_lines: List[str]) -> None:
+                existing = blocks.setdefault(name, [])
+                for entry in new_lines:
+                    if entry not in existing:
+                        existing.append(entry)
+
+            for _, source_lines in self._sources:
+                current_name: Optional[str] = None
+                current_lines: List[str] = []
+                for raw_line in source_lines:
+                    line = raw_line.strip()
+                    match = func_pattern.match(raw_line)
+                    if match:
+                        prefix = match.group("prefix")
+                        if "return" in prefix or "=" in prefix:
+                            if current_name is not None:
+                                current_lines.append(line)
+                            continue
+                        if current_name is not None:
+                            append_block(current_name, current_lines)
+                        current_name = match.group(2)
+                        current_lines = [line]
+                    elif current_name is not None:
                         current_lines.append(line)
-                        continue
-                    if current_name is not None:
-                        blocks[current_name] = current_lines
-                    current_name = match.group(2)
-                    current_lines = [line]
-                elif current_name is not None:
-                    current_lines.append(line)
-            if current_name is not None:
-                blocks[current_name] = current_lines
+                if current_name is not None:
+                    append_block(current_name, current_lines)
             self._function_blocks = blocks
         return self._function_blocks
 
@@ -112,27 +133,30 @@ class HLILParser:
             ptr_pattern = re.compile(
                 r"^(?:\d+:)?\s*100[0-9a-f]+\s+char \(\* (?P<label>data_[0-9a-f]+)\)\[[^]]+\] = (?P<target>data_[0-9a-f]+) {\"(?P<name>[^\"]+)\"}"
             )
-            for idx, raw_line in enumerate(self.lines):
-                m = ptr_pattern.match(raw_line)
-                if not m:
-                    continue
-                next_line = ""
-                for j in range(idx + 1, len(self.lines)):
-                    candidate = self.lines[j]
-                    if candidate.strip():
-                        next_line = candidate
-                        break
-                if not next_line:
-                    continue
-                if not re.search(r"[0-9a-f]{2}\s+[0-9a-f]{2}\s+[0-9a-f]{2}", next_line, re.IGNORECASE):
-                    continue
-                byte_values = _parse_hex_bytes(next_line)[:12]
-                if len(byte_values) < 12:
-                    continue
-                offset = _bytes_to_int_le(byte_values[0:4])
-                type_id = _bytes_to_int_le(byte_values[4:8])
-                flags = _bytes_to_int_le(byte_values[8:12])
-                entries[offset] = FieldInfo(name=m.group("name"), offset=offset, type_id=type_id, flags=flags)
+            for _, source_lines in self._sources:
+                for idx, raw_line in enumerate(source_lines):
+                    m = ptr_pattern.match(raw_line)
+                    if not m:
+                        continue
+                    next_line = ""
+                    for j in range(idx + 1, len(source_lines)):
+                        candidate = source_lines[j]
+                        if candidate.strip():
+                            next_line = candidate
+                            break
+                    if not next_line:
+                        continue
+                    if not re.search(r"[0-9a-f]{2}\s+[0-9a-f]{2}\s+[0-9a-f]{2}", next_line, re.IGNORECASE):
+                        continue
+                    byte_values = _parse_hex_bytes(next_line)[:12]
+                    if len(byte_values) < 12:
+                        continue
+                    offset = _bytes_to_int_le(byte_values[0:4])
+                    if offset in entries:
+                        continue
+                    type_id = _bytes_to_int_le(byte_values[4:8])
+                    flags = _bytes_to_int_le(byte_values[8:12])
+                    entries[offset] = FieldInfo(name=m.group("name"), offset=offset, type_id=type_id, flags=flags)
             self._fields = entries
         return self._fields
 
@@ -146,24 +170,27 @@ class HLILParser:
             func_pattern = re.compile(
                 r"^(?:\d+:)?\s*100[0-9a-f]+\s+void\* (?P<label>data_[0-9a-f]+) = (?P<func>sub_[0-9a-f]+)"
             )
-            for idx, raw_line in enumerate(self.lines):
-                m = ptr_pattern.match(raw_line)
-                if not m:
-                    continue
-                next_line = ""
-                for j in range(idx + 1, len(self.lines)):
-                    candidate = self.lines[j]
-                    if candidate.strip():
-                        next_line = candidate
-                        break
-                if not next_line:
-                    continue
-                m_func = func_pattern.match(next_line)
-                if not m_func:
-                    continue
-                classname = m.group("name")
-                func = m_func.group("func")
-                spawn_entries[classname] = func
+            for _, source_lines in self._sources:
+                for idx, raw_line in enumerate(source_lines):
+                    m = ptr_pattern.match(raw_line)
+                    if not m:
+                        continue
+                    next_line = ""
+                    for j in range(idx + 1, len(source_lines)):
+                        candidate = source_lines[j]
+                        if candidate.strip():
+                            next_line = candidate
+                            break
+                    if not next_line:
+                        continue
+                    m_func = func_pattern.match(next_line)
+                    if not m_func:
+                        continue
+                    classname = m.group("name")
+                    if classname in spawn_entries:
+                        continue
+                    func = m_func.group("func")
+                    spawn_entries[classname] = func
             self._spawn_map = spawn_entries
         return self._spawn_map
 
