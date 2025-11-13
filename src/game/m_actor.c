@@ -23,6 +23,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "m_actor.h"
 
 #define	MAX_ACTOR_NAMES		8
+typedef enum
+{
+	ACTOR_PATH_STATE_IDLE = 0,
+	ACTOR_PATH_STATE_MOVING,
+	ACTOR_PATH_STATE_WAITING
+} actor_path_state_t;
+
+static void Actor_PathBind(edict_t *self, edict_t *controller);
+static void Actor_PathMarkWait(edict_t *self, float wait_seconds);
+static void Actor_PathSync(edict_t *self);
+static void Actor_FireMissionEvent(edict_t *ent, edict_t *activator);
+static void Actor_OblivionThink(edict_t *self);
+static void Actor_EnableOblivionThink(edict_t *self);
+
+extern void walkmonster_start_go(edict_t *self);
+
 
 /*
  * Oblivion extends the Quake II actor AI flags with additional high bits
@@ -121,19 +137,211 @@ static void Actor_ConfigureMovementState(edict_t *self)
 
 static void Actor_InitMissionTimer(edict_t *self)
 {
-        if (!self)
-                return;
+	if (!self)
+		return;
 
-        if (self->oblivion.mission_timer_limit < 0)
-                self->oblivion.mission_timer_limit = 0;
+	if (self->oblivion.mission_timer_limit < 0)
+		self->oblivion.mission_timer_limit = 0;
 
-        if (self->oblivion.mission_timer_remaining <= 0
-                && self->oblivion.mission_timer_limit > 0)
-        {
-                self->oblivion.mission_timer_remaining = self->oblivion.mission_timer_limit;
-        }
+	if (self->oblivion.mission_timer_remaining <= 0
+		&& self->oblivion.mission_timer_limit > 0)
+	{
+		self->oblivion.mission_timer_remaining = self->oblivion.mission_timer_limit;
+	}
 }
 
+/*
+=============
+Actor_PathBind
+
+Initialise the path controller bookkeeping so the actor can keep track
+of distances, direction, and state while marching along a scripted
+target_actor chain.
+=============
+*/
+static void Actor_PathBind(edict_t *self, edict_t *controller)
+{
+	vec3_t	delta;
+	float			distance;
+
+	if (!self)
+		return;
+
+	self->oblivion.controller = controller;
+	self->oblivion.path_target = controller;
+
+	if (controller)
+	{
+		self->oblivion.last_controller = controller;
+
+		VectorSubtract(controller->s.origin, self->s.origin, delta);
+		distance = VectorLength(delta);
+		self->oblivion.controller_distance = distance;
+		self->oblivion.path_remaining = distance;
+
+		if (distance > 0.0f)
+		{
+			VectorScale(delta, 1.0f / distance, self->oblivion.path_dir);
+		}
+		else
+		{
+			VectorClear(self->oblivion.path_dir);
+		}
+
+		self->oblivion.path_state = ACTOR_PATH_STATE_MOVING;
+		self->oblivion.controller_resume = level.time;
+	}
+	else
+	{
+		self->oblivion.controller_distance = 0.0f;
+		self->oblivion.path_remaining = 0.0f;
+		VectorClear(self->oblivion.path_dir);
+		self->oblivion.path_state = ACTOR_PATH_STATE_IDLE;
+	}
+
+	self->oblivion.path_speed = self->speed;
+	self->oblivion.path_step_speed = VectorLength(self->velocity);
+	self->oblivion.path_time = level.time;
+	VectorCopy(self->velocity, self->oblivion.path_velocity);
+}
+
+/*
+=============
+Actor_PathMarkWait
+
+Record any per-node wait overrides so the think loop can honour the
+scripted pause before resuming motion.
+=============
+*/
+static void Actor_PathMarkWait(edict_t *self, float wait_seconds)
+{
+	if (!self)
+		return;
+
+	if (wait_seconds > 0.0f)
+	{
+		self->oblivion.path_wait_time = wait_seconds;
+		self->oblivion.path_time = level.time + wait_seconds;
+		self->oblivion.controller_resume = self->oblivion.path_time;
+		self->oblivion.path_state = ACTOR_PATH_STATE_WAITING;
+	}
+	else
+	{
+		self->oblivion.path_wait_time = -1.0f;
+		if (self->oblivion.path_state == ACTOR_PATH_STATE_WAITING)
+		{
+			self->oblivion.path_state = self->oblivion.controller ? ACTOR_PATH_STATE_MOVING : ACTOR_PATH_STATE_IDLE;
+		}
+	}
+}
+
+/*
+=============
+Actor_PathSync
+
+Update the runtime metrics that describe the active controller after the
+actor moves during the current frame.
+=============
+*/
+static void Actor_PathSync(edict_t *self)
+{
+	vec3_t	delta;
+	float			distance;
+
+	if (!self)
+		return;
+
+	self->oblivion.path_speed = self->speed;
+	VectorCopy(self->velocity, self->oblivion.path_velocity);
+	self->oblivion.path_step_speed = VectorLength(self->oblivion.path_velocity);
+
+	if (self->oblivion.controller)
+	{
+		VectorSubtract(self->oblivion.controller->s.origin, self->s.origin, delta);
+		distance = VectorLength(delta);
+		self->oblivion.controller_distance = distance;
+		self->oblivion.path_remaining = distance;
+
+		if (distance > 0.0f)
+		{
+			VectorScale(delta, 1.0f / distance, self->oblivion.path_dir);
+		}
+		else
+		{
+			VectorClear(self->oblivion.path_dir);
+		}
+	}
+	else
+	{
+		self->oblivion.controller_distance = 0.0f;
+		self->oblivion.path_remaining = 0.0f;
+		VectorClear(self->oblivion.path_dir);
+		if (self->oblivion.path_state != ACTOR_PATH_STATE_WAITING)
+			self->oblivion.path_state = ACTOR_PATH_STATE_IDLE;
+	}
+
+	if (self->oblivion.path_state == ACTOR_PATH_STATE_WAITING
+		&& level.time >= self->oblivion.path_time)
+	{
+		self->oblivion.path_state = self->oblivion.controller ? ACTOR_PATH_STATE_MOVING : ACTOR_PATH_STATE_IDLE;
+	}
+}
+
+/*
+=============
+Actor_FireMissionEvent
+
+Forward mission updates through the HUD API and collapse subsequent
+events into incremental updates.
+=============
+*/
+static void Actor_FireMissionEvent(edict_t *ent, edict_t *activator)
+{
+	if (!ent)
+		return;
+
+	if (Mission_TargetHelpFired(ent, activator))
+		ent->oblivion.mission_state = MISSION_EVENT_UPDATE;
+}
+
+/*
+=============
+Actor_OblivionThink
+
+Wrap the default monster think loop so mission timers and path metrics
+stay in sync with the actor's scripted controller.
+=============
+*/
+static void Actor_OblivionThink(edict_t *self)
+{
+	if (!self)
+		return;
+
+	Actor_PathSync(self);
+	monster_think(self);
+	Actor_PathSync(self);
+	self->nextthink = level.time + FRAMETIME;
+}
+
+/*
+=============
+Actor_EnableOblivionThink
+
+Install the Oblivion-specific think wrapper once the walkmonster
+bootstrap has finished initialising the actor.
+=============
+*/
+static void Actor_EnableOblivionThink(edict_t *self)
+{
+	if (!self)
+		return;
+
+	if (self->think == walkmonster_start_go)
+		walkmonster_start_go(self);
+
+	self->think = Actor_OblivionThink;
+	self->nextthink = level.time + FRAMETIME;
+}
 /*
 =============
 Actor_AttachController
@@ -145,7 +353,7 @@ actor is waiting at the end of a path.
 */
 static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
 {
-	vec3_t dir;
+	vec3_t	dir;
 
 	if (!self)
 		return false;
@@ -155,7 +363,7 @@ static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
 	self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
 	if (!controller || !controller->classname
-		|| strcmp(controller->classname, "target_actor") != 0)
+			|| strcmp(controller->classname, "target_actor") != 0)
 	{
 		self->goalentity = NULL;
 		self->movetarget = NULL;
@@ -166,10 +374,10 @@ static qboolean Actor_AttachController(edict_t *self, edict_t *controller)
 	self->ideal_yaw = self->s.angles[YAW] = vectoyaw(dir);
 	self->monsterinfo.walk(self);
 
-	self->oblivion.controller = controller;
-	self->oblivion.last_controller = controller;
-	self->oblivion.controller_distance = VectorLength(dir);
-	self->oblivion.controller_resume = level.time;
+	Actor_PathBind(self, controller);
+	Actor_PathMarkWait(self, controller->wait);
+	self->oblivion.prev_path = NULL;
+	self->oblivion.script_target = NULL;
 
 	return true;
 }
@@ -590,31 +798,32 @@ static void Actor_UseOblivion(edict_t *self, edict_t *other, edict_t *activator)
 {
 	edict_t *target = G_PickTarget(self->target);
 
+	self->target = NULL;
 	self->goalentity = target;
 	self->movetarget = target;
 	self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
 
-	if (target && target->classname && strcmp(target->classname, "target_actor") == 0)
+	if (Actor_AttachController(self, target))
 	{
-		vec3_t delta;
-
-		VectorSubtract(target->s.origin, self->s.origin, delta);
-		self->s.angles[YAW] = self->ideal_yaw = vectoyaw(delta);
-
-		if (self->monsterinfo.walk)
-			self->monsterinfo.walk(self);
-
-		self->target = NULL;
+		Actor_FireMissionEvent(self, activator);
 		return;
 	}
 
-	self->target = NULL;
+	Actor_PathBind(self, NULL);
 	self->monsterinfo.pausetime = 100000000.0f;
 
 	if (self->monsterinfo.stand)
 		self->monsterinfo.stand(self);
 }
 
+/*
+=============
+Actor_SpawnOblivion
+
+Initialise the Oblivion-specific fields when an actor spawns so mission
+controllers can immediately bind once the monster bootstrap completes.
+=============
+*/
 static qboolean Actor_SpawnOblivion(edict_t *self)
 {
 	static const char *const kDefaultTargetName = "Yo Mama";
@@ -640,6 +849,8 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 	VectorSet(self->maxs, 16, 16, 32);
 
 	Actor_ConfigureMovementState(self);
+	Actor_PathBind(self, NULL);
+	Actor_PathMarkWait(self, -1.0f);
 
 	if (!(self->spawnflags & ACTOR_SPAWNFLAG_CORPSE))
 	{
@@ -702,6 +913,7 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 
 	gi.linkentity(self);
 	walkmonster_start(self);
+	Actor_EnableOblivionThink(self);
 
 	if (self->spawnflags & ACTOR_SPAWNFLAG_START_ON)
 	{
@@ -764,10 +976,14 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 
 	other->goalentity = other->movetarget = NULL;
 	other->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
+	other->oblivion.prev_path = self;
+	Actor_FireMissionEvent(self, other);
 
 	pathtarget_ent = NULL;
 	if (self->pathtarget)
 		pathtarget_ent = G_PickTarget(self->pathtarget);
+
+	other->oblivion.script_target = pathtarget_ent;
 
 	if (self->message)
 	{
@@ -839,12 +1055,16 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 
 	next_target = G_PickTarget(self->target);
 	other->movetarget = next_target;
+	Actor_PathBind(other, next_target);
+	Actor_PathMarkWait(other, self->wait);
 
 	if (!other->goalentity)
 		other->goalentity = other->movetarget;
 
 	if (!other->movetarget && !other->enemy)
 	{
+		Actor_PathBind(other, NULL);
+		Actor_PathMarkWait(other, -1.0f);
 		other->monsterinfo.pausetime = level.time + 100000000;
 		other->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
 		other->monsterinfo.stand (other);
