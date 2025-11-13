@@ -18,31 +18,23 @@ reimplementation under `src/game/`. The script emits a consolidated manifest at
 
 ## Entities present in HLIL but missing from the repo
 
-The comparison manifest shows a large gap in fundamental pickup, weapon, key,
-trigger, and target classnames. Highlighted groups include:
-
-* **Items and weapons** – standard Quake II items such as
-  `item_adrenaline`, `item_enviro`, `item_quad`, `weapon_railgun`, and
-  `weapon_supershotgun` do not have corresponding spawn entries in the current
-  `g_spawn.c` table. 【F:docs/manifests/spawn_manifest_comparison.json†L2-L59】
-* **Keys and mission-critical objects** – the retail binary exposes
-  `key_power_cube`, `key_commander_head`, `key_pass`, and map progression keys
-  (`key_red_key`, `key_blue_key`, etc.), none of which appear in the reverse
-  engineered spawn list. 【F:docs/manifests/spawn_manifest_comparison.json†L18-L41】
-* **Triggers and targets** – HLIL includes `trigger_teleport`, `target_rocket`,
-  and `target_railgun`, all currently absent. 【F:docs/manifests/spawn_manifest_comparison.json†L42-L55】
-
-Each of these groups will need either full gameplay ports or, at minimum,
-placeholder implementations so that map entities do not silently drop during
-loading.
+The refreshed comparison manifest now highlights only a short list of HLIL-only
+class names without a modern spawn implementation: the mission-critical
+`key_power_cube`, heavy ordnance (`detpack`, `grenade`, `mine`), the Makron boss
+(`monster_makron`), and a lingering `%s/listip.cfg` path literal. 【F:docs/manifests/spawn_manifest_comparison.json†L248-L255】
+Bringing these entries across—or intentionally stubbing them—will prevent maps
+from losing objective items or scripted encounters.
 
 ## Entities only present in the repo
 
-`monster_sentinel` is implemented in the modern codebase but does not surface in
-the retail `gamex86.dll` spawn table, which suggests it was added post-release
-or is specific to Oblivion’s fork. 【F:docs/manifests/spawn_manifest_comparison.json†L60-L63】
-Documenting that divergence in monster reference material will help level
-authors understand which assets are custom to this project.
+`missing_in_hlil` remains extensive because the retail DLL lacks many of the
+reconstructed Quake II staples present in this repo. That list spans worldspawn
+helpers (e.g., `info_player_start`, `worldspawn`), interaction triggers
+(`trigger_multiple`, `target_spawner`), utility entities (`misc_camera`,
+`misc_banner`), and large portions of the monster roster (`monster_gladiator`,
+`monster_spider`, `monster_sentinel`, etc.). 【F:docs/manifests/spawn_manifest_comparison.json†L129-L247】
+Treat these as Oblivion-specific content until HLIL coverage confirms otherwise
+so that documentation and regression tests capture their bespoke behaviour.
 
 ## Spawnflag mismatches
 
@@ -51,57 +43,45 @@ bits compared to the binary:
 
 | Entity             | HLIL behaviour | Repo behaviour |
 |--------------------|----------------|----------------|
-| `func_clock`       | No recorded spawnflag checks | Checks bits 1, 2, and 4 (start stopped, toggle, reverse) |
-| `func_door`        | Clears bit 0 (forces re-open) on load | Only checks bits 1, 16, and 64, never clears bit 0 |
-| `func_water`       | No spawnflag interaction detected | Checks flags and masks in modern code |
-| `misc_actor`       | No spawnflag logic extracted | Repo toggles cinematic and start-on flags |
-| `target_actor`     | HLIL leaves spawnflags untouched | Repo checks/clears bits 1 and 2 |
+| `func_door`        | No spawnflag checks recorded | Checks bits 1, 16, and 64 on spawn |
+| `func_door_rotating` | No spawnflag checks recorded | Checks bits 1, 2, 16, 64, and 128 |
+| `light`            | No spawnflag checks recorded | Tests bit 1 (`START_OFF`) |
 
 (See `docs/manifests/spawn_manifest_comparison.json` under
-`spawnflag_mismatches` for the exact bit sets.)
+`spawnflag_mismatches` for the exact bit sets.) 【F:docs/manifests/spawn_manifest_comparison.json†L256-L286】
 
 These gaps need manual review—the extractor only records literal bitmasks so
 any macro or logic change should be double-checked before porting behaviour.
 
 ## Default value drift
 
-The HLIL data reveals broad categories where the reverse engineered code no
-longer seeds the same defaults as the retail binary:
+The `default_mismatches` block has narrowed to a handful of concrete gaps:
 
-* **Moving brushes** – classic brush entities such as `func_plat` set `speed`
-  to 20 and `accel`/`decel` to 5 when absent, while our code leaves them at
-  zero. 【F:docs/manifests/spawn_manifest_comparison.json†L74-L111】
-* **Monsters** – HLIL assigns AI function pointers (`currentmove`, `dodge`,
-  behaviour callbacks) and health thresholds during spawn. Our modern code
-  expects those to be wired elsewhere, so monsters like `monster_gladiator` and
-  `monster_tank` start without the baseline state the binary assumed.
-  【F:docs/manifests/spawn_manifest_comparison.json†L124-L183】
-* **Miscellaneous scene props** – camera helpers (`misc_camera`,
-  `misc_camera_target`), gibs, and banners all receive wait/delay defaults and
-  moveinfo setup in the retail binary that we currently skip. That likely leads
-  to stuck animations or zero-length think times. 【F:docs/manifests/spawn_manifest_comparison.json†L84-L123】
+* **`light` toggles** – HLIL zeros the value at offset `0x58` (clearing the
+  style/flag slot) while the repo leaves it untouched. 【F:docs/manifests/spawn_manifest_comparison.json†L2-L12】
+* **Boss monster scaffolding** – `monster_jorg`, `monster_supertank`, and
+  `monster_tank` share missing assignments at offsets `0x12c`, `0x140`, `0x2c4`,
+  and `0x390`, suggesting additional bounding-box or AI pointer initialisation
+  that needs to be restored. 【F:docs/manifests/spawn_manifest_comparison.json†L14-L127】
 
-Bringing these defaults across should be prioritised because they frequently
-alter startup timing and AI reliability.
+Porting these writes will ensure heavyweight encounters inherit the full set of
+startup values from the retail DLL.
 
 ## Recommended follow-ups
 
-1. **Restore core pickup/weapon spawn entries.** Implement (or stub) missing
-   `SP_` functions for the item/weapon/key classes above so map parsing matches
-   retail expectations, and document any deliberately omitted gameplay changes
-   in `docs/`. 【F:docs/manifests/spawn_manifest_comparison.json†L2-L55】
-2. **Audit spawnflag handling on movers and actors.** Compare `func_clock`,
-   `func_door*`, `func_water`, `misc_actor`, `target_actor`, and related
-   entities against their HLIL bit usage, porting the missing masks or noting
-   intentional behaviour changes. 【F:docs/manifests/spawn_manifest_comparison.json†L65-L101】
-3. **Port critical default assignments.** Migrate the binary’s default values
-   for brush movement (`func_plat`, `func_train`, etc.), monster AI pointers,
-   and camera helpers so that runtime state matches the original game. Include
-   inline comments or doc updates summarizing any remaining differences.
-   【F:docs/manifests/spawn_manifest_comparison.json†L74-L183】
-4. **Document custom-only assets.** Flag entities like `monster_sentinel` as
-   Oblivion-specific in design docs to avoid confusion when porting retail
-   maps. 【F:docs/manifests/spawn_manifest_comparison.json†L60-L63】
+1. **Restore the outstanding HLIL-only spawns.** Implement or intentionally stub
+   `detpack`, `grenade`, `mine`, `key_power_cube`, `monster_makron`, and the
+   `%s/listip.cfg` helper so retail maps retain their scripted objects.
+   【F:docs/manifests/spawn_manifest_comparison.json†L248-L255】
+2. **Confirm repo-only entities are Oblivion specific.** Review the extensive
+   `missing_in_hlil` list and document which actors, triggers, and props are
+   deliberate additions versus extraction gaps. 【F:docs/manifests/spawn_manifest_comparison.json†L129-L247】
+3. **Align spawnflag checks.** Reconcile the additional bit tests the repo
+   performs for `func_door`, `func_door_rotating`, and `light` against the HLIL
+   behaviour. 【F:docs/manifests/spawn_manifest_comparison.json†L256-L286】
+4. **Restore heavyweight defaults.** Port the missing initialisation writes for
+   `light` and the boss monsters so their runtime state mirrors the binary.
+   【F:docs/manifests/spawn_manifest_comparison.json†L2-L127】
 
 With the snapshot test in place, future engine tweaks that touch spawn logic
 must update the manifest, ensuring drift stays visible.
