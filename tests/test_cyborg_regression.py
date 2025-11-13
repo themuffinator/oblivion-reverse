@@ -136,6 +136,14 @@ class CyborgRegressionTests(unittest.TestCase):
             msg="Pain cooldown changed – update the fixture or investigate regression",
         )
 
+    def test_pain_handler_triggers_wounded_anchor(self) -> None:
+        block = extract_function_block(self.source_text, "cyborg_pain")
+        self.assertRegex(
+            block,
+            r"cyborg_wound_stand_ground\s*\(\s*self\s*\)",
+            "Pain handler must update the wounded stand-ground anchoring",
+        )
+
     def test_attack_finished_timer_and_stand_ground(self) -> None:
         block = extract_function_block(self.source_text, "cyborg_attack_dispatch")
         match = ATTACK_FINISHED_RE.search(block)

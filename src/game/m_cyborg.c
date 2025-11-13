@@ -516,6 +516,12 @@ static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
 	int	slot;
 
+	/* Update the wounded anchor thresholds on every damage event so the
+	 * locomotion helpers can later release the cyborg through
+	 * cyborg_update_stand_ground even if the pain animation is skipped.
+	 */
+	cyborg_wound_stand_ground (self);
+
 	if (level.time < self->oblivion.cyborg_pain_time)
 		return;
 
