@@ -138,6 +138,7 @@ static void cyborg_fire_muzzle_left (edict_t *self)
 }
 
 
+static void cyborg_land (edict_t *self);
 static void cyborg_idle_loop (edict_t *self);
 static void cyborg_locomotion_resume (edict_t *self);
 static void cyborg_attack_dispatch (edict_t *self);
@@ -147,7 +148,7 @@ static void cyborg_wound_stand_ground (edict_t *self);
 static void cyborg_stand_ground_think (edict_t *self);
 
 static mframe_t cyborg_frames_stand[] = {
-{ai_stand, 0.0f, cyborg_stand_ground_think}
+	{ai_stand, 0.0f, cyborg_stand_ground_think}
 };
 static mmove_t cyborg_move_stand = {
 	CYBORG_FRAME_STAND_START, CYBORG_FRAME_STAND_END, cyborg_frames_stand, NULL
@@ -239,6 +240,21 @@ static mmove_t cyborg_move_attack_barrage = {
 	CYBORG_FRAME_ATTACK3_START, CYBORG_FRAME_ATTACK3_END, cyborg_frames_attack_barrage, cyborg_locomotion_stage
 };
 
+/*
+=============
+cyborg_land
+
+Emit the heavy landing impact when the pending flag is set.
+=============
+*/
+static void cyborg_land (edict_t *self)
+{
+	if (!self->oblivion.cyborg_landing_thud)
+		return;
+
+	self->oblivion.cyborg_landing_thud = false;
+	gi.sound (self, CHAN_BODY, sound_thud, 1.0f, ATTN_NORM, 0.0f);
+}
 
 /*
 =============
@@ -260,6 +276,7 @@ static qboolean cyborg_update_stand_ground (edict_t *self)
 
 	self->monsterinfo.aiflags &= ~(AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
 	self->oblivion.cyborg_anchor_time = 0.0f;
+	cyborg_land (self);
 	return true;
 }
 
@@ -278,6 +295,7 @@ static void cyborg_schedule_stand_ground (edict_t *self, float duration)
 		return;
 
 	self->monsterinfo.aiflags |= AI_STAND_GROUND;
+	self->oblivion.cyborg_landing_thud = true;
 	anchor_expire = level.time + duration;
 
 	if (self->oblivion.cyborg_anchor_time <= level.time || self->oblivion.cyborg_anchor_time < anchor_expire)
@@ -364,6 +382,7 @@ Select between the walk and run chains based on the enemy state.
 static void cyborg_locomotion_stage (edict_t *self)
 {
 	cyborg_update_stand_ground (self);
+	cyborg_land (self);
 
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
@@ -397,6 +416,7 @@ Return to the staged walk/run loop after a transient animation.
 static void cyborg_locomotion_resume (edict_t *self)
 {
 	cyborg_update_stand_ground (self);
+	cyborg_land (self);
 
 	if (self->monsterinfo.aiflags & AI_STAND_GROUND)
 	{
@@ -468,14 +488,17 @@ static void cyborg_attack_dispatch (edict_t *self)
 
 	if (choice < 0.5f)
 	{
+		self->oblivion.cyborg_landing_thud = true;
 		self->monsterinfo.currentmove = &cyborg_move_attack_primary;
 	}
 	else if (choice < 0.7f)
 	{
+		self->oblivion.cyborg_landing_thud = true;
 		self->monsterinfo.currentmove = &cyborg_move_attack_barrage;
 	}
 	else
 	{
+		self->oblivion.cyborg_landing_thud = true;
 		self->monsterinfo.currentmove = &cyborg_move_attack_secondary;
 	}
 }
@@ -526,6 +549,7 @@ static mmove_t death_move = {CYBORG_FRAME_DEATH_START, CYBORG_FRAME_DEATH_END, d
 
 	self->oblivion.cyborg_anchor_time = 0.0f;
 	self->oblivion.cyborg_anchor_stage = 0;
+	self->oblivion.cyborg_landing_thud = false;
 	self->monsterinfo.aiflags &= ~AI_STAND_GROUND;
 
 	gi.sound (self, CHAN_VOICE, sound_death, 1, ATTN_NORM, 0);
@@ -579,6 +603,7 @@ void SP_monster_cyborg (edict_t *self)
 	self->max_health = self->health;
 	self->oblivion.cyborg_anchor_time = 0.0f;
 	self->oblivion.cyborg_anchor_stage = 0;
+	self->oblivion.cyborg_landing_thud = false;
 
 	self->oblivion.cyborg_pain_time = 0.0f;
 	self->oblivion.cyborg_pain_slot = 0;
