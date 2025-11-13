@@ -18,6 +18,22 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
         current = json.loads(result.stdout)
         expected_path = repo_root / "tests" / "expected_spawn_manifest.json"
         expected = json.loads(expected_path.read_text(encoding="utf-8"))
+        hlil_manifest = current.get("combined", {}).get("hlil", {})
+        self.assertGreater(
+            len(hlil_manifest),
+            0,
+            "Parsed HLIL manifest should contain at least one classname",
+        )
+        self.assertIn(
+            "monster_jorg",
+            hlil_manifest,
+            "Expected monster_jorg entry missing from HLIL manifest",
+        )
+        self.assertEqual(
+            hlil_manifest["monster_jorg"].get("function"),
+            "sub_10001ac0",
+            "monster_jorg HLIL manifest entry does not match expected function",
+        )
         self.assertEqual(current, expected)
 
 

@@ -10,6 +10,7 @@ import math
 import re
 import struct
 import sys
+from collections import deque
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, Iterable, List, Optional, Sequence, Set, Tuple
@@ -71,15 +72,9 @@ class RepoSpawnInfo:
 class HLILParser:
     def __init__(self, path: Path):
         self.path = path
-        split_root = self.path.parent / "split"
-        source_paths: List[Path] = [self.path]
-        if split_root.exists():
-            extra_paths = sorted(split_root.glob("**/*.txt"))
-            source_paths.extend(extra_paths)
-
         self._sources: List[Tuple[Path, List[str]]] = []
         self.lines: List[str] = []
-        for source_path in source_paths:
+        for source_path in self._iter_source_paths():
             source_lines = source_path.read_text(encoding="utf-8", errors="replace").splitlines()
             self._sources.append((source_path, source_lines))
             self.lines.extend(source_lines)
@@ -89,6 +84,13 @@ class HLILParser:
         self._spawn_map: Optional[Dict[str, str]] = None
 
     # -- general helpers --
+    def _iter_source_paths(self) -> Iterable[Path]:
+        yield self.path
+        split_root = self.path.parent / "split"
+        if split_root.is_dir():
+            for extra_path in sorted(split_root.rglob("*.txt")):
+                yield extra_path
+
     @property
     def function_blocks(self) -> Dict[str, List[str]]:
         if self._function_blocks is None:
@@ -199,124 +201,82 @@ class HLILParser:
         return self._spawn_map
 
     def _extract_spawn_map_from_strcmp(self, block: List[str]) -> Dict[str, str]:
-        literal_pattern = re.compile(r'char\*\s+[^=]+\s*=\s*"([^"]+)"')
-        if_pattern = re.compile(r'^100[0-9a-f]+\s+if\s*\([^)]*==\s*0\)')
+        literal_pattern = re.compile(
+            r'(?:const\s+)?char(?:\s+const)?\s*\*\s+[^=]+\s*=\s*"([^"]+)"'
+        )
         goto_pattern = re.compile(r'goto\s+(label_[0-9a-f]+)')
         return_pattern = re.compile(r'return\s+(sub_[0-9a-f]+)\b')
         label_pattern = re.compile(r'(label_[0-9a-f]+):')
+
         label_indices: Dict[str, int] = {}
         for idx, line in enumerate(block):
             m_label = label_pattern.search(line)
             if m_label:
                 label_indices[m_label.group(1)] = idx
 
-        results: Dict[str, str] = {}
-        idx = 0
-        while idx < len(block):
-            line = block[idx]
+        literal_positions: List[Tuple[int, str]] = []
+        for idx, line in enumerate(block):
             m_literal = literal_pattern.search(line)
-            if not m_literal:
-                idx += 1
-                continue
-            classname = m_literal.group(1)
-            target_func: Optional[str] = None
-            search_limit = min(len(block), idx + 80)
-            inner = idx + 1
-            while inner < search_limit:
-                next_line = block[inner]
-                if literal_pattern.search(next_line):
-                    break
-                stripped = next_line.strip()
-                m_direct_return = return_pattern.search(stripped)
-                if m_direct_return:
-                    target_func = m_direct_return.group(1)
-                    break
-                if if_pattern.match(stripped):
-                    candidate = self._resolve_strcmp_if(
-                        block,
-                        inner,
-                        label_indices,
-                        goto_pattern,
-                        return_pattern,
-                        label_pattern,
-                    )
-                    if candidate:
-                        target_func = candidate
-                        break
-                inner += 1
-            if target_func:
-                results[classname] = target_func
-            idx += 1
+            if m_literal:
+                literal_positions.append((idx, m_literal.group(1)))
+
+        results: Dict[str, str] = {}
+        for pos, (line_idx, classname) in enumerate(literal_positions):
+            search_limit = (
+                literal_positions[pos + 1][0]
+                if pos + 1 < len(literal_positions)
+                else len(block)
+            )
+            target = self._resolve_strcmp_chain(
+                block,
+                line_idx + 1,
+                search_limit,
+                goto_pattern,
+                return_pattern,
+                label_indices,
+            )
+            if target:
+                results[classname] = target
         return results
 
-    def _resolve_strcmp_if(
+    def _resolve_strcmp_chain(
         self,
         block: List[str],
-        if_index: int,
-        label_indices: Dict[str, int],
+        start_index: int,
+        search_limit: int,
         goto_pattern: re.Pattern[str],
         return_pattern: re.Pattern[str],
-        label_pattern: re.Pattern[str],
-    ) -> Optional[str]:
-        for offset in range(1, 12):
-            idx = if_index + offset
-            if idx >= len(block):
-                break
-            text = block[idx].strip()
-            if not text:
-                continue
-            m_return = return_pattern.search(text)
-            if m_return:
-                return m_return.group(1)
-            m_goto = goto_pattern.search(text)
-            if m_goto:
-                return self._resolve_strcmp_label(
-                    block,
-                    m_goto.group(1),
-                    label_indices,
-                    goto_pattern,
-                    return_pattern,
-                    label_pattern,
-                )
-            if text.startswith("else"):
-                break
-        return None
-
-    def _resolve_strcmp_label(
-        self,
-        block: List[str],
-        label: str,
         label_indices: Dict[str, int],
-        goto_pattern: re.Pattern[str],
-        return_pattern: re.Pattern[str],
-        label_pattern: re.Pattern[str],
     ) -> Optional[str]:
-        if label not in label_indices:
+        if not block:
             return None
-        visited: Set[str] = set()
-        queue: List[str] = [label]
+
+        queue: deque[int] = deque()
+        queue.append(max(0, start_index))
+        visited_starts: Set[int] = set()
+
         while queue:
-            current = queue.pop()
-            if current in visited:
+            current = queue.popleft()
+            if current in visited_starts or current >= len(block):
                 continue
-            visited.add(current)
-            start = label_indices.get(current)
-            if start is None:
-                continue
-            end = min(len(block), start + 80)
-            for idx in range(start + 1, end):
-                text = block[idx].strip()
-                if not text:
-                    continue
-                m_return = return_pattern.search(text)
-                if m_return:
-                    return m_return.group(1)
-                m_goto = goto_pattern.search(text)
-                if m_goto and m_goto.group(1) not in visited:
-                    queue.append(m_goto.group(1))
-                m_label = label_pattern.search(text)
-                if m_label and m_label.group(1) not in visited:
-                    queue.append(m_label.group(1))
+            visited_starts.add(current)
+
+            end = search_limit if current == start_index else len(block)
+            idx = current
+            while idx < end and idx < len(block):
+                line = block[idx].strip()
+                if line:
+                    m_return = return_pattern.search(line)
+                    if m_return:
+                        return m_return.group(1)
+
+                    for m_goto in goto_pattern.finditer(line):
+                        label_name = m_goto.group(1)
+                        target_idx = label_indices.get(label_name)
+                        if target_idx is not None and target_idx not in visited_starts:
+                            queue.append(target_idx)
+                idx += 1
+
         return None
 
     # -- extraction --
