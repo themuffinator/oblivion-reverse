@@ -1952,49 +1952,60 @@ void Weapon_RemoteDetonator (edict_t *ent)
         Weapon_Generic (ent, 4, 8, 52, 55, pause_frames, fire_frames, Weapon_RemoteDetonator_Fire);
 }
 
+/*
+==============
+Weapon_ProximityMines_Fire
+
+Fires a proximity mine and handles ammo usage along with the placement sound.
+==============
+*/
 static void Weapon_ProximityMines_Fire (edict_t *ent)
 {
-        vec3_t  offset, start;
-        vec3_t  forward, right;
-        int             damage = 90;
-        int             splash = 120;
-        float   radius = 160.0f;
+	vec3_t offset, start;
+	vec3_t forward, right;
+	int		damage = 90;
+	int		splash = 120;
+	float	radius = 160.0f;
+	edict_t *mine;
 
-        if (!((int)dmflags->value & DF_INFINITE_AMMO))
-        {
-                if (!ent->client->ammo_index || ent->client->pers.inventory[ent->client->ammo_index] < 1)
-                {
-                        ent->client->ps.gunframe++;
-                        if (level.time >= ent->pain_debounce_time)
-                        {
-                                gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
-                                ent->pain_debounce_time = level.time + 1;
-                        }
-                        return;
-                }
-        }
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+	{
+		if (!ent->client->ammo_index || ent->client->pers.inventory[ent->client->ammo_index] < 1)
+		{
+			ent->client->ps.gunframe++;
+			if (level.time >= ent->pain_debounce_time)
+			{
+				gi.sound(ent, CHAN_VOICE, gi.soundindex("weapons/noammo.wav"), 1, ATTN_NORM, 0);
+				ent->pain_debounce_time = level.time + 1;
+			}
+			return;
+		}
+	}
 
-        if (is_quad)
-        {
-                damage *= 4;
-                splash *= 4;
-        }
+	if (is_quad)
+	{
+		damage *= 4;
+		splash *= 4;
+	}
 
-        AngleVectors (ent->client->v_angle, forward, right, NULL);
-        VectorSet (offset, 8, 8, ent->viewheight-8);
-        P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
-        fire_proximity_mine (ent, start, forward, damage, 600, radius, splash);
+	AngleVectors (ent->client->v_angle, forward, right, NULL);
+	VectorSet (offset, 8, 8, ent->viewheight-8);
+	P_ProjectSource (ent->client, ent->s.origin, offset, forward, right, start);
+	mine = fire_proximity_mine (ent, start, forward, damage, 600, radius, splash);
 
-        gi.WriteByte (svc_muzzleflash);
-        gi.WriteShort (ent-g_edicts);
-        gi.WriteByte (MZ_GRENADE | is_silenced);
-        gi.multicast (ent->s.origin, MULTICAST_PVS);
+	if (mine)
+		gi.sound(ent, CHAN_ITEM, gi.soundindex("weapons/hgrent1a.wav"), 1, ATTN_NORM, 0);
 
-        ent->client->ps.gunframe++;
-        PlayerNoise(ent, start, PNOISE_WEAPON);
+	gi.WriteByte (svc_muzzleflash);
+	gi.WriteShort (ent-g_edicts);
+	gi.WriteByte (MZ_GRENADE | is_silenced);
+	gi.multicast (ent->s.origin, MULTICAST_PVS);
 
-        if (!((int)dmflags->value & DF_INFINITE_AMMO))
-                ent->client->pers.inventory[ent->client->ammo_index]--;
+	ent->client->ps.gunframe++;
+	PlayerNoise(ent, start, PNOISE_WEAPON);
+
+	if (!((int)dmflags->value & DF_INFINITE_AMMO))
+		ent->client->pers.inventory[ent->client->ammo_index]--;
 }
 
 void Weapon_ProximityMines (edict_t *ent)
