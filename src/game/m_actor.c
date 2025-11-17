@@ -26,6 +26,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define	MAX_ACTOR_NAMES		8
 #define ACTOR_CHAT_COOLDOWN	2.0f
 
+extern mmove_t actor_move_stand;
+extern mmove_t actor_move_flipoff;
+extern mmove_t actor_move_taunt;
+
+static void Actor_PathAssignController(edict_t *self, edict_t *controller);
+
 /*
  * Oblivion extends the Quake II actor AI flags with additional high bits
  * that coordinate scripted mission controllers.  Use local names so the
@@ -36,11 +42,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define	AI_ACTOR_PATH_IDLE		0x02000000
 #define	AI_ACTOR_FRIENDLY		0x01000000
 
-/* misc_actor spawnflags */
-#define ACTOR_SPAWNFLAG_START_ON        32
-#define ACTOR_SPAWNFLAG_WIMPY           64
+/* misc_actor spawnflags are declared in m_actor.h */
 
- 
 static const char *Actor_FallbackName(edict_t *self)
 {
         static const char *const fallback[MAX_ACTOR_NAMES] =
@@ -906,7 +909,7 @@ mframe_t actor_frames_taunt [] =
 };
 mmove_t actor_move_taunt = {FRAME_taunt01, FRAME_taunt17, actor_frames_taunt, actor_run};
 
-char *messages[] =
+static const char *const messages[] =
 {
 	"Watch it",
 	"#$@*&",
@@ -930,7 +933,7 @@ void actor_pain (edict_t *self, edict_t *other, float kick, int damage)
 	if ((other->client) && (random() < 0.4))
 	{
 		vec3_t	v;
-		char	*name;
+		const char	*name;
 
 		VectorSubtract (other->s.origin, self->s.origin, v);
 		self->ideal_yaw = vectoyaw (v);
@@ -1270,10 +1273,10 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 
 	if (self->spawnflags & ACTOR_SPAWNFLAG_START_ON)
 	{
-		edict_t *world = &g_edicts[0];
+		edict_t *world_ent = &g_edicts[0];
 
 		if (self->use)
-			self->use(self, world, world);
+			self->use(self, world_ent, world_ent);
 	}
 
 	return true;
