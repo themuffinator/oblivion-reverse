@@ -173,6 +173,8 @@ field_t		clientfields[] =
 	{"pers.weapon", CLOFS(pers.weapon), F_ITEM},
 	{"pers.lastweapon", CLOFS(pers.lastweapon), F_ITEM},
 	{"newweapon", CLOFS(newweapon), F_ITEM},
+	{"rtdu.next_use_time", CLOFS(rtdu.next_use_time), F_FLOAT},
+	{"rtdu.turret", CLOFS(rtdu.turret), F_EDICT},
 
 	{NULL, 0, F_INT}
 };
@@ -705,6 +707,40 @@ void WriteLevel (char *filename)
 
 
 /*
+=============
+G_RestoreRTDUTurretLinks
+
+Rebuilds gclient_t.rtdu.turret references after entities are restored.
+=============
+*/
+static void G_RestoreRTDUTurretLinks (void)
+{
+	int		i;
+	edict_t	*ent;
+
+	for (i=0 ; i<game.maxclients ; i++)
+	{
+		game.clients[i].rtdu.turret = NULL;
+	}
+
+	for (i=0 ; i<globals.num_edicts ; i++)
+	{
+		ent = &g_edicts[i];
+
+		if (!ent->inuse || !ent->classname)
+			continue;
+
+		if (strcmp(ent->classname, "rtdu_turret"))
+			continue;
+
+		if (!ent->owner || !ent->owner->client)
+			continue;
+
+		ent->owner->client->rtdu.turret = ent;
+	}
+}
+
+/*
 =================
 ReadLevel
 
@@ -807,4 +843,6 @@ void ReadLevel (char *filename)
 			if (strcmp(ent->classname, "target_crosslevel_target") == 0)
 				ent->nextthink = level.time + ent->delay;
 	}
+
+	G_RestoreRTDUTurretLinks ();
 }
