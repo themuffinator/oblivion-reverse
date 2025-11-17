@@ -70,6 +70,7 @@ Fire a deatomizer bolt using the frame-selectable weapon sample recovered from t
 static void cyborg_fire_deatom (edict_t *self, const vec3_t muzzle_offset, int sample_index)
 {
 	vec3_t	start, dir, forward, right, target;
+	vec3_t	offset;
 
 	if (!self->enemy)
 		return;
@@ -78,7 +79,8 @@ static void cyborg_fire_deatom (edict_t *self, const vec3_t muzzle_offset, int s
 		sample_index = 0;
 
 	AngleVectors (self->s.angles, forward, right, NULL);
-	G_ProjectSource (self->s.origin, muzzle_offset, forward, right, start);
+	VectorCopy (muzzle_offset, offset);
+	G_ProjectSource (self->s.origin, offset, forward, right, start);
 
 	VectorCopy (self->enemy->s.origin, target);
 	target[2] += self->enemy->viewheight;
@@ -141,11 +143,13 @@ static void cyborg_fire_muzzle_left (edict_t *self)
 static void cyborg_land (edict_t *self);
 static void cyborg_idle_loop (edict_t *self);
 static void cyborg_locomotion_resume (edict_t *self);
+static void cyborg_locomotion_stage (edict_t *self);
 static void cyborg_attack_dispatch (edict_t *self);
 static qboolean cyborg_update_stand_ground (edict_t *self);
 static void cyborg_schedule_stand_ground (edict_t *self, float duration);
 static void cyborg_wound_stand_ground (edict_t *self);
 static void cyborg_stand_ground_think (edict_t *self);
+static void cyborg_stand (edict_t *self);
 
 static mframe_t cyborg_frames_stand[] = {
 	{ai_stand, 0.0f, cyborg_stand_ground_think}
