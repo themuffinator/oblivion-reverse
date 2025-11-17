@@ -256,6 +256,7 @@ static mframe_t badass_frames_pain[] = {
 static mmove_t badass_move_pain = {FRAME_PAIN1, FRAME_PAIN10, badass_frames_pain, badass_run};
 
 void ClipGibVelocity (edict_t *ent);
+void gib_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point);
 
 /*
 =============
@@ -303,7 +304,7 @@ static void badass_die_gibs (edict_t *self, int damage)
 		if (!gib)
 			break;
 
-		gi.setmodel (gib, def->model);
+		gi.setmodel (gib, (char *)def->model);
 		VectorCopy (def->mins, gib->mins);
 		VectorCopy (def->maxs, gib->maxs);
 		VectorSubtract (gib->maxs, gib->mins, gib->size);

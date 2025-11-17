@@ -176,7 +176,7 @@ static void kigrax_idle_select (edict_t *self)
 	}
 
 	if (random () < 0.5f)
-tgi.sound (self, CHAN_VOICE, sound_idle, 1.0f, ATTN_IDLE, 0.0f);
+		gi.sound (self, CHAN_VOICE, sound_idle, 1.0f, ATTN_IDLE, 0.0f);
 }
 
 /*
@@ -196,9 +196,9 @@ static void kigrax_walk_select (edict_t *self)
 	}
 
 	if (random () < 0.5f)
-tself->monsterinfo.currentmove = &kigrax_move_patrol_ccw;
+		self->monsterinfo.currentmove = &kigrax_move_patrol_ccw;
 	else
-tself->monsterinfo.currentmove = &kigrax_move_patrol_cw;
+		self->monsterinfo.currentmove = &kigrax_move_patrol_cw;
 }
 
 /*
@@ -218,9 +218,9 @@ static void kigrax_run_select (edict_t *self)
 	}
 
 	if (random () < 0.4f)
-tself->monsterinfo.currentmove = &kigrax_move_strafe_dash;
+		self->monsterinfo.currentmove = &kigrax_move_strafe_dash;
 	else
-tself->monsterinfo.currentmove = &kigrax_move_strafe_long;
+		self->monsterinfo.currentmove = &kigrax_move_strafe_long;
 }
 
 /*
@@ -247,9 +247,9 @@ controllers can reuse the HLIL scouting behaviour.
 static void kigrax_search (edict_t *self)
 {
 	if (random () < 0.33f)
-tgi.sound (self, CHAN_VOICE, sound_idle, 1.0f, ATTN_IDLE, 0.0f);
+		gi.sound (self, CHAN_VOICE, sound_idle, 1.0f, ATTN_IDLE, 0.0f);
 	else
-tgi.sound (self, CHAN_VOICE, sound_search, 1.0f, ATTN_IDLE, 0.0f);
+		gi.sound (self, CHAN_VOICE, sound_search, 1.0f, ATTN_IDLE, 0.0f);
 
 	kigrax_walk_select (self);
 }
@@ -280,7 +280,7 @@ static void kigrax_fire (edict_t *self)
 	vec3_t start, dir, forward, right, target;
 
 	if (!self->enemy)
-treturn;
+		return;
 
 	AngleVectors (self->s.angles, forward, right, NULL);
 	G_ProjectSource (self->s.origin, kigrax_flash_offset, forward, right, start);
@@ -328,7 +328,7 @@ static void kigrax_pain (edict_t *self, edict_t *other, float kick, int damage)
 	};
 
 	if (level.time < self->pain_debounce_time)
-treturn;
+		return;
 
 	self->pain_debounce_time = level.time + 1.0f;
 	gi.sound (self, CHAN_VOICE, sound_pain, 1.0f, ATTN_NORM, 0.0f);
