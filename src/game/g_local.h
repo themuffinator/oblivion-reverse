@@ -119,6 +119,7 @@ typedef enum mission_event_e
 
 // edict->spawnflags
 // these are set with checkboxes on each entity in the map editor
+#define	SPAWNFLAG_CORPSE			0x00000008
 #define	SPAWNFLAG_NOT_EASY			0x00000100
 #define	SPAWNFLAG_NOT_MEDIUM		0x00000200
 #define	SPAWNFLAG_NOT_HARD			0x00000400

@@ -528,16 +528,65 @@ void monster_death_use (edict_t *self)
 	G_UseTargets (self, self->enemy);
 }
 
+/*
+=============
+Monster_SpawnCorpse
+
+Force a monster to spawn in a dead state when the corpse spawnflag is set.
+=============
+*/
+static qboolean Monster_SpawnCorpse (edict_t *self)
+{
+	if (!self)
+		return false;
+
+	if (!(self->spawnflags & SPAWNFLAG_CORPSE))
+		return false;
+
+	self->think = NULL;
+	self->nextthink = 0;
+	self->svflags |= SVF_DEADMONSTER;
+	self->takedamage = DAMAGE_YES;
+	self->deadflag = DEAD_DEAD;
+	self->max_health = self->health;
+	VectorClear (self->velocity);
+
+	if (self->item)
+	{
+		Drop_Item (self, self->item);
+		self->item = NULL;
+	}
+
+	if (self->die)
+	{
+		self->health = 0;
+		self->die (self, self, self, 0, vec3_origin);
+
+		if (self->monsterinfo.currentmove)
+		{
+			self->s.frame = self->monsterinfo.currentmove->lastframe;
+			if (self->monsterinfo.currentmove->endfunc)
+				self->monsterinfo.currentmove->endfunc (self);
+		}
+	}
+
+	gi.linkentity (self);
+	return true;
+}
 
 //============================================================================
 
 qboolean monster_start (edict_t *self)
 {
+	qboolean corpse_spawn;
+
 	if (deathmatch->value)
 	{
 		G_FreeEdict (self);
 		return false;
 	}
+
+	corpse_spawn = (self->spawnflags & SPAWNFLAG_CORPSE) != 0;
 
 	if ((self->spawnflags & 4) && !(self->monsterinfo.aiflags & AI_GOOD_GUY))
 	{
@@ -546,7 +595,7 @@ qboolean monster_start (edict_t *self)
 //		gi.dprintf("fixed spawnflags on %s at %s\n", self->classname, vtos(self->s.origin));
 	}
 
-	if (!(self->monsterinfo.aiflags & AI_GOOD_GUY))
+	if (!(self->monsterinfo.aiflags & AI_GOOD_GUY) && !corpse_spawn)
 		level.total_monsters++;
 
 	self->nextthink = level.time + FRAMETIME;
@@ -571,6 +620,12 @@ qboolean monster_start (edict_t *self)
 		self->item = FindItemByClassname (st.item);
 		if (!self->item)
 			gi.dprintf("%s at %s has bad item: %s\n", self->classname, vtos(self->s.origin), st.item);
+	}
+
+	if (corpse_spawn)
+	{
+		Monster_SpawnCorpse (self);
+		return false;
 	}
 
 	// randomize what frame they start on

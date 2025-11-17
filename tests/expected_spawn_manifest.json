@@ -4144,7 +4144,9 @@
         }
       },
       "item_health": {
-        "defaults": {},
+        "defaults": {
+          "count": 10.0
+        },
         "function": "SP_item_health",
         "spawnflags": {
           "assignments": [],
