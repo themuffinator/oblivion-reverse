@@ -89,6 +89,7 @@ class HLILParser:
     def __init__(self, path: Path):
         self.path = path
         self._split_root = self.path.parent / "split"
+        self._interpreted_root = self.path.parent / "interpreted"
         self._sources: List[SourceFile] = []
         self.lines: List[str] = []
         for source_path in self._iter_source_paths():
@@ -101,11 +102,13 @@ class HLILParser:
         self._fields: Optional[Dict[int, FieldInfo]] = None
         self._spawn_map: Optional[Dict[str, str]] = None
         self._string_literals: Optional[Dict[str, str]] = None
+        self._interpreted_strings: Optional[List[Dict[str, str]]] = None
         self._binary_path = self._resolve_binary_path()
         self._binary_data: Optional[bytes] = None
         self._binary_sections: Optional[List[BinarySection]] = None
         self._image_base: Optional[int] = None
         self._spawn_table_cache: Dict[int, Dict[str, str]] = {}
+        self._itemlist_spawn_entries: Optional[Dict[str, str]] = None
 
     # -- general helpers --
     def _resolve_binary_path(self) -> Optional[Path]:
@@ -247,6 +250,9 @@ class HLILParser:
                 for classname, func in self._extract_spawn_map_from_strcmp(block).items():
                     if classname not in spawn_entries:
                         spawn_entries[classname] = func
+            for classname, func in self._parse_itemlist_spawn_entries().items():
+                if classname not in spawn_entries:
+                    spawn_entries[classname] = func
             self._spawn_map = spawn_entries
         return self._spawn_map
 
@@ -267,8 +273,36 @@ class HLILParser:
                         literal_map[normalized] = name
                         if key.startswith("data_"):
                             literal_map[f"0x{key.split('_', 1)[1].lower()}"] = name
+            for entry in self._load_interpreted_strings():
+                value = entry.get("value")
+                if not value:
+                    continue
+                symbol = entry.get("symbol", "")
+                if symbol:
+                    literal_map[symbol.lower()] = value
+                    if symbol.startswith("data_"):
+                        literal_map[f"0x{symbol.split('_', 1)[1].lower()}"] = value
+                address = entry.get("address", "")
+                if address:
+                    literal_map[address.lower()] = value
             self._string_literals = literal_map
         return self._string_literals
+
+    def _load_interpreted_strings(self) -> List[Dict[str, str]]:
+        if self._interpreted_strings is None:
+            path = self._interpreted_root / "strings.json"
+            if path.is_file():
+                try:
+                    data = json.loads(path.read_text(encoding="utf-8"))
+                    if isinstance(data, list):
+                        self._interpreted_strings = [entry for entry in data if isinstance(entry, dict)]
+                    else:
+                        self._interpreted_strings = []
+                except json.JSONDecodeError:
+                    self._interpreted_strings = []
+            else:
+                self._interpreted_strings = []
+        return self._interpreted_strings
 
     def _normalize_classname(self, classname: str) -> str:
         return classname.strip().strip("\0")
@@ -352,6 +386,14 @@ class HLILParser:
         except UnicodeDecodeError:
             return None
 
+    def _read_uint32(self, address: int) -> Optional[int]:
+        if not self._load_binary_image() or self._binary_data is None:
+            return None
+        offset = self._va_to_file_offset(address)
+        if offset is None or offset + 4 > len(self._binary_data):
+            return None
+        return struct.unpack_from("<I", self._binary_data, offset)[0]
+
     def _is_valid_function_address(self, address: int) -> bool:
         if not self._load_binary_image() or self._binary_sections is None:
             return False
@@ -387,6 +429,45 @@ class HLILParser:
                 entries[normalized] = f"sub_{func_ptr:08x}"
             offset += 8
         self._spawn_table_cache[address] = entries
+        return entries
+
+    def _parse_itemlist_spawn_entries(self) -> Dict[str, str]:
+        if self._itemlist_spawn_entries is not None:
+            return self._itemlist_spawn_entries
+        entries: Dict[str, str] = {}
+        base_address = 0x10046928
+        count_address = 0x1006CA54
+        entry_size = 0x48
+        handler_func = "sub_1000cf20"
+        if not self._load_binary_image() or self._binary_data is None:
+            self._itemlist_spawn_entries = entries
+            return entries
+        offset = self._va_to_file_offset(base_address)
+        if offset is None:
+            self._itemlist_spawn_entries = entries
+            return entries
+        max_entries = self._read_uint32(count_address) or 0
+        if max_entries <= 0:
+            max_entries = 256
+        data = self._binary_data
+        seen_entry = False
+        for idx in range(max_entries):
+            entry_offset = offset + idx * entry_size
+            if entry_offset + 4 > len(data):
+                break
+            name_ptr = struct.unpack_from("<I", data, entry_offset)[0]
+            if name_ptr == 0:
+                if seen_entry:
+                    break
+                continue
+            classname = self._read_c_string(name_ptr)
+            if not classname:
+                continue
+            normalized = self._normalize_classname(classname)
+            if normalized and normalized not in entries:
+                entries[normalized] = handler_func
+                seen_entry = True
+        self._itemlist_spawn_entries = entries
         return entries
 
     def _extract_spawn_map_from_spawn_tables(

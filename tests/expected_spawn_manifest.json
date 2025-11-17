@@ -11,6 +11,303 @@
           "sets": []
         }
       },
+      "ammo_bullets": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_cells": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_detpack": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_dod": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_grenades": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_mines": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_pistolplasma": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_rifleplasma": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_rockets": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_shells": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "ammo_slugs": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
       "detpack": {
         "defaults": {},
         "function": "sub_1001e820",
@@ -760,6 +1057,249 @@
           "sets": []
         }
       },
+      "item_adrenaline": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_ancient_head": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_armor_body": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_armor_combat": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_armor_jacket": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_armor_shard": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_bandolier": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_breather": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_enviro": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
       "item_health": {
         "defaults": {
           "offset_0x254": [
@@ -828,6 +1368,330 @@
           "sets": []
         }
       },
+      "item_invulnerability": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_pack": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_power_screen": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_power_shield": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_quad": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "item_silencer": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_airstrike_target": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_blue_key": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_commander_head": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_data_cd": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_data_spinner": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_pass": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
       "key_power_cube": {
         "defaults": {
           "offset_0x58": [
@@ -843,6 +1707,60 @@
           "checks": [],
           "clears": [],
           "sets": []
+        }
+      },
+      "key_pyramid": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "key_red_key": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
         }
       },
       "light": {
@@ -3463,6 +4381,465 @@
           "sets": []
         }
       },
+      "weapon_bfg": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_blaster": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_chaingun": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_deatomizer": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_dod": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_grenadelauncher": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_hellfury": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_hyperblaster": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_machinegun": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_plasma_pistol": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_plasma_rifle": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_railgun": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_remote_detonator": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_rocketlauncher": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_rtdu": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_shotgun": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
+      "weapon_supershotgun": {
+        "defaults": {
+          "offset_0x11c": [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          "offset_0x44": [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ]
+        },
+        "function": "sub_1000cf20",
+        "spawnflags": {
+          "assignments": [
+            0
+          ],
+          "checks": [],
+          "clears": [],
+          "sets": [
+            1
+          ]
+        }
+      },
       "worldspawn": {
         "defaults": {
           "offset_0x104": [
@@ -5561,6 +6938,226 @@
   },
   "comparison": {
     "default_mismatches": {
+      "ammo_bullets": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_cells": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_detpack": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_dod": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_grenades": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_mines": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_pistolplasma": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_rifleplasma": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_rockets": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_shells": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "ammo_slugs": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
       "func_areaportal": {
         "offset_0x254": [
           [
@@ -6241,6 +7838,186 @@
           null
         ]
       },
+      "item_adrenaline": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_ancient_head": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_armor_body": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_armor_combat": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_armor_jacket": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_armor_shard": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_bandolier": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_breather": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_enviro": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
       "item_health": {
         "offset_0x254": [
           [
@@ -6285,12 +8062,292 @@
           null
         ]
       },
+      "item_invulnerability": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_pack": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_power_screen": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_power_shield": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_quad": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "item_silencer": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_airstrike_target": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_blue_key": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_commander_head": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_data_cd": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_data_spinner": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_pass": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
       "key_power_cube": {
         "offset_0x58": [
           [
             {
               "offset": 88,
               "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "key_pyramid": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "key_red_key": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
             }
           ],
           null
@@ -8762,6 +10819,346 @@
           null
         ]
       },
+      "weapon_bfg": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_blaster": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_chaingun": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_deatomizer": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_dod": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_grenadelauncher": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_hellfury": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_hyperblaster": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_machinegun": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_plasma_pistol": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_plasma_rifle": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_railgun": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_remote_detonator": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_rocketlauncher": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_rtdu": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_shotgun": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_supershotgun": {
+        "offset_0x11c": [
+          [
+            {
+              "offset": 284,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "offset": 68,
+              "value": 512
+            }
+          ],
+          null
+        ]
+      },
       "worldspawn": {
         "offset_0x104": [
           [
@@ -8802,59 +11199,8 @@
       }
     },
     "missing_in_hlil": [
-      "ammo_bullets",
-      "ammo_cells",
-      "ammo_detpack",
-      "ammo_dod",
-      "ammo_grenades",
-      "ammo_mines",
-      "ammo_pistolplasma",
-      "ammo_rifleplasma",
-      "ammo_rockets",
-      "ammo_shells",
-      "ammo_slugs",
-      "item_adrenaline",
-      "item_ancient_head",
-      "item_armor_body",
-      "item_armor_combat",
-      "item_armor_jacket",
-      "item_armor_shard",
-      "item_bandolier",
-      "item_breather",
-      "item_enviro",
-      "item_invulnerability",
-      "item_pack",
-      "item_power_screen",
-      "item_power_shield",
-      "item_quad",
-      "item_silencer",
-      "key_airstrike_target",
-      "key_blue_key",
-      "key_commander_head",
-      "key_data_cd",
-      "key_data_spinner",
-      "key_pass",
-      "key_pyramid",
-      "key_red_key",
       "monster_sentinel",
-      "weapon_bfg",
-      "weapon_blaster",
-      "weapon_chaingun",
-      "weapon_deatomizer",
-      "weapon_dod",
-      "weapon_grenadelauncher",
-      "weapon_hellfury",
-      "weapon_hyperblaster",
-      "weapon_lasercannon",
-      "weapon_machinegun",
-      "weapon_plasma_pistol",
-      "weapon_plasma_rifle",
-      "weapon_railgun",
-      "weapon_remote_detonator",
-      "weapon_rocketlauncher",
-      "weapon_rtdu",
-      "weapon_shotgun",
-      "weapon_supershotgun"
+      "weapon_lasercannon"
     ],
     "missing_in_repo": [
       "%s/listip.cfg",
@@ -8864,6 +11210,160 @@
       "monster_makron"
     ],
     "spawnflag_mismatches": {
+      "ammo_bullets": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_cells": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_detpack": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_dod": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_grenades": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_mines": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_pistolplasma": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_rifleplasma": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_rockets": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_shells": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "ammo_slugs": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
       "func_clock": {
         "checks": [
           [],
@@ -8985,6 +11485,328 @@
           ]
         ]
       },
+      "item_adrenaline": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_ancient_head": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_armor_body": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_armor_combat": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_armor_jacket": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_armor_shard": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_bandolier": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_breather": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_enviro": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_invulnerability": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_pack": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_power_screen": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_power_shield": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_quad": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "item_silencer": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_airstrike_target": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_blue_key": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_commander_head": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_data_cd": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_data_spinner": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_pass": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_pyramid": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "key_red_key": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
       "light": {
         "checks": [
           [],
@@ -9091,6 +11913,244 @@
             4,
             16
           ]
+        ]
+      },
+      "weapon_bfg": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_blaster": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_chaingun": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_deatomizer": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_dod": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_grenadelauncher": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_hellfury": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_hyperblaster": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_machinegun": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_plasma_pistol": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_plasma_rifle": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_railgun": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_remote_detonator": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_rocketlauncher": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_rtdu": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_shotgun": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
+        ]
+      },
+      "weapon_supershotgun": {
+        "assignments": [
+          [
+            0
+          ],
+          []
+        ],
+        "sets": [
+          [
+            1
+          ],
+          []
         ]
       }
     }
