@@ -101,6 +101,7 @@ class HLILParser:
         self._fields: Optional[Dict[int, FieldInfo]] = None
         self._spawn_map: Optional[Dict[str, str]] = None
         self._string_literals: Optional[Dict[str, str]] = None
+        self._interpreted_strings: Optional[List[Dict[str, str]]] = None
         self._binary_path = self._resolve_binary_path()
         self._binary_data: Optional[bytes] = None
         self._binary_sections: Optional[List[BinarySection]] = None
@@ -252,6 +253,14 @@ class HLILParser:
             for classname in ("ammo_mines",):
                 if classname in item_entries and classname not in spawn_entries:
                     spawn_entries[classname] = "SpawnItemFromItemlist"
+
+            interpreted_weapons = self._interpreted_classnames(
+                category="weapon_descriptor", prefix="weapon_"
+            )
+            for classname in sorted(interpreted_weapons):
+                if classname in item_entries and classname not in spawn_entries:
+                    spawn_entries[classname] = "SpawnItemFromItemlist"
+
             self._spawn_map = spawn_entries
         return self._spawn_map
 
@@ -272,8 +281,50 @@ class HLILParser:
                         literal_map[normalized] = name
                         if key.startswith("data_"):
                             literal_map[f"0x{key.split('_', 1)[1].lower()}"] = name
+
+            for entry in self._load_interpreted_strings():
+                value = entry.get("value")
+                if not value:
+                    continue
+                for key in (entry.get("symbol"), entry.get("address")):
+                    if not key:
+                        continue
+                    normalized = key.lower()
+                    literal_map[normalized] = value
+
             self._string_literals = literal_map
         return self._string_literals
+
+    def _load_interpreted_strings(self) -> List[Dict[str, str]]:
+        if self._interpreted_strings is not None:
+            return self._interpreted_strings
+        interpreted_path = self.path.parent / "interpreted" / "strings.json"
+        if interpreted_path.is_file():
+            try:
+                self._interpreted_strings = json.loads(
+                    interpreted_path.read_text(encoding="utf-8")
+                )
+            except json.JSONDecodeError:
+                self._interpreted_strings = []
+        else:
+            self._interpreted_strings = []
+        return self._interpreted_strings
+
+    def _interpreted_classnames(
+        self, category: Optional[str] = None, prefix: Optional[str] = None
+    ) -> Set[str]:
+        classnames: Set[str] = set()
+        for entry in self._load_interpreted_strings():
+            if category and entry.get("category") != category:
+                continue
+            value = entry.get("value")
+            if not value:
+                continue
+            normalized = self._normalize_classname(value)
+            if prefix and not normalized.startswith(prefix):
+                continue
+            classnames.add(normalized)
+        return classnames
 
     def _normalize_classname(self, classname: str) -> str:
         return classname.strip().strip("\0")

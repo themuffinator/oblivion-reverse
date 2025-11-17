@@ -34,6 +34,16 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
             "sub_10001ac0",
             "monster_jorg HLIL manifest entry does not match expected function",
         )
+        self.assertIn(
+            "weapon_rtdu",
+            hlil_manifest,
+            "Expected weapon_rtdu entry missing from HLIL manifest",
+        )
+        self.assertEqual(
+            hlil_manifest["weapon_rtdu"].get("function"),
+            "SpawnItemFromItemlist",
+            "weapon_rtdu HLIL manifest entry does not match expected function",
+        )
         self.assertEqual(current, expected)
 
 
