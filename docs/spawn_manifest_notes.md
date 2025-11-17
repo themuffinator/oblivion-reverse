@@ -17,12 +17,11 @@ expand, so those classnames continue to require manual recovery.
 monolithic dump; the only reference in the split assets is the handwritten stub
 at `gamex86.dll_hlil_block9999_sub_10015750.txt`, which mirrors the existing
 Quake II code.【F:references/HLIL/oblivion/split/gamex86.dll_hlil_block9999_sub_10015750.txt†L1-L27】 Because there is no literal classname to parse, the runtime
-hooks are hidden behind `OBLIVION_ENABLE_ROTATE_TRAIN` so that the stock
-build behaves like the binary while still retaining the implementation for
-comparison against the manual HLIL block.【F:src/game/g_spawn.c†L64-L76】【F:src/game/g_rtrain.c†L1-L5】
-The manifest extractor now respects that macro by omitting the repo entry when
-it resolves to zero, so the JSON snapshot only advertises the classname when
-the feature flag is explicitly enabled before running the tool.
+hooks now default to enabled via `OBLIVION_ENABLE_ROTATE_TRAIN` so that the repo
+mirrors the recovered HLIL behavior.【F:src/game/g_spawn.c†L64-L76】【F:src/game/g_rtrain.c†L1-L5】
+The manifest extractor still honors the macro and omits the repo entry if a
+custom build toggles it off, allowing contributors to emulate the retail binary
+when necessary.
 
 ### Static `spawn_t` table hidden in `data_10046928`
 

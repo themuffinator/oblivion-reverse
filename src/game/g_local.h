@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "m_actor.h"
 
 #ifndef OBLIVION_ENABLE_ROTATE_TRAIN
-#define OBLIVION_ENABLE_ROTATE_TRAIN 0
+#define OBLIVION_ENABLE_ROTATE_TRAIN 1
 #endif
 
 struct edict_s;

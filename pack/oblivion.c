@@ -578,9 +578,10 @@ The train spawns at the first target it is pointing at.
 If the train is the target of a button or trigger, it will not begin
 moving until activated.
 
-NOTE: This classname is compiled out of the stock DLL unless
-`OBLIVION_ENABLE_ROTATE_TRAIN` is set to 1, so level scripts must enable the
-macro before building a custom binary if they intend to use it.
+NOTE: This classname was historically compiled out of the stock DLL unless
+`OBLIVION_ENABLE_ROTATE_TRAIN` was set to 1. The repo now enables the macro by
+default so that the entity matches the recovered HLIL reference, but level
+scripts can still toggle it off if they need to mirror the retail binary.
 
 speed		default 100
 dmg			default 2

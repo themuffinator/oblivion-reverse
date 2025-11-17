@@ -3970,6 +3970,21 @@
         "sets": []
       }
     },
+    "func_rotate_train": {
+      "defaults": {
+        "dmg": 100.0,
+        "speed": 100.0
+      },
+      "function": "SP_func_rotate_train",
+      "spawnflags": {
+        "assignments": [],
+        "checks": [
+          4
+        ],
+        "clears": [],
+        "sets": []
+      }
+    },
     "func_train": {
       "defaults": {
         "dmg": 100.0,

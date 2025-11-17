@@ -3448,7 +3448,6 @@
   "missing_in_repo": [
     "%s/listip.cfg",
     "detpack",
-    "func_rotate_train",
     "grenade",
     "mine",
     "monster_makron"

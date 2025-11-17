@@ -5939,6 +5939,21 @@
           "sets": []
         }
       },
+      "func_rotate_train": {
+        "defaults": {
+          "dmg": 100.0,
+          "speed": 100.0
+        },
+        "function": "SP_func_rotate_train",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
       "func_train": {
         "defaults": {
           "dmg": 100.0,
@@ -13824,7 +13839,6 @@
     "missing_in_repo": [
       "%s/listip.cfg",
       "detpack",
-      "func_rotate_train",
       "grenade",
       "mine",
       "monster_makron"
