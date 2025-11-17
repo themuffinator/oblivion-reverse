@@ -106,6 +106,7 @@ class HLILParser:
         self._binary_sections: Optional[List[BinarySection]] = None
         self._image_base: Optional[int] = None
         self._spawn_table_cache: Dict[int, Dict[str, str]] = {}
+        self._itemlist_cache: Optional[Dict[str, Tuple[int, ...]]] = None
 
     # -- general helpers --
     def _resolve_binary_path(self) -> Optional[Path]:
@@ -247,6 +248,10 @@ class HLILParser:
                 for classname, func in self._extract_spawn_map_from_strcmp(block).items():
                     if classname not in spawn_entries:
                         spawn_entries[classname] = func
+            item_entries = self._itemlist_entries()
+            for classname in ("ammo_mines",):
+                if classname in item_entries and classname not in spawn_entries:
+                    spawn_entries[classname] = "SpawnItemFromItemlist"
             self._spawn_map = spawn_entries
         return self._spawn_map
 
@@ -597,8 +602,58 @@ class HLILParser:
             if block:
                 info.defaults = self._extract_defaults(block, fields)
                 info.spawnflags = self._extract_spawnflags(block)
+            if not info.defaults and func == "SpawnItemFromItemlist":
+                item_defaults = self._itemlist_defaults_for(classname)
+                if item_defaults:
+                    info.defaults = item_defaults
             manifest[classname] = info
         return manifest
+
+    def _itemlist_entries(self) -> Dict[str, Tuple[int, ...]]:
+        if self._itemlist_cache is not None:
+            return self._itemlist_cache
+        entries: Dict[str, Tuple[int, ...]] = {}
+        if not self._load_binary_image() or self._binary_data is None:
+            self._itemlist_cache = entries
+            return entries
+        base_address = 0x10046928
+        entry_size = 0x48
+        offset = self._va_to_file_offset(base_address)
+        if offset is None:
+            self._itemlist_cache = entries
+            return entries
+        data = self._binary_data
+        idx = 0
+        while offset + (idx + 1) * entry_size <= len(data):
+            start = offset + idx * entry_size
+            chunk = data[start : start + entry_size]
+            if len(chunk) < entry_size:
+                break
+            values = struct.unpack("<" + "I" * (entry_size // 4), chunk)
+            if not any(values):
+                if idx != 0:
+                    break
+                idx += 1
+                continue
+            classname_ptr = values[0]
+            classname = self._read_c_string(classname_ptr)
+            if classname:
+                entries[self._normalize_classname(classname)] = values
+            idx += 1
+        self._itemlist_cache = entries
+        return entries
+
+    def _itemlist_defaults_for(self, classname: str) -> Dict[str, List[Dict[str, object]]]:
+        entries = self._itemlist_entries()
+        values = entries.get(classname)
+        if not values:
+            return {}
+        defaults: Dict[str, List[Dict[str, object]]] = {}
+        for idx, raw_value in enumerate(values):
+            offset = idx * 4
+            field_name = f"offset_0x{offset:x}"
+            defaults[field_name] = [{"offset": offset, "value": int(raw_value)}]
+        return defaults
 
     def _extract_defaults(self, block: List[str], fields: Dict[int, FieldInfo]) -> Dict[str, List[Dict[str, object]]]:
         results: Dict[str, List[Dict[str, object]]] = {}

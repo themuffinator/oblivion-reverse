@@ -1,5 +1,169 @@
 {
   "default_mismatches": {
+    "ammo_mines": {
+      "offset_0x0": [
+        [
+          {
+            "offset": 0,
+            "value": 268732464
+          }
+        ],
+        null
+      ],
+      "offset_0x10": [
+        [
+          {
+            "offset": 16,
+            "value": 268662672
+          }
+        ],
+        null
+      ],
+      "offset_0x14": [
+        [
+          {
+            "offset": 20,
+            "value": 268732688
+          }
+        ],
+        null
+      ],
+      "offset_0x18": [
+        [
+          {
+            "offset": 24,
+            "value": 268732428
+          }
+        ],
+        null
+      ],
+      "offset_0x1c": [
+        [
+          {
+            "offset": 28,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x20": [
+        [
+          {
+            "offset": 32,
+            "value": 268732396
+          }
+        ],
+        null
+      ],
+      "offset_0x24": [
+        [
+          {
+            "offset": 36,
+            "value": 268732388
+          }
+        ],
+        null
+      ],
+      "offset_0x28": [
+        [
+          {
+            "offset": 40,
+            "value": 268723068
+          }
+        ],
+        null
+      ],
+      "offset_0x2c": [
+        [
+          {
+            "offset": 44,
+            "value": 3
+          }
+        ],
+        null
+      ],
+      "offset_0x30": [
+        [
+          {
+            "offset": 48,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x34": [
+        [
+          {
+            "offset": 52,
+            "value": 268723068
+          }
+        ],
+        null
+      ],
+      "offset_0x38": [
+        [
+          {
+            "offset": 56,
+            "value": 3
+          }
+        ],
+        null
+      ],
+      "offset_0x3c": [
+        [
+          {
+            "offset": 60,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x4": [
+        [
+          {
+            "offset": 4,
+            "value": 268484336
+          }
+        ],
+        null
+      ],
+      "offset_0x40": [
+        [
+          {
+            "offset": 64,
+            "value": 4
+          }
+        ],
+        null
+      ],
+      "offset_0x44": [
+        [
+          {
+            "offset": 68,
+            "value": 268732476
+          }
+        ],
+        null
+      ],
+      "offset_0x8": [
+        [
+          {
+            "offset": 8,
+            "value": 268654784
+          }
+        ],
+        null
+      ],
+      "offset_0xc": [
+        [
+          {
+            "offset": 12,
+            "value": 268484624
+          }
+        ],
+        null
+      ]
+    },
     "func_areaportal": {
       "offset_0x254": [
         [
@@ -3246,7 +3410,6 @@
     "ammo_detpack",
     "ammo_dod",
     "ammo_grenades",
-    "ammo_mines",
     "ammo_pistolplasma",
     "ammo_rifleplasma",
     "ammo_rockets",
