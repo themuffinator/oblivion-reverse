@@ -6,6 +6,41 @@
 #define MODEL_SCALE             1.0f
 #define BADASS_SPAWNFLAG_TURRET 8
 
+typedef struct
+{
+	const char *model;
+	vec3_t mins;
+	vec3_t maxs;
+} badass_gib_def_t;
+
+static const badass_gib_def_t badass_gib_defs[] = {
+	{
+		"models/monsters/badass/gib_torso.md2",
+		{-17.0f, -15.0f, -50.0f},
+		{ 41.0f,  22.0f, -29.0f}
+	},
+	{
+		"models/monsters/badass/gib_lleg.md2",
+		{-35.0f,   1.0f, -46.0f},
+		{ 47.0f,  53.0f, -22.0f}
+	},
+	{
+		"models/monsters/badass/gib_rleg.md2",
+		{-34.0f, -51.0f, -44.0f},
+		{ 48.0f,  -1.0f, -21.0f}
+	},
+	{
+		"models/monsters/badass/gib_larm.md2",
+		{-29.0f, -12.0f, -33.0f},
+		{ 31.0f,  53.0f, -12.0f}
+	},
+	{
+		"models/monsters/badass/gib_rarm.md2",
+		{-34.0f, -51.0f, -42.0f},
+		{ 26.0f, -30.0f, -21.0f}
+	}
+};
+
 static int sound_pain;
 static int sound_death;
 static int sound_idle;
@@ -220,13 +255,102 @@ static mframe_t badass_frames_pain[] = {
 };
 static mmove_t badass_move_pain = {FRAME_PAIN1, FRAME_PAIN10, badass_frames_pain, badass_run};
 
+void ClipGibVelocity (edict_t *ent);
+
+/*
+=============
+badass_die_gibs
+
+Spawns the per-limb badass gibs with placement and velocity that mirrors the
+original game logic extracted from sub_1001fde0.
+=============
+*/
 static void badass_die_gibs (edict_t *self, int damage)
 {
-        ThrowGib (self, "models/monsters/badass/gib_larm.md2", damage, GIB_METALLIC);
-        ThrowGib (self, "models/monsters/badass/gib_rarm.md2", damage, GIB_METALLIC);
-        ThrowGib (self, "models/monsters/badass/gib_lleg.md2", damage, GIB_METALLIC);
-        ThrowGib (self, "models/monsters/badass/gib_rleg.md2", damage, GIB_METALLIC);
-        ThrowHead (self, "models/monsters/badass/gib_torso.md2", damage, GIB_METALLIC);
+	vec3_t forward, right, up;
+	const size_t gib_count = sizeof(badass_gib_defs) / sizeof(badass_gib_defs[0]);
+
+	(void)damage;
+
+	AngleVectors (self->s.angles, forward, right, up);
+
+	for (size_t i = 0; i < gib_count; ++i)
+	{
+		const badass_gib_def_t *def = &badass_gib_defs[i];
+		edict_t *gib = G_Spawn ();
+
+		if (!gib)
+			break;
+
+		gi.setmodel (gib, def->model);
+		VectorCopy (def->mins, gib->mins);
+		VectorCopy (def->maxs, gib->maxs);
+		VectorSubtract (gib->maxs, gib->mins, gib->size);
+
+		vec3_t local_center;
+		vec3_t origin;
+		VectorCopy (self->s.origin, origin);
+		for (int axis = 0; axis < 3; ++axis)
+			local_center[axis] = 0.5f * (def->mins[axis] + def->maxs[axis]);
+
+		VectorMA (origin, local_center[0], forward, origin);
+		VectorMA (origin, local_center[1], right, origin);
+		VectorMA (origin, local_center[2], up, origin);
+
+		VectorCopy (origin, gib->s.origin);
+		VectorCopy (origin, gib->s.old_origin);
+		VectorCopy (self->s.angles, gib->s.angles);
+
+		gib->solid = SOLID_NOT;
+		gib->movetype = MOVETYPE_BOUNCE;
+		gib->takedamage = DAMAGE_YES;
+		gib->die = gib_die;
+		gib->classname = "badass_gib";
+		gib->flags |= FL_NO_KNOCKBACK;
+		gib->s.effects |= EF_GIB;
+		gib->s.sound = 0;
+		gib->nextthink = level.time + 10.0f + random () * 10.0f;
+		gib->think = G_FreeEdict;
+		gib->owner = self;
+		gib->gravity = 1.0f;
+		gib->svflags &= ~SVF_MONSTER;
+
+		VectorClear (gib->velocity);
+		VectorClear (gib->avelocity);
+		gib->avelocity[YAW] = crandom () * 200.0f;
+
+		switch (i)
+		{
+		case 0:
+		{
+			const float forward_scale = -100.0f * random ();
+			VectorMA (gib->velocity, forward_scale, forward, gib->velocity);
+			VectorMA (gib->velocity, 300.0f, up, gib->velocity);
+			break;
+		}
+		case 1:
+			VectorMA (gib->velocity, 200.0f, up, gib->velocity);
+			VectorMA (gib->velocity, -200.0f, right, gib->velocity);
+			break;
+		case 2:
+			VectorMA (gib->velocity, 200.0f, up, gib->velocity);
+			VectorMA (gib->velocity, 200.0f, right, gib->velocity);
+			break;
+		case 3:
+			VectorMA (gib->velocity, -200.0f, forward, gib->velocity);
+			VectorMA (gib->velocity, random () * 275.0f + 50.0f, up, gib->velocity);
+			VectorMA (gib->velocity, -100.0f, right, gib->velocity);
+			break;
+		case 4:
+			VectorMA (gib->velocity, -200.0f, forward, gib->velocity);
+			VectorMA (gib->velocity, random () * 300.0f, up, gib->velocity);
+			VectorMA (gib->velocity, 50.0f, right, gib->velocity);
+			break;
+		}
+
+		ClipGibVelocity (gib);
+		gi.linkentity (gib);
+	}
 }
 
 static void badass_thud (edict_t *self)
