@@ -140,6 +140,13 @@ static void rotate_train_wait(edict_t *self)
         }
 }
 
+/*
+=============
+rotate_train_next
+
+Advance the rotate train to the next path corner.
+=============
+*/
 static void rotate_train_next(edict_t *self)
 {
         edict_t *ent;
@@ -158,20 +165,20 @@ again:
 
         self->target = ent->target;
 
-        if (ent->spawnflags & 1) {
-                if (!first) {
-                        gi.dprintf("connected teleport path_corners, see %s at %s\n", ent->classname, vtos(ent->s.origin));
-                        return;
-                }
-                first = false;
-                VectorSubtract(ent->s.origin, self->mins, self->s.origin);
-                VectorCopy(self->s.origin, self->s.old_origin);
-                self->s.event = EV_OTHER_TELEPORT;
-                gi.linkentity(self);
-                goto again;
-        }
+	if (ent->spawnflags & 1) {
+		if (!first) {
+			gi.dprintf("connected teleport path_corners, see %s at %s\n", ent->classname, vtos(ent->s.origin));
+			return;
+		}
+		first = false;
+		VectorCopy(ent->s.origin, self->s.origin);
+		VectorCopy(self->s.origin, self->s.old_origin);
+		self->s.event = EV_OTHER_TELEPORT;
+		gi.linkentity(self);
+		goto again;
+	}
 
-        self->moveinfo.wait = ent->wait;
+	self->moveinfo.wait = ent->wait;
         self->target_ent = ent;
 
         if (!(self->flags & FL_TEAMSLAVE)) {
@@ -180,12 +187,12 @@ again:
                         self->s.sound = self->moveinfo.sound_middle;
         }
 
-        VectorSubtract(ent->s.origin, self->mins, dest);
-        self->moveinfo.state = STATE_TOP;
-        VectorCopy(self->s.origin, self->moveinfo.start_origin);
-        VectorCopy(dest, self->moveinfo.end_origin);
+	VectorCopy(ent->s.origin, dest);
+	self->moveinfo.state = STATE_TOP;
+	VectorCopy(self->s.origin, self->moveinfo.start_origin);
+	VectorCopy(dest, self->moveinfo.end_origin);
 
-        vec3_t delta;
+	vec3_t delta;
         VectorSubtract(dest, self->s.origin, delta);
         float distance = VectorLength(delta);
         float move_time = RotateTrain_ComputeMoveTime(self, ent, distance);
@@ -206,15 +213,22 @@ again:
         self->spawnflags |= RTRAIN_START_ON;
 }
 
+/*
+=============
+rotate_train_resume
+
+Resume rotation and translation toward the current target corner.
+=============
+*/
 static void rotate_train_resume(edict_t *self)
 {
         edict_t *ent = self->target_ent;
         if (!ent)
                 return;
 
-        vec3_t dest;
-        VectorSubtract(ent->s.origin, self->mins, dest);
-        vec3_t delta;
+	vec3_t dest;
+	VectorCopy(ent->s.origin, dest);
+	vec3_t delta;
         VectorSubtract(dest, self->s.origin, delta);
         float distance = VectorLength(delta);
         float move_time = RotateTrain_ComputeMoveTime(self, ent, distance);
@@ -234,6 +248,13 @@ static void rotate_train_resume(edict_t *self)
         self->spawnflags |= RTRAIN_START_ON;
 }
 
+/*
+=============
+rotate_train_find
+
+Initialize the rotate train starting position based on its first corner.
+=============
+*/
 static void rotate_train_find(edict_t *self)
 {
         edict_t *ent;
@@ -249,8 +270,8 @@ static void rotate_train_find(edict_t *self)
         }
         self->target = ent->target;
 
-        VectorSubtract(ent->s.origin, self->mins, self->s.origin);
-        gi.linkentity(self);
+	VectorCopy(ent->s.origin, self->s.origin);
+	gi.linkentity(self);
 
         if (!self->targetname)
                 self->spawnflags |= RTRAIN_START_ON;
@@ -281,6 +302,13 @@ static void rotate_train_use(edict_t *self, edict_t *other, edict_t *activator)
         }
 }
 
+/*
+=============
+SP_func_rotate_train
+
+Spawn function for func_rotate_train entities.
+=============
+*/
 void SP_func_rotate_train(edict_t *self)
 {
         self->movetype = MOVETYPE_PUSH;
