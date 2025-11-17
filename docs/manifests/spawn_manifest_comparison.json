@@ -1,12 +1,158 @@
 {
-  "default_mismatches": {},
+  "default_mismatches": {
+    "key_power_cube": {
+      "offset_0x58": [
+        [
+          {
+            "offset": 88,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "light": {
+      "offset_0x58": [
+        [
+          {
+            "offset": 88,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_jorg": {
+      "offset_0x12c": [
+        [
+          {
+            "offset": 300,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x140": [
+        [
+          {
+            "offset": 320,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x2c4": [
+        [
+          {
+            "offset": 708,
+            "value": 128
+          }
+        ],
+        null
+      ],
+      "offset_0x390": [
+        [
+          {
+            "offset": 912,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_supertank": {
+      "offset_0x12c": [
+        [
+          {
+            "offset": 300,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x140": [
+        [
+          {
+            "offset": 320,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x2c4": [
+        [
+          {
+            "offset": 708,
+            "value": 128
+          }
+        ],
+        null
+      ],
+      "offset_0x390": [
+        [
+          {
+            "offset": 912,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_tank": {
+      "offset_0x12c": [
+        [
+          {
+            "offset": 300,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x140": [
+        [
+          {
+            "offset": 320,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x2c4": [
+        [
+          {
+            "offset": 708,
+            "value": 128
+          }
+        ],
+        null
+      ],
+      "offset_0x390": [
+        [
+          {
+            "offset": 912,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    }
+  },
   "missing_in_hlil": [
+    "ammo_bullets",
+    "ammo_cells",
+    "ammo_detpack",
+    "ammo_dod",
+    "ammo_grenades",
+    "ammo_mines",
+    "ammo_pistolplasma",
+    "ammo_rifleplasma",
+    "ammo_rockets",
+    "ammo_shells",
+    "ammo_slugs",
     "func_areaportal",
     "func_button",
     "func_clock",
     "func_conveyor",
-    "func_door",
-    "func_door_rotating",
     "func_door_secret",
     "func_explosive",
     "func_group",
@@ -26,14 +172,35 @@
     "info_player_intermission",
     "info_player_start",
     "info_teleport_dest",
+    "item_adrenaline",
+    "item_ancient_head",
+    "item_armor_body",
+    "item_armor_combat",
+    "item_armor_jacket",
+    "item_armor_shard",
+    "item_bandolier",
+    "item_breather",
+    "item_enviro",
     "item_health",
     "item_health_large",
     "item_health_mega",
     "item_health_small",
-    "light",
+    "item_invulnerability",
+    "item_pack",
+    "item_power_screen",
+    "item_power_shield",
+    "item_quad",
+    "item_silencer",
+    "key_airstrike_target",
+    "key_blue_key",
+    "key_commander_head",
+    "key_data_cd",
+    "key_data_spinner",
+    "key_pass",
+    "key_pyramid",
+    "key_red_key",
     "light_mine1",
     "light_mine2",
-    "misc_actor",
     "misc_banner",
     "misc_bigviper",
     "misc_blackhole",
@@ -70,7 +237,6 @@
     "monster_gunner",
     "monster_hover",
     "monster_infantry",
-    "monster_jorg",
     "monster_kigrax",
     "monster_medic",
     "monster_mutant",
@@ -81,8 +247,6 @@
     "monster_soldier_light",
     "monster_soldier_ss",
     "monster_spider",
-    "monster_supertank",
-    "monster_tank",
     "monster_tank_commander",
     "path_corner",
     "point_combat",
@@ -123,8 +287,63 @@
     "turret_breach",
     "turret_driver",
     "viewthing",
+    "weapon_bfg",
+    "weapon_blaster",
+    "weapon_chaingun",
+    "weapon_deatomizer",
+    "weapon_dod",
+    "weapon_grenadelauncher",
+    "weapon_hellfury",
+    "weapon_hyperblaster",
+    "weapon_lasercannon",
+    "weapon_machinegun",
+    "weapon_plasma_pistol",
+    "weapon_plasma_rifle",
+    "weapon_railgun",
+    "weapon_remote_detonator",
+    "weapon_rocketlauncher",
+    "weapon_rtdu",
+    "weapon_shotgun",
+    "weapon_supershotgun",
     "worldspawn"
   ],
-  "missing_in_repo": [],
-  "spawnflag_mismatches": {}
+  "missing_in_repo": [
+    "%s/listip.cfg",
+    "detpack",
+    "grenade",
+    "mine",
+    "monster_makron"
+  ],
+  "spawnflag_mismatches": {
+    "func_door": {
+      "checks": [
+        [],
+        [
+          1,
+          16,
+          64
+        ]
+      ]
+    },
+    "func_door_rotating": {
+      "checks": [
+        [],
+        [
+          1,
+          2,
+          16,
+          64,
+          128
+        ]
+      ]
+    },
+    "light": {
+      "checks": [
+        [],
+        [
+          1
+        ]
+      ]
+    }
+  }
 }
