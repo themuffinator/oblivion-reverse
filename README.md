@@ -29,9 +29,14 @@ git submodule update --init --recursive
    ```bash
    cmake -S . -B build
    ```
+   On Windows, Quake II expects a 32-bit Release `gamex86.dll`, so be sure to
+   configure CMake for a Win32 generator:
+   ```bash
+   cmake -S . -B build -A Win32
+   ```
 2. Configure the build:
    ```bash
-   cmake --build build
+   cmake --build build --config Release
    ```
 3. The compiled binaries and tools will be located under `build/`.
 
