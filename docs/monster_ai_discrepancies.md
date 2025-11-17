@@ -16,6 +16,8 @@ Manual regression passes compare the reconstructed C sources against the Binary 
 | Spider | Pain / recovery | Pain plays a three-frame flinch with a 1.5 s debounce and immediately returns to run behaviour.【F:src/game/m_spider.c†L124-L139】 | `sub_1002d570`/`sub_1002d610` track stagger state via `*(self+0x268)` before clearing back to idle loops.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L33841-L33870】 | Stagger bookkeeping and pain exits now flow through `spider_mark_stagger`, `spider_clear_stagger`, and `spider_pain_recover`, feeding back into the locomotion selectors.【F:src/game/m_spider.c†L207-L345】 |
 | Spider | Audio cues | The port reuses a single thud for both footsteps and death while omitting the secondary pain voice.【F:src/game/m_spider.c†L189-L207】 | HLIL loads both gladiator pain clips and differentiates the death thud from step impacts.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L34169-L34191】 | Separate footstep, pain, and death channels (`sound_step`, `sound_pain1/2`, `sound_death`) restore the retail mix within the spider sound table.【F:src/game/m_spider.c†L346-L389】 |
 | Spider | Spawnflag handling | There is no branch for the boss spawnflag, so all variants share the same bounding box and idle set.【F:src/game/m_spider.c†L182-L217】 | The retail DLL checks bit 8 to select an alternate hull and idle sequence, including movetype adjustments.【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L34192-L34205】 | Spawnflag bit 8 now selects the oversized hull, alternate idle loop, and exposes the check in the spawn manifest for regression coverage.【F:src/game/m_spider.c†L365-L396】【F:tests/expected_spawn_manifest.json†L6665-L6677】 |
+| Kigrax | Strafing/scouting AI | Stand/walk/run/attack collapsed into four frames so the sentry hovers in place without the retail strafing loops.【F:src/game/m_kigrax.c†L1-L74】 | HLIL wires eight mmove blocks (0–168) with idle, patrol, dash, and attack controllers through `0x100291b0`, `0x10028f20`, and `0x10028ee0`.【F:docs/kigrax_hlil_notes.md†L3-L20】 | `kigrax_init_moves`, `kigrax_idle_select`, `kigrax_walk_select`, and `kigrax_run_select` now seed the recovered mmove tables so stand/search/run mirror the HLIL state machine.【F:src/game/m_kigrax.c†L114-L220】【F:src/game/m_kigrax.c†L318-L376】 |
+| Kigrax | Attack cleanup | The burst uses a single-frame blaster shot and immediately falls back to the run selector, so bounding box toggles and the four-shot salvo never trigger.【F:src/game/m_kigrax.c†L260-L307】 | HLIL’s `0x1002f030` callback adjusts the hull, spawns four bolts, and only then returns to the patrol selectors.【F:docs/kigrax_hlil_notes.md†L20-L20】 | Port the `0x1002f030` bounding-box/salvo routine so the attack frames can fire all four projectiles and restore the crouched hull before rejoining the strafing loop. |
 
 ## monster_cyborg
 
@@ -75,6 +77,20 @@ Manual regression passes compare the reconstructed C sources against the Binary 
 - Track the stagger flag at `*(self+0x268)` and call the recovery helpers so pain reactions feed back into the proper idle/run loops instead of directly resuming movement.【F:src/game/m_spider.c†L124-L139】【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L33841-L33870】
 - Split the footstep and death thud cues while adding the missing secondary pain voice to reproduce the retail audio mix.【F:src/game/m_spider.c†L189-L207】【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L34169-L34191】
 - Implement the spawnflag bit 8 branch to expand the hull, adjust movetype, and load the alternate idle frames for the boss variant.【F:src/game/m_spider.c†L182-L207】【F:references/HLIL/oblivion/gamex86.dll_hlil.txt†L34192-L34205】
+
+## monster_kigrax
+
+### HLIL animation snapshot (0x10029353–0x100295e2)
+- Spawn wiring seeds the hover/search/sight/pain/death sound table, writes the default bbox/movetype/viewheight, and assigns the stand/search/walk/run/attack callbacks at `0x100291b0`, `0x10029220`, `0x10028f20`, `0x10028ee0`, and `0x1002f030`.【F:docs/kigrax_hlil_notes.md†L3-L7】
+- Eight mmove tables span frames 0–168: idle hover, scan, two patrol loops, two strafing speeds, an attack prep hover, and a 19-frame burst that calls `0x1002f030` on frame 163 and when the sequence ends.【F:docs/kigrax_hlil_notes.md†L8-L20】
+
+### Current source implementation (`src/game/m_kigrax.c`)
+- `kigrax_init_moves` recreates the HLIL frame ranges and AI helpers while the stand/search/run selectors randomise between the hover, patrol, and dash loops to keep the sentry moving.【F:src/game/m_kigrax.c†L14-L220】
+- The attack entry (frames 139–149) now feeds a 19-frame burst that fires on frame 163 before handing back to the strafing selectors, matching the HLIL cadence.【F:src/game/m_kigrax.c†L229-L307】
+
+### Remaining deviations
+- `0x1002f030` also shrinks the hull and spawns four bolts; the reconstruction currently fires a single shot and immediately returns to the strafing dispatcher, so bounding-box toggles and the full salvo remain unimplemented.【F:docs/kigrax_hlil_notes.md†L20-L20】【F:src/game/m_kigrax.c†L260-L307】
+- Pain and death still reuse placeholder two-frame mmoves, so stagger durations, gibbing hooks, and recovery logic do not yet mirror the retail DLL.【F:src/game/m_kigrax.c†L313-L372】
 
 ## Retail footage status
 Surviving DM2 recordings (`demo1.dm2`, `demo2.dm2`) are present under `pack/demos/`, but the current toolchain still lacks a Quake II demo player, so no fresh footage or screenshots can be captured to corroborate ambiguous HLIL states.【40f0a8†L1-L2】
