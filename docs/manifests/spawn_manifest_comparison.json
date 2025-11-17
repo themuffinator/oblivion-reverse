@@ -2261,6 +2261,89 @@
         null
       ]
     },
+    "monster_kigrax": {
+      "offset_0x1e4": [
+        [
+          {
+            "offset": 484,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0x23c": [
+        [
+          {
+            "offset": 572,
+            "value": 1119092736
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3248488448
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3248488448
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1094713344
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 5
+          }
+        ],
+        null
+      ]
+    },
     "monster_mutant": {
       "offset_0x104": [
         [

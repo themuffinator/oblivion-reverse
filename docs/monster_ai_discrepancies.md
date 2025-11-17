@@ -80,18 +80,18 @@ Manual regression passes compare the reconstructed C sources against the Binary 
 
 ## monster_kigrax
 
-### HLIL animation snapshot (0x10029353–0x100295e2)
-- Spawn wiring seeds the hover/search/sight/pain/death sound table, writes the default bbox/movetype/viewheight, and assigns the stand/search/walk/run/attack callbacks at `0x100291b0`, `0x10029220`, `0x10028f20`, `0x10028ee0`, and `0x1002f030`.【F:docs/kigrax_hlil_notes.md†L3-L7】
-- Eight mmove tables span frames 0–168: idle hover, scan, two patrol loops, two strafing speeds, an attack prep hover, and a 19-frame burst that calls `0x1002f030` on frame 163 and when the sequence ends.【F:docs/kigrax_hlil_notes.md†L8-L20】
+### HLIL spawn/state snapshot
+- The spawn routine seeds the hover/search/sight/pain/death audio table, installs the hover selectors (`0x100291b0`/`0x10029220`), strafing dispatchers (`0x10028f20`/`0x10028ee0`), and sight handler (`0x10028e60`), and writes the bbox/movetype/yaw-speed/viewheight defaults captured in the manifest.【F:docs/kigrax_hlil_notes.md†L3-L7】【F:docs/manifests/spawn_manifest.json†L2298-L2351】
+- Eight mmove tables span frames 0–168 (idle hover/scan, patrol CCW/CW, long/dash strafes, attack prep, and a 19-frame burst that calls `0x1002f030` at frame 163 and when the loop ends), keeping the sentry in constant lateral motion.【F:docs/kigrax_hlil_notes.md†L8-L20】
 
 ### Current source implementation (`src/game/m_kigrax.c`)
-- `kigrax_init_moves` recreates the HLIL frame ranges and AI helpers while the stand/search/run selectors randomise between the hover, patrol, and dash loops to keep the sentry moving.【F:src/game/m_kigrax.c†L14-L220】
-- The attack entry (frames 139–149) now feeds a 19-frame burst that fires on frame 163 before handing back to the strafing selectors, matching the HLIL cadence.【F:src/game/m_kigrax.c†L229-L307】
-- The death cleanup mirrors the hover corpse routine by swapping to MOVETYPE_TOSS, shrinking the hull, and running the delayed explosion thinker backed by a regression test that enforces the toss/explosion contract.【F:src/game/m_kigrax.c†L330-L376】【F:tests/test_kigrax_regression.py†L1-L58】
-
-### Remaining deviations
-- `0x1002f030` also shrinks the hull and spawns four bolts; the reconstruction currently fires a single shot and immediately returns to the strafing dispatcher, so bounding-box toggles and the full salvo remain unimplemented.【F:docs/kigrax_hlil_notes.md†L20-L20】【F:src/game/m_kigrax.c†L260-L307】
+- `kigrax_init_moves` rebuilds the HLIL frame ranges/AIs, and the stand/search/run selectors randomise between hover/patrol/dash loops so the source pacing matches the recovered state machine.【F:src/game/m_kigrax.c†L14-L220】
+- The attack entry (frames 139–149) now feeds the 19-frame burst that fires on frame 163 before rejoining the strafing selectors, mirroring the HLIL cadence, while the corpse cleanup swaps to MOVETYPE_TOSS and schedules the hover-style explosion thinker.【F:src/game/m_kigrax.c†L229-L376】
+- The reconstructed salvo still emits a single bolt and never toggles the crouched hull that `0x1002f030` handles in the binary, so the bounding-box/salvo routine remains a TODO.【F:docs/kigrax_hlil_notes.md†L20-L20】【F:src/game/m_kigrax.c†L260-L307】
 - Pain and death still reuse placeholder two-frame mmoves, so stagger durations, gibbing hooks, and recovery logic do not yet mirror the retail DLL.【F:src/game/m_kigrax.c†L313-L372】
+
+### Regression coverage
+- `tests/test_kigrax_regression.py` now asserts that the spawn defaults and mmove ranges stay aligned with the decoded HLIL data in addition to the existing corpse thinker checks.【F:tests/test_kigrax_regression.py†L1-L126】【F:tests/test_kigrax_regression.py†L128-L169】
 
 ## Retail footage status
 Surviving DM2 recordings (`demo1.dm2`, `demo2.dm2`) are present under `pack/demos/`, but the current toolchain still lacks a Quake II demo player, so no fresh footage or screenshots can be captured to corroborate ambiguous HLIL states.【40f0a8†L1-L2】

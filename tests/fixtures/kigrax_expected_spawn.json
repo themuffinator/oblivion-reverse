@@ -1,0 +1,47 @@
+{
+  "defaults": {
+    "offset_0xbc": -20.0,
+    "offset_0xc0": -20.0,
+    "offset_0xc4": -32.0,
+    "offset_0xc8": 20.0,
+    "offset_0xcc": 20.0,
+    "offset_0xd0": 12.0,
+    "offset_0xf8": 5.0,
+    "offset_0x1e4": 20.0,
+    "offset_0x23c": 90.0
+  },
+  "mmoves": {
+    "kigrax_move_hover": {
+      "start": 0,
+      "end": 27
+    },
+    "kigrax_move_scan": {
+      "start": 28,
+      "end": 48
+    },
+    "kigrax_move_patrol_ccw": {
+      "start": 61,
+      "end": 82
+    },
+    "kigrax_move_patrol_cw": {
+      "start": 83,
+      "end": 104
+    },
+    "kigrax_move_strafe_long": {
+      "start": 105,
+      "end": 121
+    },
+    "kigrax_move_strafe_dash": {
+      "start": 122,
+      "end": 138
+    },
+    "kigrax_move_attack_prep": {
+      "start": 139,
+      "end": 149
+    },
+    "kigrax_move_attack": {
+      "start": 150,
+      "end": 168
+    }
+  }
+}
