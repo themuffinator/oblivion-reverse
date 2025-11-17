@@ -67,16 +67,25 @@ class RepoSpawnInfo:
     })
 
 
+@dataclass
+class SourceFile:
+    path: Path
+    lines: List[str]
+    is_split: bool
+
+
 # ----------------------------- HLIL parsing -----------------------------
 
 class HLILParser:
     def __init__(self, path: Path):
         self.path = path
-        self._sources: List[Tuple[Path, List[str]]] = []
+        self._split_root = self.path.parent / "split"
+        self._sources: List[SourceFile] = []
         self.lines: List[str] = []
         for source_path in self._iter_source_paths():
             source_lines = source_path.read_text(encoding="utf-8", errors="replace").splitlines()
-            self._sources.append((source_path, source_lines))
+            is_split = self._is_split_source(source_path)
+            self._sources.append(SourceFile(path=source_path, lines=source_lines, is_split=is_split))
             self.lines.extend(source_lines)
 
         self._function_blocks: Optional[Dict[str, List[str]]] = None
@@ -86,10 +95,16 @@ class HLILParser:
     # -- general helpers --
     def _iter_source_paths(self) -> Iterable[Path]:
         yield self.path
-        split_root = self.path.parent / "split"
-        if split_root.is_dir():
-            for extra_path in sorted(split_root.rglob("*.txt")):
+        if self._split_root.is_dir():
+            for extra_path in sorted(self._split_root.rglob("*.txt")):
                 yield extra_path
+
+    def _is_split_source(self, source_path: Path) -> bool:
+        try:
+            source_path.relative_to(self._split_root)
+        except ValueError:
+            return False
+        return True
 
     @property
     def function_blocks(self) -> Dict[str, List[str]]:
@@ -105,10 +120,10 @@ class HLILParser:
                     if entry not in existing:
                         existing.append(entry)
 
-            for _, source_lines in self._sources:
+            for source in self._sources:
                 current_name: Optional[str] = None
                 current_lines: List[str] = []
-                for raw_line in source_lines:
+                for raw_line in source.lines:
                     line = raw_line.strip()
                     match = func_pattern.match(raw_line)
                     if match:
@@ -135,14 +150,14 @@ class HLILParser:
             ptr_pattern = re.compile(
                 r"^(?:\d+:)?\s*100[0-9a-f]+\s+char \(\* (?P<label>data_[0-9a-f]+)\)\[[^]]+\] = (?P<target>data_[0-9a-f]+) {\"(?P<name>[^\"]+)\"}"
             )
-            for _, source_lines in self._sources:
-                for idx, raw_line in enumerate(source_lines):
+            for source in self._sources:
+                for idx, raw_line in enumerate(source.lines):
                     m = ptr_pattern.match(raw_line)
                     if not m:
                         continue
                     next_line = ""
-                    for j in range(idx + 1, len(source_lines)):
-                        candidate = source_lines[j]
+                    for j in range(idx + 1, len(source.lines)):
+                        candidate = source.lines[j]
                         if candidate.strip():
                             next_line = candidate
                             break
@@ -172,33 +187,57 @@ class HLILParser:
             func_pattern = re.compile(
                 r"^(?:\d+:)?\s*100[0-9a-f]+\s+void\* (?P<label>data_[0-9a-f]+) = (?P<func>sub_[0-9a-f]+)"
             )
-            for _, source_lines in self._sources:
-                for idx, raw_line in enumerate(source_lines):
+            sub_decl_pattern = re.compile(r"\b(sub_[0-9a-f]+)\s*\(", re.IGNORECASE)
+            for source in self._sources:
+                for idx, raw_line in enumerate(source.lines):
                     m = ptr_pattern.match(raw_line)
                     if not m:
                         continue
                     next_line = ""
-                    for j in range(idx + 1, len(source_lines)):
-                        candidate = source_lines[j]
+                    for j in range(idx + 1, len(source.lines)):
+                        candidate = source.lines[j]
                         if candidate.strip():
                             next_line = candidate
                             break
                     if not next_line:
                         continue
-                    m_func = func_pattern.match(next_line)
-                    if not m_func:
-                        continue
                     classname = m.group("name")
                     if classname in spawn_entries:
                         continue
-                    func = m_func.group("func")
-                    spawn_entries[classname] = func
+                    m_func = func_pattern.match(next_line)
+                    if m_func:
+                        spawn_entries[classname] = m_func.group("func")
+                        continue
+                    if source.is_split:
+                        follow_func = self._find_next_function_decl(
+                            source.lines, idx + 1, sub_decl_pattern
+                        )
+                        if follow_func:
+                            spawn_entries[classname] = follow_func
             for block in self.function_blocks.values():
                 for classname, func in self._extract_spawn_map_from_strcmp(block).items():
                     if classname not in spawn_entries:
                         spawn_entries[classname] = func
             self._spawn_map = spawn_entries
         return self._spawn_map
+
+    def _find_next_function_decl(
+        self,
+        lines: Sequence[str],
+        start_index: int,
+        sub_decl_pattern: re.Pattern[str],
+    ) -> Optional[str]:
+        for idx in range(start_index, len(lines)):
+            candidate = lines[idx]
+            stripped = candidate.strip()
+            if not stripped:
+                continue
+            if stripped.startswith(("#", "//", "/*", "*", "*/")):
+                continue
+            match = sub_decl_pattern.search(candidate)
+            if match:
+                return match.group(1)
+        return None
 
     def _extract_spawn_map_from_strcmp(self, block: List[str]) -> Dict[str, str]:
         literal_pattern = re.compile(
