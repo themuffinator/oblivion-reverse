@@ -3883,21 +3883,6 @@
         "sets": []
       }
     },
-    "func_rotate_train": {
-      "defaults": {
-        "dmg": 100.0,
-        "speed": 100.0
-      },
-      "function": "SP_func_rotate_train",
-      "spawnflags": {
-        "assignments": [],
-        "checks": [
-          4
-        ],
-        "clears": [],
-        "sets": []
-      }
-    },
     "func_rotating": {
       "defaults": {},
       "function": "SP_func_rotating",
@@ -4143,7 +4128,9 @@
       }
     },
     "item_health": {
-      "defaults": {},
+      "defaults": {
+        "count": 10.0
+      },
       "function": "SP_item_health",
       "spawnflags": {
         "assignments": [],

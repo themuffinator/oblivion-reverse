@@ -3884,21 +3884,6 @@
           "sets": []
         }
       },
-      "func_rotate_train": {
-        "defaults": {
-          "dmg": 100.0,
-          "speed": 100.0
-        },
-        "function": "SP_func_rotate_train",
-        "spawnflags": {
-          "assignments": [],
-          "checks": [
-            4
-          ],
-          "clears": [],
-          "sets": []
-        }
-      },
       "func_rotating": {
         "defaults": {},
         "function": "SP_func_rotating",
@@ -6252,102 +6237,6 @@
             {
               "offset": 816,
               "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_rotate_train": {
-        "offset_0x10": [
-          [
-            {
-              "offset": 16,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1120403456
-            }
-          ],
-          null
-        ],
-        "offset_0x18": [
-          [
-            {
-              "offset": 24,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x1f4": [
-          [
-            {
-              "offset": 500,
-              "value": 268522848
-            }
-          ],
-          null
-        ],
-        "offset_0x1f8": [
-          [
-            {
-              "offset": 504,
-              "value": 268521616
-            }
-          ],
-          null
-        ],
-        "offset_0x200": [
-          [
-            {
-              "offset": 512,
-              "value": 268523248
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 0
-            },
-            {
-              "offset": 580,
-              "value": 100
             }
           ],
           null
@@ -9143,6 +9032,7 @@
     "missing_in_repo": [
       "%s/listip.cfg",
       "detpack",
+      "func_rotate_train",
       "grenade",
       "mine",
       "monster_makron"

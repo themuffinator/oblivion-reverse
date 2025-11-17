@@ -830,6 +830,9 @@ class RepoParser:
             spawn_map[classname] = func.strip()
         for classname in sorted(self._parse_itemlist_classnames()):
             spawn_map.setdefault(classname, "SpawnItemFromItemlist")
+        rotate_flag = self.macro_resolver.evaluate("OBLIVION_ENABLE_ROTATE_TRAIN")
+        if rotate_flag is not None and rotate_flag == 0:
+            spawn_map.pop("func_rotate_train", None)
         return spawn_map
 
     def _parse_itemlist_classnames(self) -> Set[str]:
