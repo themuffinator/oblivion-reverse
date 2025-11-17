@@ -30,6 +30,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "game.h"
 #include "m_actor.h"
 
+#ifndef OBLIVION_ENABLE_ROTATE_TRAIN
+#define OBLIVION_ENABLE_ROTATE_TRAIN 0
+#endif
+
 struct edict_s;
 
 typedef struct edict_oblivion_ext_s

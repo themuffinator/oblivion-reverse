@@ -61,7 +61,9 @@ void SP_func_door_secret (edict_t *ent);
 void SP_func_door_rotating (edict_t *ent);
 void SP_func_water (edict_t *ent);
 void SP_func_train (edict_t *ent);
+#if OBLIVION_ENABLE_ROTATE_TRAIN
 void SP_func_rotate_train (edict_t *ent);
+#endif
 void SP_func_conveyor (edict_t *self);
 void SP_func_wall (edict_t *self);
 void SP_func_object (edict_t *self);
@@ -192,7 +194,9 @@ spawn_t	spawns[] = {
 	{"func_door_rotating", SP_func_door_rotating},
 	{"func_rotating", SP_func_rotating},
 	{"func_train", SP_func_train},
+#if OBLIVION_ENABLE_ROTATE_TRAIN
 	{"func_rotate_train", SP_func_rotate_train},
+#endif
 	{"func_water", SP_func_water},
 	{"func_conveyor", SP_func_conveyor},
 	{"func_areaportal", SP_func_areaportal},

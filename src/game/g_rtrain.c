@@ -1,5 +1,7 @@
 #include "g_local.h"
 
+#if OBLIVION_ENABLE_ROTATE_TRAIN
+
 #define STATE_TOP                       0
 #define STATE_BOTTOM            1
 #define STATE_UP                        2
@@ -317,3 +319,5 @@ void SP_func_rotate_train(edict_t *self)
                 gi.dprintf("func_rotate_train without a target at %s\n", vtos(self->absmin));
         }
 }
+
+#endif

@@ -11,6 +11,16 @@ handles inline `strcmp` chains, but most of the unfilled entries live behind
 static data blocks or runtime string resolvers that the HLIL dump does not
 expand, so those classnames continue to require manual recovery.
 
+## Intentional `func_rotate_train` divergence
+
+`func_rotate_train` never shows up in the interpreted HLIL string tables or the
+monolithic dump; the only reference in the split assets is the handwritten stub
+at `gamex86.dll_hlil_block9999_sub_10015750.txt`, which mirrors the existing
+Quake II code.【F:references/HLIL/oblivion/split/gamex86.dll_hlil_block9999_sub_10015750.txt†L1-L27】 Because there is no literal classname to parse, the runtime
+hooks are now hidden behind `OBLIVION_ENABLE_ROTATE_TRAIN` so that the stock
+build behaves like the binary while still retaining the implementation for
+comparison against the manual HLIL block.【F:src/game/g_spawn.c†L64-L76】【F:src/game/g_rtrain.c†L1-L5】
+
 ### Static `spawn_t` table hidden in `data_10046928`
 
 `ED_CallSpawn` (`sub_10016750`) still walks the compiled `spawn_t` array rooted
