@@ -1,1 +1,2667 @@
-{"combined": {"hlil": {"%s/listip.cfg": {"function": "sub_10039ca4", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "detpack": {"function": "sub_1001e820", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_door": {"function": "sub_10006b20", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_door_rotating": {"function": "sub_10006df0", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "grenade": {"function": "sub_1001b400", "defaults": {"offset_0x58": [{"value": 0, "offset": 88}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "key_power_cube": {"function": "sub_1001b400", "defaults": {"offset_0x58": [{"value": 0, "offset": 88}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "light": {"function": "sub_1001b400", "defaults": {"offset_0x58": [{"value": 0, "offset": 88}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "mine": {"function": "sub_1001db40", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_actor": {"function": "sub_10037cd0", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_jorg": {"function": "sub_10001ac0", "defaults": {"offset_0x2c4": [{"value": 128, "offset": 708}], "offset_0x140": [{"value": 0, "offset": 320}], "offset_0x12c": [{"value": 0, "offset": 300}], "offset_0x390": [{"value": 0, "offset": 912}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_makron": {"function": "sub_10001ac0", "defaults": {"offset_0x2c4": [{"value": 128, "offset": 708}], "offset_0x140": [{"value": 0, "offset": 320}], "offset_0x12c": [{"value": 0, "offset": 300}], "offset_0x390": [{"value": 0, "offset": 912}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_supertank": {"function": "sub_10001ac0", "defaults": {"offset_0x2c4": [{"value": 128, "offset": 708}], "offset_0x140": [{"value": 0, "offset": 320}], "offset_0x12c": [{"value": 0, "offset": 300}], "offset_0x390": [{"value": 0, "offset": 912}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_tank": {"function": "sub_10001ac0", "defaults": {"offset_0x2c4": [{"value": 128, "offset": 708}], "offset_0x140": [{"value": 0, "offset": 320}], "offset_0x12c": [{"value": 0, "offset": 300}], "offset_0x390": [{"value": 0, "offset": 912}]}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}}, "repo": {"func_areaportal": {"function": "SP_func_areaportal", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_button": {"function": "SP_func_button", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_clock": {"function": "SP_func_clock", "defaults": {"count": 60.0}, "spawnflags": {"checks": [1, 2, 4], "sets": [], "clears": [], "assignments": []}}, "func_conveyor": {"function": "SP_func_conveyor", "defaults": {"speed": 0.0}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "func_door": {"function": "SP_func_door", "defaults": {}, "spawnflags": {"checks": [1, 16, 64], "sets": [], "clears": [], "assignments": []}}, "func_door_rotating": {"function": "SP_func_door_rotating", "defaults": {}, "spawnflags": {"checks": [1, 2, 16, 64, 128], "sets": [], "clears": [], "assignments": []}}, "func_door_secret": {"function": "SP_func_door_secret", "defaults": {}, "spawnflags": {"checks": [1, 2, 4], "sets": [], "clears": [], "assignments": []}}, "func_explosive": {"function": "SP_func_explosive", "defaults": {"health": 100.0}, "spawnflags": {"checks": [1, 2, 4], "sets": [], "clears": [], "assignments": []}}, "func_group": {"function": "SP_info_null", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_killbox": {"function": "SP_func_killbox", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_object": {"function": "SP_func_object", "defaults": {"dmg": 100.0}, "spawnflags": {"checks": [2, 4], "sets": [], "clears": [], "assignments": []}}, "func_plat": {"function": "SP_func_plat", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "func_rotate_train": {"function": "SP_func_rotate_train", "defaults": {"dmg": 100.0, "speed": 100.0}, "spawnflags": {"checks": [4], "sets": [], "clears": [], "assignments": []}}, "func_rotating": {"function": "SP_func_rotating", "defaults": {}, "spawnflags": {"checks": [1, 2, 4, 8, 32, 64, 128], "sets": [], "clears": [], "assignments": []}}, "func_timer": {"function": "SP_func_timer", "defaults": {"wait": 1.0}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "func_train": {"function": "SP_func_train", "defaults": {"dmg": 100.0, "speed": 100.0}, "spawnflags": {"checks": [4], "sets": [], "clears": [], "assignments": []}}, "func_wall": {"function": "SP_func_wall", "defaults": {}, "spawnflags": {"checks": [1, 2, 4, 7, 8, 16], "sets": [1, 2], "clears": [], "assignments": []}}, "func_water": {"function": "SP_func_water", "defaults": {"speed": 25.0, "wait": -1.0}, "spawnflags": {"checks": [1], "sets": [32], "clears": [], "assignments": []}}, "info_notnull": {"function": "SP_info_notnull", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_null": {"function": "SP_info_null", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_player_coop": {"function": "SP_info_player_coop", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_player_deathmatch": {"function": "SP_info_player_deathmatch", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_player_intermission": {"function": "SP_info_player_intermission", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_player_start": {"function": "SP_info_player_start", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "info_teleport_dest": {"function": "SP_info_teleport_dest", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "item_health": {"function": "SP_item_health", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "item_health_large": {"function": "SP_item_health_large", "defaults": {"count": 25.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "item_health_mega": {"function": "SP_item_health_mega", "defaults": {"count": 100.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "item_health_small": {"function": "SP_item_health_small", "defaults": {"count": 2.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "light": {"function": "SP_light", "defaults": {}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "light_mine1": {"function": "SP_light_mine1", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "light_mine2": {"function": "SP_light_mine2", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_actor": {"function": "SP_misc_actor", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_banner": {"function": "SP_misc_banner", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_bigviper": {"function": "SP_misc_bigviper", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_blackhole": {"function": "SP_misc_blackhole", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_camera": {"function": "SP_misc_camera", "defaults": {}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "misc_camera_target": {"function": "SP_misc_camera_target", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_deadsoldier": {"function": "SP_misc_deadsoldier", "defaults": {}, "spawnflags": {"checks": [2, 4, 8, 16, 32], "sets": [], "clears": [], "assignments": []}}, "misc_easterchick": {"function": "SP_misc_easterchick", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_easterchick2": {"function": "SP_misc_easterchick2", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_eastertank": {"function": "SP_misc_eastertank", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_explobox": {"function": "SP_misc_explobox", "defaults": {"mass": 400.0, "health": 10.0, "dmg": 150.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_gib_arm": {"function": "SP_misc_gib_arm", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_gib_head": {"function": "SP_misc_gib_head", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_gib_leg": {"function": "SP_misc_gib_leg", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_insane": {"function": "SP_misc_insane", "defaults": {"health": 100.0, "gib_health": -50.0, "mass": 300.0}, "spawnflags": {"checks": [8, 16], "sets": [], "clears": [], "assignments": []}}, "misc_satellite_dish": {"function": "SP_misc_satellite_dish", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_screenfader": {"function": "SP_misc_screenfader", "defaults": {"wait": 1.0, "random": 0.0}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "misc_strogg_ship": {"function": "SP_misc_strogg_ship", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_teleporter": {"function": "SP_misc_teleporter", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_teleporter_dest": {"function": "SP_misc_teleporter_dest", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_viper": {"function": "SP_misc_viper", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "misc_viper_bomb": {"function": "SP_misc_viper_bomb", "defaults": {"dmg": 1000.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_badass": {"function": "SP_monster_badass", "defaults": {"yaw_speed": 25.0, "mass": 600.0, "health": 1000.0, "gib_health": -200.0, "monsterinfo.max_ideal_distance": 1500.0}, "spawnflags": {"checks": [8], "sets": [], "clears": [], "assignments": []}}, "monster_berserk": {"function": "SP_monster_berserk", "defaults": {"health": 240.0, "gib_health": -60.0, "mass": 250.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_boss2": {"function": "SP_monster_boss2", "defaults": {"health": 2000.0, "gib_health": -200.0, "mass": 1000.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_boss3_stand": {"function": "SP_monster_boss3_stand", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_brain": {"function": "SP_monster_brain", "defaults": {"health": 300.0, "gib_health": -150.0, "mass": 400.0, "monsterinfo.power_armor_power": 100.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_chick": {"function": "SP_monster_chick", "defaults": {"health": 175.0, "gib_health": -70.0, "mass": 200.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_commander_body": {"function": "SP_monster_commander_body", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_cyborg": {"function": "SP_monster_cyborg", "defaults": {"mass": 300.0, "health": 300.0, "gib_health": -120.0, "oblivion.cyborg_anchor_time": 0.0, "oblivion.cyborg_anchor_stage": 0.0, "oblivion.cyborg_pain_time": 0.0, "oblivion.cyborg_pain_slot": 0.0, "monsterinfo.max_ideal_distance": 512.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_flipper": {"function": "SP_monster_flipper", "defaults": {"health": 50.0, "gib_health": -30.0, "mass": 100.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_floater": {"function": "SP_monster_floater", "defaults": {"health": 200.0, "gib_health": -80.0, "mass": 300.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_flyer": {"function": "SP_monster_flyer", "defaults": {"health": 50.0, "mass": 50.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_gladiator": {"function": "SP_monster_gladiator", "defaults": {"health": 400.0, "gib_health": -175.0, "mass": 400.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_gunner": {"function": "SP_monster_gunner", "defaults": {"health": 175.0, "gib_health": -70.0, "mass": 200.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_hover": {"function": "SP_monster_hover", "defaults": {"health": 240.0, "gib_health": -100.0, "mass": 150.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_infantry": {"function": "SP_monster_infantry", "defaults": {"health": 100.0, "gib_health": -40.0, "mass": 200.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_jorg": {"function": "SP_monster_jorg", "defaults": {"health": 3000.0, "gib_health": -2000.0, "mass": 1000.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_kigrax": {"function": "SP_monster_kigrax", "defaults": {"mass": 150.0, "yaw_speed": 20.0, "health": 200.0, "gib_health": -100.0, "viewheight": 90.0, "monsterinfo.scale": 1.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_medic": {"function": "SP_monster_medic", "defaults": {"health": 300.0, "gib_health": -130.0, "mass": 400.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_mutant": {"function": "SP_monster_mutant", "defaults": {"health": 300.0, "gib_health": -120.0, "mass": 300.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_parasite": {"function": "SP_monster_parasite", "defaults": {"health": 175.0, "gib_health": -50.0, "mass": 250.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_sentinel": {"function": "SP_monster_sentinel", "defaults": {"health": 1000.0, "gib_health": -200.0, "mass": 550.0, "monsterinfo.speed": 28.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_soldier": {"function": "SP_monster_soldier", "defaults": {"s.skinnum": 2.0, "health": 30.0, "gib_health": -30.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_soldier_deatom": {"function": "SP_monster_soldier_deatom", "defaults": {"s.skinnum": 4.0, "count": 1.0, "health": 55.0, "gib_health": -40.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_soldier_light": {"function": "SP_monster_soldier_light", "defaults": {"s.skinnum": 0.0, "health": 20.0, "gib_health": -30.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_soldier_ss": {"function": "SP_monster_soldier_ss", "defaults": {"s.skinnum": 4.0, "health": 40.0, "gib_health": -30.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_spider": {"function": "SP_monster_spider", "defaults": {"mass": 300.0, "health": 400.0, "gib_health": -120.0}, "spawnflags": {"checks": [256], "sets": [], "clears": [], "assignments": []}}, "monster_supertank": {"function": "SP_monster_supertank", "defaults": {"health": 1500.0, "gib_health": -500.0, "mass": 800.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_tank": {"function": "SP_monster_tank", "defaults": {"health": 750.0, "gib_health": -200.0, "mass": 500.0, "s.skinnum": 2.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "monster_tank_commander": {"function": "SP_monster_tank", "defaults": {"health": 750.0, "gib_health": -200.0, "mass": 500.0, "s.skinnum": 2.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "path_corner": {"function": "SP_path_corner", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "point_combat": {"function": "SP_point_combat", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_actor": {"function": "SP_target_actor", "defaults": {"speed": 200.0}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "target_blaster": {"function": "SP_target_blaster", "defaults": {"dmg": 15.0, "speed": 1000.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_changelevel": {"function": "SP_target_changelevel", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_character": {"function": "SP_target_character", "defaults": {"s.frame": 12.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_crosslevel_target": {"function": "SP_target_crosslevel_target", "defaults": {"delay": 1.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_crosslevel_trigger": {"function": "SP_target_crosslevel_trigger", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_earthquake": {"function": "SP_target_earthquake", "defaults": {"count": 5.0, "speed": 200.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_explosion": {"function": "SP_target_explosion", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_goal": {"function": "SP_target_goal", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_help": {"function": "SP_target_help", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_laser": {"function": "SP_target_laser", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_lightramp": {"function": "SP_target_lightramp", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_railgun": {"function": "SP_target_railgun", "defaults": {"dmg": 150.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_rocket": {"function": "SP_target_rocket", "defaults": {"speed": 650.0, "dmg": 100.0, "count": 120.0, "delay": 0.0, "dmg_radius": 120.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_secret": {"function": "SP_target_secret", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_spawner": {"function": "SP_target_spawner", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_speaker": {"function": "SP_target_speaker", "defaults": {}, "spawnflags": {"checks": [1], "sets": [], "clears": [], "assignments": []}}, "target_splash": {"function": "SP_target_splash", "defaults": {"count": 32.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_string": {"function": "SP_target_string", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "target_temp_entity": {"function": "SP_target_temp_entity", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_always": {"function": "SP_trigger_always", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_counter": {"function": "SP_trigger_counter", "defaults": {"wait": -1.0, "count": 2.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_elevator": {"function": "SP_trigger_elevator", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_gravity": {"function": "SP_trigger_gravity", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_hurt": {"function": "SP_trigger_hurt", "defaults": {"dmg": 5.0}, "spawnflags": {"checks": [1, 2], "sets": [], "clears": [], "assignments": []}}, "trigger_key": {"function": "SP_trigger_key", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_misc_camera": {"function": "SP_trigger_misc_camera", "defaults": {"delay": 1.0}, "spawnflags": {"checks": [4], "sets": [], "clears": [], "assignments": []}}, "trigger_monsterjump": {"function": "SP_trigger_monsterjump", "defaults": {"speed": 200.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_multiple": {"function": "SP_trigger_multiple", "defaults": {}, "spawnflags": {"checks": [4], "sets": [], "clears": [], "assignments": []}}, "trigger_once": {"function": "SP_trigger_once", "defaults": {}, "spawnflags": {"checks": [1], "sets": [4], "clears": [], "assignments": []}}, "trigger_push": {"function": "SP_trigger_push", "defaults": {"speed": 1000.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_relay": {"function": "SP_trigger_relay", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "trigger_teleport": {"function": "SP_trigger_teleport", "defaults": {"nextthink": 0.0}, "spawnflags": {"checks": [1, 2, 4, 16], "sets": [], "clears": [], "assignments": []}}, "turret_base": {"function": "SP_turret_base", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "turret_breach": {"function": "SP_turret_breach", "defaults": {"speed": 50.0, "dmg": 10.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "turret_driver": {"function": "SP_turret_driver", "defaults": {"health": 100.0, "gib_health": 0.0, "mass": 200.0, "viewheight": 24.0}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "viewthing": {"function": "SP_viewthing", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}, "worldspawn": {"function": "SP_worldspawn", "defaults": {}, "spawnflags": {"checks": [], "sets": [], "clears": [], "assignments": []}}}}, "comparison": {"missing_in_repo": ["%s/listip.cfg", "detpack", "grenade", "key_power_cube", "mine", "monster_makron"], "missing_in_hlil": ["func_areaportal", "func_button", "func_clock", "func_conveyor", "func_door_secret", "func_explosive", "func_group", "func_killbox", "func_object", "func_plat", "func_rotate_train", "func_rotating", "func_timer", "func_train", "func_wall", "func_water", "info_notnull", "info_null", "info_player_coop", "info_player_deathmatch", "info_player_intermission", "info_player_start", "info_teleport_dest", "item_health", "item_health_large", "item_health_mega", "item_health_small", "light_mine1", "light_mine2", "misc_banner", "misc_bigviper", "misc_blackhole", "misc_camera", "misc_camera_target", "misc_deadsoldier", "misc_easterchick", "misc_easterchick2", "misc_eastertank", "misc_explobox", "misc_gib_arm", "misc_gib_head", "misc_gib_leg", "misc_insane", "misc_satellite_dish", "misc_screenfader", "misc_strogg_ship", "misc_teleporter", "misc_teleporter_dest", "misc_viper", "misc_viper_bomb", "monster_badass", "monster_berserk", "monster_boss2", "monster_boss3_stand", "monster_brain", "monster_chick", "monster_commander_body", "monster_cyborg", "monster_flipper", "monster_floater", "monster_flyer", "monster_gladiator", "monster_gunner", "monster_hover", "monster_infantry", "monster_kigrax", "monster_medic", "monster_mutant", "monster_parasite", "monster_sentinel", "monster_soldier", "monster_soldier_deatom", "monster_soldier_light", "monster_soldier_ss", "monster_spider", "monster_tank_commander", "path_corner", "point_combat", "target_actor", "target_blaster", "target_changelevel", "target_character", "target_crosslevel_target", "target_crosslevel_trigger", "target_earthquake", "target_explosion", "target_goal", "target_help", "target_laser", "target_lightramp", "target_railgun", "target_rocket", "target_secret", "target_spawner", "target_speaker", "target_splash", "target_string", "target_temp_entity", "trigger_always", "trigger_counter", "trigger_elevator", "trigger_gravity", "trigger_hurt", "trigger_key", "trigger_misc_camera", "trigger_monsterjump", "trigger_multiple", "trigger_once", "trigger_push", "trigger_relay", "trigger_teleport", "turret_base", "turret_breach", "turret_driver", "viewthing", "worldspawn"], "spawnflag_mismatches": {"func_door": {"checks": [[], [1, 16, 64]]}, "func_door_rotating": {"checks": [[], [1, 2, 16, 64, 128]]}, "light": {"checks": [[], [1]]}}, "default_mismatches": {"light": {"offset_0x58": [[{"value": 0, "offset": 88}], null]}, "monster_jorg": {"offset_0x2c4": [[{"value": 128, "offset": 708}], null], "offset_0x140": [[{"value": 0, "offset": 320}], null], "offset_0x12c": [[{"value": 0, "offset": 300}], null], "offset_0x390": [[{"value": 0, "offset": 912}], null]}, "monster_supertank": {"offset_0x2c4": [[{"value": 128, "offset": 708}], null], "offset_0x140": [[{"value": 0, "offset": 320}], null], "offset_0x12c": [[{"value": 0, "offset": 300}], null], "offset_0x390": [[{"value": 0, "offset": 912}], null]}, "monster_tank": {"offset_0x2c4": [[{"value": 128, "offset": 708}], null], "offset_0x140": [[{"value": 0, "offset": 320}], null], "offset_0x12c": [[{"value": 0, "offset": 300}], null], "offset_0x390": [[{"value": 0, "offset": 912}], null]}}}}
+{
+  "combined": {
+    "hlil": {
+      "%s/listip.cfg": {
+        "defaults": {},
+        "function": "sub_10039ca4",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "detpack": {
+        "defaults": {},
+        "function": "sub_1001e820",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_door": {
+        "defaults": {},
+        "function": "sub_10006b20",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_door_rotating": {
+        "defaults": {},
+        "function": "sub_10006df0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "grenade": {
+        "defaults": {
+          "offset_0x58": [
+            {
+              "offset": 88,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_1001b400",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_power_cube": {
+        "defaults": {
+          "offset_0x58": [
+            {
+              "offset": 88,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_1001b400",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "light": {
+        "defaults": {
+          "offset_0x58": [
+            {
+              "offset": 88,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_1001b400",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "mine": {
+        "defaults": {},
+        "function": "sub_1001db40",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_actor": {
+        "defaults": {},
+        "function": "sub_10037cd0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_jorg": {
+        "defaults": {
+          "offset_0x12c": [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          "offset_0x140": [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          "offset_0x2c4": [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          "offset_0x390": [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_10001ac0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_makron": {
+        "defaults": {
+          "offset_0x12c": [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          "offset_0x140": [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          "offset_0x2c4": [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          "offset_0x390": [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_10001ac0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_supertank": {
+        "defaults": {
+          "offset_0x12c": [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          "offset_0x140": [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          "offset_0x2c4": [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          "offset_0x390": [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_10001ac0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_tank": {
+        "defaults": {
+          "offset_0x12c": [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          "offset_0x140": [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          "offset_0x2c4": [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          "offset_0x390": [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ]
+        },
+        "function": "sub_10001ac0",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      }
+    },
+    "repo": {
+      "ammo_bullets": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_cells": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_detpack": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_dod": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_grenades": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_mines": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_pistolplasma": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_rifleplasma": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_rockets": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_shells": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "ammo_slugs": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_areaportal": {
+        "defaults": {},
+        "function": "SP_func_areaportal",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_button": {
+        "defaults": {},
+        "function": "SP_func_button",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_clock": {
+        "defaults": {
+          "count": 60.0
+        },
+        "function": "SP_func_clock",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_conveyor": {
+        "defaults": {
+          "speed": 0.0
+        },
+        "function": "SP_func_conveyor",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_door": {
+        "defaults": {},
+        "function": "SP_func_door",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            16,
+            64
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_door_rotating": {
+        "defaults": {},
+        "function": "SP_func_door_rotating",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            16,
+            64,
+            128
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_door_secret": {
+        "defaults": {},
+        "function": "SP_func_door_secret",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_explosive": {
+        "defaults": {
+          "health": 100.0
+        },
+        "function": "SP_func_explosive",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_group": {
+        "defaults": {},
+        "function": "SP_info_null",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_killbox": {
+        "defaults": {},
+        "function": "SP_func_killbox",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_object": {
+        "defaults": {
+          "dmg": 100.0
+        },
+        "function": "SP_func_object",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            2,
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_plat": {
+        "defaults": {},
+        "function": "SP_func_plat",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_rotate_train": {
+        "defaults": {
+          "dmg": 100.0,
+          "speed": 100.0
+        },
+        "function": "SP_func_rotate_train",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_rotating": {
+        "defaults": {},
+        "function": "SP_func_rotating",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4,
+            8,
+            32,
+            64,
+            128
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_timer": {
+        "defaults": {
+          "wait": 1.0
+        },
+        "function": "SP_func_timer",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_train": {
+        "defaults": {
+          "dmg": 100.0,
+          "speed": 100.0
+        },
+        "function": "SP_func_train",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "func_wall": {
+        "defaults": {},
+        "function": "SP_func_wall",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4,
+            7,
+            8,
+            16
+          ],
+          "clears": [],
+          "sets": [
+            1,
+            2
+          ]
+        }
+      },
+      "func_water": {
+        "defaults": {
+          "speed": 25.0,
+          "wait": -1.0
+        },
+        "function": "SP_func_water",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": [
+            32
+          ]
+        }
+      },
+      "info_notnull": {
+        "defaults": {},
+        "function": "SP_info_notnull",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_null": {
+        "defaults": {},
+        "function": "SP_info_null",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_player_coop": {
+        "defaults": {},
+        "function": "SP_info_player_coop",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_player_deathmatch": {
+        "defaults": {},
+        "function": "SP_info_player_deathmatch",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_player_intermission": {
+        "defaults": {},
+        "function": "SP_info_player_intermission",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_player_start": {
+        "defaults": {},
+        "function": "SP_info_player_start",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "info_teleport_dest": {
+        "defaults": {},
+        "function": "SP_info_teleport_dest",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_adrenaline": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_ancient_head": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_armor_body": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_armor_combat": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_armor_jacket": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_armor_shard": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_bandolier": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_breather": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_enviro": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_health": {
+        "defaults": {
+          "count": 10.0
+        },
+        "function": "SP_item_health",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_health_large": {
+        "defaults": {
+          "count": 25.0
+        },
+        "function": "SP_item_health_large",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_health_mega": {
+        "defaults": {
+          "count": 100.0
+        },
+        "function": "SP_item_health_mega",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_health_small": {
+        "defaults": {
+          "count": 2.0
+        },
+        "function": "SP_item_health_small",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_invulnerability": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_pack": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_power_screen": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_power_shield": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_quad": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "item_silencer": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_airstrike_target": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_blue_key": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_commander_head": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_data_cd": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_data_spinner": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_pass": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_power_cube": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_pyramid": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "key_red_key": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "light": {
+        "defaults": {},
+        "function": "SP_light",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "light_mine1": {
+        "defaults": {},
+        "function": "SP_light_mine1",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "light_mine2": {
+        "defaults": {},
+        "function": "SP_light_mine2",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_actor": {
+        "defaults": {},
+        "function": "SP_misc_actor",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_banner": {
+        "defaults": {},
+        "function": "SP_misc_banner",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_bigviper": {
+        "defaults": {},
+        "function": "SP_misc_bigviper",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_blackhole": {
+        "defaults": {},
+        "function": "SP_misc_blackhole",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_camera": {
+        "defaults": {},
+        "function": "SP_misc_camera",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_camera_target": {
+        "defaults": {},
+        "function": "SP_misc_camera_target",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_deadsoldier": {
+        "defaults": {},
+        "function": "SP_misc_deadsoldier",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_easterchick": {
+        "defaults": {},
+        "function": "SP_misc_easterchick",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_easterchick2": {
+        "defaults": {},
+        "function": "SP_misc_easterchick2",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_eastertank": {
+        "defaults": {},
+        "function": "SP_misc_eastertank",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_explobox": {
+        "defaults": {
+          "dmg": 150.0,
+          "health": 10.0,
+          "mass": 400.0
+        },
+        "function": "SP_misc_explobox",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_gib_arm": {
+        "defaults": {},
+        "function": "SP_misc_gib_arm",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_gib_head": {
+        "defaults": {},
+        "function": "SP_misc_gib_head",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_gib_leg": {
+        "defaults": {},
+        "function": "SP_misc_gib_leg",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_insane": {
+        "defaults": {
+          "gib_health": -50.0,
+          "health": 100.0,
+          "mass": 300.0
+        },
+        "function": "SP_misc_insane",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            8,
+            16
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_satellite_dish": {
+        "defaults": {},
+        "function": "SP_misc_satellite_dish",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_screenfader": {
+        "defaults": {
+          "random": 0.0,
+          "wait": 1.0
+        },
+        "function": "SP_misc_screenfader",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_strogg_ship": {
+        "defaults": {},
+        "function": "SP_misc_strogg_ship",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_teleporter": {
+        "defaults": {},
+        "function": "SP_misc_teleporter",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_teleporter_dest": {
+        "defaults": {},
+        "function": "SP_misc_teleporter_dest",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_viper": {
+        "defaults": {},
+        "function": "SP_misc_viper",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "misc_viper_bomb": {
+        "defaults": {
+          "dmg": 1000.0
+        },
+        "function": "SP_misc_viper_bomb",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_badass": {
+        "defaults": {
+          "gib_health": -200.0,
+          "health": 1000.0,
+          "mass": 600.0,
+          "monsterinfo.max_ideal_distance": 1500.0,
+          "yaw_speed": 25.0
+        },
+        "function": "SP_monster_badass",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            8
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_berserk": {
+        "defaults": {
+          "gib_health": -60.0,
+          "health": 240.0,
+          "mass": 250.0
+        },
+        "function": "SP_monster_berserk",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_boss2": {
+        "defaults": {
+          "gib_health": -200.0,
+          "health": 2000.0,
+          "mass": 1000.0
+        },
+        "function": "SP_monster_boss2",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_boss3_stand": {
+        "defaults": {},
+        "function": "SP_monster_boss3_stand",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_brain": {
+        "defaults": {
+          "gib_health": -150.0,
+          "health": 300.0,
+          "mass": 400.0,
+          "monsterinfo.power_armor_power": 100.0
+        },
+        "function": "SP_monster_brain",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_chick": {
+        "defaults": {
+          "gib_health": -70.0,
+          "health": 175.0,
+          "mass": 200.0
+        },
+        "function": "SP_monster_chick",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_commander_body": {
+        "defaults": {},
+        "function": "SP_monster_commander_body",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_cyborg": {
+        "defaults": {
+          "gib_health": -120.0,
+          "health": 300.0,
+          "mass": 300.0,
+          "monsterinfo.max_ideal_distance": 512.0,
+          "oblivion.cyborg_anchor_stage": 0.0,
+          "oblivion.cyborg_anchor_time": 0.0,
+          "oblivion.cyborg_pain_slot": 0.0,
+          "oblivion.cyborg_pain_time": 0.0
+        },
+        "function": "SP_monster_cyborg",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_flipper": {
+        "defaults": {
+          "gib_health": -30.0,
+          "health": 50.0,
+          "mass": 100.0
+        },
+        "function": "SP_monster_flipper",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_floater": {
+        "defaults": {
+          "gib_health": -80.0,
+          "health": 200.0,
+          "mass": 300.0
+        },
+        "function": "SP_monster_floater",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_flyer": {
+        "defaults": {
+          "health": 50.0,
+          "mass": 50.0
+        },
+        "function": "SP_monster_flyer",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_gladiator": {
+        "defaults": {
+          "gib_health": -175.0,
+          "health": 400.0,
+          "mass": 400.0
+        },
+        "function": "SP_monster_gladiator",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_gunner": {
+        "defaults": {
+          "gib_health": -70.0,
+          "health": 175.0,
+          "mass": 200.0
+        },
+        "function": "SP_monster_gunner",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_hover": {
+        "defaults": {
+          "gib_health": -100.0,
+          "health": 240.0,
+          "mass": 150.0
+        },
+        "function": "SP_monster_hover",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_infantry": {
+        "defaults": {
+          "gib_health": -40.0,
+          "health": 100.0,
+          "mass": 200.0
+        },
+        "function": "SP_monster_infantry",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_jorg": {
+        "defaults": {
+          "gib_health": -2000.0,
+          "health": 3000.0,
+          "mass": 1000.0
+        },
+        "function": "SP_monster_jorg",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_kigrax": {
+        "defaults": {
+          "gib_health": -100.0,
+          "health": 200.0,
+          "mass": 150.0,
+          "monsterinfo.scale": 1.0,
+          "viewheight": 90.0,
+          "yaw_speed": 20.0
+        },
+        "function": "SP_monster_kigrax",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_medic": {
+        "defaults": {
+          "gib_health": -130.0,
+          "health": 300.0,
+          "mass": 400.0
+        },
+        "function": "SP_monster_medic",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_mutant": {
+        "defaults": {
+          "gib_health": -120.0,
+          "health": 300.0,
+          "mass": 300.0
+        },
+        "function": "SP_monster_mutant",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_parasite": {
+        "defaults": {
+          "gib_health": -50.0,
+          "health": 175.0,
+          "mass": 250.0
+        },
+        "function": "SP_monster_parasite",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_sentinel": {
+        "defaults": {
+          "gib_health": -200.0,
+          "health": 1000.0,
+          "mass": 550.0,
+          "monsterinfo.speed": 28.0
+        },
+        "function": "SP_monster_sentinel",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_soldier": {
+        "defaults": {
+          "gib_health": -30.0,
+          "health": 30.0,
+          "s.skinnum": 2.0
+        },
+        "function": "SP_monster_soldier",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_soldier_deatom": {
+        "defaults": {
+          "count": 1.0,
+          "gib_health": -40.0,
+          "health": 55.0,
+          "s.skinnum": 4.0
+        },
+        "function": "SP_monster_soldier_deatom",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_soldier_light": {
+        "defaults": {
+          "gib_health": -30.0,
+          "health": 20.0,
+          "s.skinnum": 0.0
+        },
+        "function": "SP_monster_soldier_light",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_soldier_ss": {
+        "defaults": {
+          "gib_health": -30.0,
+          "health": 40.0,
+          "s.skinnum": 4.0
+        },
+        "function": "SP_monster_soldier_ss",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_spider": {
+        "defaults": {
+          "gib_health": -120.0,
+          "health": 400.0,
+          "mass": 300.0
+        },
+        "function": "SP_monster_spider",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            256
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_supertank": {
+        "defaults": {
+          "gib_health": -500.0,
+          "health": 1500.0,
+          "mass": 800.0
+        },
+        "function": "SP_monster_supertank",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_tank": {
+        "defaults": {
+          "gib_health": -200.0,
+          "health": 750.0,
+          "mass": 500.0,
+          "s.skinnum": 2.0
+        },
+        "function": "SP_monster_tank",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "monster_tank_commander": {
+        "defaults": {
+          "gib_health": -200.0,
+          "health": 750.0,
+          "mass": 500.0,
+          "s.skinnum": 2.0
+        },
+        "function": "SP_monster_tank",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "path_corner": {
+        "defaults": {},
+        "function": "SP_path_corner",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "point_combat": {
+        "defaults": {},
+        "function": "SP_point_combat",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_actor": {
+        "defaults": {
+          "speed": 200.0
+        },
+        "function": "SP_target_actor",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_blaster": {
+        "defaults": {
+          "dmg": 15.0,
+          "speed": 1000.0
+        },
+        "function": "SP_target_blaster",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_changelevel": {
+        "defaults": {},
+        "function": "SP_target_changelevel",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_character": {
+        "defaults": {
+          "s.frame": 12.0
+        },
+        "function": "SP_target_character",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_crosslevel_target": {
+        "defaults": {
+          "delay": 1.0
+        },
+        "function": "SP_target_crosslevel_target",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_crosslevel_trigger": {
+        "defaults": {},
+        "function": "SP_target_crosslevel_trigger",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_earthquake": {
+        "defaults": {
+          "count": 5.0,
+          "speed": 200.0
+        },
+        "function": "SP_target_earthquake",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_explosion": {
+        "defaults": {},
+        "function": "SP_target_explosion",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_goal": {
+        "defaults": {},
+        "function": "SP_target_goal",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_help": {
+        "defaults": {},
+        "function": "SP_target_help",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_laser": {
+        "defaults": {},
+        "function": "SP_target_laser",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_lightramp": {
+        "defaults": {},
+        "function": "SP_target_lightramp",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_railgun": {
+        "defaults": {
+          "dmg": 150.0
+        },
+        "function": "SP_target_railgun",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_rocket": {
+        "defaults": {
+          "count": 120.0,
+          "delay": 0.0,
+          "dmg": 100.0,
+          "dmg_radius": 120.0,
+          "speed": 650.0
+        },
+        "function": "SP_target_rocket",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_secret": {
+        "defaults": {},
+        "function": "SP_target_secret",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_spawner": {
+        "defaults": {},
+        "function": "SP_target_spawner",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_speaker": {
+        "defaults": {},
+        "function": "SP_target_speaker",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_splash": {
+        "defaults": {
+          "count": 32.0
+        },
+        "function": "SP_target_splash",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_string": {
+        "defaults": {},
+        "function": "SP_target_string",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "target_temp_entity": {
+        "defaults": {},
+        "function": "SP_target_temp_entity",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_always": {
+        "defaults": {},
+        "function": "SP_trigger_always",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_counter": {
+        "defaults": {
+          "count": 2.0,
+          "wait": -1.0
+        },
+        "function": "SP_trigger_counter",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_elevator": {
+        "defaults": {},
+        "function": "SP_trigger_elevator",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_gravity": {
+        "defaults": {},
+        "function": "SP_trigger_gravity",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_hurt": {
+        "defaults": {
+          "dmg": 5.0
+        },
+        "function": "SP_trigger_hurt",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_key": {
+        "defaults": {},
+        "function": "SP_trigger_key",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_misc_camera": {
+        "defaults": {
+          "delay": 1.0
+        },
+        "function": "SP_trigger_misc_camera",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_monsterjump": {
+        "defaults": {
+          "speed": 200.0
+        },
+        "function": "SP_trigger_monsterjump",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_multiple": {
+        "defaults": {},
+        "function": "SP_trigger_multiple",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_once": {
+        "defaults": {},
+        "function": "SP_trigger_once",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1
+          ],
+          "clears": [],
+          "sets": [
+            4
+          ]
+        }
+      },
+      "trigger_push": {
+        "defaults": {
+          "speed": 1000.0
+        },
+        "function": "SP_trigger_push",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_relay": {
+        "defaults": {},
+        "function": "SP_trigger_relay",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "trigger_teleport": {
+        "defaults": {
+          "nextthink": 0.0
+        },
+        "function": "SP_trigger_teleport",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            1,
+            2,
+            4,
+            16
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "turret_base": {
+        "defaults": {},
+        "function": "SP_turret_base",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "turret_breach": {
+        "defaults": {
+          "dmg": 10.0,
+          "speed": 50.0
+        },
+        "function": "SP_turret_breach",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "turret_driver": {
+        "defaults": {
+          "gib_health": 0.0,
+          "health": 100.0,
+          "mass": 200.0,
+          "viewheight": 24.0
+        },
+        "function": "SP_turret_driver",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "viewthing": {
+        "defaults": {},
+        "function": "SP_viewthing",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_bfg": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_blaster": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_chaingun": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_deatomizer": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_dod": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_grenadelauncher": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_hellfury": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_hyperblaster": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_lasercannon": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_machinegun": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_plasma_pistol": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_plasma_rifle": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_railgun": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_remote_detonator": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_rocketlauncher": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_rtdu": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_shotgun": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "weapon_supershotgun": {
+        "defaults": {},
+        "function": "SpawnItemFromItemlist",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      },
+      "worldspawn": {
+        "defaults": {},
+        "function": "SP_worldspawn",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [],
+          "clears": [],
+          "sets": []
+        }
+      }
+    }
+  },
+  "comparison": {
+    "default_mismatches": {
+      "key_power_cube": {
+        "offset_0x58": [
+          [
+            {
+              "offset": 88,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "light": {
+        "offset_0x58": [
+          [
+            {
+              "offset": 88,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "monster_jorg": {
+        "offset_0x12c": [
+          [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x2c4": [
+          [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "monster_supertank": {
+        "offset_0x12c": [
+          [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x2c4": [
+          [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "monster_tank": {
+        "offset_0x12c": [
+          [
+            {
+              "offset": 300,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "offset": 320,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x2c4": [
+          [
+            {
+              "offset": 708,
+              "value": 128
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "offset": 912,
+              "value": 0
+            }
+          ],
+          null
+        ]
+      }
+    },
+    "missing_in_hlil": [
+      "ammo_bullets",
+      "ammo_cells",
+      "ammo_detpack",
+      "ammo_dod",
+      "ammo_grenades",
+      "ammo_mines",
+      "ammo_pistolplasma",
+      "ammo_rifleplasma",
+      "ammo_rockets",
+      "ammo_shells",
+      "ammo_slugs",
+      "func_areaportal",
+      "func_button",
+      "func_clock",
+      "func_conveyor",
+      "func_door_secret",
+      "func_explosive",
+      "func_group",
+      "func_killbox",
+      "func_object",
+      "func_plat",
+      "func_rotate_train",
+      "func_rotating",
+      "func_timer",
+      "func_train",
+      "func_wall",
+      "func_water",
+      "info_notnull",
+      "info_null",
+      "info_player_coop",
+      "info_player_deathmatch",
+      "info_player_intermission",
+      "info_player_start",
+      "info_teleport_dest",
+      "item_adrenaline",
+      "item_ancient_head",
+      "item_armor_body",
+      "item_armor_combat",
+      "item_armor_jacket",
+      "item_armor_shard",
+      "item_bandolier",
+      "item_breather",
+      "item_enviro",
+      "item_health",
+      "item_health_large",
+      "item_health_mega",
+      "item_health_small",
+      "item_invulnerability",
+      "item_pack",
+      "item_power_screen",
+      "item_power_shield",
+      "item_quad",
+      "item_silencer",
+      "key_airstrike_target",
+      "key_blue_key",
+      "key_commander_head",
+      "key_data_cd",
+      "key_data_spinner",
+      "key_pass",
+      "key_pyramid",
+      "key_red_key",
+      "light_mine1",
+      "light_mine2",
+      "misc_banner",
+      "misc_bigviper",
+      "misc_blackhole",
+      "misc_camera",
+      "misc_camera_target",
+      "misc_deadsoldier",
+      "misc_easterchick",
+      "misc_easterchick2",
+      "misc_eastertank",
+      "misc_explobox",
+      "misc_gib_arm",
+      "misc_gib_head",
+      "misc_gib_leg",
+      "misc_insane",
+      "misc_satellite_dish",
+      "misc_screenfader",
+      "misc_strogg_ship",
+      "misc_teleporter",
+      "misc_teleporter_dest",
+      "misc_viper",
+      "misc_viper_bomb",
+      "monster_badass",
+      "monster_berserk",
+      "monster_boss2",
+      "monster_boss3_stand",
+      "monster_brain",
+      "monster_chick",
+      "monster_commander_body",
+      "monster_cyborg",
+      "monster_flipper",
+      "monster_floater",
+      "monster_flyer",
+      "monster_gladiator",
+      "monster_gunner",
+      "monster_hover",
+      "monster_infantry",
+      "monster_kigrax",
+      "monster_medic",
+      "monster_mutant",
+      "monster_parasite",
+      "monster_sentinel",
+      "monster_soldier",
+      "monster_soldier_deatom",
+      "monster_soldier_light",
+      "monster_soldier_ss",
+      "monster_spider",
+      "monster_tank_commander",
+      "path_corner",
+      "point_combat",
+      "target_actor",
+      "target_blaster",
+      "target_changelevel",
+      "target_character",
+      "target_crosslevel_target",
+      "target_crosslevel_trigger",
+      "target_earthquake",
+      "target_explosion",
+      "target_goal",
+      "target_help",
+      "target_laser",
+      "target_lightramp",
+      "target_railgun",
+      "target_rocket",
+      "target_secret",
+      "target_spawner",
+      "target_speaker",
+      "target_splash",
+      "target_string",
+      "target_temp_entity",
+      "trigger_always",
+      "trigger_counter",
+      "trigger_elevator",
+      "trigger_gravity",
+      "trigger_hurt",
+      "trigger_key",
+      "trigger_misc_camera",
+      "trigger_monsterjump",
+      "trigger_multiple",
+      "trigger_once",
+      "trigger_push",
+      "trigger_relay",
+      "trigger_teleport",
+      "turret_base",
+      "turret_breach",
+      "turret_driver",
+      "viewthing",
+      "weapon_bfg",
+      "weapon_blaster",
+      "weapon_chaingun",
+      "weapon_deatomizer",
+      "weapon_dod",
+      "weapon_grenadelauncher",
+      "weapon_hellfury",
+      "weapon_hyperblaster",
+      "weapon_lasercannon",
+      "weapon_machinegun",
+      "weapon_plasma_pistol",
+      "weapon_plasma_rifle",
+      "weapon_railgun",
+      "weapon_remote_detonator",
+      "weapon_rocketlauncher",
+      "weapon_rtdu",
+      "weapon_shotgun",
+      "weapon_supershotgun",
+      "worldspawn"
+    ],
+    "missing_in_repo": [
+      "%s/listip.cfg",
+      "detpack",
+      "grenade",
+      "mine",
+      "monster_makron"
+    ],
+    "spawnflag_mismatches": {
+      "func_door": {
+        "checks": [
+          [],
+          [
+            1,
+            16,
+            64
+          ]
+        ]
+      },
+      "func_door_rotating": {
+        "checks": [
+          [],
+          [
+            1,
+            2,
+            16,
+            64,
+            128
+          ]
+        ]
+      },
+      "light": {
+        "checks": [
+          [],
+          [
+            1
+          ]
+        ]
+      }
+    }
+  }
+}

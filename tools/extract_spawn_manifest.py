@@ -505,7 +505,35 @@ class RepoParser:
         array_pattern = re.compile(r"\{\s*\"([^\"]+)\",\s*(SP_[^}]+)\}")
         for classname, func in array_pattern.findall(text):
             spawn_map[classname] = func.strip()
+        for classname in sorted(self._parse_itemlist_classnames()):
+            spawn_map.setdefault(classname, "SpawnItemFromItemlist")
         return spawn_map
+
+    def _parse_itemlist_classnames(self) -> Set[str]:
+        items_file = self.game_dir / "g_items.c"
+        text = items_file.read_text(encoding="utf-8", errors="ignore")
+        anchor = re.search(r"gitem_t\s+itemlist\s*\[\]\s*=", text)
+        if not anchor:
+            return set()
+        brace_start = text.find("{", anchor.end())
+        if brace_start == -1:
+            return set()
+        depth = 0
+        brace_end = None
+        for idx in range(brace_start, len(text)):
+            ch = text[idx]
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    brace_end = idx
+                    break
+        if brace_end is None:
+            return set()
+        block = text[brace_start:brace_end]
+        classnames = set(re.findall(r"\{\s*\"([^\"]+)\"\s*,", block))
+        return classnames
 
     def _parse_functions(self) -> Dict[str, List[str]]:
         functions: Dict[str, List[str]] = {}
