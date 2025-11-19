@@ -41,7 +41,7 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
         )
         self.assertEqual(
             hlil_manifest["weapon_rtdu"].get("function"),
-            "SpawnItemFromItemlist",
+            "sub_10014220",
             "weapon_rtdu HLIL manifest entry does not match expected function",
         )
         repo_manifest = current.get("combined", {}).get("repo", {})
@@ -86,6 +86,27 @@ class SpawnManifestControllersTest(unittest.TestCase):
             self.assertTrue(
                 func_name.startswith("sub_"),
                 f"{classname} should dispatch to a sub_* function, got {func_name!r}",
+            )
+
+
+class SpawnManifestDocsCoverageTest(unittest.TestCase):
+    def test_docs_manifest_includes_controller_entries(self) -> None:
+        repo_root = Path(__file__).resolve().parents[1]
+        manifest_path = repo_root / "docs" / "manifests" / "spawn_manifest.json"
+        data = json.loads(manifest_path.read_text(encoding="utf-8"))
+        hlil_manifest = data.get("hlil", {})
+        required = {
+            "target_actor": "target_actor entry missing from docs manifest",
+            "target_changelevel": "target_changelevel entry missing from docs manifest",
+            "target_crosslevel_target": "target_crosslevel_target entry missing from docs manifest",
+            "trigger_once": "trigger_once entry missing from docs manifest",
+        }
+        for classname, message in required.items():
+            self.assertIn(classname, hlil_manifest, message)
+            func_name = hlil_manifest[classname].get("function")
+            self.assertTrue(
+                isinstance(func_name, str) and func_name,
+                f"{classname} should declare a function name",
             )
 
 

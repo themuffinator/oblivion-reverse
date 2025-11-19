@@ -12,6 +12,9 @@ Generated artefacts:
   resources or textual labels) and links back to the source HLIL snippet.
 * `arrays.json` / `arrays.md` – numeric tables, jump tables and other global
   arrays, including an inferred primitive type for quick inspection.
+* `controller_classnames.json` – automatically captured `target_*`/`trigger_*`
+  classnames that were observed in the HLIL controller call graph along with
+  their dispatch function and the split snippet that surfaced them.
 * `summary.txt` – statistics that show how many items were interpreted and
   which HLIL snippets still need manual attention.
 
