@@ -938,6 +938,7 @@ void fire_hellfury (edict_t *self, vec3_t start, vec3_t dir, int damage, int spe
 void fire_dod (edict_t *self, vec3_t start, vec3_t dir, int damage, int speed, float damage_radius, int splash_damage);
 void fire_donut (edict_t *self, vec3_t origin, float damage_radius, int splash_damage, edict_t *ignore);
 void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int kick);
+void detpack_detonate (edict_t *self);
 edict_t *fire_detpack (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius);
 void remote_detonator_trigger (edict_t *owner);
 edict_t *fire_proximity_mine (edict_t *self, vec3_t start, vec3_t aimdir, int damage, int speed, float damage_radius, int splash_damage);

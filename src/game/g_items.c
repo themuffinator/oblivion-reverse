@@ -2613,6 +2613,69 @@ void SP_item_health_mega (edict_t *self)
 	self->style = HEALTH_IGNORE_MAX|HEALTH_TIMED;
 }
 
+/*
+=============
+detpack_map_use
+
+Queue a planted detpack for detonation when it is triggered via a target.
+=============
+*/
+static void detpack_map_use (edict_t *self, edict_t *other, edict_t *activator)
+{
+	if (activator)
+		self->owner = activator;
+
+	self->use = NULL;
+	self->think = detpack_detonate;
+	self->nextthink = level.time + 0.2f;
+}
+
+/*
+=============
+detpack_map_die
+
+Explode the placed detpack if it is destroyed by external damage.
+=============
+*/
+static void detpack_map_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
+{
+	if (attacker)
+		self->owner = attacker;
+
+	detpack_detonate (self);
+}
+
+/*QUAKED detpack (.3 .3 1) (-8 -8 0) (8 8 16)
+Placed explosive charge that can be triggered by targets or destroyed by weapon fire.
+*/
+void SP_detpack (edict_t *self)
+{
+	self->movetype = MOVETYPE_NONE;
+	self->solid = SOLID_BBOX;
+	self->clipmask = MASK_SHOT;
+	VectorSet (self->mins, -8, -8, 0);
+	VectorSet (self->maxs, 8, 8, 16);
+	self->s.modelindex = gi.modelindex ("models/objects/detpack/tris.md2");
+	self->s.effects |= EF_GRENADE;
+	self->classname = "detpack";
+
+	if (!self->dmg)
+		self->dmg = 240;
+	if (!self->radius_dmg)
+		self->radius_dmg = self->dmg;
+	if (!self->dmg_radius)
+		self->dmg_radius = 200;
+
+	if (!self->health)
+		self->health = 70;
+	self->takedamage = DAMAGE_YES;
+	self->die = detpack_map_die;
+	self->use = detpack_map_use;
+
+	gi.linkentity (self);
+}
+
+
 
 void InitItems (void)
 {

@@ -1380,8 +1380,6 @@ void fire_laser_cannon (edict_t *self, vec3_t start, vec3_t dir, int damage, int
     gi.multicast (start, MULTICAST_PVS);
 }
 
-static void detpack_detonate (edict_t *self);
-
 /*
 =============
 detpack_die
@@ -1391,6 +1389,9 @@ Explode the detpack when it is destroyed by external damage.
 */
 static void detpack_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
+	if (attacker)
+		self->owner = attacker;
+
 	detpack_detonate (self);
 }
 
@@ -1408,25 +1409,51 @@ static void detpack_arm (edict_t *self)
 	self->touch = NULL;
 }
 
-/*
-=============
-detpack_detonate
-
-Create the explosion effect and apply the configured splash damage.
-=============
-*/
-static void detpack_detonate (edict_t *self)
+void detpack_detonate (edict_t *self)
 {
+	vec3_t	origin;
+	edict_t	*attacker;
+
+	if (self->owner && self->owner->client)
+		PlayerNoise (self->owner, self->s.origin, PNOISE_IMPACT);
+
+	VectorMA (self->s.origin, -0.02f, self->velocity, origin);
+	attacker = self->owner ? self->owner : self;
+
 	gi.WriteByte (svc_temp_entity);
-	gi.WriteByte (TE_EXPLOSION2);
-	gi.WritePosition (self->s.origin);
+	if (self->waterlevel)
+	{
+		if (self->groundentity)
+		{
+			gi.WriteByte (TE_GRENADE_EXPLOSION_WATER);
+		}
+		else
+		{
+			gi.WriteByte (TE_ROCKET_EXPLOSION_WATER);
+		}
+	}
+	else
+	{
+		if (self->groundentity)
+		{
+			gi.WriteByte (TE_GRENADE_EXPLOSION);
+		}
+		else
+		{
+			gi.WriteByte (TE_ROCKET_EXPLOSION);
+		}
+	}
+	gi.WritePosition (origin);
 	gi.multicast (self->s.origin, MULTICAST_PHS);
 
-	T_RadiusDamage (self, self->owner ? self->owner : self, self->radius_dmg, NULL, self->dmg_radius, MOD_DETPACK);
+	T_RadiusDamage (self, attacker,
+		self->radius_dmg ? self->radius_dmg : self->dmg,
+		NULL,
+		self->dmg_radius ? self->dmg_radius : self->radius_dmg,
+		MOD_DETPACK);
 
 	G_FreeEdict (self);
 }
-
 /*
 =============
 detpack_touch
