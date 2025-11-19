@@ -30,11 +30,20 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 SPLIT_ROOT = REPO_ROOT / "references" / "HLIL" / "oblivion" / "split"
 ORIGINAL_HLIL = REPO_ROOT / "references" / "HLIL" / "oblivion" / "gamex86.dll_hlil.txt"
 OUTPUT_ROOT = REPO_ROOT / "references" / "HLIL" / "oblivion" / "interpreted"
+CONTROLLER_OUTPUT = OUTPUT_ROOT / "controller_classnames.json"
 
 
 ADDRESS_LINE_RE = re.compile(r"^(?P<addr>[0-9a-f]{8})\s+(?P<body>.+?)\s*$", re.IGNORECASE)
 ARRAY_ENTRY_RE = re.compile(r"\[0x([0-9a-f]+)\]\s*=\s*(.+)", re.IGNORECASE)
 DATA_NAME_RE = re.compile(r"\bdata_[0-9a-f]+\b", re.IGNORECASE)
+FUNC_DECL_RE = re.compile(
+    r"^(?:\d+:)?\s*[0-9a-f]{8}\s+[^=]*\b(sub_[0-9a-f]+)\(",
+    re.IGNORECASE,
+)
+CONTROLLER_LITERAL_RE = re.compile(
+    r'"((?:target|trigger)_[a-z0-9_]+)"',
+    re.IGNORECASE,
+)
 
 
 @dataclass
@@ -55,6 +64,61 @@ class ArrayEntry:
     values: List[str]
     inferred_type: str
     source_file: str
+
+
+@dataclass
+class ControllerEntry:
+    classname: str
+    function: str
+    source_file: str
+
+
+class ControllerCollector:
+    def __init__(self) -> None:
+        self._entries: Dict[str, ControllerEntry] = {}
+
+    def process(self, source_file: Path, text: str) -> None:
+        lines = text.splitlines()
+        current_func: Optional[str] = None
+        current_lines: List[str] = []
+
+        def flush() -> None:
+            if not current_func or not current_lines:
+                return
+            block_text = "\n".join(current_lines)
+            classnames = {
+                match.group(1).lower()
+                for match in CONTROLLER_LITERAL_RE.finditer(block_text)
+            }
+            for classname in sorted(classnames):
+                if classname in self._entries:
+                    continue
+                self._entries[classname] = ControllerEntry(
+                    classname=classname,
+                    function=current_func,
+                    source_file=str(source_file.relative_to(REPO_ROOT)),
+                )
+
+        for line in lines:
+            match = FUNC_DECL_RE.match(line)
+            if match:
+                flush()
+                current_func = match.group(1)
+                current_lines = [line]
+                continue
+            if current_func:
+                current_lines.append(line)
+        flush()
+
+    def as_list(self) -> List[Dict[str, str]]:
+        return [
+            {
+                "classname": entry.classname,
+                "function": entry.function,
+                "source_file": entry.source_file,
+            }
+            for _, entry in sorted(self._entries.items())
+        ]
 
 
 def load_address_declarations(path: Path) -> Dict[str, str]:
@@ -214,9 +278,11 @@ def main() -> None:
     string_entries: List[StringEntry] = []
     array_entries: List[ArrayEntry] = []
     skipped: List[str] = []
+    controller_collector = ControllerCollector()
 
     for split_file in read_split_files(SPLIT_ROOT):
         text = split_file.read_text(encoding="utf-8", errors="ignore")
+        controller_collector.process(split_file, text)
         address = extract_address(text)
         if not address:
             skipped.append(str(split_file.relative_to(REPO_ROOT)))
@@ -247,6 +313,11 @@ def main() -> None:
     (OUTPUT_ROOT / "arrays.json").write_text(
         json.dumps([asdict(entry) for entry in array_entries], indent=2, ensure_ascii=False)
         + "\n",
+        encoding="utf-8",
+    )
+    controller_entries = controller_collector.as_list()
+    CONTROLLER_OUTPUT.write_text(
+        json.dumps(controller_entries, indent=2, ensure_ascii=False) + "\n",
         encoding="utf-8",
     )
 
@@ -286,6 +357,7 @@ def main() -> None:
     summary_lines = [
         f"Total strings interpreted: {len(string_entries)}",
         f"Total arrays interpreted: {len(array_entries)}",
+        f"Controller classnames captured: {len(controller_entries)}",
         f"Skipped artefacts: {len(skipped)}",
     ]
     if skipped:

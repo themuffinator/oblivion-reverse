@@ -342,10 +342,29 @@ class HLILParser:
         if self._call_graph_entries is not None:
             return self._call_graph_entries
 
+        interpreted_path = self.path.parent / "interpreted" / "controller_classnames.json"
+        entries: Dict[str, str] = {}
+        if interpreted_path.is_file():
+            try:
+                data = json.loads(interpreted_path.read_text(encoding="utf-8"))
+            except json.JSONDecodeError:
+                data = []
+            if isinstance(data, list):
+                for item in data:
+                    if not isinstance(item, dict):
+                        continue
+                    classname = item.get("classname")
+                    function = item.get("function")
+                    if not classname or not function:
+                        continue
+                    normalized = self._normalize_classname(str(classname))
+                    entries.setdefault(normalized, str(function))
+        if entries:
+            self._call_graph_entries = entries
+            return entries
+
         targets = ("sub_1001ad80", "sub_100166e7")
         literal_pattern = re.compile(r'"([a-z0-9_]+)"')
-        entries: Dict[str, str] = {}
-
         for func_name, block in self.function_blocks.items():
             call_index = self._locate_call_graph_start(block, targets)
             if call_index is None:
