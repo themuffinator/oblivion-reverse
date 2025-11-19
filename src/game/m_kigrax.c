@@ -30,15 +30,17 @@ enum
 	KIGRAX_FRAME_ATTACK_START = 150,
 	KIGRAX_FRAME_ATTACK_FIRE = 163,
 	KIGRAX_FRAME_ATTACK_END = 168,
-	KIGRAX_FRAME_PAIN_START = 9,
-	KIGRAX_FRAME_PAIN_END = 10,
-	KIGRAX_FRAME_DEATH_START = 11,
-	KIGRAX_FRAME_DEATH_END = 14
+	KIGRAX_FRAME_PAIN_START = 139,
+	KIGRAX_FRAME_PAIN_END = 149,
+	KIGRAX_FRAME_DEATH_START = 150,
+	KIGRAX_FRAME_DEATH_END = 168
 };
 
 #define KIGRAX_DEFAULT_MIN_Z	-32.0f
 #define KIGRAX_DEFAULT_MAX_Z	12.0f
 #define KIGRAX_ATTACK_MAX_Z	0.0f
+#define KIGRAX_PAIN_STAGGER_TIME	0.5f
+#define KIGRAX_PAIN_COOLDOWN	1.5f
 
 static const float kigrax_salvo_yaw_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
 static const float kigrax_salvo_pitch_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -47,6 +49,7 @@ static int sound_sight;
 static int sound_search;
 static int sound_idle;
 static int sound_pain;
+static int sound_pain_strong;
 static int sound_death;
 static int sound_attack;
 
@@ -57,6 +60,9 @@ static void kigrax_attack_execute (edict_t *self);
 static void kigrax_fire (edict_t *self);
 static void kigrax_attack_cleanup (edict_t *self);
 static void kigrax_set_attack_hull (edict_t *self, qboolean crouched);
+static void kigrax_begin_pain_stagger (edict_t *self);
+static void kigrax_finish_pain_stagger (edict_t *self);
+static void kigrax_spawn_debris (edict_t *self);
 static void kigrax_deadthink (edict_t *self);
 
 static mframe_t kigrax_frames_hover[KIGRAX_FRAME_IDLE_END - KIGRAX_FRAME_IDLE_START + 1];
@@ -67,6 +73,8 @@ static mframe_t kigrax_frames_strafe_long[KIGRAX_FRAME_STRAFE_LONG_END - KIGRAX_
 static mframe_t kigrax_frames_strafe_dash[KIGRAX_FRAME_STRAFE_DASH_END - KIGRAX_FRAME_STRAFE_DASH_START + 1];
 static mframe_t kigrax_frames_attack_prep[KIGRAX_FRAME_ATTACK_PREP_END - KIGRAX_FRAME_ATTACK_PREP_START + 1];
 static mframe_t kigrax_frames_attack[KIGRAX_FRAME_ATTACK_END - KIGRAX_FRAME_ATTACK_START + 1];
+static mframe_t kigrax_frames_pain[KIGRAX_FRAME_PAIN_END - KIGRAX_FRAME_PAIN_START + 1];
+static mframe_t kigrax_frames_death[KIGRAX_FRAME_DEATH_END - KIGRAX_FRAME_DEATH_START + 1];
 
 static mmove_t kigrax_move_hover = {
 	KIGRAX_FRAME_IDLE_START,
@@ -111,10 +119,22 @@ static mmove_t kigrax_move_attack_prep = {
 	kigrax_attack_execute
 };
 static mmove_t kigrax_move_attack = {
-KIGRAX_FRAME_ATTACK_START,
-KIGRAX_FRAME_ATTACK_END,
-kigrax_frames_attack,
-kigrax_attack_cleanup
+	KIGRAX_FRAME_ATTACK_START,
+	KIGRAX_FRAME_ATTACK_END,
+	kigrax_frames_attack,
+	kigrax_attack_cleanup
+};
+static mmove_t kigrax_move_pain = {
+	KIGRAX_FRAME_PAIN_START,
+	KIGRAX_FRAME_PAIN_END,
+	kigrax_frames_pain,
+	kigrax_run_select
+};
+static mmove_t kigrax_move_death = {
+	KIGRAX_FRAME_DEATH_START,
+	KIGRAX_FRAME_DEATH_END,
+	kigrax_frames_death,
+	kigrax_dead
 };
 
 static qboolean kigrax_moves_initialized;
@@ -159,6 +179,18 @@ static void kigrax_init_moves (void)
 		kigrax_frames_attack[i] = (mframe_t){ai_move, 0.0f, NULL};
 
 	kigrax_frames_attack[KIGRAX_FRAME_ATTACK_FIRE - KIGRAX_FRAME_ATTACK_START].thinkfunc = kigrax_fire;
+
+	for (i = 0; i < ARRAY_LEN(kigrax_frames_pain); i++)
+		kigrax_frames_pain[i] = (mframe_t){ai_move, 0.0f, NULL};
+
+	kigrax_frames_pain[0].thinkfunc = kigrax_begin_pain_stagger;
+	kigrax_frames_pain[ARRAY_LEN(kigrax_frames_pain) - 1].thinkfunc = kigrax_finish_pain_stagger;
+
+	for (i = 0; i < ARRAY_LEN(kigrax_frames_death); i++)
+		kigrax_frames_death[i] = (mframe_t){ai_move, 0.0f, NULL};
+
+	kigrax_frames_death[3].thinkfunc = kigrax_spawn_debris;
+	kigrax_frames_death[10].thinkfunc = kigrax_spawn_debris;
 
 	kigrax_moves_initialized = true;
 }
@@ -362,6 +394,50 @@ static void kigrax_attack_cleanup (edict_t *self)
 	kigrax_run_select (self);
 }
 
+/*
+=============
+kigrax_begin_pain_stagger
+
+Record the HLIL stagger window so the final pain frame can keep looping
+until the timer expires.
+=============
+*/
+static void kigrax_begin_pain_stagger (edict_t *self)
+{
+	self->timestamp = level.time + KIGRAX_PAIN_STAGGER_TIME;
+}
+
+/*
+=============
+kigrax_finish_pain_stagger
+
+Hold the final pain frame until the stagger timer elapses before allowing the
+mmove end callback to resume strafing.
+=============
+*/
+static void kigrax_finish_pain_stagger (edict_t *self)
+{
+	if (level.time < self->timestamp)
+	{
+		self->monsterinfo.nextframe = self->s.frame;
+		return;
+	}
+
+	self->timestamp = 0.0f;
+}
+
+/*
+=============
+kigrax_spawn_debris
+
+Emit a metallic gib so the death animation mirrors the HLIL debris spray.
+=============
+*/
+static void kigrax_spawn_debris (edict_t *self)
+{
+	ThrowGib (self, "models/objects/gibs/sm_meat/tris.md2", 10, GIB_ORGANIC);
+}
+
 
 /*
 =============
@@ -384,23 +460,17 @@ kigrax_pain
 */
 static void kigrax_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
-	static mframe_t pain_frames[] = {
-		{ai_move, 0.0f, NULL},
-		{ai_move, 0.0f, NULL}
-	};
-	static mmove_t pain_move = {
-		KIGRAX_FRAME_PAIN_START,
-		KIGRAX_FRAME_PAIN_END,
-		pain_frames,
-		kigrax_run_select
-	};
-
 	if (level.time < self->pain_debounce_time)
 		return;
 
-	self->pain_debounce_time = level.time + 1.0f;
-	gi.sound (self, CHAN_VOICE, sound_pain, 1.0f, ATTN_NORM, 0.0f);
-	self->monsterinfo.currentmove = &pain_move;
+	self->pain_debounce_time = level.time + KIGRAX_PAIN_COOLDOWN;
+
+	if (random () < 0.5f)
+		gi.sound (self, CHAN_VOICE, sound_pain, 1.0f, ATTN_NORM, 0.0f);
+	else
+		gi.sound (self, CHAN_VOICE, sound_pain_strong, 1.0f, ATTN_NORM, 0.0f);
+
+	self->monsterinfo.currentmove = &kigrax_move_pain;
 }
 
 /*
@@ -449,21 +519,6 @@ kigrax_die
 */
 static void kigrax_die (edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
-	static mframe_t death_frames[] = {
-		{ai_move, 0.0f, NULL},
-		{ai_move, 0.0f, NULL},
-		{ai_move, 0.0f, kigrax_dead},
-		{ai_move, 0.0f, kigrax_dead}
-	};
-	static mmove_t death_move = {
-		KIGRAX_FRAME_DEATH_START,
-		KIGRAX_FRAME_DEATH_END,
-		death_frames,
-		kigrax_dead
-	};
-
-	gi.sound (self, CHAN_VOICE, sound_death, 1.0f, ATTN_NORM, 0.0f);
-
 	if (self->health <= self->gib_health)
 	{
 		gi.sound (self, CHAN_VOICE, gi.soundindex ("misc/udeath.wav"), 1.0f, ATTN_NORM, 0.0f);
@@ -473,7 +528,8 @@ static void kigrax_die (edict_t *self, edict_t *inflictor, edict_t *attacker, in
 		return;
 	}
 
-	self->monsterinfo.currentmove = &death_move;
+	gi.sound (self, CHAN_VOICE, sound_death, 1.0f, ATTN_NORM, 0.0f);
+	self->monsterinfo.currentmove = &kigrax_move_death;
 }
 
 /*
@@ -507,6 +563,7 @@ void SP_monster_kigrax (edict_t *self)
 	sound_search = gi.soundindex ("hover/hovsrch1.wav");
 	sound_idle = gi.soundindex ("kigrax/hovidle1.wav");
 	sound_pain = gi.soundindex ("hover/hovpain1.wav");
+	sound_pain_strong = gi.soundindex ("hover/hovpain2.wav");
 	sound_death = gi.soundindex ("hover/hovdeth1.wav");
 	sound_attack = gi.soundindex ("kigrax/hovatck1.wav");
 

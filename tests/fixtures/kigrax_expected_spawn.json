@@ -42,6 +42,14 @@
     "kigrax_move_attack": {
       "start": 150,
       "end": 168
+    },
+    "kigrax_move_pain": {
+      "start": 139,
+      "end": 149
+    },
+    "kigrax_move_death": {
+      "start": 150,
+      "end": 168
     }
   }
 }

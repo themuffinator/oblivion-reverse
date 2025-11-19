@@ -185,5 +185,51 @@ class KigraxSpawnManifestRegression(unittest.TestCase):
             )
 
 
+class KigraxPainRegression(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.source_text = KIGRAX_SOURCE.read_text(encoding="utf-8")
+
+    def test_pain_cooldown_matches_constant(self) -> None:
+        pain_block = extract_function_block(self.source_text, "kigrax_pain")
+        self.assertRegex(
+            pain_block,
+            r"pain_debounce_time\s*=\s*level\.time\s*\+\s*KIGRAX_PAIN_COOLDOWN",
+            "Pain cooldown no longer matches the HLIL stagger timer",
+        )
+
+    def test_pain_plays_both_voice_slots(self) -> None:
+        pain_block = extract_function_block(self.source_text, "kigrax_pain")
+        self.assertIn(
+            "sound_pain",
+            pain_block,
+            "Primary pain sound missing from kigrax_pain",
+        )
+        self.assertIn(
+            "sound_pain_strong",
+            pain_block,
+            "Secondary pain voice missing from kigrax_pain",
+        )
+
+
+class KigraxDeathMmoveRegression(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.source_text = KIGRAX_SOURCE.read_text(encoding="utf-8")
+
+    def test_death_mmove_emits_debris(self) -> None:
+        init_block = extract_function_block(self.source_text, "kigrax_init_moves")
+        self.assertIn(
+            "kigrax_frames_death[3].thinkfunc = kigrax_spawn_debris;",
+            init_block,
+            "Death mmove lost the first debris callback",
+        )
+        self.assertIn(
+            "kigrax_frames_death[10].thinkfunc = kigrax_spawn_debris;",
+            init_block,
+            "Death mmove lost the second debris callback",
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
