@@ -64,5 +64,30 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
         self.assertEqual(current, expected)
 
 
+class SpawnManifestControllersTest(unittest.TestCase):
+    def test_target_controllers_are_extracted(self) -> None:
+        repo_root = Path(__file__).resolve().parents[1]
+        script = repo_root / "tools" / "extract_spawn_manifest.py"
+        result = subprocess.run(
+            [sys.executable, str(script)],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        manifest = json.loads(result.stdout)
+        hlil_manifest = manifest.get("combined", {}).get("hlil", {})
+        required = {
+            "target_actor": "target_actor controllers should be present",
+            "target_crosslevel_target": "Missing target_crosslevel_target controller entry",
+        }
+        for classname, message in required.items():
+            self.assertIn(classname, hlil_manifest, message)
+            func_name = hlil_manifest[classname].get("function", "")
+            self.assertTrue(
+                func_name.startswith("sub_"),
+                f"{classname} should dispatch to a sub_* function, got {func_name!r}",
+            )
+
+
 if __name__ == "__main__":
     unittest.main()

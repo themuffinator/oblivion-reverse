@@ -108,6 +108,7 @@ class HLILParser:
         self._image_base: Optional[int] = None
         self._spawn_table_cache: Dict[Tuple[int, int], Dict[str, str]] = {}
         self._itemlist_cache: Optional[Dict[str, Tuple[int, ...]]] = None
+        self._call_graph_entries: Optional[Dict[str, str]] = None
 
     # -- general helpers --
     def _resolve_binary_path(self) -> Optional[Path]:
@@ -265,8 +266,9 @@ class HLILParser:
                 if classname in item_entries and classname not in spawn_entries:
                     spawn_entries[classname] = "SpawnItemFromItemlist"
 
-            if "func_rotate_train" not in spawn_entries:
-                spawn_entries["func_rotate_train"] = "sub_10015750"
+            for classname, func in self._call_graph_spawn_entries().items():
+                if classname not in spawn_entries:
+                    spawn_entries[classname] = func
 
             self._spawn_map = spawn_entries
         return self._spawn_map
@@ -335,6 +337,64 @@ class HLILParser:
 
     def _normalize_classname(self, classname: str) -> str:
         return classname.strip().strip("\0")
+
+    def _call_graph_spawn_entries(self) -> Dict[str, str]:
+        if self._call_graph_entries is not None:
+            return self._call_graph_entries
+
+        targets = ("sub_1001ad80", "sub_100166e7")
+        literal_pattern = re.compile(r'"([a-z0-9_]+)"')
+        entries: Dict[str, str] = {}
+
+        for func_name, block in self.function_blocks.items():
+            call_index = self._locate_call_graph_start(block, targets)
+            if call_index is None:
+                continue
+            for line in block[call_index:]:
+                for literal in literal_pattern.findall(line):
+                    normalized = self._normalize_classname(literal)
+                    if not self._looks_like_classname(normalized):
+                        continue
+                    entries.setdefault(normalized, func_name)
+
+        self._call_graph_entries = entries
+        return entries
+
+    def _locate_call_graph_start(
+        self, block: List[str], targets: Sequence[str]
+    ) -> Optional[int]:
+        if not block:
+            return None
+        for idx, line in enumerate(block):
+            for target in targets:
+                if target in line:
+                    return idx
+        return None
+
+    def _looks_like_classname(self, literal: str) -> bool:
+        if not literal or "_" not in literal:
+            return False
+        prefixes = (
+            "target_",
+            "trigger_",
+            "func_",
+            "misc_",
+            "monster_",
+            "path_",
+            "info_",
+            "weapon_",
+            "item_",
+            "ammo_",
+            "key_",
+            "turret_",
+            "point_",
+            "bodyque_",
+            "light_",
+            "script_",
+            "model_",
+        )
+        literal_lower = literal.lower()
+        return any(literal_lower.startswith(prefix) for prefix in prefixes)
 
     def _load_binary_image(self) -> bool:
         if self._binary_path is None:
