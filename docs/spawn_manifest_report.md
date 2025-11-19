@@ -51,7 +51,6 @@ bits compared to the binary:
 
 | Entity             | HLIL behaviour | Repo behaviour |
 |--------------------|----------------|----------------|
-| `func_clock`       | No recorded spawnflag checks | Checks bits 1, 2, and 4 (start stopped, toggle, reverse) |
 | `func_door`        | Clears bit 0 (forces re-open) on load | Only checks bits 1, 16, and 64, never clears bit 0 |
 | `func_water`       | No spawnflag interaction detected | Checks flags and masks in modern code |
 | `misc_actor`       | No spawnflag logic extracted | Repo toggles cinematic and start-on flags |
@@ -90,8 +89,8 @@ alter startup timing and AI reliability.
    `SP_` functions for the item/weapon/key classes above so map parsing matches
    retail expectations, and document any deliberately omitted gameplay changes
    in `docs/`. 【F:docs/manifests/spawn_manifest_comparison.json†L2-L55】
-2. **Audit spawnflag handling on movers and actors.** Compare `func_clock`,
-   `func_door*`, `func_water`, `misc_actor`, `target_actor`, and related
+2. **Audit spawnflag handling on movers and actors.** Compare `func_door*`,
+   `func_water`, `misc_actor`, `target_actor`, and related
    entities against their HLIL bit usage, porting the missing masks or noting
    intentional behaviour changes. 【F:docs/manifests/spawn_manifest_comparison.json†L65-L101】
 3. **Port critical default assignments.** Migrate the binary’s default values

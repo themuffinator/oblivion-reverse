@@ -734,44 +734,81 @@ class HLILParser:
         return results
 
     def _extract_spawnflags(self, block: List[str]) -> Dict[str, List[int]]:
-        checks: List[int] = []
-        sets: List[int] = []
-        clears: List[int] = []
-        assignments: List[int] = []
+        checks: Set[int] = set()
+        sets: Set[int] = set()
+        clears: Set[int] = set()
+        assignments: Set[int] = set()
+        alias_names: Set[str] = set()
+        alias_pattern = re.compile(
+            r"(?P<lhs>[A-Za-z_][\w\.:]*)\s*=\s*(?:\(\*[^)]*0x11c[^)]*\)(?:\.\w+)?|\*[^;]*0x11c[^;]*)",
+            re.IGNORECASE,
+        )
+        direct_check_pattern = re.compile(
+            r"\([^)]*0x11c[^)]*\)\s*&\s*(0x[0-9a-f]+|\d+)",
+            re.IGNORECASE,
+        )
+        direct_assign_pattern = re.compile(
+            r"\*\([^)]*0x11c[^)]*\)\s*=\s*(0x[0-9a-f]+|\d+)",
+            re.IGNORECASE,
+        )
+        direct_clear_pattern = re.compile(
+            r"\*\([^)]*0x11c[^)]*\)\s*=\s*\*\([^)]*0x11c[^)]*\)\s*&\s*(0x[0-9a-f]+|\d+)",
+            re.IGNORECASE,
+        )
+        direct_or_pattern = re.compile(r"\|=\s*(0x[0-9a-f]+|\d+)", re.IGNORECASE)
+        direct_and_pattern = re.compile(r"&=\s*(0x[0-9a-f]+|\d+)", re.IGNORECASE)
+        alias_op_pattern = re.compile(
+            r"(?P<alias>[A-Za-z_][\w\.:]*)\s*(?P<op>\|=|&=)\s*(0x[0-9a-f]+|\d+)",
+            re.IGNORECASE,
+        )
+        alias_check_pattern = re.compile(
+            r"([A-Za-z_][\w\.:]*)\s*&\s*(0x[0-9a-f]+|\d+)",
+            re.IGNORECASE,
+        )
+
         for line in block:
             if "0x11c" not in line:
                 continue
-            # direct assignment
-            m_assign = re.search(r"\*\([^)]*0x11c\)\s*=\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE)
+            for alias_match in alias_pattern.finditer(line):
+                alias_names.add(alias_match.group("lhs"))
+            m_assign = direct_assign_pattern.search(line)
             if m_assign:
-                assignments.append(int(m_assign.group(1), 0))
-            # |= sets
-            for m in re.finditer(r"\|=\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE):
-                value = int(m.group(1), 0)
-                if value not in sets:
-                    sets.append(value)
-            # &= clears via mask
-            for m in re.finditer(r"&=\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE):
+                assignments.add(int(m_assign.group(1), 0))
+            for m in direct_or_pattern.finditer(line):
+                sets.add(int(m.group(1), 0))
+            for m in direct_and_pattern.finditer(line):
                 mask = int(m.group(1), 0) & 0xFFFFFFFF
                 cleared = (~mask) & 0xFFFFFFFF
-                if 0 < cleared < 0xFFFFFFFF and cleared not in clears:
-                    clears.append(cleared)
-            # explicit masked assignment clears
-            m_clear = re.search(
-                r"\*\([^)]*0x11c\)\s*=\s*\*\([^)]*0x11c\)\s*&\s*(0x[0-9a-f]+|\d+)",
-                line,
-                re.IGNORECASE,
-            )
+                if 0 < cleared < 0xFFFFFFFF:
+                    clears.add(cleared)
+            m_clear = direct_clear_pattern.search(line)
             if m_clear:
                 mask = int(m_clear.group(1), 0) & 0xFFFFFFFF
                 cleared = (~mask) & 0xFFFFFFFF
-                if 0 < cleared < 0xFFFFFFFF and cleared not in clears:
-                    clears.append(cleared)
-            # remaining & occurrences are treated as checks
-            for m in re.finditer(r"\([^)]*0x11c[^)]*\)\s*&\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE):
-                value = int(m.group(1), 0)
-                if value not in checks:
-                    checks.append(value)
+                if 0 < cleared < 0xFFFFFFFF:
+                    clears.add(cleared)
+            for m in direct_check_pattern.finditer(line):
+                checks.add(int(m.group(1), 0))
+
+        for line in block:
+            for m in alias_op_pattern.finditer(line):
+                alias = m.group("alias")
+                value = int(m.group(3), 0)
+                if alias not in alias_names:
+                    continue
+                if m.group("op") == "|=":
+                    sets.add(value)
+                else:
+                    mask = value & 0xFFFFFFFF
+                    cleared = (~mask) & 0xFFFFFFFF
+                    if 0 < cleared < 0xFFFFFFFF:
+                        clears.add(cleared)
+            for m in alias_check_pattern.finditer(line):
+                alias = m.group(1)
+                if alias not in alias_names:
+                    continue
+                checks.add(int(m.group(2), 0))
+
         return {
             "checks": sorted(checks),
             "sets": sorted(sets),

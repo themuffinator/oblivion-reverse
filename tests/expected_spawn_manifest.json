@@ -216,7 +216,11 @@
         "function": "sub_10011160",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1,
+            2,
+            4
+          ],
           "clears": [],
           "sets": []
         }
@@ -353,7 +357,9 @@
         "spawnflags": {
           "assignments": [],
           "checks": [
-            1
+            1,
+            2,
+            4
           ],
           "clears": [],
           "sets": []
@@ -399,7 +405,10 @@
         "function": "sub_1000f250",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2,
+            4
+          ],
           "clears": [],
           "sets": []
         }
@@ -738,6 +747,7 @@
         "spawnflags": {
           "assignments": [],
           "checks": [
+            4,
             8
           ],
           "clears": [],
@@ -770,7 +780,10 @@
         "function": "sub_1000ec40",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2,
+            4
+          ],
           "clears": [],
           "sets": []
         }
@@ -969,7 +982,9 @@
         "function": "sub_1000eae0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1
+          ],
           "clears": [],
           "sets": []
         }
@@ -1126,7 +1141,11 @@
         "function": "sub_1001f460",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            8,
+            32,
+            64
+          ],
           "clears": [],
           "sets": []
         }
@@ -1410,7 +1429,13 @@
         "function": "sub_100102d0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2,
+            4,
+            8,
+            16,
+            32
+          ],
           "clears": [],
           "sets": []
         }
@@ -2297,7 +2322,62 @@
         }
       },
       "monster_kigrax": {
-        "defaults": {},
+        "defaults": {
+          "offset_0x1e4": [
+            {
+              "offset": 484,
+              "value": 1101004800
+            }
+          ],
+          "offset_0x23c": [
+            {
+              "offset": 572,
+              "value": 1119092736
+            }
+          ],
+          "offset_0xbc": [
+            {
+              "offset": 188,
+              "value": 3248488448
+            }
+          ],
+          "offset_0xc0": [
+            {
+              "offset": 192,
+              "value": 3248488448
+            }
+          ],
+          "offset_0xc4": [
+            {
+              "offset": 196,
+              "value": 3254779904
+            }
+          ],
+          "offset_0xc8": [
+            {
+              "offset": 200,
+              "value": 1101004800
+            }
+          ],
+          "offset_0xcc": [
+            {
+              "offset": 204,
+              "value": 1101004800
+            }
+          ],
+          "offset_0xd0": [
+            {
+              "offset": 208,
+              "value": 1094713344
+            }
+          ],
+          "offset_0xf8": [
+            {
+              "offset": 248,
+              "value": 5
+            }
+          ]
+        },
         "function": "sub_10029330",
         "spawnflags": {
           "assignments": [],
@@ -2653,7 +2733,9 @@
         "function": "sub_1002dcf0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            8
+          ],
           "clears": [],
           "sets": []
         }
@@ -3246,7 +3328,10 @@
         "function": "sub_100199c0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1,
+            2
+          ],
           "clears": [],
           "sets": []
         }
@@ -3364,7 +3449,9 @@
             1
           ],
           "clears": [],
-          "sets": []
+          "sets": [
+            4
+          ]
         }
       },
       "trigger_push": {
@@ -3379,7 +3466,9 @@
         "function": "sub_10019850",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2
+          ],
           "clears": [],
           "sets": []
         }
@@ -3430,6 +3519,7 @@
           "assignments": [],
           "checks": [
             2,
+            4,
             16
           ],
           "clears": [],
@@ -5907,6 +5997,21 @@
           "sets": []
         }
       },
+      "func_rotate_train": {
+        "defaults": {
+          "dmg": 100.0,
+          "speed": 100.0
+        },
+        "function": "SP_func_rotate_train",
+        "spawnflags": {
+          "assignments": [],
+          "checks": [
+            4
+          ],
+          "clears": [],
+          "sets": []
+        }
+      },
       "func_rotating": {
         "defaults": {},
         "function": "SP_func_rotating",
@@ -5934,21 +6039,6 @@
           "assignments": [],
           "checks": [
             1
-          ],
-          "clears": [],
-          "sets": []
-        }
-      },
-      "func_rotate_train": {
-        "defaults": {
-          "dmg": 100.0,
-          "speed": 100.0
-        },
-        "function": "SP_func_rotate_train",
-        "spawnflags": {
-          "assignments": [],
-          "checks": [
-            4
           ],
           "clears": [],
           "sets": []
@@ -6167,7 +6257,9 @@
         }
       },
       "item_health": {
-        "defaults": {},
+        "defaults": {
+          "count": 10.0
+        },
         "function": "SP_item_health",
         "spawnflags": {
           "assignments": [],
@@ -8287,6 +8379,102 @@
           null
         ]
       },
+      "func_rotate_train": {
+        "offset_0x10": [
+          [
+            {
+              "offset": 16,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "offset": 260,
+              "value": 2
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "offset": 20,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "offset": 328,
+              "value": 1120403456
+            }
+          ],
+          null
+        ],
+        "offset_0x18": [
+          [
+            {
+              "offset": 24,
+              "value": 0
+            }
+          ],
+          null
+        ],
+        "offset_0x1f4": [
+          [
+            {
+              "offset": 500,
+              "value": 268522848
+            }
+          ],
+          null
+        ],
+        "offset_0x1f8": [
+          [
+            {
+              "offset": 504,
+              "value": 268521616
+            }
+          ],
+          null
+        ],
+        "offset_0x200": [
+          [
+            {
+              "offset": 512,
+              "value": 268523248
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "offset": 580,
+              "value": 0
+            },
+            {
+              "offset": 580,
+              "value": 100
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "offset": 248,
+              "value": 3
+            }
+          ],
+          null
+        ]
+      },
       "func_timer": {
         "offset_0x290": [
           [
@@ -9863,6 +10051,89 @@
             {
               "offset": 912,
               "value": 0
+            }
+          ],
+          null
+        ]
+      },
+      "monster_kigrax": {
+        "offset_0x1e4": [
+          [
+            {
+              "offset": 484,
+              "value": 1101004800
+            }
+          ],
+          null
+        ],
+        "offset_0x23c": [
+          [
+            {
+              "offset": 572,
+              "value": 1119092736
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "offset": 188,
+              "value": 3248488448
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "offset": 192,
+              "value": 3248488448
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "offset": 196,
+              "value": 3254779904
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "offset": 200,
+              "value": 1101004800
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "offset": 204,
+              "value": 1101004800
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "offset": 208,
+              "value": 1094713344
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "offset": 248,
+              "value": 5
             }
           ],
           null
@@ -13844,16 +14115,6 @@
       "monster_makron"
     ],
     "spawnflag_mismatches": {
-      "func_clock": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            4
-          ]
-        ]
-      },
       "func_door": {
         "checks": [
           [],
@@ -13876,21 +14137,12 @@
           ]
         ]
       },
-      "func_door_secret": {
-        "checks": [
-          [
-            1
-          ],
-          [
-            1,
-            2,
-            4
-          ]
-        ]
-      },
       "func_explosive": {
         "checks": [
-          [],
+          [
+            2,
+            4
+          ],
           [
             1,
             2,
@@ -13924,6 +14176,7 @@
       "func_train": {
         "checks": [
           [
+            4,
             8
           ],
           [
@@ -13933,7 +14186,10 @@
       },
       "func_wall": {
         "checks": [
-          [],
+          [
+            2,
+            4
+          ],
           [
             1,
             2,
@@ -13965,12 +14221,14 @@
           ]
         ]
       },
-      "light": {
+      "misc_actor": {
         "checks": [
-          [],
           [
-            1
-          ]
+            8,
+            32,
+            64
+          ],
+          []
         ]
       },
       "misc_camera": {
@@ -13978,18 +14236,6 @@
           [],
           [
             1
-          ]
-        ]
-      },
-      "misc_deadsoldier": {
-        "checks": [
-          [],
-          [
-            2,
-            4,
-            8,
-            16,
-            32
           ]
         ]
       },
@@ -14020,7 +14266,9 @@
       },
       "monster_spider": {
         "checks": [
-          [],
+          [
+            8
+          ],
           [
             256
           ]
@@ -14042,27 +14290,19 @@
           ]
         ]
       },
-      "trigger_hurt": {
+      "trigger_push": {
         "checks": [
-          [],
           [
-            1,
             2
-          ]
-        ]
-      },
-      "trigger_once": {
-        "sets": [
-          [],
-          [
-            4
-          ]
+          ],
+          []
         ]
       },
       "trigger_teleport": {
         "checks": [
           [
             2,
+            4,
             16
           ],
           [
