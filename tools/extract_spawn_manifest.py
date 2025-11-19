@@ -958,21 +958,125 @@ class RepoParser:
 
     def _extract_defaults(self, lines: List[str]) -> Dict[str, float]:
         defaults: Dict[str, float] = {}
-        assign_pattern = re.compile(r"self->([a-zA-Z0-9_\.]+)\s*=\s*([-+]?[0-9]*\.?[0-9]+f?|0x[0-9a-fA-F]+)")
+        assign_pattern = re.compile(
+            r"\b([a-zA-Z_][a-zA-Z0-9_]*)->([a-zA-Z0-9_\.]+)\s*=\s*([^;]+)"
+        )
         for line in lines:
-            match = assign_pattern.search(line)
-            if not match:
-                continue
-            field, raw_val = match.groups()
-            value: float
-            if raw_val.lower().startswith("0x"):
-                value = float(int(raw_val, 16))
-            elif raw_val.endswith("f"):
-                value = float(raw_val[:-1])
-            else:
-                value = float(raw_val)
-            defaults[field] = value
+            for match in assign_pattern.finditer(line):
+                field = match.group(2)
+                expr = match.group(3).strip()
+                value = self._evaluate_default_expr(expr)
+                if value is None:
+                    continue
+                defaults[field] = value
         return defaults
+
+    def _evaluate_default_expr(self, expr: str) -> Optional[float]:
+        expr = expr.strip()
+        if not expr:
+            return None
+        normalized = self._normalize_c_numeric_expr(expr)
+        value = self._eval_ast_numeric_expr(normalized)
+        if value is not None:
+            return value
+        return self._parse_literal_or_macro(normalized)
+
+    def _normalize_c_numeric_expr(self, expr: str) -> str:
+        expr = expr.rstrip(";").strip()
+        cast_pattern = re.compile(r"^\(\s*(?:const\s+)?(?:struct\s+)?[a-zA-Z_][\w\s\*]*\)")
+        while True:
+            match = cast_pattern.match(expr)
+            if not match:
+                break
+            expr = expr[match.end() :].lstrip()
+        expr = re.sub(r"(\d+\.\d+)[fF]\b", r"\\1", expr)
+        expr = re.sub(r"(?<![0-9a-fA-FxX])(\d+)[fF]\b", r"\\1", expr)
+        return expr
+
+    def _eval_ast_numeric_expr(self, expr: str) -> Optional[float]:
+        try:
+            tree = ast.parse(expr, mode="eval")
+        except SyntaxError:
+            return None
+
+        def _eval(node: ast.AST) -> Optional[float]:
+            if isinstance(node, ast.Expression):
+                return _eval(node.body)
+            if isinstance(node, ast.Constant):
+                if isinstance(node.value, (int, float)):
+                    return float(node.value)
+                if isinstance(node.value, str) and node.value.lower().startswith("0x"):
+                    try:
+                        return float(int(node.value, 16))
+                    except ValueError:
+                        return None
+                return None
+            if hasattr(ast, "Num") and isinstance(node, ast.Num):  # type: ignore[attr-defined]
+                return float(node.n)
+            if isinstance(node, ast.UnaryOp):
+                operand = _eval(node.operand)
+                if operand is None:
+                    return None
+                if isinstance(node.op, ast.USub):
+                    return -operand
+                if isinstance(node.op, ast.UAdd):
+                    return operand
+                if isinstance(node.op, ast.Invert):
+                    return float((~int(operand)) & 0xFFFFFFFF)
+                return None
+            if isinstance(node, ast.BinOp):
+                left = _eval(node.left)
+                right = _eval(node.right)
+                if left is None or right is None:
+                    return None
+                if isinstance(node.op, ast.Add):
+                    return left + right
+                if isinstance(node.op, ast.Sub):
+                    return left - right
+                if isinstance(node.op, ast.Mult):
+                    return left * right
+                if isinstance(node.op, ast.Div):
+                    return left / right
+                if isinstance(node.op, ast.FloorDiv):
+                    return float(int(left / right))
+                if isinstance(node.op, ast.Mod):
+                    return left % right
+                if isinstance(node.op, ast.BitOr):
+                    return float(int(left) | int(right))
+                if isinstance(node.op, ast.BitAnd):
+                    return float(int(left) & int(right))
+                if isinstance(node.op, ast.BitXor):
+                    return float(int(left) ^ int(right))
+                if isinstance(node.op, ast.LShift):
+                    return float(int(left) << int(right))
+                if isinstance(node.op, ast.RShift):
+                    return float(int(left) >> int(right))
+                return None
+            if isinstance(node, ast.Name):
+                resolved = self.macro_resolver.evaluate(node.id)
+                if resolved is None:
+                    return None
+                return float(resolved)
+            return None
+
+        return _eval(tree)
+
+    def _parse_literal_or_macro(self, expr: str) -> Optional[float]:
+        token = expr.strip()
+        if not token:
+            return None
+        if token.lower().startswith("0x"):
+            try:
+                return float(int(token, 16))
+            except ValueError:
+                return None
+        try:
+            return float(token)
+        except ValueError:
+            resolved = self.macro_resolver.evaluate(token)
+            if resolved is not None:
+                return float(resolved)
+        return None
 
     def _extract_spawnflags(self, lines: List[str]) -> Dict[str, List[int]]:
         checks: List[int] = []

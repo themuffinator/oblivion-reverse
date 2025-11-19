@@ -5808,7 +5808,9 @@
         }
       },
       "func_areaportal": {
-        "defaults": {},
+        "defaults": {
+          "count": 0.0
+        },
         "function": "SP_func_areaportal",
         "spawnflags": {
           "assignments": [],
@@ -5818,7 +5820,11 @@
         }
       },
       "func_button": {
-        "defaults": {},
+        "defaults": {
+          "moveinfo.state": 1.0,
+          "speed": 40.0,
+          "wait": 3.0
+        },
         "function": "SP_func_button",
         "spawnflags": {
           "assignments": [],
@@ -5829,7 +5835,7 @@
       },
       "func_clock": {
         "defaults": {
-          "count": 60.0
+          "count": 3600.0
         },
         "function": "SP_func_clock",
         "spawnflags": {
@@ -5858,7 +5864,12 @@
         }
       },
       "func_door": {
-        "defaults": {},
+        "defaults": {
+          "dmg": 2.0,
+          "moveinfo.state": 1.0,
+          "speed": 100.0,
+          "wait": 3.0
+        },
         "function": "SP_func_door",
         "spawnflags": {
           "assignments": [],
@@ -5872,7 +5883,12 @@
         }
       },
       "func_door_rotating": {
-        "defaults": {},
+        "defaults": {
+          "dmg": 2.0,
+          "moveinfo.state": 1.0,
+          "speed": 100.0,
+          "wait": 3.0
+        },
         "function": "SP_func_door_rotating",
         "spawnflags": {
           "assignments": [],
@@ -5888,7 +5904,12 @@
         }
       },
       "func_door_secret": {
-        "defaults": {},
+        "defaults": {
+          "dmg": 2.0,
+          "health": 0.0,
+          "moveinfo.speed": 50.0,
+          "wait": 5.0
+        },
         "function": "SP_func_door_secret",
         "spawnflags": {
           "assignments": [],
@@ -5953,7 +5974,13 @@
         }
       },
       "func_plat": {
-        "defaults": {},
+        "defaults": {
+          "accel": 5.0,
+          "decel": 5.0,
+          "dmg": 2.0,
+          "moveinfo.state": 1.0,
+          "speed": 20.0
+        },
         "function": "SP_func_plat",
         "spawnflags": {
           "assignments": [],
@@ -5978,7 +6005,10 @@
         }
       },
       "func_rotating": {
-        "defaults": {},
+        "defaults": {
+          "dmg": 2.0,
+          "speed": 100.0
+        },
         "function": "SP_func_rotating",
         "spawnflags": {
           "assignments": [],
@@ -6046,6 +6076,7 @@
       },
       "func_water": {
         "defaults": {
+          "moveinfo.state": 1.0,
           "speed": 25.0,
           "wait": -1.0
         },
@@ -6247,7 +6278,8 @@
       },
       "item_health_mega": {
         "defaults": {
-          "count": 100.0
+          "count": 100.0,
+          "style": 3.0
         },
         "function": "SP_item_health_mega",
         "spawnflags": {
@@ -6259,7 +6291,8 @@
       },
       "item_health_small": {
         "defaults": {
-          "count": 2.0
+          "count": 2.0,
+          "style": 1.0
         },
         "function": "SP_item_health_small",
         "spawnflags": {
@@ -6492,7 +6525,9 @@
         }
       },
       "misc_camera": {
-        "defaults": {},
+        "defaults": {
+          "stop_time": 0.0
+        },
         "function": "SP_misc_camera",
         "spawnflags": {
           "assignments": [],
@@ -6514,7 +6549,10 @@
         }
       },
       "misc_deadsoldier": {
-        "defaults": {},
+        "defaults": {
+          "deadflag": 2.0,
+          "s.frame": 0.0
+        },
         "function": "SP_misc_deadsoldier",
         "spawnflags": {
           "assignments": [],
@@ -6530,7 +6568,9 @@
         }
       },
       "misc_easterchick": {
-        "defaults": {},
+        "defaults": {
+          "s.frame": 208.0
+        },
         "function": "SP_misc_easterchick",
         "spawnflags": {
           "assignments": [],
@@ -6540,7 +6580,9 @@
         }
       },
       "misc_easterchick2": {
-        "defaults": {},
+        "defaults": {
+          "s.frame": 248.0
+        },
         "function": "SP_misc_easterchick2",
         "spawnflags": {
           "assignments": [],
@@ -6550,7 +6592,9 @@
         }
       },
       "misc_eastertank": {
-        "defaults": {},
+        "defaults": {
+          "s.frame": 254.0
+        },
         "function": "SP_misc_eastertank",
         "spawnflags": {
           "assignments": [],
@@ -6563,7 +6607,8 @@
         "defaults": {
           "dmg": 150.0,
           "health": 10.0,
-          "mass": 400.0
+          "mass": 400.0,
+          "monsterinfo.aiflags": 1024.0
         },
         "function": "SP_misc_explobox",
         "spawnflags": {
@@ -6574,7 +6619,9 @@
         }
       },
       "misc_gib_arm": {
-        "defaults": {},
+        "defaults": {
+          "deadflag": 2.0
+        },
         "function": "SP_misc_gib_arm",
         "spawnflags": {
           "assignments": [],
@@ -6584,7 +6631,9 @@
         }
       },
       "misc_gib_head": {
-        "defaults": {},
+        "defaults": {
+          "deadflag": 2.0
+        },
         "function": "SP_misc_gib_head",
         "spawnflags": {
           "assignments": [],
@@ -6594,7 +6643,9 @@
         }
       },
       "misc_gib_leg": {
-        "defaults": {},
+        "defaults": {
+          "deadflag": 2.0
+        },
         "function": "SP_misc_gib_leg",
         "spawnflags": {
           "assignments": [],
@@ -6632,8 +6683,7 @@
       },
       "misc_screenfader": {
         "defaults": {
-          "random": 0.0,
-          "wait": 1.0
+          "count": 0.0
         },
         "function": "SP_misc_screenfader",
         "spawnflags": {
@@ -6646,7 +6696,9 @@
         }
       },
       "misc_strogg_ship": {
-        "defaults": {},
+        "defaults": {
+          "speed": 300.0
+        },
         "function": "SP_misc_strogg_ship",
         "spawnflags": {
           "assignments": [],
@@ -6656,7 +6708,9 @@
         }
       },
       "misc_teleporter": {
-        "defaults": {},
+        "defaults": {
+          "s.skinnum": 1.0
+        },
         "function": "SP_misc_teleporter",
         "spawnflags": {
           "assignments": [],
@@ -6676,7 +6730,9 @@
         }
       },
       "misc_viper": {
-        "defaults": {},
+        "defaults": {
+          "speed": 300.0
+        },
         "function": "SP_misc_viper",
         "spawnflags": {
           "assignments": [],
@@ -6701,9 +6757,7 @@
         "defaults": {
           "gib_health": -200.0,
           "health": 1000.0,
-          "mass": 600.0,
-          "monsterinfo.max_ideal_distance": 1500.0,
-          "yaw_speed": 25.0
+          "mass": 600.0
         },
         "function": "SP_monster_badass",
         "spawnflags": {
@@ -6744,7 +6798,9 @@
         }
       },
       "monster_boss3_stand": {
-        "defaults": {},
+        "defaults": {
+          "s.frame": 0.0
+        },
         "function": "SP_monster_boss3_stand",
         "spawnflags": {
           "assignments": [],
@@ -6758,7 +6814,8 @@
           "gib_health": -150.0,
           "health": 300.0,
           "mass": 400.0,
-          "monsterinfo.power_armor_power": 100.0
+          "monsterinfo.power_armor_power": 100.0,
+          "monsterinfo.power_armor_type": 1.0
         },
         "function": "SP_monster_brain",
         "spawnflags": {
@@ -6783,7 +6840,9 @@
         }
       },
       "monster_commander_body": {
-        "defaults": {},
+        "defaults": {
+          "flags": 16.0
+        },
         "function": "SP_monster_commander_body",
         "spawnflags": {
           "assignments": [],
@@ -6799,9 +6858,7 @@
           "mass": 300.0,
           "monsterinfo.max_ideal_distance": 512.0,
           "oblivion.cyborg_anchor_stage": 0.0,
-          "oblivion.cyborg_anchor_time": 0.0,
-          "oblivion.cyborg_pain_slot": 0.0,
-          "oblivion.cyborg_pain_time": 0.0
+          "oblivion.cyborg_pain_slot": 0.0
         },
         "function": "SP_monster_cyborg",
         "spawnflags": {
@@ -6927,9 +6984,7 @@
           "gib_health": -100.0,
           "health": 200.0,
           "mass": 150.0,
-          "monsterinfo.scale": 1.0,
-          "viewheight": 90.0,
-          "yaw_speed": 20.0
+          "viewheight": 90.0
         },
         "function": "SP_monster_kigrax",
         "spawnflags": {
@@ -7071,7 +7126,8 @@
         "defaults": {
           "gib_health": -120.0,
           "health": 400.0,
-          "mass": 300.0
+          "mass": 300.0,
+          "oblivion.spider_combo_next": 0.0
         },
         "function": "SP_monster_spider",
         "spawnflags": {
@@ -7297,7 +7353,6 @@
         "defaults": {
           "count": 120.0,
           "delay": 0.0,
-          "dmg": 100.0,
           "dmg_radius": 120.0,
           "speed": 650.0
         },
@@ -7330,7 +7385,10 @@
         }
       },
       "target_speaker": {
-        "defaults": {},
+        "defaults": {
+          "attenuation": 0.0,
+          "volume": 1.0
+        },
         "function": "SP_target_speaker",
         "spawnflags": {
           "assignments": [],
@@ -7374,7 +7432,9 @@
         }
       },
       "trigger_always": {
-        "defaults": {},
+        "defaults": {
+          "delay": 0.2
+        },
         "function": "SP_trigger_always",
         "spawnflags": {
           "assignments": [],
@@ -7442,9 +7502,7 @@
         }
       },
       "trigger_misc_camera": {
-        "defaults": {
-          "delay": 1.0
-        },
+        "defaults": {},
         "function": "SP_trigger_misc_camera",
         "spawnflags": {
           "assignments": [],
@@ -7468,7 +7526,9 @@
         }
       },
       "trigger_multiple": {
-        "defaults": {},
+        "defaults": {
+          "wait": 0.2
+        },
         "function": "SP_trigger_multiple",
         "spawnflags": {
           "assignments": [],
@@ -7480,7 +7540,9 @@
         }
       },
       "trigger_once": {
-        "defaults": {},
+        "defaults": {
+          "wait": -1.0
+        },
         "function": "SP_trigger_once",
         "spawnflags": {
           "assignments": [],
@@ -7761,7 +7823,9 @@
         }
       },
       "worldspawn": {
-        "defaults": {},
+        "defaults": {
+          "s.modelindex": 1.0
+        },
         "function": "SP_worldspawn",
         "spawnflags": {
           "assignments": [],
