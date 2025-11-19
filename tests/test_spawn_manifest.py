@@ -100,6 +100,17 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
         ]
         self.assertEqual(current, parity_expected)
 
+    def test_func_door_clears_start_open_bit(self) -> None:
+        current, _ = self._extract_manifest()
+        repo_manifest = current.get("combined", {}).get("repo", {})
+        door_spawnflags = repo_manifest.get("func_door", {}).get("spawnflags", {})
+        clears = door_spawnflags.get("clears", [])
+        self.assertIn(
+            1,
+            clears,
+            "func_door should clear spawnflag bit 0 (START_OPEN) to mirror retail behaviour",
+        )
+
 
 class SpawnManifestControllersTest(unittest.TestCase):
     def test_target_controllers_are_extracted(self) -> None:

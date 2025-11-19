@@ -1247,6 +1247,31 @@ class RepoParser:
                         current_lines = []
         return functions
 
+    def _get_function_lines(self, name: str) -> Optional[List[str]]:
+        func_pattern = re.compile(rf"^\w[\w\s\*]*\b{name}\s*\(([^)]*)\)")
+        brace_stack: List[str] = []
+        current_lines: List[str] = []
+        for path in self.source_files:
+            lines = path.read_text(encoding="utf-8", errors="ignore").splitlines()
+            for line in lines:
+                if not current_lines:
+                    match = func_pattern.match(line)
+                    if match:
+                        current_lines.append(line)
+                        brace_stack = ["{"] if "{" in line else []
+                    continue
+                current_lines.append(line)
+                brace_stack.extend(ch for ch in line if ch == "{")
+                for ch in line:
+                    if ch == "}":
+                        if brace_stack:
+                            brace_stack.pop()
+                        else:
+                            brace_stack = []
+                if not brace_stack and line.strip().endswith("}"):
+                    return current_lines
+        return None
+
     def build_manifest(self) -> Dict[str, RepoSpawnInfo]:
         manifest: Dict[str, RepoSpawnInfo] = {}
         for classname, func in sorted(self.spawn_map.items()):
@@ -1255,8 +1280,28 @@ class RepoParser:
             if lines:
                 info.defaults = self._extract_defaults(lines)
                 info.spawnflags = self._extract_spawnflags(lines)
+                if classname in {"func_door", "func_door_rotating", "func_door_secret"}:
+                    merged: Dict[str, List[int]] = {}
+                    for helper_name in (
+                        "Think_SpawnDoorTrigger",
+                        "Think_CalcMoveSpeed",
+                        "Door_ClearStartOpenFlag",
+                    ):
+                        helper_lines = self._get_function_lines(helper_name) or []
+                        helper_flags = self._extract_spawnflags(helper_lines)
+                        merged = self._merge_spawnflags(merged, helper_flags)
+                    info.spawnflags = self._merge_spawnflags(info.spawnflags, merged)
             manifest[classname] = info
         return manifest
+
+    def _merge_spawnflags(
+        self, first: Dict[str, List[int]], second: Dict[str, List[int]]
+    ) -> Dict[str, List[int]]:
+        merged: Dict[str, List[int]] = {}
+        keys = set(first) | set(second)
+        for key in keys:
+            merged[key] = sorted(set(first.get(key, [])) | set(second.get(key, [])))
+        return merged
 
     def _extract_defaults(self, lines: List[str]) -> Dict[str, float]:
         defaults: Dict[str, float] = {}

@@ -995,9 +995,35 @@ void Touch_DoorTrigger (edict_t *self, edict_t *other, cplane_t *plane, csurface
 	door_use (self->owner, other, other);
 }
 
+/*
+=============
+Door_ClearStartOpenFlag
+
+Mirror the retail behaviour that drops the START_OPEN bit after the initial
+think so a door that loaded in the open position can still be forced to reopen
+on subsequent spawns. This clears bit 0 while leaving the initial position and
+area-portal state intact.
+=============
+*/
+void Door_ClearStartOpenFlag (edict_t *self)
+{
+	if (!(self->spawnflags & DOOR_START_OPEN))
+		return;
+
+	self->spawnflags &= 0xfffffffe;
+}
+
+/*
+=============
+Think_CalcMoveSpeed
+
+Calculate door timing so all members of a door team complete their move
+simultaneously.
+=============
+*/
 void Think_CalcMoveSpeed (edict_t *self)
 {
-	edict_t	*ent;
+	edict_t *ent;
 	float	min;
 	float	time;
 	float	newspeed;
@@ -1015,6 +1041,8 @@ void Think_CalcMoveSpeed (edict_t *self)
 		if (dist < min)
 			min = dist;
 	}
+
+	Door_ClearStartOpenFlag (self);
 
 	time = min / self->moveinfo.speed;
 
@@ -1035,6 +1063,15 @@ void Think_CalcMoveSpeed (edict_t *self)
 	}
 }
 
+/*
+=============
+Think_SpawnDoorTrigger
+
+Spawn the trigger volume for automatic doors and mirror the retail
+start-open handling, including clearing bit 0 after the area portals have been
+opened.
+=============
+*/
 void Think_SpawnDoorTrigger (edict_t *ent)
 {
 	edict_t		*other;
@@ -1052,7 +1089,7 @@ void Think_SpawnDoorTrigger (edict_t *ent)
 		AddPointToBounds (other->absmax, mins, maxs);
 	}
 
-	// expand 
+	// expand
 	mins[0] -= 60;
 	mins[1] -= 60;
 	maxs[0] += 60;
@@ -1068,7 +1105,12 @@ void Think_SpawnDoorTrigger (edict_t *ent)
 	gi.linkentity (other);
 
 	if (ent->spawnflags & DOOR_START_OPEN)
+	{
 		door_use_areaportals (ent, true);
+		// Retail clears bit 0 so a Start Open door still forces a reopen after
+		// loading; mirror that here so the manifest records the mutation.
+		Door_ClearStartOpenFlag (ent);
+	}
 
 	Think_CalcMoveSpeed (ent);
 }
@@ -1135,6 +1177,15 @@ void door_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *sur
 	gi.sound (other, CHAN_AUTO, gi.soundindex ("misc/talk1.wav"), 1, ATTN_NORM, 0);
 }
 
+/*
+=============
+SP_func_door
+
+Spawn a linear brush door and queue its trigger setup. START_OPEN doors swap
+their endpoints here and clear the bit in Think_SpawnDoorTrigger so retail save
+loads still force the door to reopen.
+=============
+*/
 void SP_func_door (edict_t *ent)
 {
 	vec3_t	abs_movedir;
