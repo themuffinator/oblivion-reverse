@@ -201,6 +201,37 @@ static void Actor_PathResetState(edict_t *self)
 
 /*
 =============
+Actor_ApplySpawnAIFeatures
+
+Mirror the `sub_1001f460` HLIL writes so the actor spawn only touches
+`AI_ACTOR_PATH_IDLE`, `AI_ACTOR_FRIENDLY`, and `AI_STAND_GROUND` the way the
+retail DLL does. Unlike Quake II, the Oblivion binary never toggles
+`AI_GOOD_GUY` here, so the translation leaves that bit untouched on purpose to
+avoid inventing behaviour that the dump does not prove exists.
+=============
+*/
+static void Actor_ApplySpawnAIFeatures(edict_t *self)
+{
+	const int spawnflags = self ? self->spawnflags : 0;
+
+	if (!self)
+		return;
+
+	if (self->target)
+		self->monsterinfo.aiflags &= ~AI_ACTOR_PATH_IDLE;
+	else
+		self->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
+
+	if (spawnflags & ACTOR_SPAWNFLAG_WIMPY)
+		self->monsterinfo.aiflags &= ~AI_ACTOR_FRIENDLY;
+	else
+		self->monsterinfo.aiflags |= AI_ACTOR_FRIENDLY;
+
+	self->monsterinfo.aiflags |= AI_STAND_GROUND;
+}
+
+/*
+=============
 Actor_PathSelectIdleAnimation
 
 Randomise the idle animation and face the current controller while the
@@ -1191,6 +1222,10 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 
 	if (!self->targetname)
 	{
+		/* `sub_1001f460` seeds the "Yo Mama" targetname and flips the hidden
+		 * START_ON bit whenever a mapper omits one, so mirror that behaviour
+		 * instead of treating the fallback as an idle actor.
+		 */
 		self->targetname = (char *)kDefaultTargetName;
 		self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
 	}
@@ -1222,21 +1257,7 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 	self->speed = 200;
 	self->mass = 200;
 	Actor_PathResetState(self);
-
-	if (!(self->spawnflags & ACTOR_SPAWNFLAG_WIMPY))
-	{
-		self->monsterinfo.aiflags |= AI_GOOD_GUY;
-		self->monsterinfo.aiflags |= AI_ACTOR_FRIENDLY;
-	}
-	else
-	{
-		self->monsterinfo.aiflags &= ~AI_GOOD_GUY;
-	}
-
-	if (!self->target)
-		self->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
-
-	self->monsterinfo.aiflags |= AI_STAND_GROUND;
+	Actor_ApplySpawnAIFeatures(self);
 
 	self->pain = actor_pain;
 	self->die = actor_die;
