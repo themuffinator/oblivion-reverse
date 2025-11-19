@@ -53,8 +53,11 @@ bits compared to the binary:
 |--------------------|----------------|----------------|
 | `func_door`        | Clears bit 0 (forces re-open) on load | Only checks bits 1, 16, and 64, never clears bit 0 |
 | `func_water`       | No spawnflag interaction detected | Checks flags and masks in modern code |
-| `misc_actor`       | No spawnflag logic extracted | Repo toggles cinematic and start-on flags |
+| `misc_actor`       | HLIL spawn (`sub_1001f460`) injects `"Yo Mama"` and sets bit 0x20 so `sub_1001f380`/`sub_1001ef70` always receive an addressable controller target | Repo performs the same hidden START_ON write inside `Actor_SpawnOblivion`, but the wrapper-only `SP_misc_actor` keeps the extractor from seeing it |
 
+The gap for `misc_actor` is therefore a reporting artifact: the HLIL manifest
+records the hidden START_ON bit, while the repo manifest inspects only `SP_`
+wrappers and does not follow helper functions such as `Actor_SpawnOblivion`.
 (See `docs/manifests/spawn_manifest_comparison.json` under
 `spawnflag_mismatches` for the exact bit sets.)
 
