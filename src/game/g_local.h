@@ -34,6 +34,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define OBLIVION_ENABLE_ROTATE_TRAIN 1
 #endif
 
+#ifndef OBLIVION_ENABLE_MONSTER_SENTINEL
+#define OBLIVION_ENABLE_MONSTER_SENTINEL 1
+#endif
+
 struct edict_s;
 
 typedef struct edict_oblivion_ext_s

@@ -1080,7 +1080,7 @@ class HLILParser:
 # ----------------------------- Repo parsing -----------------------------
 
 class MacroResolver:
-    def __init__(self, source_paths: Iterable[Path]):
+    def __init__(self, source_paths: Iterable[Path], overrides: Optional[Dict[str, str]] = None):
         self.definitions: Dict[str, str] = {}
         pattern = re.compile(r"^\s*#\s*define\s+(\w+)\s+(.+)$")
         for path in source_paths:
@@ -1090,6 +1090,8 @@ class MacroResolver:
                     name, expr = match.groups()
                     if name not in self.definitions:
                         self.definitions[name] = expr.strip()
+        for name, expr in (overrides or {}).items():
+            self.definitions[name] = expr
         self._cache: Dict[str, int] = {}
 
     def evaluate(self, name: str) -> Optional[int]:
@@ -1161,11 +1163,11 @@ class MacroResolver:
 
 
 class RepoParser:
-    def __init__(self, root: Path):
+    def __init__(self, root: Path, macro_overrides: Optional[Dict[str, str]] = None):
         self.root = root
         self.game_dir = self.root / "src" / "game"
         self.source_files = list(self.game_dir.glob("**/*.c")) + list(self.game_dir.glob("**/*.h"))
-        self.macro_resolver = MacroResolver(self.source_files)
+        self.macro_resolver = MacroResolver(self.source_files, overrides=macro_overrides)
         self.spawn_map = self._parse_spawn_map()
         self.functions = self._parse_functions()
 
@@ -1181,6 +1183,9 @@ class RepoParser:
         rotate_flag = self.macro_resolver.evaluate("OBLIVION_ENABLE_ROTATE_TRAIN")
         if rotate_flag is not None and rotate_flag == 0:
             spawn_map.pop("func_rotate_train", None)
+        sentinel_flag = self.macro_resolver.evaluate("OBLIVION_ENABLE_MONSTER_SENTINEL")
+        if sentinel_flag is not None and sentinel_flag == 0:
+            spawn_map.pop("monster_sentinel", None)
         return spawn_map
 
     def _parse_itemlist_classnames(self) -> Set[str]:
@@ -1473,6 +1478,22 @@ def compare_manifests(hlil: Dict[str, HLILSpawnInfo], repo: Dict[str, RepoSpawnI
 
 # ----------------------------- command line interface -----------------------------
 
+
+def _parse_macro_overrides(definitions: Sequence[str]) -> Dict[str, str]:
+    overrides: Dict[str, str] = {}
+    for definition in definitions:
+        if "=" in definition:
+            name, value = definition.split("=", 1)
+        else:
+            name, value = definition, "1"
+        name = name.strip()
+        value = value.strip()
+        if not name:
+            continue
+        overrides[name] = value or "1"
+    return overrides
+
+
 def main(argv: Optional[Sequence[str]] = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--hlil", type=Path, default=Path("references/HLIL/oblivion/gamex86.dll_hlil.txt"))
@@ -1481,6 +1502,13 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     parser.add_argument("--comparison", type=Path, help="Write comparison JSON to this path")
     parser.add_argument("--pretty", action="store_true", help="Pretty-print JSON when writing to stdout")
     parser.add_argument(
+        "-D",
+        "--define",
+        action="append",
+        default=[],
+        help="Override a macro definition when parsing repo spawn data (NAME or NAME=VALUE)",
+    )
+    parser.add_argument(
         "--dump-b150-map",
         type=Path,
         help="Write the interpreted sub_1000b150 literal-to-classname map to this path",
@@ -1488,7 +1516,8 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
     args = parser.parse_args(argv)
 
     hlil_parser = HLILParser(args.hlil)
-    repo_parser = RepoParser(args.repo)
+    macro_overrides = _parse_macro_overrides(args.define)
+    repo_parser = RepoParser(args.repo, macro_overrides=macro_overrides)
 
     hlil_manifest = hlil_parser.build_manifest()
     repo_manifest = repo_parser.build_manifest()

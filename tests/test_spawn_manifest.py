@@ -7,16 +7,22 @@ import unittest
 
 
 class SpawnManifestSnapshotTest(unittest.TestCase):
-    def test_manifest_matches_snapshot(self) -> None:
+    def _extract_manifest(self, defines: list[str] | None = None) -> tuple[dict, Path]:
         repo_root = Path(__file__).resolve().parents[1]
         script = repo_root / "tools" / "extract_spawn_manifest.py"
+        cmd = [sys.executable, str(script)]
+        for definition in defines or []:
+            cmd.extend(["--define", definition])
         result = subprocess.run(
-            [sys.executable, str(script)],
+            cmd,
             check=True,
             capture_output=True,
             text=True,
         )
-        current = json.loads(result.stdout)
+        return json.loads(result.stdout), repo_root
+
+    def test_manifest_matches_snapshot(self) -> None:
+        current, repo_root = self._extract_manifest()
         expected_path = repo_root / "tests" / "expected_spawn_manifest.json"
         expected = json.loads(expected_path.read_text(encoding="utf-8"))
         hlil_manifest = current.get("combined", {}).get("hlil", {})
@@ -68,6 +74,31 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
             "monster_makron should be spawnable by maps but is still reported missing",
         )
         self.assertEqual(current, expected)
+
+    def test_parity_manifest_omits_oblivion_only_sentinel(self) -> None:
+        current, repo_root = self._extract_manifest(["OBLIVION_ENABLE_MONSTER_SENTINEL=0"])
+        repo_manifest = current.get("combined", {}).get("repo", {})
+        self.assertNotIn(
+            "monster_sentinel",
+            repo_manifest,
+            "monster_sentinel should not be present when the custom flag is disabled",
+        )
+        comparison = current.get("comparison", {})
+        for key in ("missing_in_hlil", "only_in_repo"):
+            self.assertNotIn(
+                "monster_sentinel",
+                comparison.get(key, []),
+                f"monster_sentinel should be dropped from {key} when disabled",
+            )
+
+        expected_path = repo_root / "tests" / "expected_spawn_manifest.json"
+        parity_expected = json.loads(expected_path.read_text(encoding="utf-8"))
+        parity_expected.get("combined", {}).get("repo", {}).pop("monster_sentinel", None)
+        parity_missing = parity_expected.get("comparison", {}).get("missing_in_hlil", [])
+        parity_expected["comparison"]["missing_in_hlil"] = [
+            classname for classname in parity_missing if classname != "monster_sentinel"
+        ]
+        self.assertEqual(current, parity_expected)
 
 
 class SpawnManifestControllersTest(unittest.TestCase):

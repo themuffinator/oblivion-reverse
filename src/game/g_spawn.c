@@ -153,7 +153,9 @@ void SP_monster_soldier_deatom (edict_t *self);
 void SP_monster_cyborg (edict_t *self);
 void SP_monster_kigrax (edict_t *self);
 void SP_monster_spider (edict_t *self);
+#if OBLIVION_ENABLE_MONSTER_SENTINEL
 void SP_monster_sentinel (edict_t *self);
+#endif
 void SP_monster_tank (edict_t *self);
 void SP_monster_medic (edict_t *self);
 void SP_monster_flipper (edict_t *self);
@@ -279,20 +281,23 @@ spawn_t	spawns[] = {
 	{"misc_easterchick2", SP_misc_easterchick2},
 	{"misc_screenfader", SP_misc_screenfader},
 
-        {"monster_berserk", SP_monster_berserk},
-        {"monster_badass", SP_monster_badass},
+	{"monster_berserk", SP_monster_berserk},
+	{"monster_badass", SP_monster_badass},
 	{"monster_gladiator", SP_monster_gladiator},
 	{"monster_gunner", SP_monster_gunner},
 	{"monster_infantry", SP_monster_infantry},
-        {"monster_soldier_light", SP_monster_soldier_light},
-        {"monster_soldier", SP_monster_soldier},
-        {"monster_soldier_ss", SP_monster_soldier_ss},
-        {"monster_soldier_deatom", SP_monster_soldier_deatom},
-        {"monster_cyborg", SP_monster_cyborg},
-        {"monster_kigrax", SP_monster_kigrax},
-        {"monster_spider", SP_monster_spider},
-        {"monster_sentinel", SP_monster_sentinel},
-    {"monster_tank", SP_monster_tank},
+	{"monster_soldier_light", SP_monster_soldier_light},
+	{"monster_soldier", SP_monster_soldier},
+	{"monster_soldier_ss", SP_monster_soldier_ss},
+	{"monster_soldier_deatom", SP_monster_soldier_deatom},
+	{"monster_cyborg", SP_monster_cyborg},
+	{"monster_kigrax", SP_monster_kigrax},
+	{"monster_spider", SP_monster_spider},
+
+#if OBLIVION_ENABLE_MONSTER_SENTINEL
+	{"monster_sentinel", SP_monster_sentinel},
+#endif
+	{"monster_tank", SP_monster_tank},
 	{"monster_tank_commander", SP_monster_tank},
 	{"monster_medic", SP_monster_medic},
 	{"monster_flipper", SP_monster_flipper},

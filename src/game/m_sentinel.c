@@ -8,6 +8,8 @@
 
 #include "g_local.h"
 
+#if OBLIVION_ENABLE_MONSTER_SENTINEL
+
 #define MODEL_SCALE         1.000000f
 
 #define SENTINEL_FRAME_STAND_START       0
@@ -277,13 +279,15 @@ void SP_monster_sentinel (edict_t *self)
         self->monsterinfo.sight = sentinel_sight;
         self->monsterinfo.search = sentinel_search;
         self->monsterinfo.idle = sentinel_idle;
-        self->monsterinfo.speed = 28;
+	self->monsterinfo.speed = 28;
 
-        self->monsterinfo.currentmove = &sentinel_move_stand;
-        self->monsterinfo.scale = MODEL_SCALE;
-        self->s.sound = sound_idle;
+	self->monsterinfo.currentmove = &sentinel_move_stand;
+	self->monsterinfo.scale = MODEL_SCALE;
+	self->s.sound = sound_idle;
 
-        gi.linkentity (self);
+	gi.linkentity (self);
 
-        walkmonster_start (self);
+	walkmonster_start (self);
 }
+
+#endif

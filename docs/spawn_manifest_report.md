@@ -40,9 +40,12 @@ loading.
 
 `monster_sentinel` is implemented in the modern codebase but does not surface in
 the retail `gamex86.dll` spawn table, which suggests it was added post-release
-or is specific to Oblivion’s fork. 【F:docs/manifests/spawn_manifest_comparison.json†L60-L63】
-Documenting that divergence in monster reference material will help level
-authors understand which assets are custom to this project.
+or is specific to Oblivion’s fork. The repo now gates its spawn registration
+behind `OBLIVION_ENABLE_MONSTER_SENTINEL`, mirroring the rotate-train option so
+parity builds can compile without the custom monster and produce clean manifest
+diffs. Run `tools/extract_spawn_manifest.py --define
+OBLIVION_ENABLE_MONSTER_SENTINEL=0` when regenerating parity-focused manifests
+to keep `missing_in_hlil` empty for the sentinel entry. 【F:docs/manifests/spawn_manifest_comparison.json†L60-L63】
 
 ## Spawnflag mismatches
 
