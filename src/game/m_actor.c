@@ -1313,6 +1313,32 @@ for JUMP only:
 
 /*
 =============
+TargetActor_ConfigureJump
+
+Apply the HLIL-confirmed jump defaults so `SP_target_actor` mirrors
+`sub_1001f930` while keeping spawnflag parsing out of the spawn function
+itself.
+=============
+*/
+static void TargetActor_ConfigureJump(edict_t *self)
+{
+	const int spawnflags = self->spawnflags;
+
+	if (!(spawnflags & TARGET_ACTOR_FLAG_JUMP))
+		return;
+
+	if (!self->speed)
+		self->speed = 200;
+	if (!st.height)
+		st.height = 200;
+	if (self->s.angles[YAW] == 0)
+		self->s.angles[YAW] = 360;
+	G_SetMovedir(self->s.angles, self->movedir);
+	self->movedir[2] = st.height;
+}
+
+/*
+=============
 target_actor_touch
 
 Handle scripted path targets and immediate actions when an actor
@@ -1325,6 +1351,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 	edict_t *pathtarget_ent;
 	edict_t *next_target;
 	float wait;
+	const int spawnflags = self->spawnflags;
 
 	if (other->movetarget != self)
 		return;
@@ -1346,7 +1373,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		Actor_BroadcastMessage(other, self->message);
 	}
 
-	if (self->spawnflags & 1)		//jump
+	if (spawnflags & TARGET_ACTOR_FLAG_JUMP)	//jump
 	{
 		other->velocity[0] = self->movedir[0] * self->speed;
 		other->velocity[1] = self->movedir[1] * self->speed;
@@ -1359,7 +1386,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		}
 	}
 
-	if (self->spawnflags & 2)	//shoot
+	if (spawnflags & TARGET_ACTOR_FLAG_SHOOT)	//shoot
 	{
 		if (self->pathtarget)
 			pathtarget_ent = G_PickTarget(self->pathtarget);
@@ -1368,7 +1395,7 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		other->goalentity = pathtarget_ent;
 		other->movetarget = pathtarget_ent;
 
-		if (self->spawnflags & 32)
+		if (spawnflags & TARGET_ACTOR_FLAG_BRUTAL)
 			other->monsterinfo.aiflags |= AI_BRUTAL;
 
 		other->monsterinfo.aiflags |= AI_STAND_GROUND | AI_ACTOR_SHOOT_ONCE;
@@ -1379,15 +1406,15 @@ void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurfac
 		else
 			actor_attack(other);
 	}
-	else if (self->spawnflags & 4)	//attack
+	else if (spawnflags & TARGET_ACTOR_FLAG_ATTACK)	//attack
 	{
 		other->enemy = pathtarget_ent;
 		if (other->enemy)
 		{
 			other->goalentity = other->enemy;
-			if (self->spawnflags & 32)
+			if (spawnflags & TARGET_ACTOR_FLAG_BRUTAL)
 				other->monsterinfo.aiflags |= AI_BRUTAL;
-			if (self->spawnflags & 0x12)
+			if (spawnflags & (TARGET_ACTOR_FLAG_HOLD | TARGET_ACTOR_FLAG_SHOOT))
 			{
 				other->monsterinfo.aiflags |= AI_STAND_GROUND;
 				actor_stand (other);
@@ -1447,17 +1474,7 @@ void SP_target_actor (edict_t *self)
 	VectorSet (self->maxs, 8, 8, 8);
 	self->svflags = SVF_NOCLIENT;
 
-	if (self->spawnflags & 1)
-	{
-		if (!self->speed)
-			self->speed = 200;
-		if (!st.height)
-			st.height = 200;
-		if (self->s.angles[YAW] == 0)
-			self->s.angles[YAW] = 360;
-		G_SetMovedir (self->s.angles, self->movedir);
-		self->movedir[2] = st.height;
-	}
+	TargetActor_ConfigureJump(self);
 
 	gi.linkentity (self);
 }
