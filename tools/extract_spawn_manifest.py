@@ -738,13 +738,40 @@ class HLILParser:
         sets: List[int] = []
         clears: List[int] = []
         assignments: List[int] = []
+        aliases: Set[str] = set()
         for line in block:
             if "0x11c" not in line:
+                alias_pattern = re.compile(
+                    r"\b([a-z0-9_]+)\s*=\s*\*\([^)]*0x11c[^)]*\)",
+                    re.IGNORECASE,
+                )
+                match = alias_pattern.search(line)
+                if match:
+                    aliases.add(match.group(1))
+                # even if line doesn't contain 0x11c, keep checking alias masks below
+                for alias in list(aliases):
+                    alias_check = re.compile(
+                        rf"\b{re.escape(alias)}(?:\.[a-z]+)?\s*&\s*(0x[0-9a-f]+|\d+)",
+                        re.IGNORECASE,
+                    )
+                    for m in alias_check.finditer(line):
+                        value = int(m.group(1), 0)
+                        if value not in checks:
+                            checks.append(value)
                 continue
             # direct assignment
             m_assign = re.search(r"\*\([^)]*0x11c\)\s*=\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE)
             if m_assign:
                 assignments.append(int(m_assign.group(1), 0))
+            m_or_literal = re.search(
+                r"=\s*[^;]*\|\s*(0x[0-9a-f]+|\d+)",
+                line,
+                re.IGNORECASE,
+            )
+            if m_or_literal:
+                value = int(m_or_literal.group(1), 0)
+                if value not in sets:
+                    sets.append(value)
             # |= sets
             for m in re.finditer(r"\|=\s*(0x[0-9a-f]+|\d+)", line, re.IGNORECASE):
                 value = int(m.group(1), 0)
@@ -772,6 +799,22 @@ class HLILParser:
                 value = int(m.group(1), 0)
                 if value not in checks:
                     checks.append(value)
+            alias_pattern = re.compile(
+                r"\b([a-z0-9_]+)\s*=\s*\*\([^)]*0x11c[^)]*\)",
+                re.IGNORECASE,
+            )
+            match = alias_pattern.search(line)
+            if match:
+                aliases.add(match.group(1))
+            for alias in list(aliases):
+                alias_check = re.compile(
+                    rf"\b{re.escape(alias)}(?:\.[a-z]+)?\s*&\s*(0x[0-9a-f]+|\d+)",
+                    re.IGNORECASE,
+                )
+                for m in alias_check.finditer(line):
+                    value = int(m.group(1), 0)
+                    if value not in checks:
+                        checks.append(value)
         return {
             "checks": sorted(checks),
             "sets": sorted(sets),

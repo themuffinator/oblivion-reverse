@@ -1427,7 +1427,7 @@ void SP_func_water (edict_t *self)
 		self->speed = 25;
 	self->moveinfo.accel = self->moveinfo.decel = self->moveinfo.speed = self->speed;
 
-	if (!self->wait)
+	if (self->wait < 0)
 		self->wait = -1;
 	self->moveinfo.wait = self->wait;
 

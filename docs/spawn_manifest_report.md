@@ -53,9 +53,12 @@ bits compared to the binary:
 |--------------------|----------------|----------------|
 | `func_clock`       | No recorded spawnflag checks | Checks bits 1, 2, and 4 (start stopped, toggle, reverse) |
 | `func_door`        | Clears bit 0 (forces re-open) on load | Only checks bits 1, 16, and 64, never clears bit 0 |
-| `func_water`       | No spawnflag interaction detected | Checks flags and masks in modern code |
 | `misc_actor`       | No spawnflag logic extracted | Repo toggles cinematic and start-on flags |
 | `target_actor`     | HLIL leaves spawnflags untouched | Repo checks/clears bits 1 and 2 |
+
+(The earlier `func_water` discrepancy has been resolved by clamping negative
+`wait` values to `-1` without forcing toggle behaviour when the key is
+omitted.)
 
 (See `docs/manifests/spawn_manifest_comparison.json` under
 `spawnflag_mismatches` for the exact bit sets.)

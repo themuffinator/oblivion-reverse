@@ -216,7 +216,9 @@
         "function": "sub_10011160",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            4
+          ],
           "clears": [],
           "sets": []
         }
@@ -353,7 +355,9 @@
         "spawnflags": {
           "assignments": [],
           "checks": [
-            1
+            1,
+            2,
+            4
           ],
           "clears": [],
           "sets": []
@@ -469,7 +473,10 @@
         "function": "sub_1000ede0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2,
+            4
+          ],
           "clears": [],
           "sets": []
         }
@@ -738,6 +745,7 @@
         "spawnflags": {
           "assignments": [],
           "checks": [
+            4,
             8
           ],
           "clears": [],
@@ -770,9 +778,18 @@
         "function": "sub_1000ec40",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1,
+            2,
+            4,
+            7,
+            8,
+            16
+          ],
           "clears": [],
-          "sets": []
+          "sets": [
+            2
+          ]
         }
       },
       "func_water": {
@@ -780,9 +797,13 @@
         "function": "sub_10009fa0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1
+          ],
           "clears": [],
-          "sets": []
+          "sets": [
+            32
+          ]
         }
       },
       "grenade": {
@@ -969,7 +990,9 @@
         "function": "sub_1000eae0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            1
+          ],
           "clears": [],
           "sets": []
         }
@@ -1126,7 +1149,9 @@
         "function": "sub_1001f460",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            32
+          ],
           "clears": [],
           "sets": []
         }
@@ -2297,7 +2322,62 @@
         }
       },
       "monster_kigrax": {
-        "defaults": {},
+        "defaults": {
+          "offset_0x1e4": [
+            {
+              "offset": 484,
+              "value": 1101004800
+            }
+          ],
+          "offset_0x23c": [
+            {
+              "offset": 572,
+              "value": 1119092736
+            }
+          ],
+          "offset_0xbc": [
+            {
+              "offset": 188,
+              "value": 3248488448
+            }
+          ],
+          "offset_0xc0": [
+            {
+              "offset": 192,
+              "value": 3248488448
+            }
+          ],
+          "offset_0xc4": [
+            {
+              "offset": 196,
+              "value": 3254779904
+            }
+          ],
+          "offset_0xc8": [
+            {
+              "offset": 200,
+              "value": 1101004800
+            }
+          ],
+          "offset_0xcc": [
+            {
+              "offset": 204,
+              "value": 1101004800
+            }
+          ],
+          "offset_0xd0": [
+            {
+              "offset": 208,
+              "value": 1094713344
+            }
+          ],
+          "offset_0xf8": [
+            {
+              "offset": 248,
+              "value": 5
+            }
+          ]
+        },
         "function": "sub_10029330",
         "spawnflags": {
           "assignments": [],
@@ -2653,7 +2733,9 @@
         "function": "sub_1002dcf0",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            8
+          ],
           "clears": [],
           "sets": []
         }
@@ -2837,7 +2919,9 @@
         "function": "sub_1001f930",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            64
+          ],
           "clears": [],
           "sets": []
         }
@@ -3379,7 +3463,10 @@
         "function": "sub_10019850",
         "spawnflags": {
           "assignments": [],
-          "checks": [],
+          "checks": [
+            2,
+            64
+          ],
           "clears": [],
           "sets": []
         }
@@ -7702,6 +7789,253 @@
     }
   },
   "comparison": {
+    "missing_in_repo": [
+      "%s/listip.cfg",
+      "detpack",
+      "grenade",
+      "mine",
+      "monster_makron"
+    ],
+    "missing_in_hlil": [
+      "ammo_bullets",
+      "ammo_cells",
+      "ammo_detpack",
+      "ammo_dod",
+      "ammo_grenades",
+      "ammo_pistolplasma",
+      "ammo_rifleplasma",
+      "ammo_rockets",
+      "ammo_shells",
+      "ammo_slugs",
+      "item_adrenaline",
+      "item_ancient_head",
+      "item_armor_body",
+      "item_armor_combat",
+      "item_armor_jacket",
+      "item_armor_shard",
+      "item_bandolier",
+      "item_breather",
+      "item_enviro",
+      "item_invulnerability",
+      "item_pack",
+      "item_power_screen",
+      "item_power_shield",
+      "item_quad",
+      "item_silencer",
+      "key_airstrike_target",
+      "key_blue_key",
+      "key_commander_head",
+      "key_data_cd",
+      "key_data_spinner",
+      "key_pass",
+      "key_pyramid",
+      "key_red_key",
+      "monster_sentinel",
+      "weapon_lasercannon"
+    ],
+    "spawnflag_mismatches": {
+      "func_clock": {
+        "checks": [
+          [
+            4
+          ],
+          [
+            1,
+            2,
+            4
+          ]
+        ]
+      },
+      "func_door": {
+        "checks": [
+          [],
+          [
+            1,
+            16,
+            64
+          ]
+        ]
+      },
+      "func_door_rotating": {
+        "checks": [
+          [],
+          [
+            1,
+            2,
+            16,
+            64,
+            128
+          ]
+        ]
+      },
+      "func_explosive": {
+        "checks": [
+          [],
+          [
+            1,
+            2,
+            4
+          ]
+        ]
+      },
+      "func_rotating": {
+        "checks": [
+          [],
+          [
+            1,
+            2,
+            4,
+            8,
+            32,
+            64,
+            128
+          ]
+        ]
+      },
+      "func_train": {
+        "checks": [
+          [
+            4,
+            8
+          ],
+          [
+            4
+          ]
+        ]
+      },
+      "func_wall": {
+        "sets": [
+          [
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "misc_actor": {
+        "checks": [
+          [
+            32
+          ],
+          []
+        ]
+      },
+      "misc_camera": {
+        "checks": [
+          [],
+          [
+            1
+          ]
+        ]
+      },
+      "misc_deadsoldier": {
+        "checks": [
+          [],
+          [
+            2,
+            4,
+            8,
+            16,
+            32
+          ]
+        ]
+      },
+      "misc_insane": {
+        "checks": [
+          [],
+          [
+            8,
+            16
+          ]
+        ]
+      },
+      "misc_screenfader": {
+        "checks": [
+          [],
+          [
+            1
+          ]
+        ]
+      },
+      "monster_badass": {
+        "checks": [
+          [],
+          [
+            8
+          ]
+        ]
+      },
+      "monster_spider": {
+        "checks": [
+          [
+            8
+          ],
+          [
+            256
+          ]
+        ]
+      },
+      "target_actor": {
+        "checks": [
+          [
+            64
+          ],
+          [
+            1
+          ]
+        ]
+      },
+      "target_speaker": {
+        "checks": [
+          [],
+          [
+            1
+          ]
+        ]
+      },
+      "trigger_hurt": {
+        "checks": [
+          [],
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "trigger_once": {
+        "sets": [
+          [],
+          [
+            4
+          ]
+        ]
+      },
+      "trigger_push": {
+        "checks": [
+          [
+            2,
+            64
+          ],
+          []
+        ]
+      },
+      "trigger_teleport": {
+        "checks": [
+          [
+            2,
+            16
+          ],
+          [
+            1,
+            2,
+            4,
+            16
+          ]
+        ]
+      }
+    },
     "default_mismatches": {
       "ammo_mines": {
         "offset_0x0": [
@@ -7709,6 +8043,33 @@
             {
               "offset": 0,
               "value": 268732464
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268484336
+            }
+          ],
+          null
+        ],
+        "offset_0x8": [
+          [
+            {
+              "offset": 8,
+              "value": 268654784
+            }
+          ],
+          null
+        ],
+        "offset_0xc": [
+          [
+            {
+              "offset": 12,
+              "value": 268484624
             }
           ],
           null
@@ -7821,15 +8182,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268484336
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -7847,6 +8199,3310 @@
             }
           ],
           null
+        ]
+      },
+      "func_areaportal": {
+        "offset_0x254": [
+          [
+            {
+              "value": 0,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "func_button": {
+        "offset_0x104": [
+          [
+            {
+              "value": 3,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1109393408,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x290": [
+          [
+            {
+              "value": 1077936128,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x330": [
+          [
+            {
+              "value": 1,
+              "offset": 816
+            }
+          ],
+          null
+        ]
+      },
+      "func_clock": {
+        "offset_0x254": [
+          [
+            {
+              "value": 3600,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "func_conveyor": {
+        "offset_0x148": [
+          [
+            {
+              "value": 1120403456,
+              "offset": 328
+            },
+            {
+              "value": 0,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "func_door_secret": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 0,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            },
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 2,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0x290": [
+          [
+            {
+              "value": 1084227584,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0x320": [
+          [
+            {
+              "value": 1112014848,
+              "offset": 800
+            }
+          ],
+          null
+        ],
+        "offset_0x324": [
+          [
+            {
+              "value": 1112014848,
+              "offset": 804
+            }
+          ],
+          null
+        ],
+        "offset_0x31c": [
+          [
+            {
+              "value": 1112014848,
+              "offset": 796
+            }
+          ],
+          null
+        ],
+        "offset_0x18": [
+          [
+            {
+              "value": 0,
+              "offset": 24
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 0,
+              "offset": 20
+            }
+          ],
+          null
+        ],
+        "offset_0x10": [
+          [
+            {
+              "value": 0,
+              "offset": 16
+            }
+          ],
+          null
+        ]
+      },
+      "func_explosive": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            },
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 100,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x254": [
+          [
+            {
+              "value": 1,
+              "offset": 596
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ]
+      },
+      "func_killbox": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "func_object": {
+        "offset_0x244": [
+          [
+            {
+              "value": 100,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            },
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            },
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xfc": [
+          [
+            {
+              "value": 33685507,
+              "offset": 252
+            }
+          ],
+          null
+        ]
+      },
+      "func_plat": {
+        "offset_0x18": [
+          [
+            {
+              "value": 0,
+              "offset": 24
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 0,
+              "offset": 20
+            }
+          ],
+          null
+        ],
+        "offset_0x10": [
+          [
+            {
+              "value": 0,
+              "offset": 16
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1101004800,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x14c": [
+          [
+            {
+              "value": 1084227584,
+              "offset": 332
+            }
+          ],
+          null
+        ],
+        "offset_0x150": [
+          [
+            {
+              "value": 1084227584,
+              "offset": 336
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 2,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0x330": [
+          [
+            {
+              "value": 1,
+              "offset": 816
+            },
+            {
+              "value": 2,
+              "offset": 816
+            }
+          ],
+          null
+        ]
+      },
+      "func_rotate_train": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 0,
+              "offset": 580
+            },
+            {
+              "value": 100,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0x18": [
+          [
+            {
+              "value": 0,
+              "offset": 24
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 0,
+              "offset": 20
+            }
+          ],
+          null
+        ],
+        "offset_0x10": [
+          [
+            {
+              "value": 0,
+              "offset": 16
+            }
+          ],
+          null
+        ],
+        "offset_0x1f8": [
+          [
+            {
+              "value": 268521616,
+              "offset": 504
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1120403456,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x200": [
+          [
+            {
+              "value": 268523248,
+              "offset": 512
+            }
+          ],
+          null
+        ],
+        "offset_0x1f4": [
+          [
+            {
+              "value": 268522848,
+              "offset": 500
+            }
+          ],
+          null
+        ]
+      },
+      "func_timer": {
+        "offset_0x290": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "func_train": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x18": [
+          [
+            {
+              "value": 0,
+              "offset": 24
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 0,
+              "offset": 20
+            }
+          ],
+          null
+        ],
+        "offset_0x10": [
+          [
+            {
+              "value": 0,
+              "offset": 16
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 0,
+              "offset": 580
+            },
+            {
+              "value": 20,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1120403456,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 100,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x254": [
+          [
+            {
+              "value": 10,
+              "offset": 596
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 75,
+              "offset": 400
+            }
+          ],
+          null
+        ]
+      },
+      "func_wall": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            },
+            {
+              "value": 3,
+              "offset": 248
+            },
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "info_teleport_dest": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "item_health": {
+        "offset_0x254": [
+          [
+            {
+              "value": 10,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "item_health_large": {
+        "offset_0x254": [
+          [
+            {
+              "value": 25,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "item_health_mega": {
+        "offset_0x254": [
+          [
+            {
+              "value": 100,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "item_health_small": {
+        "offset_0x254": [
+          [
+            {
+              "value": 2,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "key_power_cube": {
+        "offset_0x58": [
+          [
+            {
+              "value": 0,
+              "offset": 88
+            }
+          ],
+          null
+        ]
+      },
+      "light_mine1": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "light_mine2": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "misc_actor": {
+        "offset_0x28": [
+          [
+            {
+              "value": 255,
+              "offset": 40
+            }
+          ],
+          null
+        ],
+        "offset_0x2c": [
+          [
+            {
+              "value": 255,
+              "offset": 44
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 5,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 100,
+              "offset": 544
+            },
+            {
+              "value": 4294967295,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 200,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 183,
+              "offset": 56
+            },
+            {
+              "value": 189,
+              "offset": 56
+            },
+            {
+              "value": 197,
+              "offset": 56
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "value": 2,
+              "offset": 556
+            }
+          ],
+          null
+        ],
+        "offset_0x1ec": [
+          [
+            {
+              "value": 0,
+              "offset": 492
+            }
+          ],
+          null
+        ],
+        "offset_0x384": [
+          [
+            {
+              "value": 0,
+              "offset": 900
+            }
+          ],
+          null
+        ],
+        "offset_0x388": [
+          [
+            {
+              "value": 0,
+              "offset": 904
+            }
+          ],
+          null
+        ],
+        "offset_0x358": [
+          [
+            {
+              "value": 268747608,
+              "offset": 856
+            }
+          ],
+          null
+        ],
+        "offset_0x364": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 868
+            }
+          ],
+          null
+        ]
+      },
+      "misc_banner": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "misc_bigviper": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "misc_blackhole": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3263168512,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3263168512,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1115684864,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1115684864,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "value": 32,
+              "offset": 68
+            }
+          ],
+          null
+        ]
+      },
+      "misc_camera": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 8,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ],
+        "offset_0x290": [
+          [
+            {
+              "value": 1077936128,
+              "offset": 656
+            }
+          ],
+          null
+        ]
+      },
+      "misc_camera_target": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 8,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ],
+        "offset_0x254": [
+          [
+            {
+              "value": 0,
+              "offset": 596
+            }
+          ],
+          null
+        ],
+        "offset_0x1e0": [
+          [
+            {
+              "value": 0,
+              "offset": 480
+            }
+          ],
+          null
+        ]
+      },
+      "misc_deadsoldier": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 1,
+              "offset": 56
+            },
+            {
+              "value": 2,
+              "offset": 56
+            },
+            {
+              "value": 3,
+              "offset": 56
+            },
+            {
+              "value": 4,
+              "offset": 56
+            },
+            {
+              "value": 0,
+              "offset": 56
+            },
+            {
+              "value": 5,
+              "offset": 56
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "value": 2,
+              "offset": 556
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ]
+      },
+      "misc_easterchick": {
+        "offset_0xbc": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 208,
+              "offset": 56
+            }
+          ],
+          null
+        ]
+      },
+      "misc_easterchick2": {
+        "offset_0xbc": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 248,
+              "offset": 56
+            }
+          ],
+          null
+        ]
+      },
+      "misc_eastertank": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 254,
+              "offset": 56
+            }
+          ],
+          null
+        ]
+      },
+      "misc_explobox": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 5,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1109393408,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 400,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 10,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 150,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x35c": [
+          [
+            {
+              "value": 1024,
+              "offset": 860
+            }
+          ],
+          null
+        ]
+      },
+      "misc_gib_arm": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 7,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "value": 2,
+              "offset": 556
+            }
+          ],
+          null
+        ]
+      },
+      "misc_gib_head": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 7,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "value": 2,
+              "offset": 556
+            }
+          ],
+          null
+        ]
+      },
+      "misc_gib_leg": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 7,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x22c": [
+          [
+            {
+              "value": 2,
+              "offset": 556
+            }
+          ],
+          null
+        ]
+      },
+      "misc_satellite_dish": {
+        "offset_0xbc": [
+          [
+            {
+              "value": 3263168512,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3263168512,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1115684864,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1115684864,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1124073472,
+              "offset": 208
+            }
+          ],
+          null
+        ]
+      },
+      "misc_screenfader": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "misc_strogg_ship": {
+        "offset_0x148": [
+          [
+            {
+              "value": 1133903872,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 208
+            }
+          ],
+          null
+        ]
+      },
+      "misc_teleporter": {
+        "offset_0x3c": [
+          [
+            {
+              "value": 1,
+              "offset": 60
+            }
+          ],
+          null
+        ],
+        "offset_0x40": [
+          [
+            {
+              "value": 131072,
+              "offset": 64
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            },
+            {
+              "value": 1,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3238002688,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3238002688,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1103101952,
+              "offset": 208
+            }
+          ],
+          null
+        ]
+      },
+      "misc_teleporter_dest": {
+        "offset_0x3c": [
+          [
+            {
+              "value": 0,
+              "offset": 60
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "misc_viper_bomb": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 1000,
+              "offset": 580
+            }
+          ],
+          null
+        ]
+      },
+      "monster_commander_body": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 0,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1111490560,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 1,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0x108": [
+          [
+            {
+              "value": 16,
+              "offset": 264
+            }
+          ],
+          null
+        ]
+      },
+      "monster_jorg": {
+        "offset_0x2c4": [
+          [
+            {
+              "value": 128,
+              "offset": 708
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "value": 0,
+              "offset": 320
+            }
+          ],
+          null
+        ],
+        "offset_0x12c": [
+          [
+            {
+              "value": 0,
+              "offset": 300
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "value": 0,
+              "offset": 912
+            }
+          ],
+          null
+        ]
+      },
+      "monster_kigrax": {
+        "offset_0xbc": [
+          [
+            {
+              "value": 3248488448,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3248488448,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1101004800,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1101004800,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1094713344,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 5,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x1e4": [
+          [
+            {
+              "value": 1101004800,
+              "offset": 484
+            }
+          ],
+          null
+        ],
+        "offset_0x23c": [
+          [
+            {
+              "value": 1119092736,
+              "offset": 572
+            }
+          ],
+          null
+        ]
+      },
+      "monster_mutant": {
+        "offset_0x104": [
+          [
+            {
+              "value": 5,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 300,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967176,
+              "offset": 552
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 300,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0x37c": [
+          [
+            {
+              "value": 0,
+              "offset": 892
+            }
+          ],
+          null
+        ],
+        "offset_0x364": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 868
+            }
+          ],
+          null
+        ]
+      },
+      "monster_parasite": {
+        "offset_0x104": [
+          [
+            {
+              "value": 5,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 175,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967246,
+              "offset": 552
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 250,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0x364": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 868
+            }
+          ],
+          null
+        ]
+      },
+      "monster_soldier": {
+        "offset_0x220": [
+          [
+            {
+              "value": 30,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967266,
+              "offset": 552
+            }
+          ],
+          null
+        ]
+      },
+      "monster_soldier_deatom": {
+        "offset_0x220": [
+          [
+            {
+              "value": 40,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967266,
+              "offset": 552
+            }
+          ],
+          null
+        ]
+      },
+      "monster_soldier_light": {
+        "offset_0x3c": [
+          [
+            {
+              "value": 0,
+              "offset": 60
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 20,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967266,
+              "offset": 552
+            }
+          ],
+          null
+        ]
+      },
+      "monster_soldier_ss": {
+        "offset_0x220": [
+          [
+            {
+              "value": 40,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967266,
+              "offset": 552
+            }
+          ],
+          null
+        ]
+      },
+      "monster_spider": {
+        "offset_0x220": [
+          [
+            {
+              "value": 400,
+              "offset": 544
+            },
+            {
+              "value": 4294967295,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 400,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1107296256,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 5,
+              "offset": 260
+            },
+            {
+              "value": 7,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 4294967121,
+              "offset": 552
+            }
+          ],
+          null
+        ],
+        "offset_0xbc": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3254779904,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 3253731328,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 0,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0x1ec": [
+          [
+            {
+              "value": 0,
+              "offset": 492
+            }
+          ],
+          null
+        ],
+        "offset_0x37c": [
+          [
+            {
+              "value": 0,
+              "offset": 892
+            }
+          ],
+          null
+        ],
+        "offset_0x358": [
+          [
+            {
+              "value": 268814848,
+              "offset": 856
+            }
+          ],
+          null
+        ],
+        "offset_0x364": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 868
+            }
+          ],
+          null
+        ]
+      },
+      "monster_supertank": {
+        "offset_0x2c4": [
+          [
+            {
+              "value": 128,
+              "offset": 708
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "value": 0,
+              "offset": 320
+            }
+          ],
+          null
+        ],
+        "offset_0x12c": [
+          [
+            {
+              "value": 0,
+              "offset": 300
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "value": 0,
+              "offset": 912
+            }
+          ],
+          null
+        ]
+      },
+      "monster_tank": {
+        "offset_0x2c4": [
+          [
+            {
+              "value": 128,
+              "offset": 708
+            }
+          ],
+          null
+        ],
+        "offset_0x140": [
+          [
+            {
+              "value": 0,
+              "offset": 320
+            }
+          ],
+          null
+        ],
+        "offset_0x12c": [
+          [
+            {
+              "value": 0,
+              "offset": 300
+            }
+          ],
+          null
+        ],
+        "offset_0x390": [
+          [
+            {
+              "value": 0,
+              "offset": 912
+            }
+          ],
+          null
+        ]
+      },
+      "point_combat": {
+        "offset_0xbc": [
+          [
+            {
+              "value": 3238002688,
+              "offset": 188
+            }
+          ],
+          null
+        ],
+        "offset_0xc0": [
+          [
+            {
+              "value": 3238002688,
+              "offset": 192
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xc4": [
+          [
+            {
+              "value": 3246391296,
+              "offset": 196
+            }
+          ],
+          null
+        ],
+        "offset_0xc8": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 200
+            }
+          ],
+          null
+        ],
+        "offset_0xcc": [
+          [
+            {
+              "value": 1090519040,
+              "offset": 204
+            }
+          ],
+          null
+        ],
+        "offset_0xd0": [
+          [
+            {
+              "value": 1098907648,
+              "offset": 208
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_actor": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1128792064,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 1135869952,
+              "offset": 20
+            }
+          ],
+          null
+        ]
+      },
+      "target_blaster": {
+        "offset_0x244": [
+          [
+            {
+              "value": 15,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1148846080,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_character": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x38": [
+          [
+            {
+              "value": 12,
+              "offset": 56
+            }
+          ],
+          null
+        ]
+      },
+      "target_crosslevel_target": {
+        "offset_0x294": [
+          [
+            {
+              "value": 1065353216,
+              "offset": 660
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_crosslevel_trigger": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_earthquake": {
+        "offset_0x254": [
+          [
+            {
+              "value": 5,
+              "offset": 596
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1128792064,
+              "offset": 328
+            }
+          ],
+          null
+        ]
+      },
+      "target_explosion": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_goal": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_railgun": {
+        "offset_0x244": [
+          [
+            {
+              "value": 150,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_rocket": {
+        "offset_0x244": [
+          [
+            {
+              "value": 100,
+              "offset": 580
+            }
+          ],
+          null
+        ]
+      },
+      "target_secret": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_spawner": {
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "target_splash": {
+        "offset_0x254": [
+          [
+            {
+              "value": 32,
+              "offset": 596
+            }
+          ],
+          null
+        ],
+        "offset_0xb8": [
+          [
+            {
+              "value": 1,
+              "offset": 184
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_always": {
+        "offset_0x294": [
+          [
+            {
+              "value": 1045220557,
+              "offset": 660
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_counter": {
+        "offset_0x290": [
+          [
+            {
+              "value": 3212836864,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0x254": [
+          [
+            {
+              "value": 2,
+              "offset": 596
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_hurt": {
+        "offset_0x244": [
+          [
+            {
+              "value": 5,
+              "offset": 580
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            },
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_misc_camera": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            },
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_monsterjump": {
+        "offset_0x148": [
+          [
+            {
+              "value": 1128792064,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x14": [
+          [
+            {
+              "value": 1135869952,
+              "offset": 20
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_multiple": {
+        "offset_0x290": [
+          [
+            {
+              "value": 1045220557,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            },
+            {
+              "value": 0,
+              "offset": 248
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_once": {
+        "offset_0x290": [
+          [
+            {
+              "value": 3212836864,
+              "offset": 656
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_push": {
+        "offset_0x148": [
+          [
+            {
+              "value": 1148846080,
+              "offset": 328
+            }
+          ],
+          null
+        ]
+      },
+      "trigger_teleport": {
+        "offset_0x290": [
+          [
+            {
+              "value": 1045220557,
+              "offset": 656
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 1,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x1fc": [
+          [
+            {
+              "value": 0,
+              "offset": 508
+            },
+            {
+              "value": 0,
+              "offset": 508
+            }
+          ],
+          null
+        ]
+      },
+      "turret_base": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ]
+      },
+      "turret_breach": {
+        "offset_0xf8": [
+          [
+            {
+              "value": 3,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0x148": [
+          [
+            {
+              "value": 1112014848,
+              "offset": 328
+            }
+          ],
+          null
+        ],
+        "offset_0x244": [
+          [
+            {
+              "value": 10,
+              "offset": 580
+            }
+          ],
+          null
+        ]
+      },
+      "turret_driver": {
+        "offset_0x104": [
+          [
+            {
+              "value": 2,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x220": [
+          [
+            {
+              "value": 100,
+              "offset": 544
+            }
+          ],
+          null
+        ],
+        "offset_0x228": [
+          [
+            {
+              "value": 0,
+              "offset": 552
+            }
+          ],
+          null
+        ],
+        "offset_0x190": [
+          [
+            {
+              "value": 200,
+              "offset": 400
+            }
+          ],
+          null
+        ],
+        "offset_0x23c": [
+          [
+            {
+              "value": 24,
+              "offset": 572
+            }
+          ],
+          null
+        ],
+        "offset_0x240": [
+          [
+            {
+              "value": 2,
+              "offset": 576
+            }
+          ],
+          null
+        ],
+        "offset_0xfc": [
+          [
+            {
+              "value": 33685507,
+              "offset": 252
+            }
+          ],
+          null
+        ]
+      },
+      "viewthing": {
+        "offset_0x104": [
+          [
+            {
+              "value": 0,
+              "offset": 260
+            }
+          ],
+          null
+        ],
+        "offset_0xf8": [
+          [
+            {
+              "value": 2,
+              "offset": 248
+            }
+          ],
+          null
+        ],
+        "offset_0x44": [
+          [
+            {
+              "value": 64,
+              "offset": 68
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_bfg": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268731216
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -7861,3123 +11517,7 @@
           [
             {
               "offset": 12,
-              "value": 268484624
-            }
-          ],
-          null
-        ]
-      },
-      "func_areaportal": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "func_button": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 3
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1109393408
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1077936128
-            }
-          ],
-          null
-        ],
-        "offset_0x330": [
-          [
-            {
-              "offset": 816,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_clock": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 3600
-            }
-          ],
-          null
-        ]
-      },
-      "func_conveyor": {
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1120403456
-            },
-            {
-              "offset": 328,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_door_secret": {
-        "offset_0x10": [
-          [
-            {
-              "offset": 16,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x18": [
-          [
-            {
-              "offset": 24,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            },
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1084227584
-            }
-          ],
-          null
-        ],
-        "offset_0x31c": [
-          [
-            {
-              "offset": 796,
-              "value": 1112014848
-            }
-          ],
-          null
-        ],
-        "offset_0x320": [
-          [
-            {
-              "offset": 800,
-              "value": 1112014848
-            }
-          ],
-          null
-        ],
-        "offset_0x324": [
-          [
-            {
-              "offset": 804,
-              "value": 1112014848
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_explosive": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 100
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            },
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "func_killbox": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "func_object": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            },
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 100
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            },
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ],
-        "offset_0xfc": [
-          [
-            {
-              "offset": 252,
-              "value": 33685507
-            }
-          ],
-          null
-        ]
-      },
-      "func_plat": {
-        "offset_0x10": [
-          [
-            {
-              "offset": 16,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1101004800
-            }
-          ],
-          null
-        ],
-        "offset_0x14c": [
-          [
-            {
-              "offset": 332,
-              "value": 1084227584
-            }
-          ],
-          null
-        ],
-        "offset_0x150": [
-          [
-            {
-              "offset": 336,
-              "value": 1084227584
-            }
-          ],
-          null
-        ],
-        "offset_0x18": [
-          [
-            {
-              "offset": 24,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x330": [
-          [
-            {
-              "offset": 816,
-              "value": 1
-            },
-            {
-              "offset": 816,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_timer": {
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "func_train": {
-        "offset_0x10": [
-          [
-            {
-              "offset": 16,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1120403456
-            }
-          ],
-          null
-        ],
-        "offset_0x18": [
-          [
-            {
-              "offset": 24,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 75
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 100
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 0
-            },
-            {
-              "offset": 580,
-              "value": 20
-            }
-          ],
-          null
-        ],
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 10
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "func_wall": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            },
-            {
-              "offset": 248,
-              "value": 3
-            },
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "info_teleport_dest": {
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "item_health": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 10
-            }
-          ],
-          null
-        ]
-      },
-      "item_health_large": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 25
-            }
-          ],
-          null
-        ]
-      },
-      "item_health_mega": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 100
-            }
-          ],
-          null
-        ]
-      },
-      "item_health_small": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "key_power_cube": {
-        "offset_0x58": [
-          [
-            {
-              "offset": 88,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "light_mine1": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "light_mine2": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_actor": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 200
-            }
-          ],
-          null
-        ],
-        "offset_0x1ec": [
-          [
-            {
-              "offset": 492,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 100
-            },
-            {
-              "offset": 544,
-              "value": 4294967295
-            }
-          ],
-          null
-        ],
-        "offset_0x22c": [
-          [
-            {
-              "offset": 556,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x28": [
-          [
-            {
-              "offset": 40,
-              "value": 255
-            }
-          ],
-          null
-        ],
-        "offset_0x2c": [
-          [
-            {
-              "offset": 44,
-              "value": 255
-            }
-          ],
-          null
-        ],
-        "offset_0x358": [
-          [
-            {
-              "offset": 856,
-              "value": 268747608
-            }
-          ],
-          null
-        ],
-        "offset_0x364": [
-          [
-            {
-              "offset": 868,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 183
-            },
-            {
-              "offset": 56,
-              "value": 189
-            },
-            {
-              "offset": 56,
-              "value": 197
-            }
-          ],
-          null
-        ],
-        "offset_0x384": [
-          [
-            {
-              "offset": 900,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x388": [
-          [
-            {
-              "offset": 904,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_banner": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_bigviper": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_blackhole": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x44": [
-          [
-            {
-              "offset": 68,
-              "value": 32
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3263168512
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3263168512
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1115684864
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1115684864
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_camera": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 8
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1077936128
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_camera_target": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 8
-            }
-          ],
-          null
-        ],
-        "offset_0x1e0": [
-          [
-            {
-              "offset": 480,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_deadsoldier": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x22c": [
-          [
-            {
-              "offset": 556,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 1
-            },
-            {
-              "offset": 56,
-              "value": 2
-            },
-            {
-              "offset": 56,
-              "value": 3
-            },
-            {
-              "offset": 56,
-              "value": 4
-            },
-            {
-              "offset": 56,
-              "value": 0
-            },
-            {
-              "offset": 56,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_easterchick": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 208
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_easterchick2": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 248
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_eastertank": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 254
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_explobox": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 400
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 10
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 150
-            }
-          ],
-          null
-        ],
-        "offset_0x35c": [
-          [
-            {
-              "offset": 860,
-              "value": 1024
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1109393408
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_gib_arm": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 7
-            }
-          ],
-          null
-        ],
-        "offset_0x22c": [
-          [
-            {
-              "offset": 556,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_gib_head": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 7
-            }
-          ],
-          null
-        ],
-        "offset_0x22c": [
-          [
-            {
-              "offset": 556,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_gib_leg": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 7
-            }
-          ],
-          null
-        ],
-        "offset_0x22c": [
-          [
-            {
-              "offset": 556,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_satellite_dish": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3263168512
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3263168512
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1115684864
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1115684864
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1124073472
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_screenfader": {
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_strogg_ship": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1133903872
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "misc_teleporter": {
-        "offset_0x3c": [
-          [
-            {
-              "offset": 60,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x40": [
-          [
-            {
-              "offset": 64,
-              "value": 131072
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3238002688
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3238002688
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1103101952
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            },
-            {
-              "offset": 248,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "misc_teleporter_dest": {
-        "offset_0x3c": [
-          [
-            {
-              "offset": 60,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "misc_viper_bomb": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 1000
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "monster_commander_body": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x108": [
-          [
-            {
-              "offset": 264,
-              "value": 16
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1111490560
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "monster_jorg": {
-        "offset_0x12c": [
-          [
-            {
-              "offset": 300,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x140": [
-          [
-            {
-              "offset": 320,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x2c4": [
-          [
-            {
-              "offset": 708,
-              "value": 128
-            }
-          ],
-          null
-        ],
-        "offset_0x390": [
-          [
-            {
-              "offset": 912,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "monster_mutant": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 300
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 300
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967176
-            }
-          ],
-          null
-        ],
-        "offset_0x364": [
-          [
-            {
-              "offset": 868,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0x37c": [
-          [
-            {
-              "offset": 892,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "monster_parasite": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 250
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 175
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967246
-            }
-          ],
-          null
-        ],
-        "offset_0x364": [
-          [
-            {
-              "offset": 868,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "monster_soldier": {
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 30
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967266
-            }
-          ],
-          null
-        ]
-      },
-      "monster_soldier_deatom": {
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 40
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967266
-            }
-          ],
-          null
-        ]
-      },
-      "monster_soldier_light": {
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 20
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967266
-            }
-          ],
-          null
-        ],
-        "offset_0x3c": [
-          [
-            {
-              "offset": 60,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "monster_soldier_ss": {
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 40
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967266
-            }
-          ],
-          null
-        ]
-      },
-      "monster_spider": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 5
-            },
-            {
-              "offset": 260,
-              "value": 7
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 400
-            }
-          ],
-          null
-        ],
-        "offset_0x1ec": [
-          [
-            {
-              "offset": 492,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 400
-            },
-            {
-              "offset": 544,
-              "value": 4294967295
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 4294967121
-            }
-          ],
-          null
-        ],
-        "offset_0x358": [
-          [
-            {
-              "offset": 856,
-              "value": 268814848
-            }
-          ],
-          null
-        ],
-        "offset_0x364": [
-          [
-            {
-              "offset": 868,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0x37c": [
-          [
-            {
-              "offset": 892,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3254779904
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 3253731328
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1107296256
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "monster_supertank": {
-        "offset_0x12c": [
-          [
-            {
-              "offset": 300,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x140": [
-          [
-            {
-              "offset": 320,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x2c4": [
-          [
-            {
-              "offset": 708,
-              "value": 128
-            }
-          ],
-          null
-        ],
-        "offset_0x390": [
-          [
-            {
-              "offset": 912,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "monster_tank": {
-        "offset_0x12c": [
-          [
-            {
-              "offset": 300,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x140": [
-          [
-            {
-              "offset": 320,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x2c4": [
-          [
-            {
-              "offset": 708,
-              "value": 128
-            }
-          ],
-          null
-        ],
-        "offset_0x390": [
-          [
-            {
-              "offset": 912,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "point_combat": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xbc": [
-          [
-            {
-              "offset": 188,
-              "value": 3238002688
-            }
-          ],
-          null
-        ],
-        "offset_0xc0": [
-          [
-            {
-              "offset": 192,
-              "value": 3238002688
-            }
-          ],
-          null
-        ],
-        "offset_0xc4": [
-          [
-            {
-              "offset": 196,
-              "value": 3246391296
-            }
-          ],
-          null
-        ],
-        "offset_0xc8": [
-          [
-            {
-              "offset": 200,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xcc": [
-          [
-            {
-              "offset": 204,
-              "value": 1090519040
-            }
-          ],
-          null
-        ],
-        "offset_0xd0": [
-          [
-            {
-              "offset": 208,
-              "value": 1098907648
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_actor": {
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 1135869952
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1128792064
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_blaster": {
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1148846080
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 15
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_character": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x38": [
-          [
-            {
-              "offset": 56,
-              "value": 12
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "target_crosslevel_target": {
-        "offset_0x294": [
-          [
-            {
-              "offset": 660,
-              "value": 1065353216
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_crosslevel_trigger": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_earthquake": {
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1128792064
-            }
-          ],
-          null
-        ],
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 5
-            }
-          ],
-          null
-        ]
-      },
-      "target_explosion": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_goal": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_railgun": {
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 150
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_rocket": {
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 100
-            }
-          ],
-          null
-        ]
-      },
-      "target_secret": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_spawner": {
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "target_splash": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 32
-            }
-          ],
-          null
-        ],
-        "offset_0xb8": [
-          [
-            {
-              "offset": 184,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_always": {
-        "offset_0x294": [
-          [
-            {
-              "offset": 660,
-              "value": 1045220557
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_counter": {
-        "offset_0x254": [
-          [
-            {
-              "offset": 596,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 3212836864
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_hurt": {
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 5
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            },
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_misc_camera": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            },
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_monsterjump": {
-        "offset_0x14": [
-          [
-            {
-              "offset": 20,
-              "value": 1135869952
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1128792064
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_multiple": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1045220557
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            },
-            {
-              "offset": 248,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_once": {
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 3212836864
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_push": {
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1148846080
-            }
-          ],
-          null
-        ]
-      },
-      "trigger_teleport": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x1fc": [
-          [
-            {
-              "offset": 508,
-              "value": 0
-            },
-            {
-              "offset": 508,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x290": [
-          [
-            {
-              "offset": 656,
-              "value": 1045220557
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 1
-            }
-          ],
-          null
-        ]
-      },
-      "turret_base": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "turret_breach": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x148": [
-          [
-            {
-              "offset": 328,
-              "value": 1112014848
-            }
-          ],
-          null
-        ],
-        "offset_0x244": [
-          [
-            {
-              "offset": 580,
-              "value": 10
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 3
-            }
-          ],
-          null
-        ]
-      },
-      "turret_driver": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x190": [
-          [
-            {
-              "offset": 400,
-              "value": 200
-            }
-          ],
-          null
-        ],
-        "offset_0x220": [
-          [
-            {
-              "offset": 544,
-              "value": 100
-            }
-          ],
-          null
-        ],
-        "offset_0x228": [
-          [
-            {
-              "offset": 552,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x23c": [
-          [
-            {
-              "offset": 572,
-              "value": 24
-            }
-          ],
-          null
-        ],
-        "offset_0x240": [
-          [
-            {
-              "offset": 576,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0xfc": [
-          [
-            {
-              "offset": 252,
-              "value": 33685507
-            }
-          ],
-          null
-        ]
-      },
-      "viewthing": {
-        "offset_0x104": [
-          [
-            {
-              "offset": 260,
-              "value": 0
-            }
-          ],
-          null
-        ],
-        "offset_0x44": [
-          [
-            {
-              "offset": 68,
-              "value": 64
-            }
-          ],
-          null
-        ],
-        "offset_0xf8": [
-          [
-            {
-              "offset": 248,
-              "value": 2
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_bfg": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268731216
+              "value": 268654976
             }
           ],
           null
@@ -11090,15 +11630,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11116,6 +11647,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_blaster": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268733520
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 0
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -11130,18 +11681,7 @@
           [
             {
               "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_blaster": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268733520
+              "value": 0
             }
           ],
           null
@@ -11254,15 +11794,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 0
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11280,6 +11811,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_chaingun": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268732900
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -11294,18 +11845,7 @@
           [
             {
               "offset": 12,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_chaingun": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268732900
+              "value": 268654976
             }
           ],
           null
@@ -11418,15 +11958,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11441,6 +11972,26 @@
             {
               "offset": 68,
               "value": 268732724
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_deatomizer": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268730984
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -11459,17 +12010,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_deatomizer": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268730984
             }
           ],
           null
@@ -11582,15 +12122,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11608,6 +12139,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_dod": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268732148
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268484336
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -11622,18 +12173,7 @@
           [
             {
               "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_dod": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268732148
+              "value": 268484624
             }
           ],
           null
@@ -11746,15 +12286,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268484336
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11772,6 +12303,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_grenadelauncher": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268732124
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -11786,18 +12337,7 @@
           [
             {
               "offset": 12,
-              "value": 268484624
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_grenadelauncher": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268732124
+              "value": 268654976
             }
           ],
           null
@@ -11910,15 +12450,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -11933,6 +12464,26 @@
             {
               "offset": 68,
               "value": 268731924
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_hellfury": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268731664
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -11951,17 +12502,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_hellfury": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268731664
             }
           ],
           null
@@ -12074,15 +12614,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12097,6 +12628,26 @@
             {
               "offset": 68,
               "value": 268731680
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_hyperblaster": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268731560
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -12115,17 +12666,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_hyperblaster": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268731560
             }
           ],
           null
@@ -12238,15 +12778,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12261,6 +12792,26 @@
             {
               "offset": 68,
               "value": 268731356
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_machinegun": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268733112
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -12279,17 +12830,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_machinegun": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268733112
             }
           ],
           null
@@ -12402,15 +12942,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12428,6 +12959,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_plasma_pistol": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268733696
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 0
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -12442,18 +12993,7 @@
           [
             {
               "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_plasma_pistol": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268733696
+              "value": 0
             }
           ],
           null
@@ -12566,15 +13106,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 0
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12592,6 +13123,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_plasma_rifle": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268730796
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -12606,18 +13157,7 @@
           [
             {
               "offset": 12,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_plasma_rifle": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268730796
+              "value": 268654976
             }
           ],
           null
@@ -12730,15 +13270,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12753,6 +13284,26 @@
             {
               "offset": 68,
               "value": 268730648
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_railgun": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268731340
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -12771,17 +13322,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_railgun": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268731340
             }
           ],
           null
@@ -12894,15 +13434,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -12920,6 +13451,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_remote_detonator": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268730624
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 0
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -12934,18 +13485,7 @@
           [
             {
               "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_remote_detonator": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268730624
+              "value": 0
             }
           ],
           null
@@ -13058,15 +13598,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 0
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -13084,6 +13615,26 @@
             }
           ],
           null
+        ]
+      },
+      "weapon_rocketlauncher": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268731900
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
         ],
         "offset_0x8": [
           [
@@ -13098,18 +13649,7 @@
           [
             {
               "offset": 12,
-              "value": 0
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_rocketlauncher": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268731900
+              "value": 268654976
             }
           ],
           null
@@ -13222,15 +13762,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -13248,24 +13779,6 @@
             }
           ],
           null
-        ],
-        "offset_0x8": [
-          [
-            {
-              "offset": 8,
-              "value": 268654784
-            }
-          ],
-          null
-        ],
-        "offset_0xc": [
-          [
-            {
-              "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
         ]
       },
       "weapon_rtdu": {
@@ -13274,6 +13787,33 @@
             {
               "offset": 0,
               "value": 268730564
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268517920
+            }
+          ],
+          null
+        ],
+        "offset_0x8": [
+          [
+            {
+              "offset": 8,
+              "value": 268518000
+            }
+          ],
+          null
+        ],
+        "offset_0xc": [
+          [
+            {
+              "offset": 12,
+              "value": 268446864
             }
           ],
           null
@@ -13386,15 +13926,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268517920
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -13412,24 +13943,6 @@
             }
           ],
           null
-        ],
-        "offset_0x8": [
-          [
-            {
-              "offset": 8,
-              "value": 268518000
-            }
-          ],
-          null
-        ],
-        "offset_0xc": [
-          [
-            {
-              "offset": 12,
-              "value": 268446864
-            }
-          ],
-          null
         ]
       },
       "weapon_shotgun": {
@@ -13438,6 +13951,33 @@
             {
               "offset": 0,
               "value": 268733412
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
+            }
+          ],
+          null
+        ],
+        "offset_0x8": [
+          [
+            {
+              "offset": 8,
+              "value": 268654784
+            }
+          ],
+          null
+        ],
+        "offset_0xc": [
+          [
+            {
+              "offset": 12,
+              "value": 268654976
             }
           ],
           null
@@ -13550,15 +14090,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -13573,6 +14104,26 @@
             {
               "offset": 68,
               "value": 268733276
+            }
+          ],
+          null
+        ]
+      },
+      "weapon_supershotgun": {
+        "offset_0x0": [
+          [
+            {
+              "offset": 0,
+              "value": 268733256
+            }
+          ],
+          null
+        ],
+        "offset_0x4": [
+          [
+            {
+              "offset": 4,
+              "value": 268653152
             }
           ],
           null
@@ -13591,17 +14142,6 @@
             {
               "offset": 12,
               "value": 268654976
-            }
-          ],
-          null
-        ]
-      },
-      "weapon_supershotgun": {
-        "offset_0x0": [
-          [
-            {
-              "offset": 0,
-              "value": 268733256
             }
           ],
           null
@@ -13714,15 +14254,6 @@
           ],
           null
         ],
-        "offset_0x4": [
-          [
-            {
-              "offset": 4,
-              "value": 268653152
-            }
-          ],
-          null
-        ],
         "offset_0x40": [
           [
             {
@@ -13740,50 +14271,14 @@
             }
           ],
           null
-        ],
-        "offset_0x8": [
-          [
-            {
-              "offset": 8,
-              "value": 268654784
-            }
-          ],
-          null
-        ],
-        "offset_0xc": [
-          [
-            {
-              "offset": 12,
-              "value": 268654976
-            }
-          ],
-          null
         ]
       },
       "worldspawn": {
         "offset_0x104": [
           [
             {
-              "offset": 260,
-              "value": 2
-            }
-          ],
-          null
-        ],
-        "offset_0x28": [
-          [
-            {
-              "offset": 40,
-              "value": 1
-            }
-          ],
-          null
-        ],
-        "offset_0x58": [
-          [
-            {
-              "offset": 88,
-              "value": 1
+              "value": 2,
+              "offset": 260
             }
           ],
           null
@@ -13791,286 +14286,29 @@
         "offset_0xf8": [
           [
             {
-              "offset": 248,
-              "value": 3
+              "value": 3,
+              "offset": 248
             }
           ],
           null
-        ]
-      }
-    },
-    "missing_in_hlil": [
-      "ammo_bullets",
-      "ammo_cells",
-      "ammo_detpack",
-      "ammo_dod",
-      "ammo_grenades",
-      "ammo_pistolplasma",
-      "ammo_rifleplasma",
-      "ammo_rockets",
-      "ammo_shells",
-      "ammo_slugs",
-      "item_adrenaline",
-      "item_ancient_head",
-      "item_armor_body",
-      "item_armor_combat",
-      "item_armor_jacket",
-      "item_armor_shard",
-      "item_bandolier",
-      "item_breather",
-      "item_enviro",
-      "item_invulnerability",
-      "item_pack",
-      "item_power_screen",
-      "item_power_shield",
-      "item_quad",
-      "item_silencer",
-      "key_airstrike_target",
-      "key_blue_key",
-      "key_commander_head",
-      "key_data_cd",
-      "key_data_spinner",
-      "key_pass",
-      "key_pyramid",
-      "key_red_key",
-      "monster_sentinel",
-      "weapon_lasercannon"
-    ],
-    "missing_in_repo": [
-      "%s/listip.cfg",
-      "detpack",
-      "grenade",
-      "mine",
-      "monster_makron"
-    ],
-    "spawnflag_mismatches": {
-      "func_clock": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            4
-          ]
-        ]
-      },
-      "func_door": {
-        "checks": [
-          [],
-          [
-            1,
-            16,
-            64
-          ]
-        ]
-      },
-      "func_door_rotating": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            16,
-            64,
-            128
-          ]
-        ]
-      },
-      "func_door_secret": {
-        "checks": [
-          [
-            1
-          ],
-          [
-            1,
-            2,
-            4
-          ]
-        ]
-      },
-      "func_explosive": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            4
-          ]
-        ]
-      },
-      "func_object": {
-        "checks": [
-          [],
-          [
-            2,
-            4
-          ]
-        ]
-      },
-      "func_rotating": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            4,
-            8,
-            32,
-            64,
-            128
-          ]
-        ]
-      },
-      "func_train": {
-        "checks": [
-          [
-            8
-          ],
-          [
-            4
-          ]
-        ]
-      },
-      "func_wall": {
-        "checks": [
-          [],
-          [
-            1,
-            2,
-            4,
-            7,
-            8,
-            16
-          ]
         ],
-        "sets": [
-          [],
+        "offset_0x58": [
           [
-            1,
-            2
-          ]
-        ]
-      },
-      "func_water": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ],
-        "sets": [
-          [],
-          [
-            32
-          ]
-        ]
-      },
-      "light": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
-      "misc_camera": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
-      "misc_deadsoldier": {
-        "checks": [
-          [],
-          [
-            2,
-            4,
-            8,
-            16,
-            32
-          ]
-        ]
-      },
-      "misc_insane": {
-        "checks": [
-          [],
-          [
-            8,
-            16
-          ]
-        ]
-      },
-      "misc_screenfader": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
-      "monster_badass": {
-        "checks": [
-          [],
-          [
-            8
-          ]
-        ]
-      },
-      "monster_spider": {
-        "checks": [
-          [],
-          [
-            256
-          ]
-        ]
-      },
-      "target_actor": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
-      "target_speaker": {
-        "checks": [
-          [],
-          [
-            1
-          ]
-        ]
-      },
-      "trigger_hurt": {
-        "checks": [
-          [],
-          [
-            1,
-            2
-          ]
-        ]
-      },
-      "trigger_once": {
-        "sets": [
-          [],
-          [
-            4
-          ]
-        ]
-      },
-      "trigger_teleport": {
-        "checks": [
-          [
-            2,
-            16
+            {
+              "value": 1,
+              "offset": 88
+            }
           ],
+          null
+        ],
+        "offset_0x28": [
           [
-            1,
-            2,
-            4,
-            16
-          ]
+            {
+              "value": 1,
+              "offset": 40
+            }
+          ],
+          null
         ]
       }
     }
