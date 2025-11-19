@@ -111,6 +111,16 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
             "func_door should clear spawnflag bit 0 (START_OPEN) to mirror retail behaviour",
         )
 
+    def test_func_water_does_not_toggle_spawnflags(self) -> None:
+        current, _ = self._extract_manifest()
+        repo_manifest = current.get("combined", {}).get("repo", {})
+        water_flags = repo_manifest.get("func_water", {}).get("spawnflags", {})
+        self.assertNotIn(
+            32,
+            water_flags.get("sets", []),
+            "func_water should not rewrite spawnflags (e.g., DOOR_TOGGLE) when seeded",
+        )
+
 
 class SpawnManifestControllersTest(unittest.TestCase):
     def test_target_controllers_are_extracted(self) -> None:

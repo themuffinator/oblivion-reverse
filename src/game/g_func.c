@@ -1426,6 +1426,14 @@ START_OPEN causes the water to move to its destination when spawned and operate 
 2)	lava
 */
 
+/*
+=============
+SP_func_water
+
+Configures a moveable water brush without mutating spawnflags beyond the retail behaviour.
+=============
+*/
+
 void SP_func_water (edict_t *self)
 {
 	vec3_t	abs_movedir;
@@ -1483,9 +1491,6 @@ void SP_func_water (edict_t *self)
 	self->moveinfo.wait = self->wait;
 
 	self->use = door_use;
-
-	if (self->wait == -1)
-		self->spawnflags |= DOOR_TOGGLE;
 
 	self->classname = "func_door";
 
