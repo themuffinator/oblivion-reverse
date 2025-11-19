@@ -103,6 +103,25 @@ class HLILParserSpawnMapStrcmpTest(unittest.TestCase):
         self.assertIn("func_rotate_train", spawn_map)
         self.assertEqual(spawn_map["func_rotate_train"], "sub_10015750")
 
+    def test_spawn_map_includes_binary_table_entries(self) -> None:
+        parser = HLILParser(Path("references/HLIL/oblivion/gamex86.dll_hlil.txt"))
+
+        binary_entries = parser._spawn_entries_from_binary_tables()
+        expected = {
+            "weapon_grenadelauncher": "sub_10035260",
+            "ammo_bullets": "sub_1000bef0",
+            "func_button": "sub_10008d30",
+        }
+
+        for classname, func in expected.items():
+            self.assertIn(classname, binary_entries)
+            self.assertEqual(binary_entries[classname], func)
+
+        spawn_map = parser.spawn_map
+        for classname, func in expected.items():
+            self.assertIn(classname, spawn_map)
+            self.assertEqual(spawn_map[classname], func)
+
 
 if __name__ == "__main__":
     unittest.main()
