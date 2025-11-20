@@ -64,6 +64,7 @@ static void kigrax_begin_pain_stagger (edict_t *self);
 static void kigrax_finish_pain_stagger (edict_t *self);
 static void kigrax_spawn_debris (edict_t *self);
 static void kigrax_deadthink (edict_t *self);
+static void kigrax_dead (edict_t *self);
 
 static mframe_t kigrax_frames_hover[KIGRAX_FRAME_IDLE_END - KIGRAX_FRAME_IDLE_START + 1];
 static mframe_t kigrax_frames_scan[KIGRAX_FRAME_SCAN_END - KIGRAX_FRAME_SCAN_START + 1];
