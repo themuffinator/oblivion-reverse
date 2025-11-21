@@ -390,6 +390,7 @@ static void kigrax_attack_salvo (edict_t *self)
 	if (!(self->monsterinfo.aiflags & AI_DUCKED))
 	{
 		kigrax_set_attack_hull (self, true);
+		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
 		gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
 		self->count = 0;
 		self->timestamp = level.time;
@@ -398,6 +399,8 @@ static void kigrax_attack_salvo (edict_t *self)
 	if (!self->enemy)
 	{
 		self->count = ARRAY_LEN(kigrax_salvo_yaw_offsets);
+		self->timestamp = 0.0f;
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->monsterinfo.nextframe = self->s.frame + 1;
 	}
 
@@ -412,10 +415,11 @@ static void kigrax_attack_salvo (edict_t *self)
 
 		if (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
 		{
-			self->monsterinfo.nextframe = self->s.frame;
+			self->monsterinfo.aiflags |= AI_HOLD_FRAME;
 			return;
 		}
 
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->monsterinfo.nextframe = self->s.frame + 1;
 	}
 
@@ -423,6 +427,7 @@ static void kigrax_attack_salvo (edict_t *self)
 	{
 		self->timestamp = 0.0f;
 		self->count = 0;
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		kigrax_set_attack_hull (self, false);
 		kigrax_run_select (self);
 	}
