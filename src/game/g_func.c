@@ -1473,6 +1473,7 @@ void SP_func_water (edict_t *self)
 		VectorCopy (self->pos2, self->s.origin);
 		VectorCopy (self->pos1, self->pos2);
 		VectorCopy (self->s.origin, self->pos1);
+		Door_ClearStartOpenFlag (self);
 	}
 
 	VectorCopy (self->pos1, self->moveinfo.start_origin);

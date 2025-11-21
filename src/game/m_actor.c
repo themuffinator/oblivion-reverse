@@ -1321,8 +1321,24 @@ START_ON		actor immediately begins walking its path instead of waiting for a use
 WIMPY		reduce the actor's health so it can be dispatched quickly
 */
 
+/*
+=============
+SP_misc_actor
+
+Sanitize the actor spawnflags and apply the retail damage defaults before
+handing off to the Oblivion spawn helper.
+=============
+*/
 void SP_misc_actor (edict_t *self)
 {
+	self->spawnflags &= (ACTOR_SPAWNFLAG_AMBUSH |
+		ACTOR_SPAWNFLAG_TRIGGER_SPAWN |
+		ACTOR_SPAWNFLAG_SIGHT |
+		ACTOR_SPAWNFLAG_CORPSE |
+		ACTOR_SPAWNFLAG_START_ON |
+		ACTOR_SPAWNFLAG_WIMPY);
+	self->takedamage = DAMAGE_AIM;
+
 	if (!Actor_SpawnOblivion(self))
 		return;
 }
