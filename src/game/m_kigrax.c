@@ -41,6 +41,7 @@ enum
 #define KIGRAX_ATTACK_MAX_Z	0.0f
 #define KIGRAX_PAIN_STAGGER_TIME	0.5f
 #define KIGRAX_PAIN_COOLDOWN	1.5f
+#define KIGRAX_SALVO_INTERVAL	(FRAMETIME)
 
 static const float kigrax_salvo_yaw_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
 static const float kigrax_salvo_pitch_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
@@ -57,8 +58,8 @@ static void kigrax_idle_select (edict_t *self);
 static void kigrax_walk_select (edict_t *self);
 static void kigrax_run_select (edict_t *self);
 static void kigrax_attack_execute (edict_t *self);
-static void kigrax_fire (edict_t *self);
-static void kigrax_attack_cleanup (edict_t *self);
+static void kigrax_attack_salvo (edict_t *self);
+static void kigrax_fire_bolt (edict_t *self, int shot_index);
 static void kigrax_set_attack_hull (edict_t *self, qboolean crouched);
 static void kigrax_begin_pain_stagger (edict_t *self);
 static void kigrax_finish_pain_stagger (edict_t *self);
@@ -123,7 +124,7 @@ static mmove_t kigrax_move_attack = {
 	KIGRAX_FRAME_ATTACK_START,
 	KIGRAX_FRAME_ATTACK_END,
 	kigrax_frames_attack,
-	kigrax_attack_cleanup
+	kigrax_attack_salvo
 };
 static mmove_t kigrax_move_pain = {
 	KIGRAX_FRAME_PAIN_START,
@@ -179,7 +180,7 @@ static void kigrax_init_moves (void)
 	for (i = 0; i < ARRAY_LEN(kigrax_frames_attack); i++)
 		kigrax_frames_attack[i] = (mframe_t){ai_move, 0.0f, NULL};
 
-	kigrax_frames_attack[KIGRAX_FRAME_ATTACK_FIRE - KIGRAX_FRAME_ATTACK_START].thinkfunc = kigrax_fire;
+	kigrax_frames_attack[KIGRAX_FRAME_ATTACK_FIRE - KIGRAX_FRAME_ATTACK_START].thinkfunc = kigrax_attack_salvo;
 
 	for (i = 0; i < ARRAY_LEN(kigrax_frames_pain); i++)
 		kigrax_frames_pain[i] = (mframe_t){ai_move, 0.0f, NULL};
@@ -341,21 +342,22 @@ static void kigrax_set_attack_hull (edict_t *self, qboolean crouched)
 
 /*
 =============
-kigrax_fire
+kigrax_fire_bolt
 
-Fire the Kigrax four-shot salvo from the HLIL muzzle offset while the crouched
-attack hull is active.
+Fire a single Kigrax blaster bolt using the HLIL muzzle offsets and salvo
+aiming deltas.
 =============
 */
-static void kigrax_fire (edict_t *self)
+static void kigrax_fire_bolt (edict_t *self, int shot_index)
 {
-	vec3_t start, dir, forward, right, target, aim_angles;
-	int i;
+	vec3_t start, dir, forward, right, target, aim_angles, shot_angles, shot_dir;
 
 	if (!self->enemy)
 		return;
 
-	kigrax_set_attack_hull (self, true);
+	if (shot_index < 0 || shot_index >= ARRAY_LEN(kigrax_salvo_yaw_offsets))
+		shot_index = 0;
+
 	AngleVectors (self->s.angles, forward, right, NULL);
 	G_ProjectSource (self->s.origin, monster_flash_offset[MZ2_HOVER_BLASTER_1], forward, right, start);
 
@@ -366,35 +368,66 @@ static void kigrax_fire (edict_t *self)
 	VectorNormalize (dir);
 	vectoangles (dir, aim_angles);
 
-	gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
-	for (i = 0; i < ARRAY_LEN(kigrax_salvo_yaw_offsets); i++)
-	{
-		vec3_t shot_angles, shot_dir;
+	VectorCopy (aim_angles, shot_angles);
+	shot_angles[YAW] += kigrax_salvo_yaw_offsets[shot_index];
+	shot_angles[PITCH] += kigrax_salvo_pitch_offsets[shot_index];
+	shot_angles[ROLL] = 0.0f;
+	AngleVectors (shot_angles, shot_dir, NULL, NULL);
 
-		VectorCopy (aim_angles, shot_angles);
-		shot_angles[YAW] += kigrax_salvo_yaw_offsets[i];
-		shot_angles[PITCH] += kigrax_salvo_pitch_offsets[i];
-		shot_angles[ROLL] = 0.0f;
-		AngleVectors (shot_angles, shot_dir, NULL, NULL);
-
-		monster_fire_blaster (self, start, shot_dir, 8, 1000, MZ2_HOVER_BLASTER_1, EF_BLASTER);
-	}
+	monster_fire_blaster (self, start, shot_dir, 8, 1000, MZ2_HOVER_BLASTER_1, EF_BLASTER);
 }
 
 /*
 =============
-kigrax_attack_cleanup
+kigrax_attack_salvo
 
-Restore the standing hover hull once the salvo completes, then return to the
-run selector so the strafing dispatchers regain control.
+Mirror the HLIL 0x1002f030 helper by toggling the crouched hull, emitting the
+four-shot burst with retail spacing, and restoring the standing hull before
+returning to the strafing selector.
 =============
 */
-static void kigrax_attack_cleanup (edict_t *self)
+static void kigrax_attack_salvo (edict_t *self)
 {
-	kigrax_set_attack_hull (self, false);
-	kigrax_run_select (self);
-}
+	if (!(self->monsterinfo.aiflags & AI_DUCKED))
+	{
+		kigrax_set_attack_hull (self, true);
+		gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
+		self->count = 0;
+		self->timestamp = level.time;
+	}
 
+	if (!self->enemy)
+	{
+		self->count = ARRAY_LEN(kigrax_salvo_yaw_offsets);
+		self->monsterinfo.nextframe = self->s.frame + 1;
+	}
+
+	if ((self->monsterinfo.aiflags & AI_DUCKED) && self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
+	{
+		if (level.time >= self->timestamp)
+		{
+			kigrax_fire_bolt (self, self->count);
+			self->count++;
+			self->timestamp = level.time + KIGRAX_SALVO_INTERVAL;
+		}
+
+		if (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
+		{
+			self->monsterinfo.nextframe = self->s.frame;
+			return;
+		}
+
+		self->monsterinfo.nextframe = self->s.frame + 1;
+	}
+
+	if (self->s.frame == KIGRAX_FRAME_ATTACK_END)
+	{
+		self->timestamp = 0.0f;
+		self->count = 0;
+		kigrax_set_attack_hull (self, false);
+		kigrax_run_select (self);
+	}
+}
 /*
 =============
 kigrax_begin_pain_stagger
