@@ -62,7 +62,7 @@ static void kigrax_attack_salvo (edict_t *self);
 static void kigrax_fire_bolt (edict_t *self, int shot_index);
 static void kigrax_set_attack_hull (edict_t *self, qboolean crouched);
 static void kigrax_begin_pain_stagger (edict_t *self);
-static void kigrax_finish_pain_stagger (edict_t *self);
+static void kigrax_end_pain (edict_t *self);
 static void kigrax_spawn_debris (edict_t *self);
 static void kigrax_deadthink (edict_t *self);
 static void kigrax_dead (edict_t *self);
@@ -130,7 +130,7 @@ static mmove_t kigrax_move_pain = {
 	KIGRAX_FRAME_PAIN_START,
 	KIGRAX_FRAME_PAIN_END,
 	kigrax_frames_pain,
-	kigrax_run_select
+	kigrax_end_pain
 };
 static mmove_t kigrax_move_death = {
 	KIGRAX_FRAME_DEATH_START,
@@ -185,14 +185,13 @@ static void kigrax_init_moves (void)
 	for (i = 0; i < ARRAY_LEN(kigrax_frames_pain); i++)
 		kigrax_frames_pain[i] = (mframe_t){ai_move, 0.0f, NULL};
 
-	kigrax_frames_pain[0].thinkfunc = kigrax_begin_pain_stagger;
-	kigrax_frames_pain[ARRAY_LEN(kigrax_frames_pain) - 1].thinkfunc = kigrax_finish_pain_stagger;
+		kigrax_frames_pain[0].thinkfunc = kigrax_begin_pain_stagger;
 
 	for (i = 0; i < ARRAY_LEN(kigrax_frames_death); i++)
 		kigrax_frames_death[i] = (mframe_t){ai_move, 0.0f, NULL};
 
-	kigrax_frames_death[3].thinkfunc = kigrax_spawn_debris;
-	kigrax_frames_death[10].thinkfunc = kigrax_spawn_debris;
+		kigrax_frames_death[3].thinkfunc = kigrax_spawn_debris;
+		kigrax_frames_death[10].thinkfunc = kigrax_spawn_debris;
 
 	kigrax_moves_initialized = true;
 }
@@ -443,21 +442,24 @@ static void kigrax_begin_pain_stagger (edict_t *self)
 
 /*
 =============
-kigrax_finish_pain_stagger
+kigrax_end_pain
 
 Hold the final pain frame until the stagger timer elapses before allowing the
 mmove end callback to resume strafing.
 =============
 */
-static void kigrax_finish_pain_stagger (edict_t *self)
+static void kigrax_end_pain (edict_t *self)
 {
 	if (level.time < self->timestamp)
 	{
-		self->monsterinfo.nextframe = self->s.frame;
+		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
+		self->monsterinfo.nextframe = KIGRAX_FRAME_PAIN_END;
 		return;
 	}
 
+	self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 	self->timestamp = 0.0f;
+	kigrax_run_select (self);
 }
 
 /*

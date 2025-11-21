@@ -17,4 +17,8 @@
 | `kigrax_move_attack_prep` | `0x10058e60` | 139–149 | `sub_10001090` (`ai_move`) | Zero-distance hover that calls the run dispatcher on completion. |
 | `kigrax_move_attack` | `0x10058f58` | 150–168 | `sub_10001090` (`ai_move`) | Burst loop with `0x1002f030` as both the per-frame callback (frame 163) and the mmove end function. |
 
+## Pain and death wiring
+- The pain table spans frames 139–149 (`pain1`–`pain11`) with `ai_move` pacing. The first frame seeds `timestamp` for a `0.5` second stagger, and the final frame holds until the timer expires before feeding back into the strafing selectors.
+- The death table covers frames 150–168 (`death1`–`death19`) with debris spawns on `death4` and `death11` before the mmove end callback swaps the corpse to the hover-style toss hull and explosion thinker.
+
 `0x1002f030` toggles the bounding box, sets `movetype` flags, fires four energy bolts via `sub_1000dd30`, and then routes back into the `walk`/`run` selectors, which matches the strafing controller assignments described above.
