@@ -28,6 +28,8 @@ field_t fields[] = {
 	{"classname", FOFS(classname), F_LSTRING},
 	{"model", FOFS(model), F_LSTRING},
 	{"spawnflags", FOFS(spawnflags), F_INT},
+	{"state_flags", FOFS(state_flags), F_INT},
+	{"state_time", FOFS(state_time), F_FLOAT},
 	{"speed", FOFS(speed), F_FLOAT},
 	{"accel", FOFS(accel), F_FLOAT},
 	{"decel", FOFS(decel), F_FLOAT},

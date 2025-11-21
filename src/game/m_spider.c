@@ -40,6 +40,8 @@
 #define SPIDER_COMBO_FINISH_WINDOW	0.5f
 #define SPIDER_COMBO_RECOVER_COOLDOWN	1.0f
 
+#define SPIDER_STATE_COMBO_READY	0x00000001
+
 static int sound_sight;
 static int sound_search;
 static int sound_idle;
@@ -424,7 +426,7 @@ Return whether the melee combo chaining window is active.
 */
 static qboolean spider_combo_window_active(edict_t *self)
 {
-    return self->oblivion.spider_combo_time > level.time;
+	return (self->state_flags & SPIDER_STATE_COMBO_READY) && self->state_time > level.time;
 }
 
 /*
@@ -436,7 +438,8 @@ Arm or refresh the combo window using the supplied duration.
 */
 static void spider_set_combo_window(edict_t *self, float duration)
 {
-    self->oblivion.spider_combo_time = level.time + duration;
+	self->state_flags |= SPIDER_STATE_COMBO_READY;
+	self->state_time = level.time + duration;
 }
 
 /*
@@ -448,9 +451,10 @@ Reset the combo bookkeeping fields after attack interruption.
 */
 static void spider_clear_combo_state(edict_t *self)
 {
-    self->oblivion.spider_combo_stage = SPIDER_STAGE_NONE;
-    self->oblivion.spider_combo_last = SPIDER_CHAIN_PRIMARY;
-    self->oblivion.spider_combo_time = 0.0f;
+	self->oblivion.spider_combo_stage = SPIDER_STAGE_NONE;
+	self->oblivion.spider_combo_last = SPIDER_CHAIN_PRIMARY;
+	self->state_flags &= ~SPIDER_STATE_COMBO_READY;
+	self->state_time = 0.0f;
 }
 
 /*
