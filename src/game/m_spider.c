@@ -341,7 +341,7 @@ Play the heavy metal footstep for locomotion beats.
 */
 static void spider_step(edict_t *self)
 {
-    gi.sound(self, CHAN_BODY, sound_step, 1.0f, ATTN_NORM, 0.0f);
+	gi.sound(self, CHAN_AUTO, sound_step, 1.0f, ATTN_NORM, 0.0f);
 }
 
 /*
@@ -739,7 +739,7 @@ Play death audio, spawn gibs when appropriate, and trigger the death mmove.
 */
 static void spider_die(edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
-    gi.sound(self, CHAN_BODY, sound_death, 1.0f, ATTN_NORM, 0.0f);
+	gi.sound(self, CHAN_VOICE, sound_death, 1.0f, ATTN_NORM, 0.0f);
 
     if (self->health <= self->gib_health)
     {
@@ -784,7 +784,7 @@ void SP_monster_spider(edict_t *self)
     sound_melee[0] = gi.soundindex("gladiator/melee1.wav");
     sound_melee[1] = gi.soundindex("gladiator/melee2.wav");
     sound_melee[2] = gi.soundindex("gladiator/melee3.wav");
-    sound_step = gi.soundindex("mutant/step3.wav");
+	sound_step = gi.soundindex("mutant/thud1.wav");
 
     self->s.sound = sound_idle;
 
