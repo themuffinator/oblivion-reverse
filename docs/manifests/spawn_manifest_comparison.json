@@ -1871,6 +1871,155 @@
         null
       ]
     },
+    "func_clock": {
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 3600
+          }
+        ],
+        null
+      ]
+    },
+    "func_conveyor": {
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1120403456
+          },
+          {
+            "offset": 328,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
+    },
+    "func_door_secret": {
+      "offset_0x10": [
+        [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x14": [
+        [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x18": [
+        [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          },
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x290": [
+        [
+          {
+            "offset": 656,
+            "value": 1084227584
+          }
+        ],
+        null
+      ],
+      "offset_0x31c": [
+        [
+          {
+            "offset": 796,
+            "value": 1112014848
+          }
+        ],
+        null
+      ],
+      "offset_0x320": [
+        [
+          {
+            "offset": 800,
+            "value": 1112014848
+          }
+        ],
+        null
+      ],
+      "offset_0x324": [
+        [
+          {
+            "offset": 804,
+            "value": 1112014848
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
+    },
     "func_explosive": {
       "offset_0x104": [
         [
@@ -1917,6 +2066,159 @@
           {
             "offset": 248,
             "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "func_killbox": {
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "func_object": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          },
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 100
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          },
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ],
+      "offset_0xfc": [
+        [
+          {
+            "offset": 252,
+            "value": 33685507
+          }
+        ],
+        null
+      ]
+    },
+    "func_plat": {
+      "offset_0x10": [
+        [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x14": [
+        [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0x14c": [
+        [
+          {
+            "offset": 332,
+            "value": 1084227584
+          }
+        ],
+        null
+      ],
+      "offset_0x150": [
+        [
+          {
+            "offset": 336,
+            "value": 1084227584
+          }
+        ],
+        null
+      ],
+      "offset_0x18": [
+        [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x330": [
+        [
+          {
+            "offset": 816,
+            "value": 1
+          },
+          {
+            "offset": 816,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
           }
         ],
         null
@@ -2013,6 +2315,170 @@
           {
             "offset": 248,
             "value": 3
+          }
+        ],
+        null
+      ]
+    },
+    "func_timer": {
+      "offset_0x290": [
+        [
+          {
+            "offset": 656,
+            "value": 1065353216
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "func_train": {
+      "offset_0x10": [
+        [
+          {
+            "offset": 16,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x14": [
+        [
+          {
+            "offset": 20,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1120403456
+          }
+        ],
+        null
+      ],
+      "offset_0x18": [
+        [
+          {
+            "offset": 24,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x190": [
+        [
+          {
+            "offset": 400,
+            "value": 75
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 0
+          },
+          {
+            "offset": 580,
+            "value": 20
+          }
+        ],
+        null
+      ],
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 10
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
+    },
+    "func_wall": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          },
+          {
+            "offset": 248,
+            "value": 3
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "info_teleport_dest": {
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
           }
         ],
         null
@@ -3374,6 +3840,39 @@
           {
             "offset": 596,
             "value": 10
+          }
+        ],
+        null
+      ]
+    },
+    "item_health_large": {
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 25
+          }
+        ],
+        null
+      ]
+    },
+    "item_health_mega": {
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 100
+          }
+        ],
+        null
+      ]
+    },
+    "item_health_small": {
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 2
           }
         ],
         null
@@ -5616,6 +6115,46 @@
         null
       ]
     },
+    "light_mine1": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "light_mine2": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
     "misc_actor": {
       "offset_0x104": [
         [
@@ -5742,6 +6281,214 @@
           {
             "offset": 248,
             "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_banner": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_bigviper": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_blackhole": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x44": [
+        [
+          {
+            "offset": 68,
+            "value": 32
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3263168512
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3263168512
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1115684864
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1115684864
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1090519040
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_camera": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 8
+          }
+        ],
+        null
+      ],
+      "offset_0x290": [
+        [
+          {
+            "offset": 656,
+            "value": 1077936128
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_camera_target": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 8
+          }
+        ],
+        null
+      ],
+      "offset_0x1e0": [
+        [
+          {
+            "offset": 480,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
           }
         ],
         null
@@ -5951,6 +6698,425 @@
         null
       ]
     },
+    "misc_easterchick2": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x38": [
+        [
+          {
+            "offset": 56,
+            "value": 248
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_eastertank": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x38": [
+        [
+          {
+            "offset": 56,
+            "value": 254
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_explobox": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        null
+      ],
+      "offset_0x190": [
+        [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 10
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 150
+          }
+        ],
+        null
+      ],
+      "offset_0x35c": [
+        [
+          {
+            "offset": 860,
+            "value": 1024
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3246391296
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3246391296
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1098907648
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1098907648
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1109393408
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_gib_arm": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        null
+      ],
+      "offset_0x22c": [
+        [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_gib_head": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        null
+      ],
+      "offset_0x22c": [
+        [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_gib_leg": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        null
+      ],
+      "offset_0x22c": [
+        [
+          {
+            "offset": 556,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "misc_satellite_dish": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3263168512
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3263168512
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1115684864
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1115684864
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1124073472
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
     "misc_screenfader": {
       "offset_0xf8": [
         [
@@ -6045,6 +7211,234 @@
         null
       ]
     },
+    "misc_teleporter": {
+      "offset_0x3c": [
+        [
+          {
+            "offset": 60,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x40": [
+        [
+          {
+            "offset": 64,
+            "value": 131072
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3238002688
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3238002688
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 1090519040
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1090519040
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1090519040
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1103101952
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          },
+          {
+            "offset": 248,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "misc_teleporter_dest": {
+      "offset_0x3c": [
+        [
+          {
+            "offset": 60,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
+    "misc_viper_bomb": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 1000
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_commander_body": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x108": [
+        [
+          {
+            "offset": 264,
+            "value": 16
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1111490560
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ]
+    },
     "monster_jorg": {
       "offset_0x12c": [
         [
@@ -6083,6 +7477,89 @@
         null
       ]
     },
+    "monster_kigrax": {
+      "offset_0x1e4": [
+        [
+          {
+            "offset": 484,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0x23c": [
+        [
+          {
+            "offset": 572,
+            "value": 1119092736
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3248488448
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3248488448
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1101004800
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 1094713344
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 5
+          }
+        ],
+        null
+      ]
+    },
     "monster_makron": {
       "offset_0x12c": [
         [
@@ -6116,6 +7593,71 @@
           {
             "offset": 912,
             "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_mutant": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 5
+          }
+        ],
+        null
+      ],
+      "offset_0x190": [
+        [
+          {
+            "offset": 400,
+            "value": 300
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 300
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 4294967176
+          }
+        ],
+        null
+      ],
+      "offset_0x364": [
+        [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        null
+      ],
+      "offset_0x37c": [
+        [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
           }
         ],
         null
@@ -6177,6 +7719,46 @@
         null
       ]
     },
+    "monster_soldier": {
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 30
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ],
+        null
+      ]
+    },
+    "monster_soldier_deatom": {
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 40
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ],
+        null
+      ]
+    },
     "monster_soldier_light": {
       "offset_0x220": [
         [
@@ -6201,6 +7783,171 @@
           {
             "offset": 60,
             "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "monster_soldier_ss": {
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 40
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 4294967266
+          }
+        ],
+        null
+      ]
+    },
+    "monster_spider": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 5
+          },
+          {
+            "offset": 260,
+            "value": 7
+          }
+        ],
+        null
+      ],
+      "offset_0x190": [
+        [
+          {
+            "offset": 400,
+            "value": 400
+          }
+        ],
+        null
+      ],
+      "offset_0x1ec": [
+        [
+          {
+            "offset": 492,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 400
+          },
+          {
+            "offset": 544,
+            "value": 4294967295
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 4294967121
+          }
+        ],
+        null
+      ],
+      "offset_0x358": [
+        [
+          {
+            "offset": 856,
+            "value": 268814848
+          }
+        ],
+        null
+      ],
+      "offset_0x364": [
+        [
+          {
+            "offset": 868,
+            "value": 1065353216
+          }
+        ],
+        null
+      ],
+      "offset_0x37c": [
+        [
+          {
+            "offset": 892,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xbc": [
+        [
+          {
+            "offset": 188,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc0": [
+        [
+          {
+            "offset": 192,
+            "value": 3254779904
+          }
+        ],
+        null
+      ],
+      "offset_0xc4": [
+        [
+          {
+            "offset": 196,
+            "value": 3253731328
+          }
+        ],
+        null
+      ],
+      "offset_0xc8": [
+        [
+          {
+            "offset": 200,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xcc": [
+        [
+          {
+            "offset": 204,
+            "value": 1107296256
+          }
+        ],
+        null
+      ],
+      "offset_0xd0": [
+        [
+          {
+            "offset": 208,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
           }
         ],
         null
@@ -6357,50 +8104,96 @@
       ]
     },
     "target_actor": {
-      "offset_0x128": [
+      "offset_0x14": [
         [
           {
-            "offset": 296,
-            "value": 0
-          },
-          {
-            "offset": 296,
-            "value": 0
+            "offset": 20,
+            "value": 1135869952
           }
         ],
         null
       ],
-      "offset_0x1dc": [
+      "offset_0x148": [
         [
           {
-            "offset": 476,
-            "value": 0
+            "offset": 328,
+            "value": 1128792064
           }
         ],
         null
       ],
-      "offset_0x1e0": [
+      "offset_0xb8": [
         [
           {
-            "offset": 480,
-            "value": 0
+            "offset": 184,
+            "value": 1
           }
         ],
         null
       ],
-      "offset_0x390": [
+      "offset_0xf8": [
         [
           {
-            "offset": 912,
-            "value": 1287568416
-          },
+            "offset": 248,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_blaster": {
+      "offset_0x148": [
+        [
           {
-            "offset": 912,
-            "value": 1287568416
-          },
+            "offset": 328,
+            "value": 1148846080
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
           {
-            "offset": 912,
-            "value": 1287568416
+            "offset": 580,
+            "value": 15
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_character": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x38": [
+        [
+          {
+            "offset": 56,
+            "value": 12
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
           }
         ],
         null
@@ -6426,12 +8219,138 @@
         null
       ]
     },
+    "target_crosslevel_trigger": {
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_earthquake": {
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1128792064
+          }
+        ],
+        null
+      ],
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 5
+          }
+        ],
+        null
+      ]
+    },
+    "target_explosion": {
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_goal": {
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_railgun": {
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 150
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_rocket": {
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 100
+          }
+        ],
+        null
+      ]
+    },
+    "target_secret": {
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
     "target_spawner": {
       "offset_0xb8": [
         [
           {
             "offset": 184,
             "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "target_splash": {
+      "offset_0x254": [
+        [
+          {
+            "offset": 596,
+            "value": 32
+          }
+        ],
+        null
+      ],
+      "offset_0xb8": [
+        [
+          {
+            "offset": 184,
+            "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "trigger_always": {
+      "offset_0x294": [
+        [
+          {
+            "offset": 660,
+            "value": 1045220557
           }
         ],
         null
@@ -6452,6 +8371,74 @@
           {
             "offset": 656,
             "value": 3212836864
+          }
+        ],
+        null
+      ]
+    },
+    "trigger_hurt": {
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 5
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 1
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "trigger_misc_camera": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 1
+          },
+          {
+            "offset": 248,
+            "value": 0
+          }
+        ],
+        null
+      ]
+    },
+    "trigger_monsterjump": {
+      "offset_0x14": [
+        [
+          {
+            "offset": 20,
+            "value": 1135869952
+          }
+        ],
+        null
+      ],
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1128792064
           }
         ],
         null
@@ -6491,11 +8478,22 @@
       ]
     },
     "trigger_once": {
-      "offset_0x1fc": [
+      "offset_0x290": [
         [
           {
-            "offset": 508,
-            "value": 0
+            "offset": 656,
+            "value": 3212836864
+          }
+        ],
+        null
+      ]
+    },
+    "trigger_push": {
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1148846080
           }
         ],
         null
@@ -6538,6 +8536,138 @@
           {
             "offset": 248,
             "value": 1
+          }
+        ],
+        null
+      ]
+    },
+    "turret_base": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
+    },
+    "turret_breach": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x148": [
+        [
+          {
+            "offset": 328,
+            "value": 1112014848
+          }
+        ],
+        null
+      ],
+      "offset_0x244": [
+        [
+          {
+            "offset": 580,
+            "value": 10
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
+    },
+    "turret_driver": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x190": [
+        [
+          {
+            "offset": 400,
+            "value": 200
+          }
+        ],
+        null
+      ],
+      "offset_0x220": [
+        [
+          {
+            "offset": 544,
+            "value": 100
+          }
+        ],
+        null
+      ],
+      "offset_0x228": [
+        [
+          {
+            "offset": 552,
+            "value": 0
+          }
+        ],
+        null
+      ],
+      "offset_0x23c": [
+        [
+          {
+            "offset": 572,
+            "value": 24
+          }
+        ],
+        null
+      ],
+      "offset_0x240": [
+        [
+          {
+            "offset": 576,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0xfc": [
+        [
+          {
+            "offset": 252,
+            "value": 33685507
           }
         ],
         null
@@ -9359,106 +11489,52 @@
         ],
         null
       ]
+    },
+    "worldspawn": {
+      "offset_0x104": [
+        [
+          {
+            "offset": 260,
+            "value": 2
+          }
+        ],
+        null
+      ],
+      "offset_0x28": [
+        [
+          {
+            "offset": 40,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0x58": [
+        [
+          {
+            "offset": 88,
+            "value": 1
+          }
+        ],
+        null
+      ],
+      "offset_0xf8": [
+        [
+          {
+            "offset": 248,
+            "value": 3
+          }
+        ],
+        null
+      ]
     }
   },
   "missing_in_hlil": [
-    "func_clock",
-    "func_conveyor",
-    "func_door_secret",
-    "func_group",
-    "func_killbox",
-    "func_object",
-    "func_plat",
-    "func_rotating",
-    "func_timer",
-    "func_train",
-    "func_wall",
-    "func_water",
-    "info_notnull",
-    "info_player_coop",
-    "info_player_intermission",
-    "info_player_start",
-    "info_teleport_dest",
-    "item_health_large",
-    "item_health_mega",
-    "item_health_small",
-    "light_mine1",
-    "light_mine2",
-    "misc_banner",
-    "misc_bigviper",
-    "misc_blackhole",
-    "misc_camera",
-    "misc_camera_target",
-    "misc_easterchick2",
-    "misc_eastertank",
-    "misc_explobox",
-    "misc_gib_arm",
-    "misc_gib_head",
-    "misc_gib_leg",
-    "misc_insane",
-    "misc_satellite_dish",
-    "misc_teleporter",
-    "misc_teleporter_dest",
-    "misc_viper",
-    "misc_viper_bomb",
-    "monster_badass",
-    "monster_berserk",
-    "monster_boss2",
-    "monster_boss3_stand",
-    "monster_brain",
-    "monster_chick",
-    "monster_commander_body",
-    "monster_flipper",
-    "monster_floater",
-    "monster_flyer",
-    "monster_gladiator",
-    "monster_gunner",
-    "monster_infantry",
-    "monster_kigrax",
-    "monster_medic",
-    "monster_mutant",
     "monster_sentinel",
-    "monster_soldier",
-    "monster_soldier_deatom",
-    "monster_soldier_ss",
-    "monster_spider",
-    "monster_tank_commander",
-    "path_corner",
-    "target_blaster",
-    "target_character",
-    "target_crosslevel_trigger",
-    "target_earthquake",
-    "target_explosion",
-    "target_goal",
-    "target_help",
-    "target_laser",
-    "target_railgun",
-    "target_rocket",
-    "target_secret",
-    "target_speaker",
-    "target_splash",
-    "target_string",
-    "target_temp_entity",
-    "trigger_always",
-    "trigger_elevator",
-    "trigger_gravity",
-    "trigger_hurt",
-    "trigger_key",
-    "trigger_misc_camera",
-    "trigger_monsterjump",
-    "trigger_push",
-    "trigger_relay",
-    "turret_base",
-    "turret_breach",
-    "turret_driver",
-    "weapon_lasercannon",
-    "worldspawn"
+    "weapon_lasercannon"
   ],
   "missing_in_repo": [
-    "\u0012",
     "%s/listip.cfg",
-    "0\u0014",
-    "P\u0013",
     "detpack",
     "grenade",
     "j",
@@ -9553,6 +11629,12 @@
           16,
           64
         ]
+      ],
+      "clears": [
+        [],
+        [
+          1
+        ]
       ]
     },
     "func_door_rotating": {
@@ -9564,6 +11646,20 @@
           16,
           64,
           128
+        ]
+      ],
+      "clears": [
+        [],
+        [
+          1
+        ]
+      ]
+    },
+    "func_door_secret": {
+      "clears": [
+        [],
+        [
+          1
         ]
       ]
     },
@@ -9577,6 +11673,71 @@
           1,
           2,
           4
+        ]
+      ]
+    },
+    "func_object": {
+      "checks": [
+        [],
+        [
+          2,
+          4
+        ]
+      ]
+    },
+    "func_rotating": {
+      "checks": [
+        [],
+        [
+          1,
+          2,
+          4,
+          8,
+          32,
+          64,
+          128
+        ]
+      ]
+    },
+    "func_train": {
+      "checks": [
+        [
+          4,
+          8
+        ],
+        [
+          4
+        ]
+      ]
+    },
+    "func_wall": {
+      "checks": [
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          2,
+          4,
+          7,
+          8,
+          16
+        ]
+      ],
+      "sets": [
+        [],
+        [
+          1,
+          2
+        ]
+      ]
+    },
+    "func_water": {
+      "checks": [
+        [],
+        [
+          1
         ]
       ]
     },
@@ -9723,6 +11884,23 @@
         []
       ]
     },
+    "misc_camera": {
+      "checks": [
+        [],
+        [
+          1
+        ]
+      ]
+    },
+    "misc_insane": {
+      "checks": [
+        [],
+        [
+          8,
+          16
+        ]
+      ]
+    },
     "misc_screenfader": {
       "checks": [
         [],
@@ -9731,24 +11909,38 @@
         ]
       ]
     },
-    "trigger_once": {
+    "monster_badass": {
+      "checks": [
+        [],
+        [
+          8
+        ]
+      ]
+    },
+    "monster_spider": {
       "checks": [
         [
-          8,
-          16,
-          131072
+          8
         ],
+        [
+          256
+        ]
+      ]
+    },
+    "target_speaker": {
+      "checks": [
+        [],
         [
           1
         ]
-      ],
-      "sets": [
+      ]
+    },
+    "trigger_push": {
+      "checks": [
         [
-          1
+          2
         ],
-        [
-          4
-        ]
+        []
       ]
     },
     "trigger_teleport": {

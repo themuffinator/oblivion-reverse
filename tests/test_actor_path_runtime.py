@@ -24,6 +24,10 @@ def extract_function_block(source: str, function_name: str) -> str:
                 else:
                     match_start += 1
                 brace_index = source.find("{", alt_match.end())
+                semicolon_index = source.find(";", alt_match.end())
+                if semicolon_index != -1 and semicolon_index < brace_index:
+                    alt_match = secondary.search(source, alt_match.end())
+                    continue
                 if brace_index != -1:
                     start = brace_index + 1
                     depth = 1

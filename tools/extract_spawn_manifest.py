@@ -612,31 +612,40 @@ class HLILParser:
                     break
                 idx += 1
                 continue
-            invalid_streak = 0
-            name_ptr = values[0]
-            func_ptr = values[1]
+
             text_ptr = values[0x28 // 4]
-            if not name_ptr or not func_ptr or not self._is_valid_function_address(func_ptr):
-                idx += 1
-                continue
-            classname = self._resolve_classname_from_pointer(name_ptr, literal_map)
-            if not classname:
-                classname = self._read_c_string(name_ptr)
-            if not classname:
-                idx += 1
-                continue
             text_label = self._read_c_string(text_ptr) if text_ptr else None
-            record = {
-                "index": idx,
-                "address": base_address + idx * entry_size,
-                "classname": self._normalize_classname(classname),
-                "function": f"sub_{func_ptr:08x}",
-                "text_label": text_label,
-                "name_pointer": name_ptr,
-                "text_pointer": text_ptr,
-                "function_pointer": func_ptr,
-            }
-            records.append(record)
+
+            for pair_offset in range(0, entry_size, 8):
+                name_ptr, func_ptr = values[pair_offset // 4 : pair_offset // 4 + 2]
+                if not name_ptr or not func_ptr:
+                    continue
+                if not self._is_valid_function_address(func_ptr):
+                    continue
+                classname = self._resolve_classname_from_pointer(name_ptr, literal_map)
+                if not classname:
+                    classname = self._read_c_string(name_ptr)
+                if not classname:
+                    continue
+
+                normalized = self._normalize_classname(classname)
+                if not re.match(r"^[A-Za-z][A-Za-z0-9_]*$", normalized):
+                    continue
+
+                record = {
+                    "index": idx,
+                    "address": base_address + idx * entry_size + pair_offset,
+                    "pair_offset": pair_offset,
+                    "classname": normalized,
+                    "function": f"sub_{func_ptr:08x}",
+                    "text_label": text_label,
+                    "name_pointer": name_ptr,
+                    "text_pointer": text_ptr,
+                    "function_pointer": func_ptr,
+                }
+                records.append(record)
+
+            invalid_streak = 0 if any(r.get("index") == idx for r in records) else invalid_streak + 1
             idx += 1
         self._spawn_table_records_cache = records
         return records
