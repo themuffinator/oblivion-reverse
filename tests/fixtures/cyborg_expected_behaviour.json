@@ -1,12 +1,12 @@
 {
   "frame_sequences": {
     "cyborg_move_stand": {
-      "start": 125,
+      "start": 108,
       "end": 125
     },
     "cyborg_move_idle": {
-      "start": 125,
-      "end": 125
+      "start": 82,
+      "end": 107
     },
     "cyborg_move_walk": {
       "start": 18,

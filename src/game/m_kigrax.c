@@ -388,21 +388,24 @@ returning to the strafing selector.
 static void kigrax_attack_salvo (edict_t *self)
 {
 	if (!(self->monsterinfo.aiflags & AI_DUCKED))
-	{
-		kigrax_set_attack_hull (self, true);
-		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
-		gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
-		self->count = 0;
-		self->timestamp = level.time;
-	}
+{
+	kigrax_set_attack_hull (self, true);
+	self->monsterinfo.aiflags |= AI_HOLD_FRAME;
+	gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
+	self->count = 0;
+	self->timestamp = level.time;
+}
 
 	if (!self->enemy)
-	{
+{
+		kigrax_set_attack_hull (self, false);
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->count = ARRAY_LEN(kigrax_salvo_yaw_offsets);
 		self->timestamp = 0.0f;
 		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->monsterinfo.nextframe = self->s.frame + 1;
-	}
+		kigrax_run_select (self);
+}
 
 	if ((self->monsterinfo.aiflags & AI_DUCKED) && self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
 	{

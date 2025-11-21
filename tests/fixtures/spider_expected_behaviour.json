@@ -1,0 +1,38 @@
+{
+  "mmoves": {
+    "spider_move_stand": {"start": 0, "end": 54},
+    "spider_move_boss_idle": {"start": 0, "end": 7},
+    "spider_move_walk": {"start": 55, "end": 64},
+    "spider_move_run": {"start": 81, "end": 85},
+    "spider_move_combo_primary_entry": {"start": 86, "end": 88},
+    "spider_move_combo_secondary_entry": {"start": 89, "end": 90},
+    "spider_move_attack_primary": {"start": 65, "end": 74},
+    "spider_move_attack_secondary": {"start": 75, "end": 80},
+    "spider_move_attack_finisher": {"start": 99, "end": 103},
+    "spider_move_attack_recover": {"start": 104, "end": 110},
+    "spider_move_pain": {"start": 91, "end": 98},
+    "spider_move_death": {"start": 111, "end": 124}
+  },
+  "audio": {
+    "step": "mutant/thud1.wav",
+    "death_voice": "gladiator/glddeth1.wav",
+    "death_thud": "mutant/thud2.wav",
+    "pain": ["gladiator/pain.wav", "gladiator/gldpain2.wav"],
+    "sight": "spider/sight.wav",
+    "search": "gladiator/gldsrch1.wav"
+  },
+  "spawnflags": {
+    "boss_flag": 256,
+    "boss_idle_frames": 8,
+    "boss_hull": {
+      "mins": [-48.0, -48.0, -40.0],
+      "maxs": [48.0, 48.0, 48.0]
+    }
+  },
+  "combo_timing": {
+    "first": 0.8,
+    "chain": 0.6,
+    "finish": 0.5,
+    "recover_cooldown": 1.0
+  }
+}

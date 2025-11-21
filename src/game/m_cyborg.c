@@ -42,19 +42,40 @@ static int sound_death;
 static int sound_attack[3];
 static int sound_thud;
 
+/*
+=============
+cyborg_step
+
+Play one of the retail footstep samples while advancing.
+=============
+*/
 static void cyborg_step (edict_t *self)
 {
-    gi.sound (self, CHAN_BODY, sound_step[rand () % 3], 1, ATTN_NORM, 0);
+	gi.sound (self, CHAN_BODY, sound_step[rand () % 3], 1, ATTN_NORM, 0);
 }
 
+/*
+=============
+cyborg_sight
+
+Emit the HLIL sight bark when the cyborg first spots an enemy.
+=============
+*/
 static void cyborg_sight (edict_t *self, edict_t *other)
 {
 	gi.sound (self, CHAN_VOICE, sound_sight, 1, ATTN_NORM, 0);
 }
 
+/*
+=============
+cyborg_search
+
+Loop the search bark while the cyborg is hunting for enemies.
+=============
+*/
 static void cyborg_search (edict_t *self)
 {
-    gi.sound (self, CHAN_VOICE, sound_search, 1, ATTN_IDLE, 0);
+	gi.sound (self, CHAN_VOICE, sound_search, 1, ATTN_IDLE, 0);
 }
 
 static vec3_t cyborg_muzzle_right = {15.0f, 12.0f, 12.0f};
@@ -496,11 +517,25 @@ static void cyborg_locomotion_resume (edict_t *self)
 	}
 }
 
+/*
+=============
+cyborg_walk
+
+Dispatch walk requests to the locomotion staging helper.
+=============
+*/
 static void cyborg_walk (edict_t *self)
 {
 	cyborg_locomotion_stage (self);
 }
 
+/*
+=============
+cyborg_run
+
+Delegate run requests through the locomotion selector.
+=============
+*/
 static void cyborg_run (edict_t *self)
 {
 	cyborg_locomotion_stage (self);
@@ -519,6 +554,13 @@ static float cyborg_attack_roll (void)
 	return (rand () & 0x7fff) * (1.0f / 32768.0f);
 }
 
+/*
+=============
+cyborg_attack
+
+Entry point that routes into the retail-style attack dispatcher.
+=============
+*/
 static void cyborg_attack (edict_t *self)
 {
 	cyborg_attack_dispatch (self);

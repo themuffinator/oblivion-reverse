@@ -198,6 +198,30 @@ class KigraxPainRegression(unittest.TestCase):
             "Pain cooldown no longer matches the HLIL stagger timer",
         )
 
+
+class KigraxAttackBehaviourRegression(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.source_text = KIGRAX_SOURCE.read_text(encoding="utf-8")
+
+    def test_attack_salvo_toggles_hull_and_resumes_run(self) -> None:
+        salvo_block = extract_function_block(self.source_text, "kigrax_attack_salvo")
+        self.assertIn(
+            "kigrax_set_attack_hull (self, true);",
+            salvo_block,
+            "Salvo routine no longer switches into the crouched hull",
+        )
+        self.assertIn(
+            "kigrax_set_attack_hull (self, false);",
+            salvo_block,
+            "Salvo routine never restores the standing hull",
+        )
+        self.assertIn(
+            "kigrax_run_select (self);",
+            salvo_block,
+            "Salvo end handler must feed back into the strafing selector",
+        )
+
     def test_pain_plays_both_voice_slots(self) -> None:
         pain_block = extract_function_block(self.source_text, "kigrax_pain")
         self.assertIn(
