@@ -18314,7 +18314,7 @@
     },
     "monster_boss3_stand": {
       "defaults": {
-        "s.frame": 168.0
+        "s.frame": 196.0
       },
       "function": "SP_monster_boss3_stand",
       "spawnflags": {
@@ -18510,11 +18510,7 @@
       }
     },
     "monster_makron": {
-      "defaults": {
-        "gib_health": -2000.0,
-        "health": 3000.0,
-        "mass": 500.0
-      },
+      "defaults": {},
       "function": "SP_monster_makron",
       "spawnflags": {
         "assignments": [],

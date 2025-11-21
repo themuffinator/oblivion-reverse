@@ -923,9 +923,25 @@ class HLILParser:
     def _logged_spawn_entries(self) -> Dict[str, Dict[str, object]]:
         if self._logged_spawn_entries_cache is not None:
             return self._logged_spawn_entries_cache
+        persisted_entries = self._load_persisted_sub_1000b150_map()
+        interpreted_entries = self._interpret_sub_1000b150_calls()
+
+        entries: Dict[str, Dict[str, object]] = {**persisted_entries}
+        for classname, record in interpreted_entries.items():
+            existing = entries.get(classname)
+            if existing:
+                merged_sources = sorted(
+                    set(existing.get("sources", [])) | set(record.get("sources", []))
+                )
+                record["sources"] = merged_sources
+            entries[classname] = record
+
+        self._logged_spawn_entries_cache = entries
+        return entries
+
+    def _interpret_sub_1000b150_calls(self) -> Dict[str, Dict[str, object]]:
         literal_sources = self._sub_1000b150_literal_sources()
         if not literal_sources:
-            self._logged_spawn_entries_cache = {}
             return {}
         text_map: Dict[str, Dict[str, object]] = {}
         for record in self._spawn_table_records():
@@ -933,6 +949,7 @@ class HLILParser:
             if not text_label:
                 continue
             text_map.setdefault(text_label.lower(), record)
+
         entries: Dict[str, Dict[str, object]] = {}
         for literal, source_paths in literal_sources.items():
             record = text_map.get(literal.lower())
@@ -940,16 +957,48 @@ class HLILParser:
                 continue
             classname = record.get("classname")
             function = record.get("function")
-            if not classname or not function:
+            index = record.get("index")
+            if classname is None or function is None or index is None:
                 continue
-            entries[classname] = {
-                "classname": classname,
+            normalized = self._normalize_classname(classname)
+            entries[normalized] = {
+                "classname": normalized,
                 "function": function,
-                "index": record.get("index", -1),
+                "index": int(index),
                 "literal": literal,
                 "sources": sorted(source_paths),
             }
-        self._logged_spawn_entries_cache = entries
+
+        return entries
+
+    def _load_persisted_sub_1000b150_map(self) -> Dict[str, Dict[str, object]]:
+        interpreted_path = self.path.parent / "interpreted" / "sub_1000b150_map.json"
+        entries: Dict[str, Dict[str, object]] = {}
+        if not interpreted_path.is_file():
+            return entries
+        try:
+            data = json.loads(interpreted_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            return entries
+        if not isinstance(data, list):
+            return entries
+        for record in data:
+            if not isinstance(record, dict):
+                continue
+            classname = record.get("classname")
+            function = record.get("function")
+            index = record.get("index")
+            literal = record.get("literal")
+            if classname is None or function is None or index is None or literal is None:
+                continue
+            normalized = self._normalize_classname(str(classname))
+            entries[normalized] = {
+                "classname": normalized,
+                "function": str(function),
+                "index": int(index),
+                "literal": str(literal),
+                "sources": sorted(record.get("sources", [])),
+            }
         return entries
 
     def sub_1000b150_logged_map(self) -> List[Dict[str, object]]:
