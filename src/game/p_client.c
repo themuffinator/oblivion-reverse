@@ -36,6 +36,13 @@ void SP_misc_teleporter_dest (edict_t *ent);
 // we use carnal knowledge of the maps to fix the coop spot targetnames to match
 // that of the nearest named single player spot
 
+/*
+=============
+SP_FixCoopSpots
+
+Fixes coop spawn targetnames by matching them to the nearest single player spot.
+=============
+*/
 static void SP_FixCoopSpots (edict_t *self)
 {
 	edict_t	*spot;
@@ -67,6 +74,13 @@ static void SP_FixCoopSpots (edict_t *self)
 // some maps don't have any coop spots at all, so we need to create them
 // where they should have been
 
+/*
+=============
+SP_CreateCoopSpots
+
+Creates missing coop spawn spots on maps that lack them.
+=============
+*/
 static void SP_CreateCoopSpots (edict_t *self)
 {
 	edict_t	*spot;
@@ -105,6 +119,13 @@ static void SP_CreateCoopSpots (edict_t *self)
 /*QUAKED info_player_start (1 0 0) (-16 -16 -24) (16 16 32)
 The normal starting point for a level.
 */
+/*
+=============
+SP_info_player_start
+
+Sets up coop behavior for the starting player spawn point.
+=============
+*/
 void SP_info_player_start(edict_t *self)
 {
 	if (!coop->value)
@@ -120,6 +141,13 @@ void SP_info_player_start(edict_t *self)
 /*QUAKED info_player_deathmatch (1 0 1) (-16 -16 -24) (16 16 32)
 potential spawning position for deathmatch games
 */
+/*
+=============
+SP_info_player_deathmatch
+
+Configures deathmatch player spawn points and teleporter destinations.
+=============
+*/
 void SP_info_player_deathmatch(edict_t *self)
 {
 	if (!deathmatch->value)
@@ -134,6 +162,13 @@ void SP_info_player_deathmatch(edict_t *self)
 potential spawning position for coop games
 */
 
+/*
+=============
+SP_info_player_coop
+
+Initializes coop spawn points and applies map-specific fixes.
+=============
+*/
 void SP_info_player_coop(edict_t *self)
 {
 	if (!coop->value)
@@ -168,6 +203,13 @@ void SP_info_player_coop(edict_t *self)
 The deathmatch intermission point will be at one of these
 Use 'angles' instead of 'angle', so you can set pitch or roll as well as yaw.  'pitch yaw roll'
 */
+/*
+=============
+SP_info_player_intermission
+
+Defines a deathmatch intermission point.
+=============
+*/
 void SP_info_player_intermission(void)
 {
 }
@@ -176,12 +218,26 @@ void SP_info_player_intermission(void)
 //=======================================================================
 
 
+/*
+=============
+player_pain
+
+Placeholder for player pain handling; actual processing occurs elsewhere.
+=============
+*/
 void player_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
 	// player pain is handled at the end of the frame in P_DamageFeedback
 }
 
 
+/*
+=============
+IsFemale
+
+Determines whether a player's gender is female.
+=============
+*/
 qboolean IsFemale (edict_t *ent)
 {
 	char		*info;
@@ -195,6 +251,13 @@ qboolean IsFemale (edict_t *ent)
 	return false;
 }
 
+/*
+=============
+IsNeutral
+
+Determines whether a player's gender is unspecified.
+=============
+*/
 qboolean IsNeutral (edict_t *ent)
 {
 	char		*info;
@@ -208,6 +271,13 @@ qboolean IsNeutral (edict_t *ent)
 	return false;
 }
 
+/*
+=============
+ClientObituary
+
+Broadcasts death messages and adjusts scoring based on cause of death.
+=============
+*/
 void ClientObituary (edict_t *self, edict_t *inflictor, edict_t *attacker)
 {
 	int			mod;
