@@ -12,8 +12,8 @@ Oblivion Reverse is a community-driven effort to reverse engineer and document t
 
 ## Getting Started
 ### Prerequisites
-- A C++20-compatible compiler (e.g., GCC, Clang, or MSVC).
-- CMake 3.20 or later.
+- A C11-compatible C compiler (e.g., GCC, Clang, or MSVC) matching the CMake configuration.
+- CMake 3.16 or later.
 - Python 3.9+ for auxiliary tooling and scripts located in `docs/` and `references/`.
 - Git LFS for handling large binary assets in the `pack/` directory.
 
