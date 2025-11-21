@@ -325,8 +325,8 @@ After the counter has been triggered "count" times (default 2), it will fire all
 
 void trigger_counter_use(edict_t *self, edict_t *other, edict_t *activator)
 {
-	if (self->count == 0)
-		return;
+if (self->count == 0)
+return;
 	
 	self->count--;
 
@@ -354,6 +354,8 @@ void SP_trigger_counter (edict_t *self)
 	self->wait = -1;
 	if (!self->count)
 		self->count = 2;
+
+	self->health = self->count;
 
 	self->use = trigger_counter_use;
 }
@@ -681,6 +683,9 @@ static void trigger_teleport_touch(edict_t *self, edict_t *other, cplane_t *plan
 	vec3_t dest_angles;
 	int i;
 
+	if (self->touch_debounce_time > level.time)
+		return;
+
 	if (!other)
 		return;
 
@@ -722,6 +727,7 @@ static void trigger_teleport_touch(edict_t *self, edict_t *other, cplane_t *plan
 	VectorClear(other->avelocity);
 	other->groundentity = NULL;
 	other->teleport_time = level.time;
+	self->touch_debounce_time = level.time + self->wait;
 
 	if (!(self->spawnflags & TELEPORT_SF_NOEFFECTS))
 	{
@@ -771,6 +777,9 @@ void SP_trigger_teleport (edict_t *self)
 	self->nextthink = 0;
 
 	gi.setmodel (self, self->model);
+
+	if (!self->wait)
+		self->wait = 0.2f;
 
 	if (self->spawnflags & TELEPORT_SF_NOTOUCH)
 	{
