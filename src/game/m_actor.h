@@ -70,6 +70,7 @@ void actor_use (edict_t *self, edict_t *other, edict_t *activator);
 void target_actor_touch (edict_t *self, edict_t *other, cplane_t *plane, csurface_t *surf);
 
 void SP_misc_actor (edict_t *self);
+void Actor_PostLoad (edict_t *self);
 void SP_target_actor (edict_t *self);
 
 #endif /* M_ACTOR_H */

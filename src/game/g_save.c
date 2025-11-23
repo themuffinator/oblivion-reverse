@@ -820,6 +820,9 @@ void ReadLevel (char *filename)
 		// let the server rebuild world links for this ent
 		memset (&ent->area, 0, sizeof(ent->area));
 		gi.linkentity (ent);
+
+		if (ent->classname && strcmp(ent->classname, "misc_actor") == 0)
+			Actor_PostLoad (ent);
 	}
 
 	fclose (f);

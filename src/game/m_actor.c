@@ -126,32 +126,70 @@ static void Actor_BroadcastMessage(edict_t *self, const char *message)
 	}
 }
 
+/*
+=============
+Actor_ConfigureMovementState
+
+Apply the retail movement, collision, and hull defaults for misc_actor spawns,
+including the corpse hull adjustments used by the retail DLL.
+=============
+*/
 static void Actor_ConfigureMovementState(edict_t *self)
 {
-        if (!self)
-                return;
+	if (!self)
+		return;
 
-        self->movetype = MOVETYPE_STEP;
-        self->solid = SOLID_BBOX;
-        self->clipmask = MASK_MONSTERSOLID;
-        VectorSet(self->mins, -16, -16, -24);
-        VectorSet(self->maxs, 16, 16, 32);
+	self->movetype = MOVETYPE_STEP;
+	self->solid = SOLID_BBOX;
+	self->clipmask = MASK_MONSTERSOLID;
+	VectorSet(self->mins, -16, -16, -24);
+	VectorSet(self->maxs, 16, 16, 32);
 
-        if (self->spawnflags & ACTOR_SPAWNFLAG_CORPSE)
-        {
-                VectorSet(self->mins, -16, -16, -24);
-                VectorSet(self->maxs, 16, 16, -8);
-                self->health = -1;
-                self->max_health = self->health;
-                self->deadflag = DEAD_DEAD;
-                self->takedamage = DAMAGE_YES;
-                self->svflags |= SVF_DEADMONSTER;
-        }
+	if (self->spawnflags & ACTOR_SPAWNFLAG_CORPSE)
+	{
+		VectorSet(self->mins, -16, -16, -24);
+		VectorSet(self->maxs, 16, 16, -8);
+		self->health = -1;
+		self->max_health = self->health;
+		self->deadflag = DEAD_DEAD;
+		self->takedamage = DAMAGE_YES;
+		self->svflags |= SVF_DEADMONSTER;
+	}
 
-        self->monsterinfo.currentmove = &actor_move_stand;
-        self->monsterinfo.scale = MODEL_SCALE;
+	self->monsterinfo.currentmove = &actor_move_stand;
+	self->monsterinfo.scale = MODEL_SCALE;
 }
 
+/*
+=============
+Actor_ApplyTargetnameDefault
+
+Inject the retail "Yo Mama" targetname alongside the hidden START_ON bit when
+the mapper omits a name so mission controllers can still activate the actor.
+=============
+*/
+static void Actor_ApplyTargetnameDefault(edict_t *self)
+{
+	static const char *const kDefaultTargetName = "Yo Mama";
+
+	if (!self)
+		return;
+
+	if (self->targetname && self->targetname[0])
+		return;
+
+	self->targetname = (char *)kDefaultTargetName;
+	self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
+}
+
+/*
+=============
+Actor_InitMissionTimer
+
+Clamp the mission timer to valid values so retail defaulting is applied to
+fresh spawns and savegame restores alike.
+=============
+*/
 static void Actor_InitMissionTimer(edict_t *self)
 {
 	if (!self)
@@ -161,7 +199,7 @@ static void Actor_InitMissionTimer(edict_t *self)
 		self->oblivion.mission_timer_limit = 0;
 
 	if (self->oblivion.mission_timer_remaining <= 0
-		&& self->oblivion.mission_timer_limit > 0)
+			&& self->oblivion.mission_timer_limit > 0)
 	{
 		self->oblivion.mission_timer_remaining = self->oblivion.mission_timer_limit;
 	}
@@ -204,10 +242,9 @@ static void Actor_PathResetState(edict_t *self)
 Actor_ApplySpawnAIFeatures
 
 Mirror the `sub_1001f460` HLIL writes so the actor spawn only touches
-`AI_ACTOR_PATH_IDLE`, `AI_ACTOR_FRIENDLY`, and `AI_STAND_GROUND` the way the
-retail DLL does. Unlike Quake II, the Oblivion binary never toggles
-`AI_GOOD_GUY` here, so the translation leaves that bit untouched on purpose to
-avoid inventing behaviour that the dump does not prove exists.
+`AI_ACTOR_PATH_IDLE`, `AI_ACTOR_FRIENDLY`, `AI_GOOD_GUY`, and
+`AI_STAND_GROUND` the way the retail DLL does so Wimpy actors drop their
+friendly state while normal actors retain it.
 =============
 */
 static void Actor_ApplySpawnAIFeatures(edict_t *self)
@@ -223,9 +260,9 @@ static void Actor_ApplySpawnAIFeatures(edict_t *self)
 		self->monsterinfo.aiflags |= AI_ACTOR_PATH_IDLE;
 
 	if (spawnflags & ACTOR_SPAWNFLAG_WIMPY)
-		self->monsterinfo.aiflags &= ~AI_ACTOR_FRIENDLY;
+		self->monsterinfo.aiflags &= ~(AI_ACTOR_FRIENDLY | AI_GOOD_GUY);
 	else
-		self->monsterinfo.aiflags |= AI_ACTOR_FRIENDLY;
+		self->monsterinfo.aiflags |= (AI_ACTOR_FRIENDLY | AI_GOOD_GUY);
 
 	self->monsterinfo.aiflags |= AI_STAND_GROUND;
 }
@@ -1221,34 +1258,16 @@ binary.
 */
 static qboolean Actor_SpawnOblivion(edict_t *self)
 {
-	static const char *const kDefaultTargetName = "Yo Mama";
-
 	if (deathmatch->value)
 	{
 		G_FreeEdict(self);
 		return false;
 	}
 
-	if (!self->targetname)
-	{
-		/*
-		 * sub_1001f460 defaults the name to "Yo Mama" and raises bit 0x20
-		 * (ACTOR_SPAWNFLAG_START_ON) when the mapper omits a targetname so the
-		 * controller helpers in sub_1001f380/sub_1001ef70 can still activate the
-		 * actor.  Mirror that write here so compatibility reports have context
-		 * for the hidden spawnflag.
-		 */
-		self->targetname = (char *)kDefaultTargetName;
-		self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;
-	}
+	Actor_ApplyTargetnameDefault(self);
 
 	self->s.modelindex = 0xff;
 	self->s.modelindex2 = 0xff;
-
-	self->movetype = MOVETYPE_STEP;
-	self->solid = SOLID_BBOX;
-	VectorSet(self->mins, -16, -16, -24);
-	VectorSet(self->maxs, 16, 16, 32);
 
 	Actor_ConfigureMovementState(self);
 	Actor_ResetChatCooldown(self);
@@ -1273,8 +1292,6 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 
 	self->pain = actor_pain;
 	self->die = actor_die;
-	self->use = Actor_UseOblivion;
-	self->prethink = Actor_PreThink;
 
 	self->monsterinfo.stand = actor_stand;
 	self->monsterinfo.walk = actor_walk;
@@ -1304,6 +1321,9 @@ static qboolean Actor_SpawnOblivion(edict_t *self)
 	gi.linkentity(self);
 	walkmonster_start(self);
 
+	self->use = Actor_UseOblivion;
+	self->prethink = Actor_PreThink;
+
 	if (self->spawnflags & ACTOR_SPAWNFLAG_START_ON)
 	{
 		edict_t *world_ent = &g_edicts[0];
@@ -1332,15 +1352,41 @@ handing off to the Oblivion spawn helper.
 void SP_misc_actor (edict_t *self)
 {
 	self->spawnflags &= (ACTOR_SPAWNFLAG_AMBUSH |
-		ACTOR_SPAWNFLAG_TRIGGER_SPAWN |
-		ACTOR_SPAWNFLAG_SIGHT |
-		ACTOR_SPAWNFLAG_CORPSE |
-		ACTOR_SPAWNFLAG_START_ON |
-		ACTOR_SPAWNFLAG_WIMPY);
+			ACTOR_SPAWNFLAG_TRIGGER_SPAWN |
+			ACTOR_SPAWNFLAG_SIGHT |
+			ACTOR_SPAWNFLAG_CORPSE |
+			ACTOR_SPAWNFLAG_START_ON |
+			ACTOR_SPAWNFLAG_WIMPY);
 	self->takedamage = DAMAGE_AIM;
 
 	if (!Actor_SpawnOblivion(self))
 		return;
+}
+
+/*
+=============
+Actor_PostLoad
+
+Reapply the retail misc_actor defaults after savegame restores so hidden
+activation flags, timers, and callbacks line up with the spawn-time state.
+=============
+*/
+void Actor_PostLoad(edict_t *self)
+{
+	if (!self)
+		return;
+
+	Actor_ApplyTargetnameDefault(self);
+	Actor_InitMissionTimer(self);
+
+	if (!(self->spawnflags & ACTOR_SPAWNFLAG_CORPSE))
+		Actor_ApplySpawnAIFeatures(self);
+
+	if (!self->use || self->use == monster_use)
+		self->use = Actor_UseOblivion;
+
+	if (!self->prethink)
+		self->prethink = Actor_PreThink;
 }
 
 
