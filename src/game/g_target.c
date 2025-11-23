@@ -116,18 +116,39 @@ void SP_target_speaker (edict_t *ent)
 
 //==========================================================
 
+/*
+=============
+Use_Target_Help
+
+Broadcast mission/help messages to every client and update the HUD state.
+=============
+*/
 void Use_Target_Help (edict_t *ent, edict_t *other, edict_t *activator)
 {
+	const char *message = ent->message ? ent->message : "";
 	qboolean handled = Mission_TargetHelpFired (ent, activator);
 
 	if (!handled)
 	{
-		const char *message = ent->message ? ent->message : "";
-
 		if (ent->spawnflags & 1)
 			strncpy (game.helpmessage1, message, sizeof(game.helpmessage1)-1);
 		else
 			strncpy (game.helpmessage2, message, sizeof(game.helpmessage2)-1);
+	}
+
+	if (message[0])
+	{
+		int i;
+
+		for (i = 1; i <= game.maxclients; i++)
+		{
+			edict_t *client = &g_edicts[i];
+
+			if (!client->inuse)
+				continue;
+
+			gi.cprintf (client, PRINT_HIGH, "%s\n", message);
+		}
 	}
 
 	game.helpchanged++;
