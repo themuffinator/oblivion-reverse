@@ -184,6 +184,37 @@ class KigraxSpawnManifestRegression(unittest.TestCase):
                 f"End frame mismatch for {mmove_name}",
             )
 
+    def test_ai_timeline_and_death_frames_match_fixture(self) -> None:
+        ordered = [
+            "kigrax_move_hover",
+            "kigrax_move_scan",
+            "kigrax_move_patrol_ccw",
+            "kigrax_move_patrol_cw",
+            "kigrax_move_strafe_long",
+            "kigrax_move_strafe_dash",
+            "kigrax_move_attack_prep",
+            "kigrax_move_attack",
+        ]
+        last_end = -1
+        for name in ordered:
+            self.assertIn(name, self.mmoves, f"Missing mmove {name} in Kigrax timeline")
+            expected = self.fixture["mmoves"][name]
+            actual = self.mmoves[name]
+            self.assertEqual(actual["start"], expected["start"])
+            self.assertEqual(actual["end"], expected["end"])
+            self.assertGreater(
+                actual["start"],
+                last_end,
+                f"{name} no longer follows the prior state in the hover/attack timeline",
+            )
+            last_end = actual["end"]
+
+        self.assertEqual(
+            self.mmoves["kigrax_move_death"],
+            self.mmoves["kigrax_move_attack"],
+            "Death mmove should share the attack frame window per the HLIL timeline",
+        )
+
 
 class KigraxPainRegression(unittest.TestCase):
     @classmethod

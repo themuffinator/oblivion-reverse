@@ -96,8 +96,8 @@ static void cyborg_fire_deatom (edict_t *self, const vec3_t muzzle_offset, int s
 	if (!self->enemy)
 		return;
 
-	if (sample_index < 0 || sample_index >= (int) (sizeof (sound_attack) / sizeof (sound_attack[0])))
-		sample_index = 0;
+if (sample_index < 0 || sample_index >= (int) (sizeof (sound_attack) / sizeof (sound_attack[0])))
+sample_index = rand () % (int) (sizeof (sound_attack) / sizeof (sound_attack[0]));
 
 	AngleVectors (self->s.angles, forward, right, NULL);
 	VectorCopy (muzzle_offset, offset);
@@ -140,7 +140,7 @@ Fire the right-arm deatomizer burst using the recovered muzzle offset.
 */
 static void cyborg_fire_muzzle_right (edict_t *self)
 {
-	cyborg_fire_deatom (self, cyborg_muzzle_right, 0);
+	cyborg_fire_deatom (self, cyborg_muzzle_right, -1);
 }
 
 /*
@@ -179,32 +179,32 @@ static void cyborg_stand (edict_t *self);
  * instead of the earlier single-frame placeholders.
  */
 static mframe_t cyborg_frames_idle[] = {
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_land},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_land},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL}
+	{ai_stand, 0.0f, cyborg_land}
 };
 static mmove_t cyborg_move_idle = {
 	CYBORG_FRAME_IDLE_START, CYBORG_FRAME_IDLE_END, cyborg_frames_idle, cyborg_stand
@@ -212,22 +212,22 @@ static mmove_t cyborg_move_idle = {
 
 static mframe_t cyborg_frames_stand[] = {
 	{ai_stand, 0.0f, cyborg_stand_ground_think},
+	{ai_stand, 0.0f, cyborg_land},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_land},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
+	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_land},
 	{ai_stand, 0.0f, NULL},
 	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_stand_ground_think},
 	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
-	{ai_stand, 0.0f, NULL},
+	{ai_stand, 0.0f, cyborg_land},
 	{ai_stand, 0.0f, NULL}
 };
 static mmove_t cyborg_move_stand = {
@@ -338,8 +338,8 @@ Check whether the wounded stand-ground timer has elapsed and clear the flag.
 */
 static qboolean cyborg_update_stand_ground (edict_t *self)
 {
-	if (!(self->monsterinfo.aiflags & AI_STAND_GROUND))
-		return false;
+if (!(self->monsterinfo.aiflags & AI_STAND_GROUND))
+return false;
 
 	if (self->oblivion.cyborg_anchor_time <= 0.0f)
 		return false;
@@ -364,10 +364,10 @@ static void cyborg_schedule_stand_ground (edict_t *self, float duration)
 {
 	float		anchor_expire;
 
-	if (duration <= 0.0f)
-		return;
+if (duration <= 0.0f)
+return;
 
-	self->monsterinfo.aiflags |= AI_STAND_GROUND;
+self->monsterinfo.aiflags |= (AI_STAND_GROUND | AI_TEMP_STAND_GROUND);
 	self->oblivion.cyborg_landing_thud = true;
 	anchor_expire = level.time + duration;
 
@@ -570,6 +570,8 @@ static void cyborg_attack_dispatch (edict_t *self)
 {
 	float	choice;
 
+	cyborg_update_stand_ground (self);
+
 	if (!self->enemy)
 	{
 		cyborg_stand (self);
@@ -610,10 +612,10 @@ static void cyborg_pain (edict_t *self, edict_t *other, float kick, int damage)
 {
 	int	slot;
 
-	if (level.time < self->oblivion.cyborg_pain_time)
-		return;
+if (level.time < self->pain_debounce_time)
+return;
 
-	self->pain_debounce_time = level.time + 3.0f;
+self->pain_debounce_time = level.time + 3.0f;
 	self->oblivion.cyborg_pain_time = self->pain_debounce_time;
 
 	/* Update the wounded anchor thresholds on every damage event so the
@@ -687,14 +689,14 @@ void SP_monster_cyborg (edict_t *self)
 	sound_pain = gi.soundindex ("cyborg/mutpain1.wav");
 	sound_pain_samples[0] = sound_pain;
 	sound_pain_samples[1] = gi.soundindex ("cyborg/mutpain2.wav");
-    sound_death = gi.soundindex ("cyborg/mutdeth1.wav");
-	sound_attack[0] = gi.soundindex ("cyborg/mutatck1.wav");
-	sound_attack[1] = gi.soundindex ("cyborg/mutatck2.wav");
-	sound_attack[2] = gi.soundindex ("cyborg/mutatck3.wav");
-	sound_thud = gi.soundindex ("mutant/thud1.wav");
-    sound_step[0] = gi.soundindex ("cyborg/step1.wav");
-    sound_step[1] = gi.soundindex ("cyborg/step2.wav");
-    sound_step[2] = gi.soundindex ("cyborg/step3.wav");
+sound_death = gi.soundindex ("cyborg/mutdeth1.wav");
+sound_attack[0] = gi.soundindex ("cyborg/mutatck1.wav");
+sound_attack[1] = gi.soundindex ("cyborg/mutatck2.wav");
+sound_attack[2] = gi.soundindex ("cyborg/mutatck3.wav");
+sound_step[0] = gi.soundindex ("cyborg/step1.wav");
+sound_step[1] = gi.soundindex ("cyborg/step2.wav");
+sound_step[2] = gi.soundindex ("cyborg/step3.wav");
+sound_thud = sound_step[2];
 
     self->s.sound = gi.soundindex ("cyborg/mutidle1.wav");
 

@@ -43,8 +43,44 @@ enum
 #define KIGRAX_PAIN_COOLDOWN	1.5f
 #define KIGRAX_SALVO_INTERVAL	(FRAMETIME)
 
-static const float kigrax_salvo_yaw_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
-static const float kigrax_salvo_pitch_offsets[] = {0.0f, 0.0f, 0.0f, 0.0f};
+static const float kigrax_salvo_yaw_offsets[] = {0.0f, -4.0f, 4.0f, 0.0f};
+static const float kigrax_salvo_pitch_offsets[] = {0.0f, -2.0f, -2.0f, 0.0f};
+
+static const mframe_t kigrax_frames_pain_template[] = {
+	{ai_move, 0.0f, kigrax_begin_pain_stagger},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL}
+};
+
+static const mframe_t kigrax_frames_death_template[] = {
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, kigrax_spawn_debris},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, kigrax_spawn_debris},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL},
+	{ai_move, 0.0f, NULL}
+};
 
 static int sound_sight;
 static int sound_search;
@@ -58,144 +94,56 @@ static void kigrax_idle_select (edict_t *self);
 static void kigrax_walk_select (edict_t *self);
 static void kigrax_run_select (edict_t *self);
 static void kigrax_attack_execute (edict_t *self);
-static void kigrax_attack_salvo (edict_t *self);
-static void kigrax_fire_bolt (edict_t *self, int shot_index);
-static void kigrax_set_attack_hull (edict_t *self, qboolean crouched);
-static void kigrax_begin_pain_stagger (edict_t *self);
-static void kigrax_end_pain (edict_t *self);
-static void kigrax_spawn_debris (edict_t *self);
-static void kigrax_deadthink (edict_t *self);
-static void kigrax_dead (edict_t *self);
-
-static mframe_t kigrax_frames_hover[KIGRAX_FRAME_IDLE_END - KIGRAX_FRAME_IDLE_START + 1];
-static mframe_t kigrax_frames_scan[KIGRAX_FRAME_SCAN_END - KIGRAX_FRAME_SCAN_START + 1];
-static mframe_t kigrax_frames_patrol_ccw[KIGRAX_FRAME_PATROL_CCW_END - KIGRAX_FRAME_PATROL_CCW_START + 1];
-static mframe_t kigrax_frames_patrol_cw[KIGRAX_FRAME_PATROL_CW_END - KIGRAX_FRAME_PATROL_CW_START + 1];
-static mframe_t kigrax_frames_strafe_long[KIGRAX_FRAME_STRAFE_LONG_END - KIGRAX_FRAME_STRAFE_LONG_START + 1];
-static mframe_t kigrax_frames_strafe_dash[KIGRAX_FRAME_STRAFE_DASH_END - KIGRAX_FRAME_STRAFE_DASH_START + 1];
-static mframe_t kigrax_frames_attack_prep[KIGRAX_FRAME_ATTACK_PREP_END - KIGRAX_FRAME_ATTACK_PREP_START + 1];
-static mframe_t kigrax_frames_attack[KIGRAX_FRAME_ATTACK_END - KIGRAX_FRAME_ATTACK_START + 1];
-static mframe_t kigrax_frames_pain[KIGRAX_FRAME_PAIN_END - KIGRAX_FRAME_PAIN_START + 1];
-static mframe_t kigrax_frames_death[KIGRAX_FRAME_DEATH_END - KIGRAX_FRAME_DEATH_START + 1];
-
-static mmove_t kigrax_move_hover = {
-	KIGRAX_FRAME_IDLE_START,
-	KIGRAX_FRAME_IDLE_END,
-	kigrax_frames_hover,
-	kigrax_idle_select
-};
-static mmove_t kigrax_move_scan = {
-	KIGRAX_FRAME_SCAN_START,
-	KIGRAX_FRAME_SCAN_END,
-	kigrax_frames_scan,
-	kigrax_idle_select
-};
-static mmove_t kigrax_move_patrol_ccw = {
-	KIGRAX_FRAME_PATROL_CCW_START,
-	KIGRAX_FRAME_PATROL_CCW_END,
-	kigrax_frames_patrol_ccw,
-	kigrax_walk_select
-};
-static mmove_t kigrax_move_patrol_cw = {
-	KIGRAX_FRAME_PATROL_CW_START,
-	KIGRAX_FRAME_PATROL_CW_END,
-	kigrax_frames_patrol_cw,
-	kigrax_walk_select
-};
-static mmove_t kigrax_move_strafe_long = {
-	KIGRAX_FRAME_STRAFE_LONG_START,
-	KIGRAX_FRAME_STRAFE_LONG_END,
-	kigrax_frames_strafe_long,
-	kigrax_run_select
-};
-static mmove_t kigrax_move_strafe_dash = {
-	KIGRAX_FRAME_STRAFE_DASH_START,
-	KIGRAX_FRAME_STRAFE_DASH_END,
-	kigrax_frames_strafe_dash,
-	kigrax_run_select
-};
-static mmove_t kigrax_move_attack_prep = {
-	KIGRAX_FRAME_ATTACK_PREP_START,
-	KIGRAX_FRAME_ATTACK_PREP_END,
-	kigrax_frames_attack_prep,
-	kigrax_attack_execute
-};
-static mmove_t kigrax_move_attack = {
-	KIGRAX_FRAME_ATTACK_START,
-	KIGRAX_FRAME_ATTACK_END,
-	kigrax_frames_attack,
-	kigrax_attack_salvo
-};
-static mmove_t kigrax_move_pain = {
-	KIGRAX_FRAME_PAIN_START,
-	KIGRAX_FRAME_PAIN_END,
-	kigrax_frames_pain,
-	kigrax_end_pain
-};
-static mmove_t kigrax_move_death = {
-	KIGRAX_FRAME_DEATH_START,
-	KIGRAX_FRAME_DEATH_END,
-	kigrax_frames_death,
-	kigrax_dead
-};
-
-static qboolean kigrax_moves_initialized;
-
-/*
-=============
-kigrax_init_moves
-
-Fill the Kigrax mmove tables recovered from the HLIL dump so the state
-machine can reuse the original animation layout.
-=============
-*/
-static void kigrax_init_moves (void)
+static void kigrax_attack_salvo (edict_t *self)
 {
-	size_t i;
+	if (!(self->monsterinfo.aiflags & AI_DUCKED))
+	{
+		kigrax_set_attack_hull (self, true);
+		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
+		gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
+		self->count = 0;
+		self->timestamp = level.time;
+	}
 
-	if (kigrax_moves_initialized)
+	if (!self->enemy)
+	{
+		kigrax_set_attack_hull (self, false);
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
+		self->count = ARRAY_LEN(kigrax_salvo_yaw_offsets);
+		self->timestamp = 0.0f;
+		self->monsterinfo.nextframe = self->s.frame + 1;
+		kigrax_run_select (self);
 		return;
+	}
 
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_hover); i++)
-		kigrax_frames_hover[i] = (mframe_t){ai_stand, 0.0f, NULL};
+	if ((self->monsterinfo.aiflags & AI_DUCKED) && self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
+	{
+		while (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets) && level.time >= self->timestamp)
+		{
+			kigrax_fire_bolt (self, self->count);
+			self->count++;
+			self->timestamp += KIGRAX_SALVO_INTERVAL;
+		}
 
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_scan); i++)
-		kigrax_frames_scan[i] = (mframe_t){ai_stand, 0.0f, NULL};
+		if (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
+		{
+			self->monsterinfo.aiflags |= AI_HOLD_FRAME;
+			return;
+		}
 
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_patrol_ccw); i++)
-		kigrax_frames_patrol_ccw[i] = (mframe_t){ai_walk, 4.0f, NULL};
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
+		self->monsterinfo.nextframe = self->s.frame + 1;
+	}
 
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_patrol_cw); i++)
-		kigrax_frames_patrol_cw[i] = (mframe_t){ai_walk, 4.0f, NULL};
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_strafe_long); i++)
-		kigrax_frames_strafe_long[i] = (mframe_t){ai_run, 10.0f, NULL};
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_strafe_dash); i++)
-		kigrax_frames_strafe_dash[i] = (mframe_t){ai_run, 15.0f, NULL};
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_attack_prep); i++)
-		kigrax_frames_attack_prep[i] = (mframe_t){ai_move, 0.0f, NULL};
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_attack); i++)
-		kigrax_frames_attack[i] = (mframe_t){ai_move, 0.0f, NULL};
-
-	kigrax_frames_attack[KIGRAX_FRAME_ATTACK_FIRE - KIGRAX_FRAME_ATTACK_START].thinkfunc = kigrax_attack_salvo;
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_pain); i++)
-		kigrax_frames_pain[i] = (mframe_t){ai_move, 0.0f, NULL};
-
-		kigrax_frames_pain[0].thinkfunc = kigrax_begin_pain_stagger;
-
-	for (i = 0; i < ARRAY_LEN(kigrax_frames_death); i++)
-		kigrax_frames_death[i] = (mframe_t){ai_move, 0.0f, NULL};
-
-		kigrax_frames_death[3].thinkfunc = kigrax_spawn_debris;
-		kigrax_frames_death[10].thinkfunc = kigrax_spawn_debris;
-
-	kigrax_moves_initialized = true;
+	if (self->s.frame == KIGRAX_FRAME_ATTACK_END)
+	{
+		self->timestamp = 0.0f;
+		self->count = 0;
+		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
+		kigrax_set_attack_hull (self, false);
+		kigrax_run_select (self);
+	}
 }
-
 /*
 =============
 kigrax_idle_select
@@ -388,32 +336,32 @@ returning to the strafing selector.
 static void kigrax_attack_salvo (edict_t *self)
 {
 	if (!(self->monsterinfo.aiflags & AI_DUCKED))
-{
-	kigrax_set_attack_hull (self, true);
-	self->monsterinfo.aiflags |= AI_HOLD_FRAME;
-	gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
-	self->count = 0;
-	self->timestamp = level.time;
-}
+	{
+		kigrax_set_attack_hull (self, true);
+		self->monsterinfo.aiflags |= AI_HOLD_FRAME;
+		gi.sound (self, CHAN_WEAPON, sound_attack, 1.0f, ATTN_NORM, 0.0f);
+		self->count = 0;
+		self->timestamp = level.time;
+	}
 
 	if (!self->enemy)
-{
+	{
 		kigrax_set_attack_hull (self, false);
 		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->count = ARRAY_LEN(kigrax_salvo_yaw_offsets);
 		self->timestamp = 0.0f;
-		self->monsterinfo.aiflags &= ~AI_HOLD_FRAME;
 		self->monsterinfo.nextframe = self->s.frame + 1;
 		kigrax_run_select (self);
-}
+		return;
+	}
 
 	if ((self->monsterinfo.aiflags & AI_DUCKED) && self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
 	{
-		if (level.time >= self->timestamp)
+		while (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets) && level.time >= self->timestamp)
 		{
 			kigrax_fire_bolt (self, self->count);
 			self->count++;
-			self->timestamp = level.time + KIGRAX_SALVO_INTERVAL;
+			self->timestamp += KIGRAX_SALVO_INTERVAL;
 		}
 
 		if (self->count < ARRAY_LEN(kigrax_salvo_yaw_offsets))
@@ -435,6 +383,7 @@ static void kigrax_attack_salvo (edict_t *self)
 		kigrax_run_select (self);
 	}
 }
+
 /*
 =============
 kigrax_begin_pain_stagger

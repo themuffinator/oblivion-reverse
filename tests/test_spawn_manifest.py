@@ -121,6 +121,71 @@ class SpawnManifestSnapshotTest(unittest.TestCase):
             "func_water should not rewrite spawnflags (e.g., DOOR_TOGGLE) when seeded",
         )
 
+    def test_monster_spawners_and_defaults_are_present(self) -> None:
+        current, _ = self._extract_manifest()
+        combined = current.get("combined", {})
+        repo_manifest = combined.get("repo", {})
+        hlil_manifest = combined.get("hlil", {})
+
+        required = {
+            "monster_cyborg": {
+                "defaults": {
+                    "health": 300.0,
+                    "mass": 300.0,
+                    "gib_health": -120.0,
+                    "monsterinfo.max_ideal_distance": 512.0,
+                }
+            },
+            "monster_spider": {
+                "defaults": {
+                    "health": 400.0,
+                    "mass": 300.0,
+                    "gib_health": -120.0,
+                },
+                "spawnflags": {
+                    "checks": [256],
+                },
+            },
+            "monster_kigrax": {
+                "defaults": {
+                    "health": 200.0,
+                    "mass": 150.0,
+                    "gib_health": -100.0,
+                    "viewheight": 90.0,
+                }
+            },
+        }
+
+        for classname, expectations in required.items():
+            with self.subTest(classname=classname):
+                self.assertIn(
+                    classname,
+                    repo_manifest,
+                    f"{classname} missing from repo manifest",
+                )
+                self.assertIn(
+                    classname,
+                    hlil_manifest,
+                    f"{classname} missing from HLIL manifest",
+                )
+                defaults = repo_manifest.get(classname, {}).get("defaults", {})
+                for key, value in expectations.get("defaults", {}).items():
+                    self.assertAlmostEqual(
+                        defaults.get(key),
+                        value,
+                        msg=f"{classname} default {key} diverged from snapshot",
+                    )
+
+                spawnflags = repo_manifest.get(classname, {}).get("spawnflags", {})
+                checks = spawnflags.get("checks", [])
+                expected_checks = expectations.get("spawnflags", {}).get("checks", [])
+                for flag in expected_checks:
+                    self.assertIn(
+                        flag,
+                        checks,
+                        f"{classname} missing expected spawnflag check {flag}",
+                    )
+
 
 class SpawnManifestControllersTest(unittest.TestCase):
     def test_target_controllers_are_extracted(self) -> None:

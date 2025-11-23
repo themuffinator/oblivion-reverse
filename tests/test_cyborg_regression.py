@@ -278,6 +278,31 @@ class CyborgRegressionTests(unittest.TestCase):
             "Combined combat timeline no longer matches captured expectations",
         )
 
+    def test_ai_timeline_progression_matches_fixture(self) -> None:
+        ordered = [
+            "cyborg_move_walk",
+            "cyborg_move_attack_primary",
+            "cyborg_move_attack_secondary",
+            "cyborg_move_attack_barrage",
+            "cyborg_move_pain_stagger",
+            "cyborg_move_pain_recover",
+            "cyborg_move_idle",
+            "cyborg_move_stand",
+        ]
+        last_end = -1
+        for name in ordered:
+            self.assertIn(name, self.mmoves, f"Missing mmove {name} in timeline check")
+            expected = self.fixture["frame_sequences"][name]
+            actual = self.mmoves[name]
+            self.assertEqual(actual["start"], expected["start"])
+            self.assertEqual(actual["end"], expected["end"])
+            self.assertGreater(
+                actual["start"],
+                last_end,
+                f"{name} starts before the prior mmove ended; AI timeline ordering regressed",
+            )
+            last_end = actual["end"]
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -153,6 +153,46 @@ class ActorPathRuntimeTests(unittest.TestCase):
         ):
             self.assertIn(token, save_text)
 
+    def test_start_on_seeded_when_targetname_missing(self) -> None:
+        spawn_block = extract_function_block(self.source_text, "Actor_SpawnOblivion")
+        self.assertIn("self->targetname = (char *)kDefaultTargetName;", spawn_block)
+        self.assertRegex(
+            spawn_block,
+            r"spawnflags\s*\|=\s*ACTOR_SPAWNFLAG_START_ON",
+            "Actor spawn should raise START_ON when no targetname is provided",
+        )
+
+    def test_target_actor_messages_use_broadcast_helper(self) -> None:
+        block = extract_function_block(self.source_text, "target_actor_touch")
+        self.assertIn("Actor_BroadcastMessage(other, self->message);", block)
+        broadcast_block = extract_function_block(self.source_text, "Actor_BroadcastMessage")
+        self.assertIn(
+            "self->oblivion.custom_name_time = level.time + ACTOR_CHAT_COOLDOWN;",
+            broadcast_block,
+        )
+        self.assertRegex(
+            broadcast_block,
+            r"gi\.cprintf\s*\(ent,\s*PRINT_CHAT",
+            "Broadcast helper should print chat lines to active clients",
+        )
+
+    def test_path_wait_application_updates_timers(self) -> None:
+        block = extract_function_block(self.source_text, "Actor_PathApplyWait")
+        self.assertIn(
+            "self->oblivion.path_time = level.time + wait;",
+            block,
+        )
+        self.assertRegex(
+            block,
+            r"path_state\s*=\s*ACTOR_PATH_STATE_WAITING",
+            "Path wait handler must transition into the waiting state",
+        )
+        self.assertRegex(
+            block,
+            r"self->monsterinfo.aiflags\s*\|=\s*AI_HOLD_FRAME",
+            "Wait handler should freeze the frame while waiting",
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -134,6 +134,29 @@ class SpiderRegressionTests(unittest.TestCase):
             combo_fixture["recover_cooldown"],
         )
 
+    def test_attack_timeline_matches_fixture(self) -> None:
+        ordered = [
+            "spider_move_walk",
+            "spider_move_attack_primary",
+            "spider_move_attack_secondary",
+            "spider_move_attack_finisher",
+            "spider_move_attack_recover",
+            "spider_move_death",
+        ]
+        last_end = -1
+        for name in ordered:
+            self.assertIn(name, self.mmoves, f"Missing mmove {name} for spider timeline")
+            expected = self.fixture["mmoves"][name]
+            actual = self.mmoves[name]
+            self.assertEqual(actual["start"], expected["start"])
+            self.assertEqual(actual["end"], expected["end"])
+            self.assertGreater(
+                actual["start"],
+                last_end,
+                f"{name} begins before the previous mmove finished; attack timeline shifted",
+            )
+            last_end = actual["end"]
+
 
 if __name__ == "__main__":
     unittest.main()
