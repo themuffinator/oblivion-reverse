@@ -45,6 +45,7 @@
 #define SPIDER_COMBO_RECOVER_COOLDOWN	1.0f
 
 #define SPIDER_STATE_COMBO_READY	0x00000001
+#define SPIDER_STATE_COMBO_DISPATCHED	0x00000002
 
 static int sound_sight;
 static int sound_search;
@@ -60,6 +61,7 @@ static void spider_idle(edict_t *self);
 static void spider_sight(edict_t *self, edict_t *other);
 static void spider_search(edict_t *self);
 static void spider_step(edict_t *self);
+static void spider_death_thud(edict_t *self);
 static void spider_claw(edict_t *self);
 static void spider_idle_loop(edict_t *self);
 static void spider_stand(edict_t *self);
@@ -78,6 +80,7 @@ static qboolean spider_combo_window_active(edict_t *self);
 static void spider_set_combo_window(edict_t *self, float duration);
 static void spider_mark_stagger(edict_t *self);
 static void spider_clear_stagger(edict_t *self);
+static void spider_hold_stagger(edict_t *self);
 static void spider_pain(edict_t *self, edict_t *other, float kick, int damage);
 static void spider_pain_recover(edict_t *self);
 static void spider_dead(edict_t *self);
@@ -305,7 +308,7 @@ static mmove_t spider_move_pain = {
 static mframe_t spider_frames_death[] = {
 	{ai_move, 0, NULL},
 	{ai_move, 0, NULL},
-	{ai_move, 0, NULL},
+	{ai_move, 0, spider_death_thud},
 	{ai_move, 0, NULL},
 	{ai_move, 0, NULL},
 	{ai_move, 0, NULL},
@@ -373,7 +376,19 @@ Play the heavy metal footstep for locomotion beats.
 */
 static void spider_step(edict_t *self)
 {
-	gi.sound(self, CHAN_AUTO, sound_step, 1.0f, ATTN_NORM, 0.0f);
+	gi.sound(self, CHAN_BODY, sound_step, 1.0f, ATTN_NORM, 0.0f);
+}
+
+/*
+=============
+spider_death_thud
+
+Play the separate impact for fatal knockdowns.
+=============
+*/
+static void spider_death_thud(edict_t *self)
+{
+	gi.sound(self, CHAN_BODY, sound_death_thud, 1.0f, ATTN_NORM, 0.0f);
 }
 
 /*
@@ -483,7 +498,7 @@ static void spider_clear_combo_state(edict_t *self)
 {
 	self->oblivion.spider_combo_stage = SPIDER_STAGE_NONE;
 	self->oblivion.spider_combo_last = SPIDER_CHAIN_PRIMARY;
-	self->state_flags &= ~SPIDER_STATE_COMBO_READY;
+	self->state_flags &= ~(SPIDER_STATE_COMBO_READY | SPIDER_STATE_COMBO_DISPATCHED);
 	self->state_time = 0.0f;
 }
 
@@ -603,6 +618,22 @@ Request that the spider begin or continue a melee combo.
 */
 static void spider_attack(edict_t *self)
 {
+	if (self->oblivion.spider_staggered)
+	{
+		return;
+	}
+
+	if (self->monsterinfo.attack_finished > level.time)
+	{
+		return;
+	}
+
+	if (self->state_flags & SPIDER_STATE_COMBO_DISPATCHED)
+	{
+		return;
+	}
+
+	self->state_flags |= SPIDER_STATE_COMBO_DISPATCHED;
 	spider_combo_entry(self);
 }
 
@@ -761,7 +792,7 @@ Handle stagger tracking, cooldown management, and pain animation entry.
 */
 static void spider_pain(edict_t *self, edict_t *other, float kick, int damage)
 {
-	int sound = (rand() & 1) ? sound_pain1 : sound_pain2;
+	qboolean play_secondary = (rand() & 1);
 
 	if (level.time < self->pain_debounce_time)
 	{
@@ -769,7 +800,12 @@ static void spider_pain(edict_t *self, edict_t *other, float kick, int damage)
 	}
 
 	self->pain_debounce_time = level.time + SPIDER_PAIN_DEBOUNCE;
-	gi.sound(self, CHAN_VOICE, sound, 1.0f, ATTN_NORM, 0.0f);
+	gi.sound(self, CHAN_VOICE, sound_pain1, 1.0f, ATTN_NORM, 0.0f);
+
+	if (play_secondary)
+	{
+		gi.sound(self, CHAN_BODY, sound_pain2, 1.0f, ATTN_NORM, 0.0f);
+	}
 	spider_mark_stagger(self);
 	self->monsterinfo.currentmove = &spider_move_pain;
 }
@@ -823,16 +859,15 @@ Play death audio, spawn gibs when appropriate, and trigger the death mmove.
 static void spider_die(edict_t *self, edict_t *inflictor, edict_t *attacker, int damage, vec3_t point)
 {
 	gi.sound(self, CHAN_VOICE, sound_death, 1.0f, ATTN_NORM, 0.0f);
-	gi.sound(self, CHAN_BODY, sound_death_thud, 1.0f, ATTN_NORM, 0.0f);
 
 	if (self->health <= self->gib_health)
-{
-	gi.sound(self, CHAN_VOICE, gi.soundindex("misc/udeath.wav"), 1.0f, ATTN_NORM, 0.0f);
+	{
+		gi.sound(self, CHAN_VOICE, gi.soundindex("misc/udeath.wav"), 1.0f, ATTN_NORM, 0.0f);
 		ThrowGib(self, "models/objects/gibs/sm_metal/tris.md2", damage, GIB_METALLIC);
 		ThrowGib(self, "models/objects/gibs/chest/tris.md2", damage, GIB_METALLIC);
 		ThrowHead(self, "models/objects/gibs/head2/tris.md2", damage, GIB_ORGANIC);
 		return;
-}
+	}
 
 	self->monsterinfo.currentmove = &spider_move_death;
 }
@@ -848,8 +883,8 @@ void SP_monster_spider(edict_t *self)
 {
 	if (deathmatch->value)
 	{
-	G_FreeEdict(self);
-	return;
+		G_FreeEdict(self);
+		return;
 	}
 
 	self->s.modelindex = gi.modelindex("models/monsters/spider/tris.md2");
@@ -880,7 +915,7 @@ void SP_monster_spider(edict_t *self)
 	self->die = spider_die;
 
 	self->monsterinfo.stand = spider_stand;
-	self->monsterinfo.idle = spider_stand;
+	self->monsterinfo.idle = spider_idle_loop;
 	self->monsterinfo.walk = spider_walk;
 	self->monsterinfo.run = spider_run;
 	self->monsterinfo.attack = spider_attack;
@@ -895,10 +930,9 @@ void SP_monster_spider(edict_t *self)
 
 	if (self->oblivion.spider_alt_idle)
 	{
-	VectorSet(self->mins, -48.0f, -48.0f, -40.0f);
-	VectorSet(self->maxs, 48.0f, 48.0f, 48.0f);
-	self->movetype = MOVETYPE_STEP;
-	self->monsterinfo.idle = spider_boss_idle;
+		VectorSet(self->mins, -48.0f, -48.0f, -40.0f);
+		VectorSet(self->maxs, 48.0f, 48.0f, 48.0f);
+		self->movetype = MOVETYPE_STEP;
 	}
 
 	spider_stand(self);
