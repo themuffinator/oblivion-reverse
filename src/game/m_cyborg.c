@@ -556,6 +556,18 @@ static float cyborg_attack_roll (void)
 
 /*
 =============
+cyborg_attack_seed
+
+Set the attack mmove after the selector has scheduled the cooldown and landing flag.
+=============
+*/
+static void cyborg_attack_seed (edict_t *self, mmove_t *move)
+{
+	self->monsterinfo.currentmove = move;
+}
+
+/*
+=============
 cyborg_attack
 
 Entry point that routes into the retail-style attack dispatcher.
@@ -579,6 +591,27 @@ static void cyborg_attack_dispatch (edict_t *self)
 	}
 
 	self->monsterinfo.attack_finished = level.time + 0.9f + random () * 0.6f;
+
+	if (self->s.frame >= CYBORG_FRAME_ATTACK1_START && self->s.frame <= CYBORG_FRAME_ATTACK1_END)
+	{
+		self->oblivion.cyborg_landing_thud = true;
+		cyborg_attack_seed (self, &cyborg_move_attack_primary);
+		return;
+	}
+
+	if (self->s.frame >= CYBORG_FRAME_ATTACK2_START && self->s.frame <= CYBORG_FRAME_ATTACK2_END)
+	{
+		self->oblivion.cyborg_landing_thud = true;
+		cyborg_attack_seed (self, &cyborg_move_attack_secondary);
+		return;
+	}
+
+	if (self->s.frame >= CYBORG_FRAME_ATTACK3_START && self->s.frame <= CYBORG_FRAME_ATTACK3_END)
+	{
+		self->oblivion.cyborg_landing_thud = true;
+		cyborg_attack_seed (self, &cyborg_move_attack_barrage);
+		return;
+	}
 
 	choice = cyborg_attack_roll ();
 
