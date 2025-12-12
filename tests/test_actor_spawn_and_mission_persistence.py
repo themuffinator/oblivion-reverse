@@ -37,12 +37,14 @@ class ActorSpawnAndMissionPersistenceTests(unittest.TestCase):
         cls.target_text = TARGET_SOURCE.read_text(encoding="utf-8")
 
     def test_spawn_defaults_force_targetname_and_start_on_use(self) -> None:
+        helper_block = extract_function_block(self.actor_text, "Actor_ApplyTargetnameDefault")
+        self.assertIn("Yo Mama", helper_block)
+        self.assertIn("self->targetname && self->targetname[0]", helper_block)
+        self.assertIn("self->targetname = (char *)kDefaultTargetName;", helper_block)
+        self.assertIn("self->spawnflags |= ACTOR_SPAWNFLAG_START_ON;", helper_block)
+
         block = extract_function_block(self.actor_text, "Actor_SpawnOblivion")
-        self.assertRegex(
-            block,
-            r"if\s*\(\s*!\s*self->targetname\s*\)\s*\{[^}]*Yo Mama[^}]*spawnflags\s*\|=\s*ACTOR_SPAWNFLAG_START_ON",
-            msg="Spawn must inject the default targetname and toggle START_ON when missing",
-        )
+        self.assertIn("Actor_ApplyTargetnameDefault(self);", block)
         self.assertRegex(
             block,
             r"spawnflags\s*&\s*ACTOR_SPAWNFLAG_START_ON[\s\S]*self->use\s*\(\s*self\s*,\s*world_ent\s*,\s*world_ent\s*\)\s*;",
@@ -54,6 +56,40 @@ class ActorSpawnAndMissionPersistenceTests(unittest.TestCase):
         self.assertIn("self->think = Actor_PathThink;", block)
         self.assertRegex(block, r"self->nextthink\s*=\s*level\.time\s*\+\s*FRAMETIME\s*;")
         self.assertIn("monster_think(self);", block)
+
+    def test_spawn_defaults_match_hlil_snapshot(self) -> None:
+        block = extract_function_block(self.actor_text, "Actor_SpawnOblivion")
+        self.assertRegex(
+            block,
+            r"self->s\.modelindex\s*=\s*0xff;[\s\S]*self->s\.modelindex2\s*=\s*0xff;",
+            msg="Model indices should be seeded before linking",
+        )
+        self.assertRegex(
+            block,
+            r"self->speed\s*=\s*200;[\s\S]*self->mass\s*=\s*200;",
+            msg="Spawn should force retail speed and mass defaults",
+        )
+
+        movement_block = extract_function_block(self.actor_text, "Actor_ConfigureMovementState")
+        self.assertRegex(
+            movement_block,
+            r"VectorSet\(self->mins,\s*-16,\s*-16,\s*-24\);[\s\S]*VectorSet\(self->maxs,\s*16,\s*16,\s*32\);",
+            msg="Movement state helper should configure the standing bounding box",
+        )
+
+    def test_spawn_ai_flags_match_hlil_snapshot(self) -> None:
+        block = extract_function_block(self.actor_text, "Actor_ApplySpawnAIFeatures")
+        self.assertRegex(
+            block,
+            r"target\)[\s\S]*AI_ACTOR_PATH_IDLE[\s\S]*else[\s\S]*AI_ACTOR_PATH_IDLE",
+            msg="Path idle bit should reflect presence of an initial target",
+        )
+        self.assertIn("AI_STAND_GROUND", block)
+        self.assertRegex(
+            block,
+            r"ACTOR_SPAWNFLAG_WIMPY[\s\S]*AI_ACTOR_FRIENDLY[\s\S]*AI_GOOD_GUY",
+            msg="Friendly bits should clear for Wimpy actors and set otherwise",
+        )
 
     def test_mission_fields_persisted_through_save_slots(self) -> None:
         self.assertRegex(
@@ -95,6 +131,14 @@ class ActorSpawnAndMissionPersistenceTests(unittest.TestCase):
             mission_block,
             r"mission_timer_remaining\s*=\s*ent->oblivion\.mission_timer_limit;",
             "Mission registration should seed countdowns from the limit when missing",
+        )
+
+    def test_path_chat_and_mission_loops_broadcast_to_all_clients(self) -> None:
+        message_block = extract_function_block(self.actor_text, "Actor_BroadcastMessage")
+        self.assertRegex(
+            message_block,
+            r"for\s*\(\s*i\s*=\s*1;\s*i\s*<=\s*game\.maxclients;\s*i\+\+\s*\)[\s\S]*gi\.cprintf",
+            msg="Actor messages should loop over every active client",
         )
 
     def test_target_help_broadcasts_to_all_clients(self) -> None:
